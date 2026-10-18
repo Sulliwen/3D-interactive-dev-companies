@@ -1,0 +1,192 @@
+{
+  "role": "security",
+  "order": 10,
+  "featureStep": "On protège les données des enfants, et on sécurise la migration",
+  "tagline": "Avec la v2, Pocket Santé gère des données de santé d'enfants : je m'assure que seules les bonnes personnes y ont accès, aujourd'hui et le jour où l'enfant devient majeur.",
+  "missions": [
+    "Définir, dès l'architecture, qui peut voir les données d'un profil d'enfant, et ce qui change à ses 18 ans.",
+    "Mener un [[modele-de-menace|modèle de menace]] : imaginer comment quelqu'un pourrait détourner les profils familiaux.",
+    "Vérifier que les répétitions de migration se font sur une copie [[anonymisation|anonymisée]], jamais sur les vraies données.",
+    "Contrôler le respect du [[rgpd|RGPD]] et de l'hébergement [[hds|HDS]] pour la v1 comme pour la v2."
+  ],
+  "takeaways": [
+    "Un parent voit les rendez-vous de ses enfants **mineurs** ; à 18 ans, le profil devient un compte indépendant et le parent perd l'accès.",
+    "Le [[modele-de-menace|modèle de menace]] a fait ajouter une protection : rattacher un enfant demande une attestation d'autorité parentale.",
+    "Léa est intervenue dès la décision d'architecture, en janvier : la sécurité n'arrive pas à la fin, elle est dans les fondations."
+  ],
+  "receivesFrom": {
+    "roles": ["code-review", "backend"],
+    "text": "La section « Sécurité » de l'[[adr|ADR-007]], demandée par Léa elle-même, puis le code de l'API v2 et du script de migration écrits par Awa."
+  },
+  "handsOffTo": {
+    "roles": ["qa", "devops"],
+    "text": "Une liste de cas à tester pour Inès (accès d'un parent, d'un ex-conjoint, d'un enfant devenu majeur) et le feu vert sécurité pour qu'Ibrahima ouvre la bêta."
+  },
+  "screen": {
+    "component": "security-review",
+    "toolName": "Lumen Shield",
+    "props": {
+      "feature": "Pocket Santé 2 · Profils familiaux et migration des comptes",
+      "reviewer": "Léa Kowalski",
+      "checklist": [
+        {
+          "zone": "minors",
+          "title": "Données des mineurs",
+          "items": [
+            {
+              "label": "Seuls les adultes du foyer voient les rendez-vous d'un enfant",
+              "state": "done"
+            },
+            { "label": "À 18 ans, le profil devient un compte indépendant", "state": "done" },
+            {
+              "label": "Les soins qu'un mineur peut garder confidentiels ne sont jamais montrés au parent",
+              "state": "done",
+              "note": "Validé avec la déléguée à la protection des données"
+            },
+            {
+              "label": "Rattacher un enfant demande une attestation d'autorité parentale",
+              "state": "done"
+            }
+          ]
+        },
+        {
+          "zone": "threat-model",
+          "title": "Modèle de menace",
+          "items": [
+            {
+              "label": "Un adulte qui n'a pas l'autorité parentale tente de rattacher un enfant",
+              "state": "done",
+              "note": "Validation par le second parent ou le cabinet"
+            },
+            {
+              "label": "Un membre quitte le foyer (séparation)",
+              "state": "in-progress",
+              "note": "Parcours à finaliser avant la bêta ouverte"
+            },
+            { "label": "Quelqu'un essaie de deviner l'identifiant d'un profil", "state": "done" }
+          ]
+        },
+        {
+          "zone": "migration-data",
+          "title": "Migration",
+          "items": [
+            { "label": "Répétitions sur une copie anonymisée uniquement", "state": "done" },
+            {
+              "label": "Sauvegarde complète avant la vraie migration",
+              "state": "todo",
+              "note": "Prévue pour la bascule de septembre"
+            }
+          ]
+        }
+      ],
+      "accessCheck": {
+        "title": "Seuls les adultes du foyer voient le profil d'un enfant",
+        "source": "canViewProfile.ts · code d'Awa",
+        "code": [
+          "// Un enfant mineur n'est visible que par les adultes de son foyer",
+          "if (profile.isMinor && !household.adults.includes(viewer.id)) {",
+          "  throw new HttpError(404, 'Profil introuvable')",
+          "}"
+        ],
+        "result": "Tentative de voir le profil de Léo depuis un compte extérieur au foyer : refusée."
+      },
+      "dependencies": [
+        {
+          "name": "express",
+          "version": "4.21.2",
+          "severity": "none",
+          "note": "Aucune faille connue"
+        },
+        {
+          "name": "date-kit",
+          "version": "2.6.0",
+          "severity": "none",
+          "note": "Utilisée pour les fuseaux horaires (BUG-131)"
+        },
+        {
+          "name": "photo-resize",
+          "version": "1.4.0",
+          "severity": "high",
+          "fixedIn": "1.4.2",
+          "note": "Photo de profil piégée : mise à jour faite avant la bêta."
+        },
+        { "name": "pg", "version": "8.13.1", "severity": "none", "note": "Aucune faille connue" }
+      ],
+      "auditLog": [
+        {
+          "time": "10:02:11",
+          "event": "household.member.added",
+          "actor": "pat_7f3a",
+          "resource": "profil_leo_91c2",
+          "result": "ok"
+        },
+        {
+          "time": "10:02:12",
+          "event": "parental.attestation.checked",
+          "actor": "système",
+          "resource": "profil_leo_91c2",
+          "result": "ok"
+        },
+        {
+          "time": "10:05:47",
+          "event": "appointment.booked.for",
+          "actor": "pat_7f3a",
+          "resource": "rdv_204118 · profil_leo_91c2",
+          "result": "ok"
+        },
+        {
+          "time": "10:09:30",
+          "event": "profile.viewed",
+          "actor": "pat_c21e",
+          "resource": "profil_leo_91c2",
+          "result": "denied"
+        },
+        {
+          "time": "10:15:02",
+          "event": "migration.dry_run",
+          "actor": "awa.diallo",
+          "resource": "copie anonymisée",
+          "result": "ok"
+        }
+      ]
+    },
+    "annotations": [
+      {
+        "id": "security-header",
+        "zone": "security-header",
+        "title": "Des données encore plus sensibles",
+        "text": "La v1 gérait des données de santé d'adultes. La v2 ajoute des **enfants** et des parents âgés. Léa relit toute la [[version-majeure|version majeure]] sous cet angle : qui peut voir quoi, et pendant combien de temps."
+      },
+      {
+        "id": "minors",
+        "zone": "minors",
+        "title": "Et le jour des 18 ans ?",
+        "text": "Un parent gère les rendez-vous de ses enfants mineurs. À 18 ans, le profil devient un compte indépendant : le parent n'y a plus accès. Et la loi permet à un mineur de garder certains soins confidentiels vis-à-vis de ses parents : ces rendez-vous ne leur sont jamais montrés."
+      },
+      {
+        "id": "threat-model",
+        "zone": "threat-model",
+        "title": "Imaginer le pire, avant",
+        "text": "Le [[modele-de-menace|modèle de menace]] pose des questions dérangeantes. Et si un ex-conjoint sans autorité parentale rattachait un enfant à son foyer ? Réponse : une attestation, validée par le second parent ou le cabinet. Mieux vaut y penser avant la bêta qu'après un incident."
+      },
+      {
+        "id": "ownership",
+        "zone": "ownership",
+        "title": "Le contrôle, dans le code",
+        "text": "Cette condition, écrite par Awa, refuse l'accès au profil d'un enfant à toute personne extérieure à son foyer. Léa a essayé : depuis un autre compte, le profil de Léo est « introuvable ». Comme pour l'annulation, on ne dit même pas que le profil existe."
+      },
+      {
+        "id": "migration-data",
+        "zone": "migration-data",
+        "title": "Répéter sans exposer",
+        "text": "Les répétitions de migration manipulent 96 400 comptes. Elles se font sur une copie [[anonymisation|anonymisée]] : noms, téléphones et adresses sont remplacés par des valeurs inventées. Les développeurs testent avec de vrais volumes, sans jamais voir de vraies données de santé."
+      },
+      {
+        "id": "dependencies",
+        "zone": "dependencies",
+        "title": "Une faille dans une brique",
+        "text": "La v2 permet d'ajouter une photo de profil. La bibliothèque qui redimensionne les photos avait une [[vulnerabilite|vulnérabilité]] grave : une image piégée pouvait l'exploiter. La [[dependance|dépendance]] a été mise à jour avant l'ouverture de la bêta."
+      }
+    ]
+  }
+}

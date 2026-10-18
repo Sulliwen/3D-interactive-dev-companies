@@ -1,0 +1,31 @@
+{
+  "id": "devops",
+  "desk": 13,
+  "title": "DevOps / SRE",
+  "person": {
+    "firstName": "Ibrahima",
+    "lastName": "Ndiaye",
+    "role": "Ingénieur DevOps / SRE"
+  },
+  "tagline": "Je construis et j'entretiens l'« usine » qui emmène le code jusqu'aux téléphones des patients : automatiquement, prudemment, sans casse.",
+  "missions": [
+    "Faire tourner le [[pipeline-ci-cd|pipeline]] : la chaîne automatique qui construit, teste, contrôle et installe le logiciel.",
+    "Organiser chaque [[mise-en-ligne|mise en ligne]] pas à pas, grâce au [[deploiement-progressif|déploiement progressif]].",
+    "Prévoir le plan B : [[feature-flag|interrupteurs de fonctionnalité]] et [[retour-arriere|retour arrière]] en un clic.",
+    "Gérer les [[serveur|serveurs]] et les environnements, dont celui de [[recette]] où la QA teste.",
+    "Améliorer en continu la fiabilité et la rapidité de la chaîne, avec l'équipe de supervision."
+  ],
+  "myth": {
+    "myth": "Une mise en production, c'est un vendredi soir stressant où toute l'équipe croise les doigts.",
+    "reality": "Grâce à l'automatisation, la mise en ligne de l'annulation s'est faite un mardi à 10 h, en moins d'une heure, pendant que l'équipe travaillait normalement. Et la règle maison est claire : pas de mise en production le vendredi après-midi."
+  },
+  "realTools": [
+    "GitLab CI",
+    "GitHub Actions",
+    "Jenkins",
+    "Docker",
+    "Kubernetes",
+    "Terraform",
+    "LaunchDarkly"
+  ]
+}

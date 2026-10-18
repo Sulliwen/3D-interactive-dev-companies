@@ -1,13 +1,19 @@
-# Atelier Lumen · Dev Factory
+# Dev Factory
 
-Visite 3D éducative d'un étage d'éditeur de logiciels, pour comprendre comment travaillent
-les équipes de développement. Le visiteur se promène librement dans les bureaux d'_Atelier
-Lumen_ et suit une fonctionnalité de l'application _Pocket Santé_, de l'idée jusqu'à la
-mise en production.
+Visite 3D éducative pour comprendre comment travaillent les équipes de développement
+logiciel. Le visiteur choisit d'abord une **structure** (start-up, studio de jeu vidéo,
+laboratoire de recherche…), puis un **type de développement** (une fonctionnalité réclamée
+par les utilisateurs, la préparation d'une v2…). Il se promène ensuite librement dans les
+locaux et suit ce travail d'un poste à l'autre ; l'étage, le parcours, les personnages et
+les écrans s'adaptent au scénario choisi.
+
+Structure disponible : _Atelier Lumen_, une start-up SaaS (application _Pocket Santé_),
+avec quatre scénarios (les débuts de l'entreprise, une fonctionnalité réclamée par les
+utilisateurs, la v2 de l'application, le lancement d'un nouveau produit). Les autres structures sont annoncées « en préparation ».
 
 > **État : phase 5 (finitions) — visite complète.** Étage modélisé dans Blender (assets CC0,
-> éclairage précalculé), 14 métiers habités, parcours guidé, ambiance sonore, accueil,
-> tutoriel et écran de fin. Sans les modèles (`public/models/`), le jeu affiche l'étage en
+> éclairage précalculé), 14 métiers habités, parcours guidé, ambiance sonore, menu de
+> lancement, présentation filmée de chaque scénario, tutoriel et écran de fin. Sans les modèles (`public/models/`), le jeu affiche l'étage en
 > boîtes : tout le contenu reste consultable (« Tous les postes »).
 
 ## Prérequis
@@ -50,6 +56,7 @@ npm run dev        # http://localhost:5173
 | Regarder l'écran d'un poste | E à moins de 2 m, ou clic sur l'écran                                   |
 | Revenir à la visite         | Échap, bouton « Retour » ou clic droit                                  |
 | Tout lire sans la 3D        | Menu « Tous les postes »                                                |
+| Présentation du scénario    | Espace : pause ; ← → : étape précédente / suivante ; Échap : passer     |
 | _Dev_ : statistiques        | F2                                                                      |
 | _Dev_ : collisions          | F3                                                                      |
 
@@ -60,9 +67,13 @@ Les touches sont lues par **position** sur le clavier : ZQSD et WASD fonctionnen
 Le build est 100 % statique (aucun serveur) et utilise des chemins relatifs : le contenu de
 `dist/` peut être servi tel quel par GitHub Pages, Netlify ou un serveur web d'intranet.
 
-**GitHub Pages (configuré)** : `.github/workflows/deploy.yml` vérifie (lint, tests),
-construit et publie la visite à chaque push sur `main`. Les modèles 3D et les sons sont
-versionnés dans `public/` : la CI n'a besoin ni de Blender ni des assets sources.
+**Netlify (configuré)** : `netlify.toml` décrit le build (`npm run build` → `dist/`) et le
+cache des fichiers lourds. Publication manuelle depuis la machine :
+`npx netlify-cli deploy --prod --dir=dist` (après `npx netlify-cli login`), ou automatique
+en reliant le dépôt Git au site dans l'interface Netlify. Les modèles 3D et les sons sont
+versionnés dans `public/` : le build n'a besoin ni de Blender ni des assets sources.
+
+`.github/workflows/ci.yml` vérifie lint, tests et build à chaque push.
 
 **Intranet** : `npm run build`, puis copier `dist/` sur le serveur web.
 
@@ -85,8 +96,8 @@ src/
 │  └─ stations/   ancres des postes, détection de proximité
 ├─ stations/      écrans simulés (éditeur de code…), pastilles et bulles
 ├─ ui/            interface par-dessus la 3D
-├─ content/       textes : stations/*.json, glossary.json, company.json (validés par Zod),
-│                 screens/ (extraits de code affichés)
+├─ content/       textes validés par Zod : structures/<structure>/ (métiers, scénarios,
+│                 étapes), glossary/, screens/ (extraits de code affichés)
 ├─ assets/        images fixes des écrans (générées)
 └─ state/         état global (Zustand), progression, stockage local
 ```

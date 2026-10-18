@@ -16,7 +16,7 @@ export const SCREEN_HEIGHT = 557
  * pastilles et affiche la bulle d'explication ouverte.
  */
 export function ScreenFrame({ station, live }: { station: Station; live: boolean }) {
-  const screen = station.details?.screen
+  const screen = station.screen
   const annotations = useMemo(
     () => (screen?.annotations ?? []).map((a, i) => ({ ...a, n: i + 1 })),
     [screen],
@@ -208,10 +208,22 @@ function Bubble({
 function PlaceholderScreen({ station }: { station: Station }) {
   return (
     <div className="placeholder">
-      <p className="placeholder__number">Poste {station.number}</p>
+      <p className="placeholder__number">
+        {station.step === null ? 'Hors du parcours' : `Étape ${station.step}`}
+      </p>
       <p className="placeholder__title">{station.title}</p>
-      <p>{station.featureStep}</p>
-      <p className="placeholder__soon">L'écran de ce poste est en préparation.</p>
+      {station.absent ? (
+        <p className="placeholder__soon">
+          Écran éteint : {station.person.firstName} n'est pas encore là.
+        </p>
+      ) : station.status === 'bystander' ? (
+        <p className="placeholder__soon">Ce poste n'intervient pas dans ce scénario.</p>
+      ) : (
+        <>
+          <p>{station.featureStep}</p>
+          <p className="placeholder__soon">L'écran de ce poste est en préparation.</p>
+        </>
+      )}
     </div>
   )
 }

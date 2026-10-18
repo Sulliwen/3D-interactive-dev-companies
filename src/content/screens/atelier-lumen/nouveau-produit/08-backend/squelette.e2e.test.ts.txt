@@ -1,0 +1,25 @@
+import { describe, expect, it } from 'vitest'
+import { connecterInfirmiere, environnementHds } from '../testing/environnement'
+
+// @zone e2e
+// Test « de bout en bout » : il appelle la vraie API déployée sur l'hébergement HDS
+// de test, comme le fera le téléphone. S'il passe, toutes les pièces s'emboîtent.
+describe('squelette de bout en bout', () => {
+  it('répond depuis l’hébergement HDS', async () => {
+    const reponse = await fetch(`${environnementHds.url}/sante`)
+    expect(await reponse.json()).toEqual({ statut: 'ok' })
+  })
+
+  it('renvoie la tournée du jour de Karine, dans son ordre', async () => {
+    const karine = await connecterInfirmiere('karine.test@tournee.example')
+    const tournee = await karine.get('/tournees/aujourdhui')
+    expect(tournee.map((p) => p.patient.nom).slice(0, 2)).toEqual(['Mme Faure', 'M. Roux'])
+  })
+// @end
+
+  it("ne montre jamais les patients d'un autre cabinet", async () => {
+    const autre = await connecterInfirmiere('autre-cabinet.test@tournee.example')
+    const tournee = await autre.get('/tournees/aujourdhui')
+    expect(tournee.some((p) => p.patient.nom === 'Mme Faure')).toBe(false)
+  })
+})

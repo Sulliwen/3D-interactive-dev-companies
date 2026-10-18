@@ -11,6 +11,7 @@ const PROJECTS: Record<BacklogItem['project'], string> = {
   'pocket-sante': 'Pocket Santé',
   facturo: 'Facturo',
   mutuelle: 'Mutuelle Horizon',
+  tournee: 'Tournée',
 }
 
 const STATUS: Record<
@@ -66,11 +67,14 @@ export function BacklogScreen({ toolName, props: rawProps }: ScreenComponentProp
           ))}
           <Zone id="filters" className="bl__filters">
             <p className="bl__section">Projets</p>
-            {Object.entries(PROJECTS).map(([id, label]) => (
-              <p key={id} className={`bl__filter bl__filter--${id}`}>
-                <i aria-hidden="true" /> {label}
-              </p>
-            ))}
+            {Object.entries(PROJECTS)
+              // Tournée n'apparaît qu'une fois le projet lancé.
+              .filter(([id]) => id !== 'tournee' || props.items.some((i) => i.project === id))
+              .map(([id, label]) => (
+                <p key={id} className={`bl__filter bl__filter--${id}`}>
+                  <i aria-hidden="true" /> {label}
+                </p>
+              ))}
           </Zone>
         </nav>
 

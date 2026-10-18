@@ -1,0 +1,128 @@
+{
+  "role": "qa",
+  "order": 12,
+  "featureStep": "Le pilote commence : on trie les retours et on corrige l'essentiel",
+  "tagline": "Pendant le pilote, mes testeuses sont de vraies infirmières en tournée. Mon travail : trier vite ce qu'elles remontent, et trouver ce qui pourrait leur faire perdre confiance.",
+  "missions": [
+    "Faire la [[recette]] de chaque version en conditions réelles : mode avion, sous-sol, batterie faible, téléphones anciens.",
+    "Lire chaque jour les retours des 20 infirmières du [[pilote]] et les trier : bug, idée ou question.",
+    "Décider avec Mathilde ce qu'on corrige d'abord : ce qui fait perdre une information de soin passe avant tout.",
+    "Chercher les [[cas-limite|cas limites]] que personne n'imagine au bureau, comme deux collègues sans réseau sur la même fiche."
+  ],
+  "takeaways": [
+    "Un pilote produit beaucoup de retours (47 en cinq semaines) : les trier vite compte autant que les corriger.",
+    "Le seul bug **majeur** fait perdre une transmission. Pour une infirmière, c'est une information de soin perdue : la confiance tombe aussitôt.",
+    "Les autres retours (29 idées, 12 questions) nourrissent le backlog de Mathilde, sans tout interrompre."
+  ],
+  "receivesFrom": {
+    "roles": ["frontend", "devops", "security"],
+    "text": "L'application de Thomas, ouverte aux 20 infirmières par Ibrahima, avec les cas de sécurité demandés par Léa."
+  },
+  "handsOffTo": {
+    "roles": ["backend", "product-owner", "monitoring"],
+    "text": "Le BUG-T-14 confié à Awa, les idées des infirmières à Mathilde, et un correctif dont Camille mesurera l'effet."
+  },
+  "screen": {
+    "component": "qa-console",
+    "toolName": "Lumen Test",
+    "props": {
+      "campaign": "Tournée · pilote, semaine 2",
+      "status": "Lundi 17 janvier 2028 · 20 infirmières pilotes · Inès G.",
+      "suites": [
+        { "label": "Tests unitaires", "passed": 142, "total": 142 },
+        { "label": "Tests de l'API", "passed": 38, "total": 38 },
+        { "label": "Tests sans réseau", "passed": 5, "total": 6 }
+      ],
+      "cases": [
+        { "label": "Tournée complète en mode avion", "device": "iPhone 12", "result": "pass" },
+        {
+          "label": "Transmission écrite dans un sous-sol",
+          "device": "Android 13",
+          "result": "pass"
+        },
+        { "label": "Boutons utilisés avec des gants", "device": "iPhone 12", "result": "pass" },
+        { "label": "Téléphone de 2019, batterie à 8 %", "device": "Android 10", "result": "pass" },
+        {
+          "label": "Deux collègues, sans réseau, sur la même fiche",
+          "device": "Android 13 + iPhone 12",
+          "result": "fail",
+          "edge": true,
+          "bug": "BUG-T-14"
+        },
+        {
+          "label": "Tournée du soir qui passe minuit",
+          "device": "iPhone 12",
+          "result": "pass",
+          "edge": true
+        },
+        {
+          "label": "Remplaçante ajoutée au cabinet en cours de journée",
+          "device": "Android 13",
+          "result": "pass",
+          "edge": true
+        }
+      ],
+      "bug": {
+        "id": "BUG-T-14",
+        "title": "Une transmission écrite sans réseau disparaît si une collègue modifie la même fiche",
+        "severity": "Majeur",
+        "device": "Android 13 + iPhone 12 · Tournée 0.9",
+        "steps": [
+          "Karine (Android) et Nadège (iPhone), du même cabinet, passent en mode avion.",
+          "Karine écrit une transmission sur la fiche de Mme Faure.",
+          "Nadège en écrit une autre sur la même fiche.",
+          "Nadège retrouve le réseau, puis Karine."
+        ],
+        "expected": "Les deux transmissions apparaissent sur la fiche, dans l'ordre où elles ont été écrites.",
+        "actual": "Seule la transmission de Karine reste : celle de Nadège a disparu.",
+        "cause": {
+          "text": "À la synchronisation, la liste envoyée par le téléphone remplaçait celle du serveur, au lieu de s'y ajouter. Signalé par une infirmière du cabinet des Tilleuls ; reproduit par Inès en 20 minutes.",
+          "before": "fiche.transmissions = recues",
+          "after": "fiche.transmissions = fusionnerSansEcraser(fiche.transmissions, recues)"
+        },
+        "assignee": "Awa D.",
+        "statusBefore": "Corrigé · à retester",
+        "statusAfter": "Retesté · clos (déployé le 24 janvier)",
+        "retestLabel": "Retester"
+      }
+    },
+    "annotations": [
+      {
+        "id": "manual-plan",
+        "zone": "manual-plan",
+        "title": "Tester sur le terrain",
+        "text": "Inès ne teste pas seulement au bureau : mode avion, sous-sol, gants, vieux téléphone à 8 % de batterie. Ce sont les conditions réelles d'une tournée, telles que Samir les a observées."
+      },
+      {
+        "id": "edge-cases",
+        "zone": "edge-cases",
+        "title": "Le cas que personne n'avait prévu",
+        "text": "Deux collègues sans réseau qui écrivent sur la même fiche : c'est rare, mais ça arrive dans un cabinet de trois. Ce [[cas-limite|cas limite]] échoue, et il fait perdre une information de soin."
+      },
+      {
+        "id": "bug-report",
+        "zone": "bug-report",
+        "title": "Un bug signalé par une pilote",
+        "text": "Une infirmière du cabinet des Tilleuls a écrit : « la transmission de Nadège a disparu ». Inès l'a reproduit en 20 minutes, avec des étapes précises. Sur **47 retours** en cinq semaines, c'est le seul [[bug]] majeur ; 29 sont des idées, 12 des questions."
+      },
+      {
+        "id": "bug-cause",
+        "zone": "bug-cause",
+        "title": "Remplacer au lieu d'ajouter",
+        "text": "À la synchronisation, la liste du téléphone **écrasait** celle du serveur. Awa a corrigé en une ligne : fusionner les deux listes sans rien écraser. C'est le piège classique des applications [[hors-connexion|hors connexion]]."
+      },
+      {
+        "id": "auto-tests",
+        "zone": "auto-tests",
+        "title": "Un test de plus",
+        "text": "Un des six tests sans réseau échoue : c'est le bug, transformé en [[test-automatise|test automatique]]. Une fois corrigé, ce test tournera à chaque modification pour que le bug ne revienne jamais ([[non-regression|non-régression]])."
+      },
+      {
+        "id": "retest",
+        "zone": "retest",
+        "title": "Retester avant de fermer",
+        "text": "Inès reteste elle-même, avec deux téléphones en mode avion, avant de fermer le bug. Le correctif part chez les 20 infirmières le 24 janvier ; Camille verra la confiance revenir sur ses courbes."
+      }
+    ]
+  }
+}

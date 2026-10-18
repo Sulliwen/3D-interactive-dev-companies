@@ -27,8 +27,8 @@ export function ResearchBoardScreen({ toolName, props: raw }: ScreenComponentPro
       status={
         <>
           <span>
-            {total} entretiens · {props.sources.patients} patients · {props.sources.secretaries}{' '}
-            secrétaires médicales
+            {total} entretiens · {props.sources.patients} {props.sources.labels[0]} ·{' '}
+            {props.sources.secretaries} {props.sources.labels[1]}
           </span>
           <span style={{ marginLeft: 'auto' }}>Synthèse partagée avec l'équipe produit</span>
         </>
@@ -42,7 +42,8 @@ export function ResearchBoardScreen({ toolName, props: raw }: ScreenComponentPro
           </Zone>
           <Zone id="journey" className="rb__panel rb__journey">
             <p className="rb__heading">
-              Parcours de {props.persona.name} pour annuler un rendez-vous
+              {props.journeyTitle ??
+                `Parcours de ${props.persona.name} pour annuler un rendez-vous`}
             </p>
             <Journey journey={props.journey} />
           </Zone>
@@ -92,13 +93,13 @@ export function ResearchBoardScreen({ toolName, props: raw }: ScreenComponentPro
             <p className="rb__sub">Sources</p>
             <p className="rb__sources-row">
               <span>
-                <strong>{props.sources.patients}</strong> patients
+                <strong>{props.sources.patients}</strong> {props.sources.labels[0]}
               </span>
               <span>
-                <strong>{props.sources.secretaries}</strong> secrétaires médicales
+                <strong>{props.sources.secretaries}</strong> {props.sources.labels[1]}
               </span>
               <span>
-                <strong>45 min</strong> par entretien
+                <strong>{props.interviewLength}</strong> par entretien
               </span>
             </p>
           </Zone>

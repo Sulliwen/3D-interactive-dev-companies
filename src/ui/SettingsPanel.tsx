@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react'
 import { useGameStore, type Quality } from '../state/useGameStore'
 import { useEscape } from './escapeStack'
-import { AvatarPicker } from './WelcomeScreen'
+import { AvatarPicker } from './LaunchMenu'
 
 const TEXT_SIZES: Array<[number, string]> = [
   [1, 'Normale'],
@@ -18,6 +18,7 @@ export function SettingsPanel({ onClose }: { onClose: () => void }) {
   const settings = useGameStore((s) => s.settings)
   const setSetting = useGameStore((s) => s.setSetting)
   const resetProgress = useGameStore((s) => s.resetProgress)
+  const openMenu = useGameStore((s) => s.openMenu)
   const panel = useRef<HTMLDivElement>(null)
   useEscape(onClose)
 
@@ -128,9 +129,12 @@ export function SettingsPanel({ onClose }: { onClose: () => void }) {
         <button
           type="button"
           className="button button--ghost"
-          onClick={() => setSetting('welcomed', false)}
+          onClick={() => {
+            onClose()
+            openMenu()
+          }}
         >
-          Accueil
+          Menu
         </button>
         <button type="button" className="button" onClick={onClose}>
           Fermer

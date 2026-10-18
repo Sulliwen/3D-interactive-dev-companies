@@ -1,0 +1,23 @@
+{
+  "id": "engineering-manager",
+  "desk": 15,
+  "title": "Engineering Manager",
+  "person": {
+    "firstName": "Nadia",
+    "lastName": "Benali",
+    "role": "Engineering Manager"
+  },
+  "tagline": "Je n'écris presque plus de code : mon travail, c'est que l'équipe technique puisse bien travailler, progresser et durer.",
+  "missions": [
+    "Mener des [[entretien-individuel|entretiens individuels]] réguliers avec chaque développeur·se : difficultés, envies, progression.",
+    "Recruter les futurs collègues, avec l'équipe, et organiser leur [[onboarding]].",
+    "Veiller à la charge de travail pendant chaque [[sprint]], pour éviter la surcharge et l'épuisement.",
+    "Faire grandir les compétences : binômes, formations, premières responsabilités (animer une [[revue-de-code|revue de code]], présenter en démo…).",
+    "Faire le lien entre l'équipe technique et la direction : besoins, risques, organisation."
+  ],
+  "myth": {
+    "myth": "Le manager technique est le meilleur développeur de l'équipe, celui qui décide de tout le code.",
+    "reality": "Ce sont les développeurs qui décident du code, ensemble, notamment en revue de code. Le rôle de Nadia est différent : recruter, accompagner, protéger le temps de l'équipe et l'aider à progresser."
+  },
+  "realTools": ["Lattice", "Culture Amp", "15Five", "Welcome to the Jungle", "Notion"]
+}

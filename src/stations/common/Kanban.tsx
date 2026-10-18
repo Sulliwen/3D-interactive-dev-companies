@@ -4,8 +4,8 @@ import './common.css'
 export interface KanbanCard {
   id: string
   title: string
-  /** Projet : la couleur suit le projet (Pocket Santé, Facturo, mutuelle). */
-  project: 'pocket-sante' | 'facturo' | 'mutuelle'
+  /** Projet : la couleur suit le projet (Pocket Santé, Facturo, mutuelle, Tournée). */
+  project: 'pocket-sante' | 'facturo' | 'mutuelle' | 'tournee'
   /** Estimation (points). */
   estimate?: number
   assignee?: string
@@ -28,6 +28,7 @@ const PROJECT_LABEL: Record<KanbanCard['project'], string> = {
   'pocket-sante': 'Pocket Santé',
   facturo: 'Facturo',
   mutuelle: 'Mutuelle',
+  tournee: 'Tournée',
 }
 
 /** Tableau en colonnes (backlog, sprint) ; les cartes portent la couleur de leur projet. */

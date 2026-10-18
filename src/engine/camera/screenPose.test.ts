@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import type { StationAnchor } from '../world/floorplan'
-import { computeScreenPose } from './screenPose'
+import { computeScreenPose, computeTourShot } from './screenPose'
 
 // Écran de 0,62 × 0,36 m en (0, 1, 0), face vers +Z.
 const anchor: StationAnchor = {
@@ -46,5 +46,19 @@ describe('cadrage de la caméra face à un écran', () => {
     )
     expect(pose.position[0]).toBeGreaterThan(0.3)
     expect(pose.direction[0]).toBeCloseTo(-1)
+  })
+})
+
+describe('plans de la présentation', () => {
+  it('regarde le poste de haut, du côté de la personne assise', () => {
+    const shot = computeTourShot(anchor)
+    expect(shot.position[1]).toBeGreaterThan(shot.target[1])
+    expect(shot.position[2]).toBeGreaterThan(1.5)
+    expect(shot.target[2]).toBeGreaterThan(0)
+  })
+
+  it('recule davantage devant un grand écran mural', () => {
+    const wall = computeTourShot({ ...anchor, screenSize: [1.72, 1] })
+    expect(wall.position[2]).toBeGreaterThan(computeTourShot(anchor).position[2])
   })
 })

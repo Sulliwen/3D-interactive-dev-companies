@@ -1,0 +1,139 @@
+{
+  "role": "devops",
+  "order": 12,
+  "featureStep": "La bêta privée s'ouvre aux premières familles, avec un retour arrière prêt",
+  "tagline": "Pendant des mois, je fais tourner deux versions côte à côte. Aujourd'hui, j'ouvre la v2 à quelques centaines de familles, en gardant la main pour tout couper en quelques secondes.",
+  "missions": [
+    "Adapter le [[pipeline-ci-cd|pipeline]] pour construire, tester et livrer la v1 et la v2 ensemble.",
+    "Ajouter une étape de répétition de [[migration-donnees|migration]] sur une copie anonymisée, à chaque nouvelle version.",
+    "Ouvrir la [[beta|bêta]] par vagues grâce à l'[[feature-flag|interrupteur]] `app-v2-beta`, en surveillant chaque vague.",
+    "Préparer le [[retour-arriere|retour arrière]] et la bascule de septembre, puis l'arrêt de la v1 en décembre."
+  ],
+  "takeaways": [
+    "La bêta s'ouvre **par vagues** : 170 comptes (équipe et proches), puis 850 familles invitées aujourd'hui, puis 2 100 fin mai.",
+    "Le retour arrière ne désinstalle rien : couper l'interrupteur ramène les familles sur la v1, avec tous leurs rendez-vous.",
+    "La vraie bascule de tous les patients n'aura lieu qu'en **septembre**, après la bêta ouverte de l'été : on ne bascule pas 120 000 personnes d'un coup."
+  ],
+  "receivesFrom": {
+    "roles": ["qa", "security", "code-review"],
+    "text": "Le feu vert d'Inès (QA) après la répétition de migration n° 3, celui de Léa (sécurité), et le plan de coexistence de l'ADR-007 écrit par Marc."
+  },
+  "handsOffTo": {
+    "roles": ["engineering-manager"],
+    "text": "Une bêta ouverte et sous surveillance. Les retours des familles repartent vers l'équipe produit, et Nadia (Engineering Manager) prépare la suite du projet avec l'équipe."
+  },
+  "screen": {
+    "component": "pipeline",
+    "toolName": "Lumen CI",
+    "props": {
+      "run": {
+        "id": 2187,
+        "title": "Pocket Santé 2 · bêta privée, vague 2",
+        "trigger": "Déclenché par Ibrahima · feu vert QA (Inès) et sécurité (Léa)",
+        "branch": "main",
+        "commit": "7c41d0b"
+      },
+      "stages": [
+        {
+          "label": "Construction",
+          "detail": "v1 et v2 dans la même application",
+          "duration": "1 min 48 s"
+        },
+        {
+          "label": "Tests",
+          "detail": "1 608 tests (468 v1 + 1 140 v2)",
+          "duration": "6 min 10 s",
+          "zone": "stage-tests"
+        },
+        {
+          "label": "Analyse de sécurité",
+          "detail": "Code et dépendances",
+          "duration": "2 min 05 s"
+        },
+        {
+          "label": "Répétition de migration",
+          "detail": "Copie anonymisée · 96 400 comptes",
+          "duration": "41 min",
+          "zone": "stage-migration"
+        },
+        {
+          "label": "Recette",
+          "detail": "Installation sur l'environnement de test",
+          "duration": "4 min 50 s"
+        },
+        { "label": "Bêta privée", "detail": "Ouverture par vagues", "duration": "en cours" }
+      ],
+      "rollout": {
+        "flag": "app-v2-beta",
+        "steps": [
+          {
+            "percent": 0.2,
+            "label": "Équipe et proches · 170 comptes (mardi)",
+            "check": "Aucune erreur pendant 48 h"
+          },
+          {
+            "percent": 0.9,
+            "label": "Premières familles invitées · 850 comptes (aujourd'hui)",
+            "check": "Retours lus chaque jour par Lucie et Samir"
+          },
+          {
+            "percent": 2.2,
+            "label": "Bêta privée complète · 2 100 comptes (fin mai)",
+            "check": "Satisfaction ≥ 4,3 / 5, aucun compte perdu"
+          }
+        ],
+        "rollbackMessage": "Bêta coupée : les familles retrouvent la v1 en quelques secondes, avec tous leurs rendez-vous. (Simulation : rien n'a été coupé pour de vrai.)"
+      },
+      "log": [
+        "$ lumen-ci run --pipeline 2187",
+        "▸ build      v1 + v2 ok (1m48s)",
+        "▸ tests      1608 passed (6m10s)",
+        "▸ security   0 critical · photo-resize 1.4.2 ✓",
+        "▸ migration  dry-run 96400 accounts · 0 lost · 0 shifted (41m)",
+        "▸ staging    deployed · smoke tests ok",
+        "$ flag app-v2-beta --cohort team-and-friends   # mardi : 170 comptes",
+        "  health v1: errors 0.0% · health v2: errors 0.1% ✓",
+        "$ flag app-v2-beta --cohort invited-families   # aujourd'hui : 850 comptes",
+        "  ✓ app-v2-beta on for 850 accounts · v1 unchanged for everyone else"
+      ]
+    },
+    "annotations": [
+      {
+        "id": "pipeline-header",
+        "zone": "pipeline-header",
+        "title": "Deux versions, une seule chaîne",
+        "text": "Le même [[pipeline-ci-cd|pipeline]] construit et teste la v1 et la v2 à chaque changement. Ibrahima ne lance la bêta qu'avec deux feux verts : celui d'Inès (QA) et celui de Léa (sécurité). Aucune mise en ligne ne se fait « à la main »."
+      },
+      {
+        "id": "stage-tests",
+        "zone": "stage-tests",
+        "title": "1 608 tests à chaque fois",
+        "text": "Les tests de la v1 tournent toujours, à côté de ceux de la v2. Si une modification de la v2 casse quelque chose dans la v1, la chaîne s'arrête ici, avant que le moindre patient soit touché."
+      },
+      {
+        "id": "stage-migration",
+        "zone": "stage-migration",
+        "title": "Une répétition à chaque version",
+        "text": "Ibrahima a ajouté une étape propre à la v2 : rejouer la [[migration-donnees|migration]] des 96 400 comptes sur une copie anonymisée, à chaque nouvelle version. Si un compte se perd ou si une heure se décale (comme avec le BUG-131), la chaîne s'arrête."
+      },
+      {
+        "id": "rollout",
+        "zone": "rollout",
+        "title": "Une bêta par vagues",
+        "text": "Le [[deploiement-progressif|déploiement progressif]] est ici poussé à l'extrême : 170 comptes mardi, 850 aujourd'hui, 2 100 fin mai. Moins de 3 % des patients au total. La [[beta|bêta]] sert à apprendre, pas à aller vite. Tous les autres gardent la v1."
+      },
+      {
+        "id": "feature-flag",
+        "zone": "feature-flag",
+        "title": "Revenir à la v1 en quelques secondes",
+        "text": "L'[[feature-flag|interrupteur]] `app-v2-beta` décide qui voit la v2. En cas de problème grave, Ibrahima le coupe : c'est le [[retour-arriere|retour arrière]]. Les familles retrouvent la v1 et leurs rendez-vous, puisque les deux versions lisent la même base de données. Essayez le bouton : c'est une simulation."
+      },
+      {
+        "id": "job-log",
+        "zone": "job-log",
+        "title": "Et après ?",
+        "text": "Le journal confirme : 850 comptes ont la v2, la v1 ne bouge pas pour les autres. Prochaines étapes : bêta ouverte cet été, bascule de tous les patients en septembre, arrêt de la v1 en décembre. Une [[version-majeure|version majeure]] se termine le jour où l'ancienne s'éteint."
+      }
+    ]
+  }
+}

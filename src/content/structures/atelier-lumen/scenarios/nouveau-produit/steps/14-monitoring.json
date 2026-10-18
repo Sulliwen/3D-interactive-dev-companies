@@ -1,0 +1,123 @@
+{
+  "role": "monitoring",
+  "order": 13,
+  "featureStep": "On mesure si les infirmières l'utilisent vraiment, et un cabinet paie",
+  "tagline": "Pendant un pilote, ma question n'est pas « le serveur tient-il ? » mais « les infirmières reviennent-elles, une fois la curiosité passée ? ».",
+  "missions": [
+    "Suivre l'[[activation]] et la [[retention|rétention]] des 20 infirmières du pilote, semaine après semaine.",
+    "Garder un œil sur la santé technique : [[api]], synchronisation, sauvegardes de l'hébergement [[hds|HDS]].",
+    "Relier chaque changement de courbe à un événement réel (un correctif, des vacances, une panne).",
+    "Préparer les chiffres du comité du 14 mars, comparés aux critères écrits par Claire en octobre."
+  ],
+  "takeaways": [
+    "Au début d'un pilote, la curiosité gonfle les chiffres. Ce qui compte, c'est le niveau où la courbe se stabilise : ici **45 %**.",
+    "Le creux de la semaine 3 vient du BUG-T-14 : une transmission perdue suffit à faire douter une infirmière.",
+    "Les critères de Claire sont atteints : 45 % d'infirmières actives (≥ 40 %) et **3 cabinets** qui paient. Le comité de mars pourra décider sur des faits."
+  ],
+  "receivesFrom": {
+    "roles": ["devops", "qa"],
+    "text": "Un pilote ouvert par Ibrahima le 10 janvier, et le correctif du BUG-T-14 retesté par Inès puis déployé le 24 janvier."
+  },
+  "handsOffTo": {
+    "roles": ["product-manager", "ux-research", "product-owner"],
+    "text": "Des chiffres pour Claire et son comité, et 47 retours d'infirmières pour Samir et Mathilde : la boucle repart vers la découverte."
+  },
+  "screen": {
+    "component": "monitoring",
+    "toolName": "Lumen Watch",
+    "props": {
+      "title": "Tournée · pilote",
+      "statusItems": [
+        "Hébergement HDS · 20 infirmières pilotes",
+        "Interrupteur « pilote-tournee » : 7 cabinets"
+      ],
+      "period": "Pilote · semaines 1 à 5 (10 janvier → 10 février 2028)",
+      "tiles": [
+        {
+          "label": "Actives cette semaine",
+          "value": "9 / 20",
+          "detail": "45 % · critère : au moins 40 %",
+          "status": "good"
+        },
+        { "label": "Tournées préparées", "value": "412", "detail": "depuis le 10 janvier" },
+        {
+          "label": "Transmissions écrites",
+          "value": "1 340",
+          "detail": "dont 31 % sans réseau"
+        },
+        {
+          "label": "Abonnements payants",
+          "value": "3 cabinets",
+          "detail": "8 infirmières · 19 € par mois chacune",
+          "status": "good"
+        }
+      ],
+      "slots": {
+        "title": "Utilisation, par semaine de pilote",
+        "labels": ["S1", "S2", "S3", "S4", "S5"],
+        "freed": { "label": "Transmissions écrites", "values": [180, 260, 300, 290, 310] },
+        "taken": { "label": "Tournées préparées", "values": [61, 88, 93, 84, 86] }
+      },
+      "noShow": {
+        "title": "Infirmières actives chaque semaine (%)",
+        "labels": ["S1", "S2", "S3", "S4", "S5"],
+        "values": [75, 60, 40, 45, 45],
+        "launchIndex": 2,
+        "launchLabel": "Correctif BUG-T-14",
+        "yMax": 100
+      },
+      "services": [
+        { "name": "API Tournée (HDS)", "status": "good", "detail": "99,96 % sur 30 jours" },
+        { "name": "Synchronisation", "status": "good", "detail": "4 s après le retour du réseau" },
+        {
+          "name": "Sauvegardes chiffrées",
+          "status": "good",
+          "detail": "chaque nuit, 2e centre HDS"
+        }
+      ],
+      "incident": {
+        "when": "Mardi 18 janvier 2028 · 07:12",
+        "title": "Conflits de synchronisation en hausse (14 en une heure)",
+        "detail": "Lié au BUG-T-14 : correctif déployé le 24 janvier, aucune transmission perdue depuis."
+      },
+      "loop": {
+        "title": "Retours des infirmières",
+        "count": "47 retours en 5 semaines",
+        "quote": "Le soir, je n'envoie plus de SMS : mes collègues lisent mes transmissions dans Tournée.",
+        "action": "Vers Samir et Mathilde : priorités pour le comité du 14 mars"
+      }
+    },
+    "annotations": [
+      {
+        "id": "tiles",
+        "zone": "tiles",
+        "title": "Les critères du comité",
+        "text": "En octobre, Claire avait écrit : au moins 40 % d'infirmières actives chaque semaine, et au moins 3 cabinets prêts à payer. Aujourd'hui : **45 %** et **3 cabinets**. Les deux critères sont atteints, de justesse."
+      },
+      {
+        "id": "no-show",
+        "zone": "no-show",
+        "title": "Après la curiosité",
+        "text": "75 % la première semaine, puis la courbe baisse : la nouveauté passe. Ce qui compte, c'est où elle se stabilise : 45 %. C'est la [[retention|rétention]], le vrai signe qu'un produit est utile."
+      },
+      {
+        "id": "incident",
+        "zone": "incident",
+        "title": "Le creux de la semaine 3",
+        "text": "Le 18 janvier, une [[alerte]] signale des conflits de synchronisation : c'est le BUG-T-14 trouvé par Inès. Des transmissions perdues, et des infirmières qui reviennent au cahier. Après le correctif du 24 janvier, la courbe remonte."
+      },
+      {
+        "id": "slots",
+        "zone": "slots",
+        "title": "Ce qu'elles font vraiment",
+        "text": "Les transmissions augmentent plus vite que les tournées préparées : les infirmières utilisent d'abord Tournée pour se parler. C'est exactement le problème découvert par Samir, et 31 % de ces transmissions ont été écrites sans réseau."
+      },
+      {
+        "id": "loop",
+        "zone": "loop",
+        "title": "La boucle repart",
+        "text": "Les 47 retours partent chez Samir et Mathilde. Si le comité du 14 mars dit oui, une nouvelle [[decouverte]] commence : d'autres régions, d'autres façons de travailler. Le cycle d'un produit ne s'arrête jamais vraiment."
+      }
+    ]
+  }
+}

@@ -1,0 +1,238 @@
+{
+  "role": "scrum-master",
+  "order": 6,
+  "featureStep": "Une nouvelle équipe de cinq se lance, avec ses propres règles",
+  "tagline": "Une nouvelle équipe ne naît pas en réunissant cinq personnes autour d'un tableau. Je l'aide à se donner ses règles et son rythme dès le premier jour.",
+  "missions": [
+    "Animer le [[sprint-zero|sprint 0]] : écrire ensemble l'accord d'équipe (horaires, relectures, façon de décider).",
+    "Lancer le rythme des [[sprint|sprints]] de deux semaines, avec un [[daily]] qui ne chevauche pas celui de Pocket Santé.",
+    "Organiser une démonstration aux infirmières à la fin de chaque sprint, pour garder le lien avec le terrain.",
+    "Repérer tôt ce qui freine l'équipe et l'aider à s'en débarrasser."
+  ],
+  "takeaways": [
+    "Avant de livrer des fonctionnalités, le **sprint 0** prépare tout : règles communes, dépôt de code, mise en ligne, squelette.",
+    "L'accord d'équipe est écrit **par** l'équipe, pas imposé : chacun sait comment on relit, quand on se voit, qui décide.",
+    "Fatou accompagne deux équipes à la fois : son tableau a maintenant des cartes violettes, celles de Tournée."
+  ],
+  "receivesFrom": {
+    "roles": ["product-owner", "engineering-manager"],
+    "text": "La carte du MVP de Mathilde (32 points) et l'équipe de cinq composée par Nadia : Mathilde, Hugo, Awa, Thomas et Inès."
+  },
+  "handsOffTo": {
+    "roles": ["backend", "frontend", "devops"],
+    "text": "Un premier sprint lancé : objectif « Karine voit sa tournée du jour, même en mode avion ». Awa, Thomas et Ibrahima s'y attellent."
+  },
+  "screen": {
+    "component": "sprint-board",
+    "toolName": "Lumen Board",
+    "props": {
+      "sprint": {
+        "name": "Tournée · sprint 1",
+        "dates": "22 novembre → 3 décembre 2027",
+        "day": "Jour 4 sur 10",
+        "goal": "Karine voit sa tournée du jour sur son téléphone, même en mode avion."
+      },
+      "columns": [
+        {
+          "id": "todo",
+          "title": "À faire",
+          "cards": [
+            {
+              "id": "TRN-6",
+              "title": "Réordonner ma tournée à la main",
+              "project": "tournee",
+              "estimate": 3,
+              "assignee": "Thomas"
+            },
+            {
+              "id": "t-avion",
+              "title": "Recette : tournée complète en mode avion",
+              "project": "tournee",
+              "tag": "TRN-1",
+              "assignee": "Inès"
+            }
+          ]
+        },
+        {
+          "id": "doing",
+          "title": "En cours",
+          "cards": [
+            {
+              "id": "TRN-1",
+              "title": "Voir ma tournée du jour, même sans réseau",
+              "project": "tournee",
+              "estimate": 8,
+              "tag": "MVP",
+              "highlight": true,
+              "zone": "offline-card"
+            },
+            {
+              "id": "t-base-locale",
+              "title": "Base locale sur le téléphone",
+              "project": "tournee",
+              "tag": "TRN-1",
+              "assignee": "Thomas"
+            },
+            {
+              "id": "TRN-2",
+              "title": "Ouvrir la fiche d'un patient",
+              "project": "tournee",
+              "estimate": 5,
+              "assignee": "Awa"
+            },
+            {
+              "id": "PS-188",
+              "title": "Carnet de vaccination : maquettes",
+              "project": "pocket-sante",
+              "assignee": "Yanis"
+            }
+          ]
+        },
+        {
+          "id": "review",
+          "title": "En revue",
+          "cards": [
+            {
+              "id": "t-api-tournee",
+              "title": "API : tournée du jour",
+              "project": "tournee",
+              "tag": "TRN-1",
+              "assignee": "Awa"
+            }
+          ]
+        },
+        {
+          "id": "done",
+          "title": "Terminé",
+          "cards": [
+            {
+              "id": "t-squelette",
+              "title": "Squelette de bout en bout en ligne (HDS)",
+              "project": "tournee",
+              "tag": "sprint 0",
+              "assignee": "Awa",
+              "zone": "skeleton-card"
+            },
+            {
+              "id": "t-accord",
+              "title": "Accord d'équipe écrit et signé",
+              "project": "tournee",
+              "tag": "sprint 0",
+              "assignee": "Fatou"
+            },
+            {
+              "id": "t-pipeline",
+              "title": "Mise en ligne à chaque fusion",
+              "project": "tournee",
+              "tag": "sprint 0",
+              "assignee": "Ibrahima"
+            },
+            {
+              "id": "TRN-3",
+              "title": "Cocher un soin fait",
+              "project": "tournee",
+              "estimate": 3,
+              "assignee": "Thomas"
+            }
+          ]
+        }
+      ],
+      "burndown": {
+        "labels": [
+          "Déb.",
+          "L 22",
+          "M 23",
+          "M 24",
+          "J 25",
+          "V 26",
+          "L 29",
+          "M 30",
+          "M 1",
+          "J 2",
+          "V 3"
+        ],
+        "actual": [19, 19, 18, 16, 16],
+        "total": 19,
+        "todayIndex": 4
+      },
+      "daily": {
+        "when": "Jeudi 25 novembre · 9 h 15, devant le mur Scrum (équipe Tournée)",
+        "entries": [
+          {
+            "person": "Awa",
+            "yesterday": "API de la tournée du jour envoyée en relecture.",
+            "today": "fiche patient (TRN-2), côté serveur."
+          },
+          {
+            "person": "Thomas",
+            "yesterday": "« Cocher un soin » terminé.",
+            "today": "base locale : la tournée doit s'ouvrir en mode avion.",
+            "blocker": "Il me faut une vraie tournée de test, anonymisée."
+          },
+          {
+            "person": "Inès",
+            "yesterday": "Plan de recette hors connexion.",
+            "today": "préparer une tournée de test de 30 patients fictifs pour Thomas."
+          },
+          {
+            "person": "Mathilde",
+            "yesterday": "Visio avec Karine : TRN-7 à affiner.",
+            "today": "critères de TRN-4 avec Hugo."
+          }
+        ]
+      },
+      "retro": {
+        "sprint": "sprint 0",
+        "good": [
+          "Le squelette était en ligne dès le mercredi de la première semaine.",
+          "L'accord d'équipe a été écrit ensemble, en une heure."
+        ],
+        "improve": [
+          "Les dailies de Tournée et de Pocket Santé se chevauchaient : Fatou courait d'un mur à l'autre."
+        ],
+        "actions": [
+          "Daily Tournée à 9 h 15, daily Pocket Santé à 9 h 30.",
+          "Une démonstration aux infirmières en visio à la fin de chaque sprint."
+        ]
+      }
+    },
+    "annotations": [
+      {
+        "id": "goal",
+        "zone": "goal",
+        "title": "Un objectif qu'une infirmière comprend",
+        "text": "L'objectif du sprint 1 ne parle pas de base de données : il décrit ce que Karine pourra faire. Le mode avion est dans la phrase, parce que Samir a vu la moitié des passages se faire sans réseau."
+      },
+      {
+        "id": "skeleton",
+        "zone": "skeleton-card",
+        "title": "Le sprint 0, déjà terminé",
+        "text": "Ces cartes « sprint 0 » n'apportent rien de visible aux infirmières, et pourtant tout en dépend : le [[squelette-de-bout-en-bout|squelette de bout en bout]], la mise en ligne automatique, l'accord d'équipe. C'est le [[sprint-zero|sprint 0]] d'une nouvelle équipe."
+      },
+      {
+        "id": "offline",
+        "zone": "offline-card",
+        "title": "La première vraie story",
+        "text": "TRN-1 est la plus grosse story du MVP (8 points) : sans elle, rien ne marche sur le terrain. Elle est découpée en tâches entre Awa (serveur), Thomas (téléphone) et Inès (recette en mode avion)."
+      },
+      {
+        "id": "burndown",
+        "zone": "burndown",
+        "title": "Un démarrage lent, et c'est normal",
+        "text": "Le [[burndown]] descend doucement : une équipe qui vient de se former apprend encore à travailler ensemble. Fatou ne s'en inquiète pas au jour 4 ; elle regardera la tendance à la [[retrospective|rétrospective]]."
+      },
+      {
+        "id": "daily",
+        "zone": "daily",
+        "title": "Un blocage dit à voix haute",
+        "text": "Au [[daily]], Thomas signale qu'il lui manque des données de test. Inès s'en charge le jour même : 30 patients fictifs, aucune vraie donnée de santé. C'est exactement à ça que sert le daily."
+      },
+      {
+        "id": "retro",
+        "zone": "retro",
+        "title": "La première rétrospective",
+        "text": "Dès la fin du [[sprint-zero|sprint 0]], l'équipe a fait sa [[retrospective|rétrospective]]. Deux actions concrètes : décaler les dailies, et montrer le travail aux infirmières à chaque fin de sprint."
+      }
+    ]
+  }
+}

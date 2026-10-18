@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react'
 import { useProgress } from '@react-three/drei'
-import { company } from '../content/loader'
+import { useVisit } from '../state/visit'
 
 const TIPS = [
-  '14 métiers font avancer une seule fonctionnalité.',
+  'Une dizaine de métiers font avancer un même travail.',
   'À chaque poste, les pastilles orange expliquent l’écran.',
   'Tous les mots techniques sont expliqués dans le glossaire.',
 ]
@@ -14,6 +14,7 @@ const TIPS = [
  */
 export function LoadingScreen() {
   const { progress, active } = useProgress()
+  const { structure } = useVisit()
   const [gone, setGone] = useState(false)
   const done = !active && progress >= 100
 
@@ -27,8 +28,8 @@ export function LoadingScreen() {
   return (
     <div className={`loading ${done ? 'loading--done' : ''}`} role="status" aria-live="polite">
       <div className="loading__sun" aria-hidden="true" />
-      <p className="loading__brand">{company.name}</p>
-      <p>{company.tagline}</p>
+      <p className="loading__brand">{structure.name}</p>
+      <p>{structure.tagline}</p>
       <div className="loading__bar" aria-hidden="true">
         <span style={{ width: `${Math.round(progress)}%` }} />
       </div>

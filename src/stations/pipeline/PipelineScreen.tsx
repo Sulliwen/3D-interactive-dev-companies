@@ -76,7 +76,7 @@ export function PipelineScreen({ toolName, props: rawProps }: ScreenComponentPro
           <span>
             Interrupteur {props.rollout.flag} : {flagOn ? 'activé' : 'coupé'}
           </span>
-          <span className="pl__status-right">pocket-sante · production</span>
+          <span className="pl__status-right">{props.run.target}</span>
         </>
       }
     >

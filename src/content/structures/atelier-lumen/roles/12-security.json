@@ -1,0 +1,23 @@
+{
+  "id": "security",
+  "desk": 12,
+  "title": "Sécurité",
+  "person": {
+    "firstName": "Léa",
+    "lastName": "Kowalski",
+    "role": "Ingénieure sécurité"
+  },
+  "tagline": "Je m'assure que la fonctionnalité ne met jamais en danger les données des patients : qui peut faire quoi, ce qu'on enregistre, et ce qu'on ne révèle à personne.",
+  "missions": [
+    "Vérifier que chaque fonctionnalité respecte le [[rgpd|RGPD]] et les règles propres aux données de santé ([[hds|HDS]]).",
+    "Contrôler les droits : chacun ne doit pouvoir agir que sur ses propres données.",
+    "Surveiller les [[dependance|dépendances]] du logiciel et faire corriger les [[vulnerabilite|vulnérabilités]] connues.",
+    "S'assurer que les actions sensibles sont enregistrées dans le [[journal-acces|journal d'accès]].",
+    "Sensibiliser l'équipe : former, conseiller, répondre aux questions dès la conception."
+  ],
+  "myth": {
+    "myth": "La sécurité, c'est un expert qui arrive à la fin pour tout bloquer.",
+    "reality": "Léa travaille avec l'équipe depuis le début : elle a relu la user story, demandé le test « rendez-vous d'un autre patient » et proposé que la notification reste anonyme. Son rôle est de trouver des solutions sûres, pas de dire non."
+  },
+  "realTools": ["Snyk", "Dependabot", "OWASP ZAP", "Burp Suite", "SonarQube"]
+}

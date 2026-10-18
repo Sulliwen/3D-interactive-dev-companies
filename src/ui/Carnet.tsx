@@ -1,25 +1,28 @@
 import { useState } from 'react'
-import { pathStations, stations } from '../content/loader'
 import { floorPlan } from '../engine/world/floorplan'
 import { standPoint } from '../engine/stations/standPoint'
 import { useNextStation } from '../engine/stations/useNextStation'
 import { visitedCount } from '../state/progress'
 import { useGameStore } from '../state/useGameStore'
+import { useProgress, useVisit } from '../state/visit'
 import { useEscape } from './escapeStack'
-
-const pathIds = pathStations.map((s) => s.id)
 
 /** Carnet de visite : étape en cours, chaîne complète des postes, accès direct à chacun. */
 export function Carnet() {
   const [open, setOpen] = useState(false)
-  const progress = useGameStore((s) => s.progress)
+  const visit = useVisit()
+  const progress = useProgress()
   const openCatalog = useGameStore((s) => s.openCatalog)
   const setMoveTarget = useGameStore((s) => s.setMoveTarget)
   const openFinale = useGameStore((s) => s.openFinale)
   const next = useNextStation()
-  const count = visitedCount(progress, pathIds)
+  const count = visitedCount(
+    progress,
+    visit.pathStations.map((s) => s.id),
+  )
+  const total = visit.pathStations.length
   const done = next === null
-  const nextData = next && stations.find((s) => s.number === next.number)
+  const nextData = next && visit.stations.find((s) => s.desk === next.number)
   useEscape(() => setOpen(false), open)
 
   const goTo = (n: number) => {
@@ -41,7 +44,7 @@ export function Carnet() {
       >
         <strong>Carnet de visite</strong>
         <span className="carnet__step">
-          {done ? 'Visite terminée !' : `Étape ${next.number} sur ${pathStations.length}`}
+          {done ? 'Visite terminée !' : `Étape ${nextData?.step} sur ${total}`}
         </span>
         {nextData && <span className="carnet__next"> · {nextData.title}</span>}
         <span aria-hidden="true"> {open ? '▴' : '▾'}</span>
@@ -55,17 +58,22 @@ export function Carnet() {
             </button>
           )}
           <p className="carnet__summary">
-            {count} poste{count > 1 ? 's' : ''} vu{count > 1 ? 's' : ''} sur {pathStations.length}.
-            Suivez la ligne lumineuse au sol, ou choisissez un poste.
+            <strong>{visit.scenario.title}</strong> · {count} étape{count > 1 ? 's' : ''} vue
+            {count > 1 ? 's' : ''} sur {total}. Suivez la ligne lumineuse au sol, ou choisissez un
+            poste.
           </p>
           <ol className="carnet__list">
-            {stations.map((s) => {
-              const seen = progress.visited.includes(s.id)
-              const isNext = next?.number === s.number
+            {visit.stations.map((s) => {
+              const seen = s.status !== 'bystander' && progress.visited.includes(s.id)
+              const isNext = next?.number === s.desk
+              const bystander = s.status === 'bystander'
               return (
-                <li key={s.id} className={`${seen ? 'is-seen' : ''} ${isNext ? 'is-next' : ''}`}>
+                <li
+                  key={s.id}
+                  className={`${seen ? 'is-seen' : ''} ${isNext ? 'is-next' : ''} ${bystander ? 'is-bystander' : ''}`}
+                >
                   <span className="carnet__mark" aria-hidden="true">
-                    {seen ? '✓' : s.offPath ? '★' : s.number}
+                    {seen ? '✓' : s.status === 'bonus' ? '★' : bystander ? '–' : s.step}
                   </span>
                   <span className="carnet__text">
                     <span className="carnet__title">
@@ -73,13 +81,19 @@ export function Carnet() {
                       {seen && <span className="visually-hidden"> (déjà vu)</span>}
                       {isNext && <em> · prochain</em>}
                     </span>
-                    <span className="carnet__feature">{s.featureStep}</span>
+                    <span className="carnet__feature">
+                      {s.absent
+                        ? 'Pas encore là'
+                        : bystander
+                          ? 'Hors de ce scénario'
+                          : s.featureStep}
+                    </span>
                   </span>
                   <span className="carnet__actions">
-                    <button type="button" onClick={() => goTo(s.number)}>
+                    <button type="button" onClick={() => goTo(s.desk)}>
                       Y aller
                     </button>
-                    <button type="button" onClick={() => openCatalog(s.number)}>
+                    <button type="button" onClick={() => openCatalog(s.desk)}>
                       Fiche
                     </button>
                   </span>

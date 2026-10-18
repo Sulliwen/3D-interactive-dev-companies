@@ -1,0 +1,42 @@
+import { fromZonedTime } from 'date-kit'
+import { db } from '../database'
+import { findDuplicateOf } from './duplicates'
+
+// Le fuseau horaire dans lequel la v1 enregistrait les heures : le temps universel
+const V1_TIME_ZONE = 'UTC'
+
+export async function migrateAccount(account: V1Account, { dryRun }: Options) {
+  // @zone idempotent
+  // Déjà migré ? On ne fait rien : le script peut être relancé sans dégât
+  if (await db.households.existsForAccount(account.id)) return 'already-migrated'
+  // @end
+
+  // @zone household
+  // Chaque compte v1 devient un foyer, avec un profil principal : le titulaire
+  const household = { accountId: account.id, profiles: [mainProfile(account)] }
+  // @end
+
+  // @zone duplicates
+  // Un 2e compte créé pour un enfant (même téléphone, autre adresse mail) :
+  // l'enfant devient un profil du foyer de son parent (4 200 comptes concernés)
+  const parent = await findDuplicateOf(account)
+  if (parent) return attachAsChildProfile(parent, account, { dryRun })
+  // @end
+
+  const appointments = (await db.v1.appointmentsOf(account.id)).map((row) => ({
+    ...row,
+    // @zone timezone
+    // Corrigé (BUG-131) : la v1 enregistrait déjà l'heure universelle (UTC).
+    // La convertir une 2e fois depuis l'heure de Paris avançait les rendez-vous de 2 h.
+    startsAt: fromZonedTime(row.starts_at, V1_TIME_ZONE),
+    // @end
+  }))
+
+  // @zone dry-run
+  // Mode « essai à blanc » : on calcule tout, on n'écrit rien. Utilisé pour les
+  // répétitions sur la copie anonymisée de la base, avant la vraie migration.
+  if (dryRun) return { household, appointments: appointments.length }
+  await db.transaction((tx) => tx.households.create(household, appointments))
+  // @end
+  return 'migrated'
+}

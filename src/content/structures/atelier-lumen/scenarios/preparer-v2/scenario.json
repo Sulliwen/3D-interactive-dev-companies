@@ -1,0 +1,43 @@
+{
+  "id": "preparer-v2",
+  "order": 2,
+  "kind": "Version majeure",
+  "title": "Préparer la v2 de Pocket Santé",
+  "summary": "L'application est en ligne depuis trois ans et doit être repensée pour toute la famille. L'équipe construit la v2 à côté de la v1, qui continue de tourner, jusqu'au lancement d'une bêta privée.",
+  "workItem": {
+    "label": "La v2 de Pocket Santé, ici",
+    "title": "Repenser Pocket Santé pour toute la famille, sur des fondations neuves, sans perdre aucun des 120 000 patients ni interrompre la v1.",
+    "project": "pocket-sante"
+  },
+  "intro": "Nous sommes le jeudi 29 avril 2027. Depuis janvier, douze métiers préparent Pocket Santé 2 pendant que la v1 continue de servir les patients chaque jour. Aujourd'hui, les premières familles reçoivent la bêta privée.",
+  "finale": {
+    "lead": "Il a fallu douze métiers et quatre mois pour arriver à cette bêta, sans jamais arrêter la v1. Et ce n'est qu'un début : la bêta ouverte cet été, la bascule de tous les patients en septembre, puis l'arrêt de la v1 en décembre.",
+    "outcomesTitle": "Où en est la v2 au lancement de la bêta",
+    "outcomes": [
+      {
+        "label": "Comptes perdus lors de la répétition de migration",
+        "before": "37 (n° 1)",
+        "after": "0 (n° 3)"
+      },
+      { "label": "Prendre rendez-vous pour un enfant", "before": "3 min 40", "after": "1 min 10" },
+      { "label": "Familles avec Pocket Santé 2", "before": "0", "after": "850" },
+      {
+        "label": "Incidents majeurs sur la v1 pendant la construction",
+        "before": "—",
+        "after": "0"
+      }
+    ]
+  },
+  "bystanders": [
+    {
+      "role": "support",
+      "note": "Lucie continue de répondre aux patients de la **v1**, qui reste l'application de presque tout le monde. Elle prépare aussi la foire aux questions de la [[beta|bêta]] : dès que les familles écriront, elle sera en première ligne.",
+      "screenFrom": "retours-utilisateurs"
+    },
+    {
+      "role": "monitoring",
+      "note": "Camille surveille la **v1** en production : c'est elle qui tourne pour 120 000 patients. La v2 n'est pas encore en ligne pour tout le monde ; sa [[supervision]] commencera avec la [[beta|bêta]] ouverte.",
+      "screenFrom": "retours-utilisateurs"
+    }
+  ]
+}

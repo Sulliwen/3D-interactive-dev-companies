@@ -1,6 +1,7 @@
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
-import { company, getStationByNumber, stations } from '../content/loader'
+import { stationAtDesk } from '../content/loader'
 import { useGameStore } from '../state/useGameStore'
+import { useProgress, useVisit } from '../state/visit'
 import { SCREEN_HEIGHT, SCREEN_WIDTH, ScreenFrame } from '../stations/ScreenFrame'
 import type { Station } from '../content/schema'
 import { Dialog } from './Dialog'
@@ -15,30 +16,41 @@ export function Catalog() {
   const openCatalog = useGameStore((s) => s.openCatalog)
   const closeOverlay = useGameStore((s) => s.closeOverlay)
   const visitStation = useGameStore((s) => s.visitStation)
-  const visited = useGameStore((s) => s.progress.visited)
-  const station = current === null ? undefined : getStationByNumber(current)
+  const visit = useVisit()
+  const visited = useProgress().visited
+  const station = current === null ? undefined : stationAtDesk(visit, current)
+  const { structure, scenario } = visit
 
   useEffect(() => {
-    if (station?.details) visitStation(station.id)
+    if (station && station.status !== 'bystander') visitStation(station.id)
   }, [station, visitStation])
 
   return (
     <Dialog title="Tous les postes" onClose={closeOverlay} className="dialog--wide">
       <div className="catalog">
-        <nav className="catalog__nav" aria-label="Postes, dans l'ordre de la chaîne">
+        <nav className="catalog__nav" aria-label="Postes, dans l'ordre du parcours">
           <ol>
-            {stations.map((s) => (
-              <li key={s.id}>
+            {visit.stations.map((s) => (
+              <li key={s.id} className={s.status === 'bystander' ? 'is-bystander' : ''}>
                 <button
                   type="button"
-                  aria-current={s.number === current ? 'true' : undefined}
-                  className={s.number === current ? 'is-current' : ''}
-                  onClick={() => openCatalog(s.number)}
+                  aria-current={s.desk === current ? 'true' : undefined}
+                  className={s.desk === current ? 'is-current' : ''}
+                  onClick={() => openCatalog(s.desk)}
                 >
-                  <span className="catalog__num">{s.number}</span>
+                  <span className="catalog__num">
+                    {s.status === 'bonus' ? '★' : s.status === 'bystander' ? '–' : s.step}
+                  </span>
                   <span>
                     {s.title}
-                    {visited.includes(s.id) && <span className="catalog__seen"> · vu</span>}
+                    {s.status === 'bystander' && (
+                      <span className="catalog__seen">
+                        {s.absent ? ' · pas encore là' : ' · hors scénario'}
+                      </span>
+                    )}
+                    {s.status !== 'bystander' && visited.includes(s.id) && (
+                      <span className="catalog__seen"> · vu</span>
+                    )}
                   </span>
                 </button>
               </li>
@@ -54,13 +66,12 @@ export function Catalog() {
             </>
           ) : (
             <div className="catalog__intro">
-              <p className="sheet__label">Le fil rouge de la visite</p>
-              <p className="catalog__feature">« {company.feature.title} »</p>
+              <p className="sheet__label">
+                {structure.name} · {scenario.title}
+              </p>
+              <p className="catalog__feature">« {scenario.workItem.title} »</p>
               <p>
-                Chez {company.name}, quatorze métiers font avancer cette fonctionnalité de
-                l'application Pocket Santé, du premier message d'un patient mécontent jusqu'aux
-                statistiques après la mise en ligne. Choisissez un poste dans la liste pour voir son
-                écran et sa fiche.
+                {scenario.intro} Choisissez un poste dans la liste pour voir son écran et sa fiche.
               </p>
             </div>
           )}

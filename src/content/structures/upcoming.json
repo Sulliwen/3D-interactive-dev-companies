@@ -1,0 +1,55 @@
+[
+  {
+    "kind": "Studio de jeu vidéo",
+    "summary": "Game designers, artistes, programmeurs et testeurs fabriquent un jeu, de la première maquette jouable à la sortie sur console.",
+    "scenarios": [
+      "Pré-production et vertical slice",
+      "Jalon de sortie et certification console",
+      "Patch et live ops après le lancement"
+    ]
+  },
+  {
+    "kind": "ESN / agence",
+    "summary": "Une entreprise de services qui développe des logiciels pour ses clients, au forfait ou en régie.",
+    "scenarios": [
+      "Réponse à un appel d'offres et projet au forfait",
+      "Maintenance et évolutions d'une application cliente (TMA)"
+    ]
+  },
+  {
+    "kind": "Service numérique public",
+    "summary": "Une équipe d'administration qui construit les démarches en ligne des citoyens, avec des règles de sécurité et d'accessibilité strictes.",
+    "scenarios": [
+      "Une nouvelle démarche en ligne",
+      "Moderniser un logiciel ancien",
+      "Homologation de sécurité et accessibilité"
+    ]
+  },
+  {
+    "kind": "Éditeur de logiciel « client lourd »",
+    "summary": "Un éditeur établi dont le logiciel s'installe sur les ordinateurs de ses clients et sort en versions numérotées.",
+    "scenarios": [
+      "La version majeure annuelle",
+      "Compatibilité avec un nouveau système d'exploitation",
+      "Une faille de sécurité à corriger"
+    ]
+  },
+  {
+    "kind": "Industriel embarqué / système critique",
+    "summary": "Du logiciel qui tourne dans des appareils, testé sur des bancs matériels et certifié avant de sortir.",
+    "scenarios": [
+      "Un nouveau produit certifié",
+      "Mise à jour à distance d'appareils déjà installés"
+    ]
+  },
+  {
+    "kind": "Laboratoire de recherche",
+    "summary": "Une équipe universitaire qui invente des techniques nouvelles et les diffuse dans un logiciel libre utilisé dans le monde entier.",
+    "scenarios": [
+      "De l'article de recherche à la version publiée",
+      "Préparer la compétition annuelle des solveurs",
+      "Un projet avec un partenaire industriel",
+      "Maintenir un logiciel libre de recherche"
+    ]
+  }
+]

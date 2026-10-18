@@ -1,0 +1,155 @@
+{
+  "role": "product-manager",
+  "order": 1,
+  "featureStep": "Une idée, et trente entretiens avant d'écrire du code",
+  "tagline": "Je suis [[cofondateur|cofondatrice]] : avant d'avoir une équipe, je fais moi-même la recherche, le produit, la vente… et je vérifie que le problème existe vraiment.",
+  "missions": [
+    "Mener moi-même les [[entretien-utilisateur|entretiens]] avec des patients et des secrétaires médicales (le travail de Samir, plus tard).",
+    "Écrire le problème en une phrase, et écarter les idées que personne ne réclame.",
+    "Décider avec Hugo et Awa de continuer ou d'arrêter, à chaque étape.",
+    "Trouver de l'argent : [[incubateur]], prêts d'honneur, puis la [[levee-de-fonds|levée de fonds]] de mai 2024.",
+    "Démarcher les premiers cabinets, en attendant que Lucie prenne le relais."
+  ],
+  "takeaways": [
+    "Un produit commence par un **problème vérifié**, pas par une solution : Claire a parlé à 30 personnes avant que la première ligne de code soit écrite.",
+    "Les entretiens servent aussi à **écarter** des idées : personne ne demandait de téléconsultation, Claire l'a laissée de côté.",
+    "Au début, une même personne porte plusieurs métiers. Chez Atelier Lumen, la casquette « recherche » de Claire deviendra le poste de Samir en 2025."
+  ],
+  "receivesFrom": {
+    "roles": ["design", "backend"],
+    "text": "Une conversation entre trois anciens collègues, en mars 2023 : Claire, Hugo (design) et Awa (technique) se demandent pourquoi prendre rendez-vous chez un médecin oblige encore à téléphoner. Ils décident de vérifier avant de construire."
+  },
+  "handsOffTo": {
+    "roles": ["design"],
+    "text": "Un problème écrit en une phrase et un [[persona]] : Hugo peut dessiner une maquette et mesurer si les gens la veulent vraiment."
+  },
+  "screen": {
+    "component": "research-board",
+    "toolName": "Carnet UX",
+    "props": {
+      "study": "Découverte : prendre rendez-vous chez un soignant (mars → mai 2023)",
+      "sources": {
+        "patients": 22,
+        "secretaries": 8
+      },
+      "themes": [
+        {
+          "title": "Le téléphone, seul chemin",
+          "notes": [
+            {
+              "text": "Le cabinet ouvre quand je suis au volant, et ferme quand je rentre.",
+              "who": "Patiente, 41 ans"
+            },
+            {
+              "text": "J'ai rappelé six fois, puis j'ai laissé tomber.",
+              "who": "Patient, 29 ans"
+            },
+            {
+              "text": "J'attends d'avoir vraiment mal pour me décider à appeler.",
+              "who": "Patient, 63 ans"
+            }
+          ]
+        },
+        {
+          "title": "Les secrétaires débordées",
+          "notes": [
+            {
+              "text": "Le matin, je décroche, je raccroche, je redécroche. Trois heures comme ça.",
+              "who": "Secrétaire médicale"
+            },
+            {
+              "text": "Pendant que je suis au téléphone, la salle d'attente me regarde.",
+              "who": "Secrétaire médicale"
+            },
+            {
+              "text": "La moitié des appels, c'est juste « avez-vous un créneau jeudi ? ».",
+              "who": "Secrétaire médicale"
+            }
+          ]
+        },
+        {
+          "title": "Ce qu'on ne nous a pas demandé",
+          "notes": [
+            {
+              "text": "La consultation en vidéo ? Non, je veux voir mon médecin.",
+              "who": "Patiente, 57 ans"
+            },
+            {
+              "text": "Mon dossier médical, c'est le médecin qui le garde, ça me va.",
+              "who": "Patient, 35 ans"
+            }
+          ]
+        }
+      ],
+      "persona": {
+        "name": "Hélène",
+        "age": 41,
+        "role": "Commerciale itinérante, deux adolescents",
+        "quote": "Le cabinet ouvre quand je suis au volant, et ferme quand je rentre.",
+        "needs": [
+          "Voir les créneaux libres le soir, en quelques secondes",
+          "Recevoir une confirmation écrite",
+          "Garder son médecin habituel"
+        ],
+        "frustrations": [
+          "Appeler pendant les heures de bureau",
+          "Tomber sur la messagerie",
+          "Reporter un soin faute de temps"
+        ]
+      },
+      "journey": [
+        {
+          "step": "Je sens que je dois consulter",
+          "feeling": "neutral"
+        },
+        {
+          "step": "J'appelle le cabinet",
+          "feeling": "bad",
+          "pain": "Occupé, ou fermé quand je suis disponible"
+        },
+        {
+          "step": "Je rappelle plus tard",
+          "feeling": "bad",
+          "pain": "Je finis par oublier ou renoncer"
+        },
+        {
+          "step": "J'obtiens un créneau",
+          "feeling": "neutral"
+        },
+        {
+          "step": "Je suis soignée",
+          "feeling": "good"
+        }
+      ],
+      "problem": "Pour prendre rendez-vous, il faut appeler aux heures où le cabinet est saturé : les patients renoncent ou reportent leurs soins, et les secrétaires passent jusqu'à 3 heures par jour au téléphone.",
+      "journeyTitle": "Parcours d'Hélène pour prendre rendez-vous",
+      "interviewLength": "1 h"
+    },
+    "annotations": [
+      {
+        "id": "sources",
+        "zone": "sources",
+        "title": "Trente conversations, sans rien vendre",
+        "text": "De mars à mai 2023, Claire a rencontré **22 patients** et **8 secrétaires médicales**. Elle ne présentait aucune application : elle demandait seulement de raconter la dernière prise de rendez-vous. C'est un [[entretien-utilisateur|entretien de découverte]] : on cherche le problème, pas des compliments."
+      },
+      {
+        "id": "affinity",
+        "zone": "affinity",
+        "title": "Deux côtés du même téléphone",
+        "text": "Sur la [[carte-affinites|carte d'affinités]], les patients et les secrétaires décrivent le même problème, chacun à un bout du fil. C'est un bon signe : une solution peut aider les deux à la fois. Le troisième thème liste ce que **personne** n'a demandé : la téléconsultation a été écartée."
+      },
+      {
+        "id": "persona",
+        "zone": "persona",
+        "title": "Hélène, la première patiente imaginaire",
+        "text": "Ce [[persona]] résume les patients rencontrés. Bien plus tard, en 2026, Samir en créera un autre, Sarah, à partir de nouveaux entretiens : un persona évolue avec le produit et ses utilisateurs."
+      },
+      {
+        "id": "problem",
+        "zone": "problem",
+        "title": "Le problème avant la solution",
+        "text": "Cette phrase ne parle pas d'application. Elle décrit un problème, avec un chiffre : **3 heures par jour** au téléphone pour les secrétaires. Tout ce que l'équipe construira ensuite devra le résoudre ; sinon, on arrête."
+      }
+    ]
+  }
+}

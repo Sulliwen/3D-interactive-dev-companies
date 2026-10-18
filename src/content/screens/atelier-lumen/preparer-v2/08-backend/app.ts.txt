@@ -1,0 +1,24 @@
+import express from 'express'
+import { v1Router } from './v1/router'
+import { v2Router } from './v2/router'
+
+export const app = express()
+
+// @zone versions
+// Deux versions de l'API répondent en même temps (ADR-007) :
+// - /v1 : l'application actuelle, utilisée par 120 000 patients ;
+// - /v2 : Pocket Santé 2, ouverte aux familles de la bêta.
+// La v1 ne sera arrêtée qu'en décembre 2027, quand tout le monde sera passé à la v2.
+app.use('/v1', v1Router)
+app.use('/v2', v2Router)
+// @end
+
+// @zone v1-compat
+// La v1 ne connaît qu'une personne par compte : elle lit le profil principal du foyer.
+// Un rendez-vous pris dans la v2 pour soi-même apparaît donc aussi dans la v1.
+v1Router.get('/appointments', requireAuth, async (req, res) => {
+  const household = await households.findByAccount(req.user.id)
+  const appointments = await appointmentsOf(household.mainProfileId)
+  res.json(appointments.map(toV1Format))
+})
+// @end

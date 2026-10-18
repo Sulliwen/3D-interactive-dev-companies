@@ -1,12 +1,19 @@
+import { getVisit } from '../../content/loader'
+import { useGameStore } from '../../state/useGameStore'
 import { floorPlan } from '../world/floorplan'
-import { npcObstacles } from '../world/npcs'
+import { npcObstaclesFor } from '../world/staging'
 import { buildNavGrid, type NavGrid } from './navGrid'
 
-let grid: NavGrid | null = null
+const grids = new Map<string, NavGrid>()
 
-/** Grille de navigation de l'étage, calculée au premier usage. */
+/** Grille de navigation de l'étage pour la visite en cours, calculée au premier usage. */
 export function getNavGrid(): NavGrid {
-  // Le mobilier et les personnages debout.
-  grid ??= buildNavGrid({ ...floorPlan, boxes: [...floorPlan.boxes, ...npcObstacles] })
+  const key = getVisit(useGameStore.getState().visit).key
+  let grid = grids.get(key)
+  if (!grid) {
+    // Le mobilier et les personnages debout (ils changent de place selon le scénario).
+    grid = buildNavGrid({ ...floorPlan, boxes: [...floorPlan.boxes, ...npcObstaclesFor(key)] })
+    grids.set(key, grid)
+  }
   return grid
 }

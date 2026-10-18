@@ -1,0 +1,119 @@
+{
+  "role": "design",
+  "order": 2,
+  "featureStep": "Une maquette et une page web : les gens en veulent-ils ?",
+  "tagline": "Je suis [[cofondateur|cofondateur]] : je dessine le produit, mais aussi le site, le logo et les flyers. Et surtout, je vérifie que des gens en veulent avant qu'Awa le construise.",
+  "missions": [
+    "Dessiner une [[maquette]] cliquable et la faire tester par de vrais patients et des secrétaires, avant tout code.",
+    "Créer une [[page-de-destination|page de destination]] qui présente Pocket Santé et propose de s'inscrire à la bêta.",
+    "Suivre chaque semaine le nombre d'inscrits et d'où ils viennent (le travail de Julien, plus tard).",
+    "Faire aussi le logo, les flyers pour les salles d'attente et les premières captures pour les magasins d'applications."
+  ],
+  "takeaways": [
+    "Une [[maquette]] cliquable se fait en quelques jours et se jette sans regret : c'est le moyen le moins cher de vérifier qu'une idée tient debout.",
+    "Une [[page-de-destination|page de destination]] mesure l'intérêt réel : **412 inscrits** sans dépenser un euro de publicité, c'est un signal suffisant pour continuer.",
+    "Les chiffres ne mentent pas, mais il faut lire **d'où** ils viennent : ici, les cabinets eux-mêmes sont le meilleur canal pour trouver des patients."
+  ],
+  "receivesFrom": {
+    "roles": ["product-manager"],
+    "text": "Le problème écrit par Claire après ses 30 entretiens, et Hélène, la patiente imaginaire qui le résume."
+  },
+  "handsOffTo": {
+    "roles": ["backend"],
+    "text": "Une maquette validée par 9 patients sur 10 et 412 inscrits qui attendent : Awa peut commencer la première version, en sachant exactement quoi construire."
+  },
+  "screen": {
+    "component": "analytics-dashboard",
+    "toolName": "Lumen Insights",
+    "props": {
+      "dashboard": "pocketsante.fr — inscriptions à la bêta",
+      "period": "12 juin → 23 juillet 2023 (6 semaines)",
+      "tiles": [
+        {
+          "label": "Visiteurs de la page",
+          "value": "3 100",
+          "detail": "0 € de publicité"
+        },
+        {
+          "label": "Inscrits à la bêta",
+          "value": "412",
+          "detail": "13 % des visiteurs",
+          "status": "good"
+        },
+        {
+          "label": "Cabinets volontaires",
+          "value": "9",
+          "detail": "« Prévenez mon médecin »",
+          "status": "good"
+        },
+        {
+          "label": "Test de la maquette",
+          "value": "9 / 10",
+          "detail": "prennent un rendez-vous sans aide",
+          "status": "good"
+        }
+      ],
+      "trend": {
+        "title": "Inscrits à la bêta, semaine après semaine (cumul)",
+        "seriesLabel": "Inscrits",
+        "labels": ["sem. 1", "sem. 2", "sem. 3", "sem. 4", "sem. 5", "sem. 6"],
+        "values": [38, 99, 196, 268, 352, 412],
+        "unit": "",
+        "yMax": 500
+      },
+      "breakdown": {
+        "title": "D'où viennent les inscrits",
+        "valueLabel": "Inscrits",
+        "bars": [
+          { "label": "Cabinets, proches", "value": 168, "highlight": true },
+          { "label": "Quartier", "value": 121 },
+          { "label": "Flyers", "value": 84 },
+          { "label": "LinkedIn", "value": 39 }
+        ]
+      },
+      "query": {
+        "title": "Comment le chiffre est calculé",
+        "lines": [
+          "-- Part des visiteurs qui laissent leur adresse",
+          "SELECT COUNT(DISTINCT email) AS inscrits,",
+          "       ROUND(100.0 * COUNT(DISTINCT email)",
+          "             / (SELECT COUNT(*) FROM visites), 0) AS taux",
+          "  FROM inscriptions_beta",
+          " WHERE inscrit_le BETWEEN '2023-06-12' AND '2023-07-23';"
+        ],
+        "result": "412 inscrits · 13 %"
+      },
+      "hypothesis": {
+        "title": "Et si…",
+        "value": "≈ 280 patients actifs",
+        "text": "Si deux inscrits sur trois utilisent vraiment l'application quand la bêta ouvrira avec les premiers cabinets, environ 280 patients prendront leurs rendez-vous en ligne chaque mois."
+      }
+    },
+    "annotations": [
+      {
+        "id": "tiles",
+        "zone": "tiles",
+        "title": "Des preuves, pas des compliments",
+        "text": "« Bonne idée ! » ne coûte rien à dire. Laisser son adresse, ou demander qu'on prévienne son médecin, c'est déjà un engagement. Hugo mesure des **gestes**, pas des opinions : 412 inscrits et 9 cabinets volontaires, avant même que l'application existe."
+      },
+      {
+        "id": "trend",
+        "zone": "trend",
+        "title": "Une page avant le produit",
+        "text": "Une [[page-de-destination|page de destination]] présente Pocket Santé comme s'il existait déjà, avec un bouton « Je veux l'essayer ». La courbe monte toute seule, sans publicité : l'idée se partage. Hugo l'a construite en deux jours."
+      },
+      {
+        "id": "breakdown",
+        "zone": "breakdown",
+        "title": "Le meilleur canal : les cabinets",
+        "text": "La plupart des inscrits viennent du bouche-à-oreille et des cabinets eux-mêmes. Conclusion pour la suite : convaincre un cabinet, c'est gagner tous ses patients. C'est ce que fera Lucie, au dernier poste de cette visite."
+      },
+      {
+        "id": "hypothesis",
+        "zone": "hypothesis",
+        "title": "La décision de continuer",
+        "text": "Fin juillet 2023, les trois [[cofondateur|cofondateurs]] regardent ces chiffres et décident de construire la première version. Avec moins de 50 inscrits, ils auraient revu l'idée : arrêter tôt coûte bien moins cher qu'arrêter après un an de développement."
+      }
+    ]
+  }
+}

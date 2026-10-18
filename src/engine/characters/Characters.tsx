@@ -10,7 +10,9 @@ import {
   type AnimationClip,
   type Group,
 } from 'three'
-import { npcs, type NpcPlacement } from '../world/npcs'
+import type { NpcPlacement } from '../world/npcs'
+import { npcsFor } from '../world/staging'
+import { useVisit } from '../../state/visit'
 import { useGameStore } from '../../state/useGameStore'
 import { QUALITY } from '../quality'
 import { usePreparedCharacter, useClips } from './assets'
@@ -19,10 +21,12 @@ import { characters, planCharacters, registerCharacter } from './manager'
 /** Les collaborateurs et figurants de l'étage, animés en boucle. */
 export function Characters() {
   const clips = useClips()
+  const npcs = npcsFor(useVisit().key)
   return (
     <>
       {npcs.map((p) => (
-        <Suspense key={p.id} fallback={null}>
+        // La clé change avec la place : un figurant déplacé par le scénario est recréé.
+        <Suspense key={`${p.id}@${p.position.join(',')}`} fallback={null}>
           <Npc placement={p} clips={clips} />
         </Suspense>
       ))}

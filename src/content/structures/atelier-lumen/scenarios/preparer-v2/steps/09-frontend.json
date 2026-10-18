@@ -1,0 +1,95 @@
+{
+  "role": "frontend",
+  "order": 9,
+  "featureStep": "On construit la nouvelle application, cachée derrière un interrupteur",
+  "tagline": "Je construis Pocket Santé 2 dans la même application que la v1 : un interrupteur décide qui voit quoi, et chaque écran est assemblé avec les composants du design system.",
+  "missions": [
+    "Construire les écrans de la v2 (choisir un profil, ajouter un proche) à partir des [[maquette|maquettes]] de Hugo.",
+    "Assembler chaque écran avec les [[composant|composants]] du [[design-system|design system]] Lumière 2, plutôt que de redessiner des boutons à la main.",
+    "Cacher la v2 derrière un [[feature-flag|interrupteur de fonctionnalité]] : seules les familles invitées la voient.",
+    "Permettre de revenir à la v1 en un clic pendant la [[beta|bêta]], et continuer de corriger l'application v1."
+  ],
+  "takeaways": [
+    "La v1 et la v2 sont livrées **dans la même application** installée : l'interrupteur `app-v2-beta` décide laquelle s'affiche.",
+    "Un écran de la v2 s'assemble avec les composants Lumière 2, comme des briques : le design system existe aussi dans le code.",
+    "Pendant la bêta, une famille peut revenir à la v1 à tout moment, sans perdre ses rendez-vous : les deux versions lisent les mêmes données."
+  ],
+  "receivesFrom": {
+    "roles": ["design", "backend", "scrum-master"],
+    "text": "Les maquettes et les composants Lumière 2 de Hugo, l'API `/v2` d'Awa (foyers et profils), et les sprints planifiés par Fatou."
+  },
+  "handsOffTo": {
+    "roles": ["qa"],
+    "text": "Une application v2 prête à être testée par Inès sur iPhone et Android, à côté de la v1 qui doit continuer de marcher exactement comme avant."
+  },
+  "screen": {
+    "component": "code-editor",
+    "toolName": "Atelier Code",
+    "props": {
+      "project": "pocket-sante-app",
+      "branch": "feature/v2-profils",
+      "folder": "v2",
+      "explorer": ["src/v1/", "src/api/", "src/flags/", "app.json", "package.json"],
+      "files": [
+        { "name": "App.tsx", "source": "atelier-lumen/preparer-v2/09-frontend/App.tsx.txt" },
+        {
+          "name": "ProfileSwitcher.tsx",
+          "source": "atelier-lumen/preparer-v2/09-frontend/ProfileSwitcher.tsx.txt"
+        },
+        {
+          "name": "ProfileSwitcher.test.tsx",
+          "source": "atelier-lumen/preparer-v2/09-frontend/ProfileSwitcher.test.tsx.txt"
+        }
+      ],
+      "initialFile": 0,
+      "terminal": {
+        "command": "npm test ProfileSwitcher",
+        "lines": [
+          { "kind": "info", "text": "RUN  src/v2/ProfileSwitcher.test.tsx" },
+          { "kind": "pass", "text": "affiche un profil par membre du foyer  27 ms" },
+          { "kind": "pass", "text": "transmet le profil choisi à l'écran suivant  19 ms" },
+          { "kind": "pass", "text": "propose toujours « Ajouter un proche »  9 ms" },
+          { "kind": "summary", "text": "Tests  3 passed (3)   ·   Duration 0.58 s" }
+        ]
+      }
+    },
+    "annotations": [
+      {
+        "id": "feature-flag",
+        "zone": "feature-flag",
+        "title": "Une application, deux versions",
+        "text": "Thomas n'a pas créé une nouvelle application à télécharger. La v2 est livrée **dans** l'application existante, cachée derrière un [[feature-flag|interrupteur]] nommé `app-v2-beta`. Ibrahima (DevOps) l'allumera famille par famille, sans nouvelle installation."
+      },
+      {
+        "id": "back-to-v1",
+        "zone": "back-to-v1",
+        "title": "Une porte de sortie",
+        "text": "Une [[beta|bêta]] doit être sans risque pour ceux qui l'essaient. Si quelque chose ne va pas, la famille revient à la v1 depuis les réglages. Ses rendez-vous sont toujours là : la v1 et la v2 lisent la même base de données, comme l'a décidé l'ADR de Marc."
+      },
+      {
+        "id": "design-system",
+        "zone": "design-system",
+        "title": "Des briques, pas de la peinture",
+        "text": "Aucun style n'est écrit à la main ici : la carte de profil vient du [[design-system|design system]] Lumière 2, dessiné par Hugo et construit une fois pour toutes. Si Hugo change une couleur demain, elle change partout dans la v2."
+      },
+      {
+        "id": "api-v2",
+        "zone": "api-v2",
+        "title": "La nouvelle API",
+        "text": "Les profils du foyer arrivent de l'adresse `/v2/households/me`, construite par Awa. La partie v1 de l'application, elle, continue d'appeler `/v1` : chacune parle à sa version de l'[[api]]."
+      },
+      {
+        "id": "add-relative",
+        "zone": "add-relative",
+        "title": "Un retour de test, devenu une ligne de code",
+        "text": "Lors du test du [[prototype]], un patient n'avait pas trouvé comment ajouter sa mère. Hugo a remonté le bouton dans les maquettes ; Thomas le place ici, en haut de l'écran, et un test vérifie qu'il est toujours affiché."
+      },
+      {
+        "id": "terminal",
+        "zone": "terminal",
+        "title": "Les tests du nouvel écran",
+        "text": "Thomas a écrit trois [[test-automatise|tests automatisés]] pour ce nouvel écran. Il relance aussi ceux de la v1 : une modification de la v2 ne doit jamais casser l'ancienne application. Inès (QA) vérifiera ensuite sur de vrais téléphones."
+      }
+    ]
+  }
+}

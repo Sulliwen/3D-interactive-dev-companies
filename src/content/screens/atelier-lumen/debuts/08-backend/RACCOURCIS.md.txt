@@ -1,0 +1,21 @@
+# Raccourcis assumés · Pocket Santé v0
+
+Ce que nous avons choisi de NE PAS faire pour sortir la bêta en 8 semaines,
+et quand nous le rattraperons. À relire à chaque fin de mois (Awa, Claire, Hugo).
+
+# @zone list
+| N° | Raccourci                                   | Risque accepté                        | À rembourser                  |
+|----|---------------------------------------------|---------------------------------------|-------------------------------|
+| 1  | Créneaux saisis à la main (/admin)          | 20 min par cabinet et par jour        | au-delà de 10 cabinets        |
+| 2  | Aucun test automatique                      | une erreur passe inaperçue            | avant le lancement public     |
+| 3  | Mise en ligne à la main (./deploy.sh)       | seule Awa sait le faire               | à la 1re embauche technique   |
+| 4  | Un seul serveur                             | quelques minutes de panne possibles   | au-delà de 1 000 patients     |
+| 5  | Rappels par e-mail, pas par SMS             | des patients lisent peu leurs e-mails | quand les cabinets paieront   |
+# @end
+
+# @zone never
+## Ce qui n'est PAS négociable
+- Hébergement certifié HDS (données de santé), dès le premier jour.
+- Base de données chiffrée, sauvegardée chaque nuit.
+- Un patient ne voit que ses rendez-vous ; un cabinet que les siens.
+# @end

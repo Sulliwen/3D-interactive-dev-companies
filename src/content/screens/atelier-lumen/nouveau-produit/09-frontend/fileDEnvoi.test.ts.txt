@@ -1,0 +1,25 @@
+import { describe, expect, it } from 'vitest'
+import { ecrireTransmission, envoyerCeQuiAttend } from './fileDEnvoi'
+import { couperLeReseau, retablirLeReseau, serveurDeTest } from '../testing/reseau'
+
+describe("file d'envoi des transmissions", () => {
+  // @zone offline-test
+  it('garde une transmission écrite en mode avion, puis l’envoie au retour du réseau', async () => {
+    couperLeReseau()
+    await ecrireTransmission('passage-faure', 'Glycémie 1,32 g/l, insuline faite à 7 h 05.')
+    expect(serveurDeTest.transmissions()).toHaveLength(0)
+
+    retablirLeReseau()
+    expect(await envoyerCeQuiAttend()).toBe(1)
+    expect(serveurDeTest.transmissions()[0].texte).toContain('insuline faite')
+  })
+  // @end
+
+  it("ne perd rien si l'envoi échoue", async () => {
+    serveurDeTest.tomberEnPanne()
+    await ecrireTransmission('passage-roux', 'Pansement refait, plaie propre.')
+    await expect(envoyerCeQuiAttend()).rejects.toThrow()
+    serveurDeTest.reparer()
+    expect(await envoyerCeQuiAttend()).toBe(1)
+  })
+})

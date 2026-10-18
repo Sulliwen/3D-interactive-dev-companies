@@ -1,0 +1,23 @@
+{
+  "id": "monitoring",
+  "desk": 14,
+  "title": "Supervision et retour",
+  "person": {
+    "firstName": "Camille",
+    "lastName": "Robert",
+    "role": "Ingénieur·e SRE, supervision"
+  },
+  "tagline": "Je veille sur l'application une fois qu'elle est entre les mains des patients : est-ce qu'elle fonctionne, et est-ce qu'elle tient ses promesses ?",
+  "missions": [
+    "Surveiller en continu le bon fonctionnement des services grâce à la [[supervision]] : lenteurs, erreurs, pannes.",
+    "Régler les [[alerte|alertes]] pour être prévenu·e avant que les patients ne remarquent un problème.",
+    "Réagir vite en cas d'[[incident]], puis en analyser la cause avec l'équipe, sans chercher de coupable.",
+    "Mesurer, avec l'équipe produit, si la fonctionnalité atteint son objectif après la [[mise-en-ligne|mise en ligne]].",
+    "Partager ce qu'on apprend avec le support et le produit, pour nourrir la suite."
+  ],
+  "myth": {
+    "myth": "Une fois le logiciel en ligne, le travail de l'équipe technique est terminé.",
+    "reality": "La mise en ligne est un début. Il faut surveiller, réagir aux incidents et mesurer l'effet réel sur les utilisateurs. Sans ces mesures, impossible de savoir si l'objectif fixé par la Product Manager est atteint."
+  },
+  "realTools": ["Grafana", "Datadog", "Prometheus", "Sentry", "PagerDuty", "New Relic"]
+}

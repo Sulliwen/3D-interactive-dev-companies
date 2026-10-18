@@ -1,0 +1,29 @@
+import { db } from '../database'
+import type { Infirmiere } from '../auth/requireNurse'
+
+/** La tournée du jour d'une infirmière : ses patients, dans l'ordre qu'elle a choisi. */
+export async function tourneeDuJour(infirmiere: Infirmiere) {
+  const aujourdhui = new Date().toISOString().slice(0, 10)
+
+  // @zone cabinet
+  // Une infirmière ne voit que les patients de SON cabinet, jamais ceux des autres.
+  // Le filtre est fait ici, côté serveur : on ne fait pas confiance au téléphone.
+  const passages = await db.passages.findMany({
+    where: { cabinetId: infirmiere.cabinetId, infirmiereId: infirmiere.id, jour: aujourdhui },
+    orderBy: { ordre: 'asc' },
+  })
+  // @end
+
+  // @zone minimal
+  // Le strict minimum pour soigner : nom, adresse, code d'accès, soins à faire.
+  // Pas de numéro de sécurité sociale ni d'ordonnance : le MVP n'en a pas besoin
+  // (minimisation des données, demandée par Léa dans l'AIPD).
+  return passages.map((p) => ({
+    id: p.id,
+    ordre: p.ordre,
+    patient: { nom: p.patient.nom, adresse: p.patient.adresse, codeAcces: p.patient.codeAcces },
+    soins: p.soins.map((s) => ({ id: s.id, libelle: s.libelle, heure: s.heure, fait: s.fait })),
+    dernieresTransmissions: p.transmissions.slice(-3),
+  }))
+  // @end
+}

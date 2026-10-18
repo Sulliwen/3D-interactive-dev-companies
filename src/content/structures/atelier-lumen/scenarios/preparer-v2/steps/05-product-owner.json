@@ -1,0 +1,169 @@
+{
+  "role": "product-owner",
+  "order": 6,
+  "featureStep": "La v2 est découpée en épopées, et la bêta reçoit un périmètre minimal",
+  "tagline": "Une v2, c'est des mois de travail : je la découpe en morceaux livrables et je décide ce qui suffit pour une première bêta, et ce qui attendra.",
+  "missions": [
+    "Découper la v2 en [[epopee|épopées]], puis chaque épopée en [[user-story|user stories]] qui tiennent dans un [[sprint]].",
+    "Fixer le [[mvp|périmètre minimal]] de la bêta privée : ce qui est indispensable pour que des familles l'utilisent vraiment.",
+    "Tenir un seul [[backlog]] où la v1 (correctifs) et la v2 (nouveautés) sont triées ensemble.",
+    "Écrire les [[critere-acceptation|critères d'acceptation]], dont ceux qui garantissent que la v1 continue de marcher."
+  ],
+  "takeaways": [
+    "La v2 est découpée en **5 épopées** ; la bêta privée n'en contient que l'essentiel : profils, rendez-vous pour un proche, migration.",
+    "Dire « pas dans la bêta » n'est pas dire « jamais » : le carnet de vaccination et le paiement en ligne viendront après la bascule.",
+    "La v1 et la v2 partagent le même [[backlog]] : un correctif urgent de la v1 peut passer devant une nouveauté de la v2."
+  ],
+  "receivesFrom": {
+    "roles": ["data", "ux-research", "design"],
+    "text": "Les usages mesurés par Julien (quoi garder, quoi abandonner), le problème compris par Samir et les maquettes des parcours famille dessinées par Hugo."
+  },
+  "handsOffTo": {
+    "roles": ["scrum-master"],
+    "text": "Un backlog trié et un périmètre de bêta clair : Fatou (Scrum Master) peut répartir le travail sur les sprints 30 à 36."
+  },
+  "screen": {
+    "component": "backlog",
+    "toolName": "Lumen Board",
+    "props": {
+      "board": "Pocket Santé · Backlog v1 + v2",
+      "views": ["Backlog", "Épopées v2", "Périmètre bêta", "Sprint 36"],
+      "selected": "PS2-21",
+      "items": [
+        {
+          "id": "PS2-21",
+          "title": "Prendre rendez-vous pour mon enfant",
+          "project": "pocket-sante",
+          "estimate": 8,
+          "status": "ready",
+          "story": {
+            "asA": "parent",
+            "iWant": "choisir le profil de mon enfant avant de prendre un rendez-vous",
+            "soThat": "le cabinet reçoive le bon patient sans que je bricole le motif"
+          },
+          "origin": "Épopée PS2-2 · 31 % des rendez-vous pris pour un proche ; 4 200 comptes en double ; test du prototype réussi par 7 parents sur 8.",
+          "criteria": [
+            "Avant de choisir un créneau, le parent choisit le profil : lui-même, Léo, Jade…",
+            {
+              "given": "un enfant mineur rattaché au foyer,",
+              "when": "le parent prend rendez-vous pour lui,",
+              "then": "le cabinet reçoit le nom et la date de naissance de l'enfant, pas ceux du parent."
+            },
+            {
+              "given": "un rendez-vous pris pour un proche,",
+              "when": "le rappel SMS part la veille,",
+              "then": "il indique le prénom du proche."
+            },
+            "Le rendez-vous apparaît aussi dans la v1, dans « Mes rendez-vous » du parent.",
+            "Seuls les adultes du foyer voient les rendez-vous d'un enfant."
+          ],
+          "estimateNote": "estimée par l'équipe le 8 mars",
+          "links": [
+            { "label": "Maquettes « Parcours famille »", "kind": "design" },
+            { "label": "Sprint 33 (8 → 19 mars)", "kind": "sprint" }
+          ]
+        },
+        {
+          "id": "PS-161",
+          "title": "v1 · Rappel SMS envoyé deux fois",
+          "project": "pocket-sante",
+          "estimate": 2,
+          "status": "ready",
+          "description": "Correctif de la v1, signalé par Lucie (support) : 300 patients ont reçu leur rappel en double mardi. Passe devant les nouveautés v2."
+        },
+        {
+          "id": "PS2-1",
+          "title": "Épopée · Foyer et profils",
+          "project": "pocket-sante",
+          "estimate": 34,
+          "status": "ready",
+          "description": "Créer un foyer, ajouter un enfant ou un parent âgé, passer d'un profil à l'autre. 9 user stories. Dans la bêta."
+        },
+        {
+          "id": "PS2-3",
+          "title": "Épopée · Migration des comptes",
+          "project": "pocket-sante",
+          "estimate": 21,
+          "status": "ready",
+          "description": "Chaque compte de la v1 devient un foyer ; les 4 200 comptes en double sont rattachés au parent. Répétée 3 fois avant la bêta."
+        },
+        {
+          "id": "PS2-5",
+          "title": "Épopée · Bêta privée",
+          "project": "pocket-sante",
+          "estimate": 13,
+          "status": "ready",
+          "description": "Inviter les familles, recueillir leurs retours dans l'application, revenir à la v1 en un clic."
+        },
+        {
+          "id": "FA-97",
+          "title": "Export comptable mensuel",
+          "project": "facturo",
+          "estimate": 5,
+          "status": "ready",
+          "story": {
+            "asA": "artisan",
+            "iWant": "exporter mes factures du mois en un fichier",
+            "soThat": "les transmettre à mon comptable"
+          }
+        },
+        {
+          "id": "PS2-12",
+          "title": "Payer la consultation en ligne (v2)",
+          "project": "pocket-sante",
+          "estimate": null,
+          "status": "refine",
+          "description": "Reporté de la v1 : construit directement dans la v2, après la bascule de septembre. À découper."
+        },
+        {
+          "id": "PS2-9",
+          "title": "Carnet de vaccination des enfants",
+          "project": "pocket-sante",
+          "estimate": null,
+          "status": "idea",
+          "description": "Très demandé en entretien, mais pas indispensable pour la bêta. Après la bascule."
+        },
+        {
+          "id": "PS-150",
+          "title": "Messagerie avec le cabinet",
+          "project": "pocket-sante",
+          "estimate": null,
+          "status": "idea",
+          "description": "Ne sera pas reconstruite en v2 : 1,8 % des comptes l'utilisent. Les patients seront prévenus avant l'arrêt de la v1."
+        }
+      ]
+    },
+    "annotations": [
+      {
+        "id": "backlog",
+        "zone": "backlog",
+        "title": "Un seul backlog pour la v1 et la v2",
+        "text": "Mathilde ne tient pas deux listes. Les correctifs de la v1 (comme PS-161, un rappel envoyé deux fois) et les nouveautés de la v2 sont triés ensemble. Un problème qui touche des patients aujourd'hui passe souvent devant une fonction de demain : c'est la [[maintenance]]."
+      },
+      {
+        "id": "story",
+        "zone": "story",
+        "title": "Une épopée, découpée",
+        "text": "« Prendre rendez-vous pour un proche » est une [[epopee|épopée]] : trop gros pour un seul sprint. Mathilde l'a découpée en [[user-story|user stories]] ; celle-ci, PS2-21, reprend mot pour mot le besoin de Sarah, la [[persona]] de Samir."
+      },
+      {
+        "id": "criteria",
+        "zone": "criteria",
+        "title": "Ne pas casser la v1",
+        "text": "Le quatrième critère est propre aux versions majeures : un rendez-vous pris dans la v2 doit **aussi** apparaître dans la v1. Pendant des mois, une famille peut avoir un parent en v2 et l'autre encore en v1. Les deux doivent voir la même chose."
+      },
+      {
+        "id": "estimate",
+        "zone": "estimate",
+        "title": "Huit points",
+        "text": "L'équipe a estimé cette story à **8 points**, plus que l'annulation (5 points). Elle touche le nouveau modèle de foyer, deux versions de l'[[api]] et la sécurité des mineurs. L'estimation sert à remplir chaque sprint de façon réaliste."
+      },
+      {
+        "id": "links",
+        "zone": "links",
+        "title": "Le périmètre de la bêta",
+        "text": "La vue « Périmètre bêta » ne contient que trois épopées : profils, migration, bêta. C'est le [[mvp|périmètre minimal]]. Le carnet de vaccination et le paiement attendront la bascule : mieux vaut une bêta petite et solide qu'une bêta complète et fragile."
+      }
+    ]
+  }
+}

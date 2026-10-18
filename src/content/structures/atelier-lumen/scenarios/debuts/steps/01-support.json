@@ -1,0 +1,197 @@
+{
+  "role": "support",
+  "order": 5,
+  "featureStep": "Les premiers cabinets clients : support, formation et vente",
+  "tagline": "Je suis la première embauche hors technique : je réponds aux cabinets, je les forme, je fais les démonstrations pour en convaincre d'autres… et je rapporte tout à Claire.",
+  "missions": [
+    "Répondre aux secrétaires et aux patients des cabinets clients, par mail et par téléphone.",
+    "Former chaque nouveau cabinet à l'espace cabinet, sur place, en une matinée.",
+    "Faire les démonstrations aux cabinets intéressés, et préparer leur abonnement.",
+    "Saisir chaque matin les créneaux libres des cabinets, tant que ce [[raccourci-assume|raccourci]] existe.",
+    "Remonter à Claire les demandes qui reviennent, pour décider quoi construire ensuite."
+  ],
+  "takeaways": [
+    "Un [[premier-client|premier client payant]] vaut mieux que mille compliments : depuis le 1er avril, les 3 cabinets de la bêta paient **29 € par praticien et par mois**.",
+    "Au début, support, formation et vente sont la même personne. C'est précieux : Lucie entend tout ce que disent les clients, et le rapporte à l'équipe.",
+    "La boucle de retour existe dès le premier jour : la demande « congés » de Sandrine part sur le mur de post-its de Claire. Elle annonce le scénario « Une fonctionnalité réclamée par les utilisateurs »."
+  ],
+  "receivesFrom": {
+    "roles": ["frontend", "product-manager"],
+    "text": "L'application mobile de Thomas, publiée aujourd'hui, et les 3 cabinets de la bêta que Claire avait convaincus un par un."
+  },
+  "handsOffTo": {
+    "roles": ["product-manager"],
+    "text": "Les demandes qui reviennent : 14 demandes « congés et absences » en un mois. Claire les colle sur le mur de post-its : la boucle recommence, avec de vrais clients cette fois."
+  },
+  "screen": {
+    "component": "ticket-desk",
+    "toolName": "Lumen Desk",
+    "props": {
+      "filters": [
+        {
+          "label": "Tous",
+          "count": 40
+        },
+        {
+          "label": "Non lus",
+          "count": 3
+        },
+        {
+          "label": "Cabinets",
+          "count": 31
+        },
+        {
+          "label": "Démos",
+          "count": 6
+        }
+      ],
+      "inbox": [
+        {
+          "id": "T-087",
+          "from": "Sandrine Moulin · Cabinet des Pentes",
+          "subject": "Congés du Dr Faure : les patients réservent quand même",
+          "tag": "Congés",
+          "time": "08:47",
+          "unread": false
+        },
+        {
+          "id": "T-086",
+          "from": "Dr Lambert · Centre dentaire Saxe",
+          "subject": "Première facture : 3 ou 4 praticiens ?",
+          "tag": "Facturation",
+          "time": "08:15",
+          "unread": true
+        },
+        {
+          "id": "T-085",
+          "from": "Kiné Croix-Rousse",
+          "subject": "Un confrère de Villeurbanne voudrait une démo",
+          "tag": "Démo",
+          "time": "Hier",
+          "unread": true
+        },
+        {
+          "id": "T-084",
+          "from": "Joël B. (patient)",
+          "subject": "L'application mobile ne trouve pas mon kiné",
+          "tag": "Patient",
+          "time": "Hier",
+          "unread": true
+        },
+        {
+          "id": "T-083",
+          "from": "Sandrine Moulin · Cabinet des Pentes",
+          "subject": "Merci pour la formation de mardi !",
+          "tag": "Formation",
+          "time": "Mar.",
+          "unread": false
+        }
+      ],
+      "ticket": {
+        "id": "T-087",
+        "subject": "Congés du Dr Faure : les patients réservent quand même",
+        "messages": [
+          {
+            "author": "Sandrine Moulin",
+            "kind": "patient",
+            "time": "Jeu. 4 avril · 08:47",
+            "text": "Bonjour Lucie, le Dr Faure est en congés du 22 au 26 avril. Je ne vois pas comment fermer ses créneaux : deux patients ont déjà réservé pour cette semaine-là !"
+          },
+          {
+            "author": "Lucie",
+            "kind": "agent",
+            "time": "Jeu. 4 avril · 09:05",
+            "text": "Bonjour Sandrine ! L'application ne sait pas encore gérer les congés, désolée. Je ferme moi-même ses créneaux ce matin et je préviens les deux patients pour leur proposer une autre date. Je vous appelle à 14 h pour faire le point. Lucie"
+          },
+          {
+            "author": "Lucie",
+            "kind": "note",
+            "time": "09:12",
+            "text": "3e demande « congés » en deux semaines, et les 3 cabinets sont concernés. Je le colle sur le mur de Claire : à la main, ça passe pour 3 cabinets, pas pour 30."
+          }
+        ],
+        "reply": "« Congés : fermeture manuelle » · réponse rédigée"
+      },
+      "status": {
+        "queue": "Cabinets",
+        "firstReply": "25 min",
+        "satisfaction": "non mesurée"
+      },
+      "customer": {
+        "kind": "Cabinet client",
+        "name": "Cabinet médical des Pentes (Lyon 1er)",
+        "details": [
+          {
+            "label": "Praticiens",
+            "value": "4 médecins"
+          },
+          {
+            "label": "Client depuis",
+            "value": "bêta, 6 nov. 2023"
+          },
+          {
+            "label": "Abonnement",
+            "value": "29 € / praticien / mois, depuis le 1er avril"
+          }
+        ],
+        "tags": ["Premier client payant", "Formé le 2 avril"]
+      },
+      "reasons": {
+        "title": "Demandes depuis le 1er mars",
+        "items": [
+          {
+            "label": "Congés et absences",
+            "count": 14
+          },
+          {
+            "label": "Prise en main de l'agenda",
+            "count": 11
+          },
+          {
+            "label": "Démos",
+            "count": 6
+          },
+          {
+            "label": "Facturation",
+            "count": 5
+          },
+          {
+            "label": "Patients perdus dans l'appli",
+            "count": 4
+          }
+        ],
+        "note": "« Congés et absences » : 1re demande des cabinets, faite à la main en attendant."
+      },
+      "escalation": {
+        "action": "Remonter à Claire",
+        "done": "Collé sur le mur de post-its, colonne « À faire » : « Gérer les congés des praticiens »."
+      }
+    },
+    "annotations": [
+      {
+        "id": "customer",
+        "zone": "tags",
+        "title": "Un premier client payant",
+        "text": "Le Cabinet des Pentes a testé gratuitement pendant cinq mois. Depuis le 1er avril, il paie : c'est un [[premier-client|premier client payant]]. Accepter de payer est la meilleure preuve que Pocket Santé résout un vrai problème."
+      },
+      {
+        "id": "inbox",
+        "zone": "inbox",
+        "title": "Trois métiers dans une boîte",
+        "text": "Une question de congés (support), un merci pour une formation, une demande de démonstration (vente), une facture… Lucie fait tout. Plus tard, ces casquettes deviendront des équipes. Pour l'instant, Lucie connaît chaque cabinet par son prénom."
+      },
+      {
+        "id": "note",
+        "zone": "note",
+        "title": "Faire à la main, puis automatiser",
+        "text": "Lucie ferme les créneaux elle-même : c'est le même genre de [[raccourci-assume|raccourci]] que la saisie des créneaux au poste d'Awa. Il est utile tant qu'il y a 3 cabinets. Sa note interne dit déjà quand il ne suffira plus : à 30."
+      },
+      {
+        "id": "escalation",
+        "zone": "escalation",
+        "title": "La boucle, dès le premier jour",
+        "text": "La demande repart vers Claire, comme les tickets de Lucie repartent vers le produit dans le scénario « Une fonctionnalité réclamée par les utilisateurs ». La [[boucle-de-retour|boucle de retour]] existe dès les débuts. Elle grandira avec l'équipe."
+      }
+    ]
+  }
+}

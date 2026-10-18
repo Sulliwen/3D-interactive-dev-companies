@@ -1,0 +1,173 @@
+{
+  "role": "product-manager",
+  "order": 3,
+  "featureStep": "On décide : continuer ou arrêter, avec un budget de trois mois",
+  "tagline": "Je ne décide pas de « faire une application ». Je décide d'acheter, pour trois mois, la réponse à quatre questions risquées.",
+  "missions": [
+    "Lister les [[hypothese|hypothèses risquées]] dont dépend le succès de Tournée, et la façon de vérifier chacune.",
+    "Défendre devant le comité un budget limité (3 mois, une équipe de 5), plutôt qu'un grand projet sans fin.",
+    "Écrire **avant** de commencer les critères qui diront s'il faut continuer ou arrêter.",
+    "Protéger les autres produits : Tournée ne doit rien coûter à Pocket Santé ni à Facturo."
+  ],
+  "takeaways": [
+    "La plupart des idées s'arrêtent ici, et c'est normal : dire non tôt coûte bien moins cher que dire non après un an de développement.",
+    "Claire n'achète pas un produit : elle achète trois mois pour vérifier **quatre hypothèses**, avec des critères d'arrêt écrits d'avance.",
+    "Fixer les critères avant de connaître les résultats empêche de se raconter des histoires au moment de décider."
+  ],
+  "receivesFrom": {
+    "roles": ["ux-research", "data"],
+    "text": "Un problème confirmé par Samir (13 entretiens sur 15) et chiffré par Julien (640 inscrits, 214 réponses, un marché d'environ 100 000 infirmiers)."
+  },
+  "handsOffTo": {
+    "roles": ["design", "product-owner", "engineering-manager"],
+    "text": "Un feu vert pour trois mois : Hugo teste d'abord un prototype, Mathilde prépare le périmètre, Nadia compose l'équipe."
+  },
+  "screen": {
+    "component": "roadmap",
+    "toolName": "Lumen Roadmap",
+    "props": {
+      "view": "Tournée · exploration (comité produit du 5 octobre 2027)",
+      "okr": {
+        "objective": "Savoir, d'ici mars 2028, si Tournée mérite de devenir un produit",
+        "keyResults": [
+          "20 infirmières pilotes équipées le 10 janvier",
+          "Au moins 40 % des pilotes actives chaque semaine après 4 semaines",
+          "Au moins 3 cabinets prêts à payer 19 € / mois / infirmière"
+        ]
+      },
+      "months": ["sept.", "oct.", "nov.", "déc.", "janv.", "févr.", "mars"],
+      "lanes": [
+        {
+          "project": "tournee",
+          "name": "Tournée",
+          "items": [
+            {
+              "title": "Découverte",
+              "start": 0,
+              "end": 0
+            },
+            {
+              "title": "Prototype testé",
+              "start": 1,
+              "end": 1
+            },
+            {
+              "title": "Construction du MVP",
+              "start": 2,
+              "end": 4
+            },
+            {
+              "title": "Pilote mesuré",
+              "start": 4,
+              "end": 5,
+              "highlight": true
+            },
+            {
+              "title": "Décision",
+              "start": 6,
+              "end": 6
+            }
+          ]
+        },
+        {
+          "project": "pocket-sante",
+          "name": "Pocket Santé",
+          "items": [
+            {
+              "title": "Bascule v2",
+              "start": 0,
+              "end": 0
+            },
+            {
+              "title": "Arrêt de la v1",
+              "start": 3,
+              "end": 3
+            },
+            {
+              "title": "Carnet de vaccination",
+              "start": 4,
+              "end": 6
+            }
+          ]
+        },
+        {
+          "project": "facturo",
+          "name": "Facturo",
+          "items": [
+            {
+              "title": "Application mobile",
+              "start": 0,
+              "end": 4
+            }
+          ]
+        }
+      ],
+      "matrix": [
+        {
+          "label": "Tournée : transmissions",
+          "impact": 0.82,
+          "effort": 0.5,
+          "highlight": true,
+          "note": "le problème cité par 13 infirmières sur 15. Un MVP en trois mois paraît possible. Retenu, avec un budget limité."
+        },
+        {
+          "label": "Itinéraire automatique",
+          "impact": 0.35,
+          "effort": 0.85,
+          "note": "très difficile à bien faire, et peu demandé en entretien. À vérifier au test du prototype avant d'y mettre un seul développeur."
+        },
+        {
+          "label": "Logiciel de facturation",
+          "impact": 0.45,
+          "effort": 0.95,
+          "note": "les infirmières en ont déjà un, imposé par la télétransmission à l'Assurance maladie. Marché saturé : écarté."
+        },
+        {
+          "label": "Pocket Santé soignants",
+          "impact": 0.3,
+          "effort": 0.6,
+          "note": "Pocket Santé sert les patients ; mélanger les deux brouillerait les deux produits. Écarté."
+        },
+        {
+          "label": "Ne rien faire",
+          "impact": 0.05,
+          "effort": 0.05,
+          "note": "toujours une option : l'équipe aurait pu rester sur Pocket Santé. Le comité l'a comparée sérieusement."
+        }
+      ],
+      "why": [
+        "La v2 de Pocket Santé est basculée : une partie de l'équipe se libère en novembre.",
+        "Le problème est validé par 15 entretiens et 214 réponses ; 640 infirmières attendent le lancement.",
+        "Trois mois et cinq personnes : si les critères ne sont pas atteints en mars, on arrête, et on aura appris à bas prix."
+      ],
+      "validated": "Validée en comité produit le 5 octobre 2027",
+      "review": "Décision au comité du 14 mars 2028"
+    },
+    "annotations": [
+      {
+        "id": "okr",
+        "zone": "okr",
+        "title": "Des critères d'arrêt écrits d'avance",
+        "text": "L'objectif n'est pas « lancer Tournée » mais « **savoir** si Tournée mérite d'exister ». Les trois résultats clés de l'[[okr|OKR]] sont aussi les critères du comité de mars : en dessous, on arrête. Les écrire en octobre évite de se raconter des histoires en mars."
+      },
+      {
+        "id": "matrix",
+        "zone": "matrix",
+        "title": "Quatre hypothèses risquées",
+        "text": "Le comité a retenu un pari précis : les transmissions. Il reste quatre [[hypothese|hypothèses]] à vérifier : le problème (déjà validé), l'usage quotidien sans réseau, l'envie d'un itinéraire automatique, et le paiement. Elles sont affichées au tableau de la salle de réunion."
+      },
+      {
+        "id": "timeline",
+        "zone": "timeline",
+        "title": "Un budget qui se termine",
+        "text": "La [[feuille-de-route|feuille de route]] de Tournée s'arrête en mars, sur une décision. C'est voulu : un nouveau produit n'a pas droit à une ligne infinie tant qu'il n'a pas trouvé son [[adequation-produit-marche|marché]]. Pendant ce temps, Pocket Santé et Facturo continuent."
+      },
+      {
+        "id": "why",
+        "zone": "why",
+        "title": "Pourquoi maintenant ?",
+        "text": "Claire a présenté ces arguments au comité du **mardi 5 octobre 2027**. Le premier est très concret : après la bascule de la v2, des développeurs se libèrent. Une bonne idée au mauvais moment reste souvent dans un tiroir."
+      }
+    ]
+  }
+}

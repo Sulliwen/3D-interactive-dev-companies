@@ -1,0 +1,139 @@
+{
+  "role": "data",
+  "order": 2,
+  "featureStep": "On mesure ce que la v1 fait vraiment, pour savoir quoi garder",
+  "tagline": "Avant de reconstruire une application, je montre ce que les patients en font vraiment : ce qui compte, ce qui ne sert presque plus, et ce qu'ils bricolent faute de mieux.",
+  "missions": [
+    "Mesurer l'usage de chaque fonction de la v1 avec des [[requete-sql|requêtes]] sur la [[base-de-donnees|base de données]].",
+    "Repérer les usages « détournés » : ce que les patients font avec l'application alors qu'elle n'a pas été prévue pour.",
+    "Aider à décider ce qui sera reconstruit en v2, et ce qui sera abandonné.",
+    "Préparer les [[indicateur|indicateurs]] qui diront si la v2 fait mieux que la v1."
+  ],
+  "takeaways": [
+    "**31 %** des rendez-vous sont pris pour quelqu'un d'autre que le titulaire du compte, et la part augmente chaque mois.",
+    "Une v2 n'est pas une copie de la v1 : la messagerie cabinet, utilisée par **1,8 %** des comptes, ne sera pas reconstruite.",
+    "Les chiffres repèrent les bricolages (4 200 comptes en double) ; la recherche utilisateur expliquera pourquoi."
+  ],
+  "receivesFrom": {
+    "roles": ["product-manager"],
+    "text": "Une question de Claire, la Product Manager : « Si l'on repense l'application pour la famille, qu'est-ce qu'on garde, qu'est-ce qu'on laisse ? »"
+  },
+  "handsOffTo": {
+    "roles": ["ux-research", "product-owner"],
+    "text": "Des chiffres sur les usages réels : Samir (recherche) va comprendre ce qu'il y a derrière, et Mathilde (Product Owner) s'en servira pour délimiter la [[beta|bêta]]."
+  },
+  "screen": {
+    "component": "analytics-dashboard",
+    "toolName": "Lumen Insights",
+    "props": {
+      "dashboard": "Usages de la v1 — préparation de Pocket Santé 2",
+      "period": "Mars 2027",
+      "tiles": [
+        {
+          "label": "Rendez-vous pris pour un proche",
+          "value": "31 %",
+          "detail": "26 % il y a un an",
+          "status": "warning"
+        },
+        {
+          "label": "Comptes qui gèrent un proche",
+          "value": "21 600",
+          "detail": "Sur 96 400 comptes"
+        },
+        {
+          "label": "Comptes en double",
+          "value": "4 200",
+          "detail": "Un 2e compte pour un enfant",
+          "status": "serious"
+        },
+        {
+          "label": "Messagerie cabinet",
+          "value": "1,8 %",
+          "detail": "Des comptes actifs, par mois"
+        }
+      ],
+      "trend": {
+        "title": "Part des rendez-vous pris pour un proche, sur 12 mois",
+        "seriesLabel": "Rendez-vous pour un proche",
+        "labels": [
+          "avr.",
+          "mai",
+          "juin",
+          "juil.",
+          "août",
+          "sept.",
+          "oct.",
+          "nov.",
+          "déc.",
+          "janv.",
+          "févr.",
+          "mars"
+        ],
+        "values": [26.1, 26.4, 26.0, 25.2, 25.8, 29.4, 29.9, 30.2, 30.0, 30.6, 30.8, 31.0],
+        "unit": " %",
+        "yMax": 40
+      },
+      "breakdown": {
+        "title": "Fonctions de la v1 utilisées, part des comptes actifs",
+        "valueLabel": "Comptes actifs (%)",
+        "bars": [
+          { "label": "Prendre RDV", "value": 100 },
+          { "label": "Mes RDV", "value": 88 },
+          { "label": "Rappels SMS", "value": 72 },
+          { "label": "Annulation", "value": 11 },
+          { "label": "Documents", "value": 6 },
+          { "label": "Messagerie", "value": 1.8, "highlight": true }
+        ]
+      },
+      "query": {
+        "title": "Comment le chiffre est calculé",
+        "lines": [
+          "-- Rendez-vous de mars 2027 pris pour une autre personne",
+          "SELECT ROUND(100.0 * COUNT(*) FILTER (",
+          "         WHERE patient_name <> account_holder_name)",
+          "       / COUNT(*), 1) AS pour_un_proche",
+          "  FROM appointments",
+          " WHERE created_at >= '2027-03-01' AND created_at < '2027-04-01';"
+        ],
+        "result": "31,0 %"
+      },
+      "hypothesis": {
+        "title": "Et si…",
+        "value": "≈ 21 600 foyers",
+        "text": "Si chaque compte qui gère un proche devenait un foyer avec plusieurs profils, environ 21 600 familles verraient tout de suite la différence, et les 4 200 comptes en double pourraient être rattachés au compte du parent."
+      }
+    },
+    "annotations": [
+      {
+        "id": "tiles",
+        "zone": "tiles",
+        "title": "Ce que les patients font vraiment",
+        "text": "Près d'un rendez-vous sur trois est pris pour un enfant ou un parent âgé, alors que l'application ne connaît qu'une personne par compte. Les patients se débrouillent : ils changent le nom à chaque fois, ou créent un second compte. Julien compte ces bricolages : **4 200 comptes en double**."
+      },
+      {
+        "id": "trend",
+        "zone": "trend",
+        "title": "La rentrée, un tournant",
+        "text": "La courbe saute en septembre : vaccins, certificats de sport, rendez-vous chez le pédiatre. Depuis, elle ne redescend plus. C'est un [[indicateur]] de fond, pas un accident : un argument fort pour une [[version-majeure|version majeure]] pensée pour la famille."
+      },
+      {
+        "id": "breakdown",
+        "zone": "breakdown",
+        "title": "Ce qu'on ne reconstruira pas",
+        "text": "Toutes les fonctions de la v1 ne méritent pas d'être refaites. La messagerie avec le cabinet n'est utilisée que par **1,8 %** des comptes et coûte cher à entretenir : elle ne sera pas reconstruite en v2. Abandonner une fonction est une vraie décision, prise avec des chiffres."
+      },
+      {
+        "id": "query",
+        "zone": "query",
+        "title": "Un chiffre qu'on peut vérifier",
+        "text": "La [[requete-sql|requête]] compare le nom du patient au nom du titulaire du compte. Ce n'est pas parfait (une faute de frappe compte comme « un proche »), et Julien l'écrit dans sa note. Dire les limites d'un chiffre fait partie du métier."
+      },
+      {
+        "id": "hypothesis",
+        "zone": "hypothesis",
+        "title": "Combien de familles concernées ?",
+        "text": "Environ **21 600 foyers** profiteraient tout de suite des profils familiaux. Ce chiffre aidera Mathilde (Product Owner) à choisir les familles invitées en [[beta|bêta]] privée : celles qui gèrent déjà des proches."
+      }
+    ]
+  }
+}

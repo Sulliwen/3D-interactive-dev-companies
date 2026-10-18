@@ -1,0 +1,167 @@
+{
+  "role": "engineering-manager",
+  "offPath": true,
+  "featureStep": "Hors parcours : on prend soin de l'équipe qui fait avancer la fonctionnalité",
+  "takeaways": [
+    "Le manager d'une équipe technique s'occupe surtout **des personnes** : leur progression, leur charge, leur intégration.",
+    "L'entretien individuel appartient à la personne : c'est **elle qui choisit les sujets**, le manager écoute et aide.",
+    "Une équipe qui dure n'est jamais surchargée en permanence : un rythme soutenable fait partie de la qualité du travail."
+  ],
+  "receivesFrom": {
+    "roles": ["scrum-master", "code-review"],
+    "text": "Les signaux du terrain : les points de blocage remontés en rétrospective par la Scrum Master, et la qualité des échanges en [[revue-de-code|revue de code]] observée par le dev senior."
+  },
+  "handsOffTo": {
+    "roles": ["backend", "frontend", "devops"],
+    "text": "Du temps protégé, des objectifs de progression clairs et du soutien pour les développeurs et l'équipe d'exploitation."
+  },
+  "screen": {
+    "component": "people",
+    "toolName": "Lumen People",
+    "props": {
+      "oneOnOne": {
+        "with": "Awa Diallo",
+        "when": "Jeudi 14 nov. · 14:00 · 30 min, toutes les deux semaines",
+        "agenda": [
+          "Comment s'est passé le sprint 24 ?",
+          "Retour sur la revue de code de la PR #318 avec Marc",
+          "Envie de présenter l'annulation en démo de fin de sprint ?"
+        ],
+        "goals": [
+          {
+            "label": "Animer une revue de code",
+            "progress": 60
+          },
+          {
+            "label": "Binôme front avec Thomas",
+            "progress": 40
+          },
+          {
+            "label": "Présenter en démo de fin de sprint",
+            "progress": 10
+          }
+        ],
+        "kudos": {
+          "from": "Marc",
+          "text": "Tes tests ont rendu la relecture facile, merci !"
+        }
+      },
+      "hiring": {
+        "role": "Développeur·se mobile",
+        "stages": [
+          {
+            "label": "Candidatures",
+            "count": 46
+          },
+          {
+            "label": "Premier échange",
+            "count": 12
+          },
+          {
+            "label": "Exercice pratique",
+            "count": 5
+          },
+          {
+            "label": "Rencontre équipe",
+            "count": 3
+          },
+          {
+            "label": "Proposition",
+            "count": 1
+          }
+        ],
+        "note": "Thomas et Marc participent aux entretiens : on recrute un futur collègue, pas seulement un CV."
+      },
+      "workload": {
+        "sprint": "Sprint 24 · 4 → 15 nov.",
+        "members": [
+          {
+            "name": "Awa",
+            "role": "Back-end",
+            "committed": 8,
+            "capacity": 10
+          },
+          {
+            "name": "Thomas",
+            "role": "Front-end / mobile",
+            "committed": 9,
+            "capacity": 10,
+            "note": "Correction du BUG-77 ajoutée en cours de sprint"
+          },
+          {
+            "name": "Marc",
+            "role": "Dev senior · revues",
+            "committed": 6,
+            "capacity": 8
+          },
+          {
+            "name": "Inès",
+            "role": "QA",
+            "committed": 6,
+            "capacity": 8
+          },
+          {
+            "name": "Ibrahima",
+            "role": "DevOps",
+            "committed": 5,
+            "capacity": 6,
+            "note": "Semaine d'astreinte : capacité réduite"
+          }
+        ]
+      },
+      "onboarding": {
+        "title": "Arrivée de Yanis · lundi 2 déc.",
+        "tasks": [
+          {
+            "label": "Ordinateur et accès prêts",
+            "done": true
+          },
+          {
+            "label": "Parrain désigné : Thomas",
+            "done": true
+          },
+          {
+            "label": "Premier ticket simple choisi",
+            "done": false
+          },
+          {
+            "label": "Déjeuner d'équipe le premier jour",
+            "done": false
+          }
+        ]
+      }
+    },
+    "annotations": [
+      {
+        "id": "one-on-one",
+        "zone": "one-on-one",
+        "title": "Le rendez-vous de la personne",
+        "text": "Toutes les deux semaines, Nadia a un [[entretien-individuel|entretien individuel]] de 30 minutes avec chaque membre de l'équipe. Les sujets sont proposés par Awa, pas par Nadia : c'est son moment à elle."
+      },
+      {
+        "id": "goals",
+        "zone": "goals",
+        "title": "Faire grandir les gens",
+        "text": "Awa s'est fixé des objectifs de progression avec Nadia : animer une [[revue-de-code|revue de code]], découvrir le front-end en binôme… Le manager ouvre des occasions d'apprendre, puis suit les progrès ensemble."
+      },
+      {
+        "id": "hiring",
+        "zone": "hiring",
+        "title": "Recruter en équipe",
+        "text": "46 candidatures pour un poste de développeur·se mobile, et une seule proposition à la fin. Les développeurs participent aux entretiens : ce sont eux qui travailleront avec la personne recrutée."
+      },
+      {
+        "id": "workload",
+        "zone": "workload",
+        "title": "Éviter la surcharge",
+        "text": "Pendant le [[sprint]], Nadia compare le travail engagé par chacun à sa disponibilité. Thomas approche de sa limite à cause du bug trouvé par la QA : on en parle, et on retire une tâche si nécessaire, plutôt que de laisser s'accumuler les heures en plus."
+      },
+      {
+        "id": "onboarding",
+        "zone": "onboarding",
+        "title": "Bien accueillir",
+        "text": "L'[[onboarding]] de Yanis se prépare avant son arrivée : accès prêts, un parrain pour ses questions, un premier ticket simple pour livrer quelque chose dès la première semaine. Un bon accueil fait gagner des mois."
+      }
+    ]
+  }
+}

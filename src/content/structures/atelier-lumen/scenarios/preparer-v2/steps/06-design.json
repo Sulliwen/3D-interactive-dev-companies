@@ -1,0 +1,112 @@
+{
+  "role": "design",
+  "order": 5,
+  "featureStep": "On crée le nouveau design system, en partant de la v1",
+  "tagline": "Pour la v2, je ne dessine pas seulement des écrans : je construis la boîte à outils visuelle (couleurs, textes, composants) avec laquelle toute l'application sera fabriquée.",
+  "missions": [
+    "Auditer les écrans de la v1 : ce qui fonctionne, ce qui n'est pas lisible, ce qui n'est pas [[accessibilite|accessible]].",
+    "Construire le [[design-system|design system]] Lumière 2 : couleurs, typographie, [[composant|composants]] réutilisables.",
+    "Dessiner les nouveaux parcours de la famille (choisir un profil, ajouter un proche) à partir de la recherche de Samir.",
+    "Travailler avec Thomas pour que chaque composant dessiné existe aussi dans le code."
+  ],
+  "takeaways": [
+    "Un [[design-system|design system]] évite de redessiner chaque bouton : on le dessine une fois, on le réutilise partout, en maquette comme dans le code.",
+    "Hugo commence par le parcours le plus utilisé de la v1, « Mes rendez-vous », et l'audite avant de le redessiner.",
+    "L'[[accessibilite|accessibilité]] est dans les fondations : texte de 16 px minimum, contrastes vérifiés, zones tactiles de 48 px."
+  ],
+  "receivesFrom": {
+    "roles": ["ux-research"],
+    "text": "Le problème qualifié par Samir et les résultats du test de [[prototype]] : choisir le profil avant le créneau fonctionne, ajouter un proche n'est pas encore assez visible."
+  },
+  "handsOffTo": {
+    "roles": ["product-owner", "frontend"],
+    "text": "Les maquettes des parcours famille pour Mathilde (Product Owner), et les composants Lumière 2 que Thomas (front-end) va construire dans l'application."
+  },
+  "screen": {
+    "component": "design-tool",
+    "toolName": "Atelier Design",
+    "props": {
+      "file": "Pocket Santé 2 · Design system Lumière 2",
+      "pages": [
+        "Audit de la v1 · Mes rendez-vous",
+        "Lumière 2 · Composants",
+        "Parcours famille",
+        "Archives v1"
+      ],
+      "collaborators": ["HL", "TP", "SH"],
+      "frames": [
+        { "state": "appointments", "caption": "v1 · Mes rendez-vous" },
+        { "state": "confirm", "caption": "v1 · Confirmation" },
+        { "state": "cancelled", "caption": "v1 · Annulation réussie" },
+        { "state": "too-late", "caption": "v1 · Moins de 24 h", "when": "Demain · 09:00" }
+      ],
+      "flow": {
+        "toConfirm": "« Annuler »",
+        "toDone": "« Oui, annuler »",
+        "toTooLate": "à reprendre : le numéro du cabinet doit être un vrai bouton d'appel"
+      },
+      "components": [
+        { "name": "Carte / Profil", "kind": "card", "label": "Léo" },
+        { "name": "Bouton / Secondaire", "kind": "secondary", "label": "Changer de profil" },
+        { "name": "Bouton / Danger", "kind": "danger", "label": "Annuler" }
+      ],
+      "colors": [
+        { "name": "Santé 600", "hex": "#0f8b8d" },
+        { "name": "Famille 500", "hex": "#6b5bd2" },
+        { "name": "Danger 700", "hex": "#b3261e" },
+        { "name": "Encre", "hex": "#14232b" }
+      ],
+      "typography": [
+        { "name": "Titre", "spec": "20 px · gras" },
+        { "name": "Texte", "spec": "16 px · normal (v1 : 13 à 15 px)" }
+      ],
+      "accessibility": [
+        { "label": "Texte gris des cartes v1", "value": "3,9 : 1 · non conforme", "ok": false },
+        { "label": "Texte gris Lumière 2", "value": "7,1 : 1 · conforme", "ok": true },
+        { "label": "Zones tactiles", "value": "48 × 48 px · conforme", "ok": true },
+        { "label": "Taille de texte minimale", "value": "16 px · conforme", "ok": true }
+      ],
+      "comment": {
+        "author": "Samir (recherche) :",
+        "initials": "SH",
+        "text": "Test n° 6 : il n'a pas trouvé où ajouter sa mère. On remonte « Ajouter un proche » en haut de l'écran Famille ?"
+      },
+      "prototype": {
+        "title": "Parcours v1 à remplacer",
+        "hint": "Voici le parcours « Mes rendez-vous » de la v1, le premier que Lumière 2 va remplacer. Essayez-le pour repérer ce qui doit changer : « Annuler », puis « Oui, annuler »."
+      }
+    },
+    "annotations": [
+      {
+        "id": "frames",
+        "zone": "frames",
+        "title": "D'abord, regarder l'existant",
+        "text": "Hugo a posé sur la toile les écrans actuels de la v1, ceux du parcours le plus utilisé. Avant de dessiner du neuf, il note ce qui marche (les patients connaissent ces écrans) et ce qui doit changer. Une v2 ne repart jamais d'une page blanche."
+      },
+      {
+        "id": "components",
+        "zone": "components",
+        "title": "Une boîte à outils commune",
+        "text": "Chaque [[composant]] (carte de profil, boutons) est dessiné une seule fois, avec toutes ses variantes. Thomas construit les mêmes dans le code. C'est le [[design-system|design system]] Lumière 2 : maquettes et application parlent enfin la même langue."
+      },
+      {
+        "id": "accessibility",
+        "zone": "accessibility",
+        "title": "La v1 ne passait pas partout",
+        "text": "L'audit a trouvé un texte gris trop pâle sur les cartes de la v1 (contraste 3,9 : 1, sous le minimum de 4,5 : 1). Lumière 2 corrige cela dans ses fondations, avec un texte de 16 px minimum : chaque nouvel écran sera [[accessibilite|accessible]] dès sa création."
+      },
+      {
+        "id": "flow",
+        "zone": "flow",
+        "title": "Ce qu'on garde, ce qu'on reprend",
+        "text": "Le parcours d'annulation de la v1 fonctionne : il sera gardé. Mais Hugo a noté une amélioration sur la flèche du refus : le numéro du cabinet deviendra un vrai bouton d'appel. Une v2, c'est aussi l'occasion de corriger les petits défauts accumulés."
+      },
+      {
+        "id": "comment",
+        "zone": "comment",
+        "title": "La recherche, toujours dans la boucle",
+        "text": "Samir suit le fichier de maquettes. Il rappelle un résultat du test de [[prototype]] : un patient n'a pas trouvé comment ajouter sa mère. Hugo va remonter ce bouton. Designers et chercheurs travaillent côte à côte, pas l'un après l'autre."
+      }
+    ]
+  }
+}

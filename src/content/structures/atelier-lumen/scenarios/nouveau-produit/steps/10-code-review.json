@@ -1,0 +1,186 @@
+{
+  "role": "code-review",
+  "order": 9,
+  "featureStep": "L'équipe fixe ses règles de code dès le premier jour",
+  "tagline": "Sur un dépôt vide, chaque habitude prise la première semaine durera des années. Autant choisir les bonnes, ensemble.",
+  "missions": [
+    "Proposer les [[convention-de-code|conventions de code]] de l'équipe Tournée dans une [[pull-request|pull request]], pour qu'elles soient discutées et pas imposées.",
+    "Brancher les outils qui vérifient ces règles automatiquement à chaque modification.",
+    "Relire les premières contributions avec soin : elles serviront d'exemple à toutes les suivantes.",
+    "Aider l'équipe à trancher les débats (noms en français ou en anglais ?) puis à les écrire noir sur blanc."
+  ],
+  "takeaways": [
+    "Les règles de l'équipe passent elles-mêmes par une [[pull-request|pull request]] : tout le monde peut les discuter avant qu'elles s'appliquent.",
+    "Ce qui peut être vérifié par un outil (présentation, format) l'est : les relecteurs gardent leur attention pour le fond.",
+    "Le vocabulaire des infirmières entre dans le code (`tournee`, `transmission`, `soin`) : développeurs et utilisatrices parlent la même langue."
+  ],
+  "receivesFrom": {
+    "roles": ["backend", "frontend"],
+    "text": "Les fondations posées par Awa (ADR-001) et le premier code de Thomas, sur un dépôt encore sans règles communes."
+  },
+  "handsOffTo": {
+    "roles": ["security", "devops"],
+    "text": "Un dépôt avec des règles claires et vérifiées automatiquement : Léa peut y ajouter ses contrôles de sécurité, Ibrahima ses étapes de mise en ligne."
+  },
+  "screen": {
+    "component": "pull-request",
+    "toolName": "Lumen Git",
+    "props": {
+      "number": 3,
+      "repo": "tournee",
+      "title": "Conventions de l'équipe Tournée (format, lint, modèle de PR)",
+      "authors": ["Marc Rousseau"],
+      "branch": "chore/conventions",
+      "base": "main",
+      "commits": 4,
+      "description": "Première proposition de règles communes pour l'équipe Tournée, à discuter avant de fusionner. Format et lint vérifiés automatiquement ; une PR = un sujet ; des règles de relecture ; les mots du métier en français.",
+      "changedFiles": [
+        { "path": "CONTRIBUTING.md", "additions": 38, "deletions": 0 },
+        { "path": ".github/pull_request_template.md", "additions": 14, "deletions": 0 },
+        { "path": "eslint.config.js", "additions": 22, "deletions": 0 },
+        { "path": ".prettierrc", "additions": 5, "deletions": 0 },
+        { "path": "package.json", "additions": 4, "deletions": 1 }
+      ],
+      "diffs": [
+        {
+          "path": "CONTRIBUTING.md",
+          "hunk": "nos règles",
+          "lines": [
+            { "t": "+", "n": 1, "text": "# Travailler sur Tournée" },
+            { "t": "+", "n": 2, "text": "" },
+            {
+              "t": "+",
+              "n": 3,
+              "text": "- Une pull request = un seul sujet, moins de 400 lignes."
+            },
+            { "t": "+", "n": 4, "text": "- Deux relectures obligatoires avant de fusionner." },
+            { "t": "+", "n": 5, "text": "- Les tests et le lint doivent être verts." },
+            {
+              "t": "+",
+              "n": 6,
+              "text": "- Relecture demandée = réponse sous 24 h (accord d'équipe)."
+            }
+          ],
+          "inlineComment": {
+            "after": 3,
+            "thread": [
+              {
+                "author": "Awa Diallo",
+                "when": "10 nov. 10:12",
+                "text": "Deux relectures dans une équipe de trois développeurs, ça veut dire que tout le monde relit tout. On va passer nos journées à attendre."
+              },
+              {
+                "author": "Marc Rousseau",
+                "when": "10 nov. 10:40",
+                "text": "D'accord : une relecture obligatoire, deux pour ce qui touche aux données de santé (avec Léa)."
+              }
+            ],
+            "suggestion": {
+              "from": "- Deux relectures obligatoires avant de fusionner.",
+              "to": "- Une relecture obligatoire ; deux pour les données de santé (dont Léa)."
+            },
+            "resolved": true
+          }
+        },
+        {
+          "path": "CONTRIBUTING.md",
+          "hunk": "nommage",
+          "lines": [
+            { "t": "+", "n": 18, "text": "## Les noms dans le code" },
+            {
+              "t": "+",
+              "n": 19,
+              "text": "Les mots du métier restent ceux des infirmières, en français :"
+            },
+            {
+              "t": "+",
+              "n": 20,
+              "text": "`tournee`, `passage`, `soin`, `transmission`, `cabinet`."
+            },
+            {
+              "t": "+",
+              "n": 21,
+              "text": "Le reste (outils, technique) reste en anglais : `fetch`, `retry`…"
+            }
+          ]
+        },
+        {
+          "path": "package.json",
+          "hunk": "scripts",
+          "lines": [
+            { "t": " ", "n": 6, "text": "  \"scripts\": {" },
+            { "t": "-", "n": 7, "text": "    \"test\": \"vitest\"" },
+            { "t": "+", "n": 7, "text": "    \"test\": \"vitest\"," },
+            { "t": "+", "n": 8, "text": "    \"lint\": \"eslint . && prettier --check .\"," },
+            { "t": "+", "n": 9, "text": "    \"format\": \"prettier --write .\"" },
+            { "t": " ", "n": 10, "text": "  }" }
+          ]
+        }
+      ],
+      "timeline": [
+        {
+          "author": "Thomas Petit",
+          "when": "10 nov. 09:55",
+          "text": "Noms en français pour le métier : oui ! Quand Karine dit « transmission », je veux trouver `transmission` dans le code, pas `handover`."
+        },
+        {
+          "author": "Inès Garcia",
+          "when": "10 nov. 11:05",
+          "text": "Je propose d'ajouter au modèle de PR une case « comment l'avez-vous testé sans réseau ? »."
+        },
+        {
+          "author": "Marc Rousseau",
+          "when": "10 nov. 11:30",
+          "text": "Ajouté au modèle. Si personne ne s'y oppose d'ici midi, je fusionne : ces règles s'appliqueront dès la PR #4."
+        }
+      ],
+      "checks": [
+        {
+          "label": "Lint",
+          "detail": "0 erreur · les nouvelles règles s'appliquent à cette PR elle-même"
+        },
+        { "label": "Format", "detail": "Tous les fichiers au format" },
+        { "label": "Tests", "detail": "3 tests réussis (squelette de bout en bout)" }
+      ],
+      "reviewers": [
+        { "name": "Awa Diallo", "state": "approved" },
+        { "name": "Thomas Petit", "state": "approved" },
+        { "name": "Inès Garcia", "state": "approved" },
+        { "name": "Ibrahima Ndiaye", "state": "pending" }
+      ],
+      "mergedMessage": "✓ Fusionnée dans main le 10 novembre 2027. Les règles s'appliquent à toutes les pull requests suivantes de Tournée."
+    },
+    "annotations": [
+      {
+        "id": "pr-header",
+        "zone": "pr-header",
+        "title": "Des règles proposées, pas imposées",
+        "text": "Marc aurait pu écrire les règles seul. Il les propose dans une [[pull-request|pull request]] : chacun peut commenter avant la [[fusion]]. Une équipe respecte mieux les règles qu'elle a discutées."
+      },
+      {
+        "id": "inline-comment",
+        "zone": "inline-comment",
+        "title": "Une règle ajustée à l'équipe",
+        "text": "Deux relectures, c'est bien dans une grande équipe ; à trois développeurs, ça bloque tout. Awa le signale, Marc propose un compromis : une relecture, deux pour les données de santé. La suggestion se fusionne d'un clic."
+      },
+      {
+        "id": "diff",
+        "zone": "diff",
+        "title": "Les mots des infirmières dans le code",
+        "text": "Débat classique : noms en français ou en anglais ? L'équipe choisit les mots du métier en français. Quand Karine parle de « transmission », Thomas trouve `transmission` dans le [[code-source|code]]. Un nouveau venu comprend le métier en lisant le code."
+      },
+      {
+        "id": "timeline",
+        "zone": "timeline",
+        "title": "Le terrain jusque dans les règles",
+        "text": "Inès ajoute une question au modèle de pull request : « comment l'avez-vous testé sans réseau ? ». Chaque modification devra y répondre. La découverte de Samir finit par s'inscrire dans les [[convention-de-code|conventions de code]]."
+      },
+      {
+        "id": "checks",
+        "zone": "checks",
+        "title": "Les outils vérifient le reste",
+        "text": "Le lint et le format sont vérifiés automatiquement, sur cette PR comprise. Les relecteurs n'ont plus à signaler une virgule ou une indentation : ils regardent le fond, ce que le code fait et s'il est sûr."
+      }
+    ]
+  }
+}

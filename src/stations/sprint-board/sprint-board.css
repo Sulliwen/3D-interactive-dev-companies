@@ -97,6 +97,10 @@
   background: var(--series-3);
 }
 
+.sb__legend .sb__legend--tournee::before {
+  background: var(--series-4);
+}
+
 .sb__board .kanban {
   gap: 6px;
   padding: 8px 6px 8px 8px;

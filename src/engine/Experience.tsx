@@ -13,6 +13,7 @@ import { Colliders } from './world/Colliders'
 import { CityBackdrop } from './world/CityBackdrop'
 import { MoveMarker } from './world/MoveMarker'
 import { GuideLine } from './world/GuideLine'
+import { EmptyDesks, ScenarioBoards } from './world/ScenarioBoards'
 import { StationScreens } from './stations/StationScreens'
 import { Player } from './player/Player'
 import { CameraRig } from './camera/CameraRig'
@@ -60,6 +61,8 @@ export function Experience() {
         </Physics>
         <World shadows={profile.shadows} shadowMapSize={profile.shadowMapSize} />
         <StationScreens />
+        <ScenarioBoards />
+        <EmptyDesks />
         <MoveMarker />
         <GuideLine />
         <CityBackdrop />

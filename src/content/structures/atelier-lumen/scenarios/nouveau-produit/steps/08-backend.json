@@ -1,0 +1,110 @@
+{
+  "role": "backend",
+  "order": 7,
+  "featureStep": "On choisit des fondations simples et on monte un squelette qui marche",
+  "tagline": "Sur un produit tout neuf, je résiste à l'envie d'essayer des technologies à la mode. Je pose des fondations simples et je prouve vite qu'elles tiennent.",
+  "missions": [
+    "Proposer les choix techniques de Tournée dans un document court, l'[[adr|ADR-001]], relu par toute l'équipe.",
+    "Monter en une semaine un [[squelette-de-bout-en-bout|squelette de bout en bout]] : une seule fonction, du téléphone à la [[base-de-donnees|base de données]], déjà en ligne.",
+    "Construire l'[[api]] de Tournée : la tournée du jour, les fiches patients, les transmissions.",
+    "Ne garder que les données nécessaires aux soins, et vérifier que chaque infirmière ne voit que son cabinet."
+  ],
+  "takeaways": [
+    "Pour un nouveau produit, l'inconnu est le marché, pas la technique : Awa reprend des outils que l'équipe maîtrise déjà.",
+    "Le **squelette de bout en bout** était en ligne au 3e jour : toutes les pièces s'emboîtaient avant la première vraie fonctionnalité.",
+    "Les règles de sécurité sont dans le code dès la première version, pas ajoutées après coup."
+  ],
+  "receivesFrom": {
+    "roles": ["product-owner", "scrum-master"],
+    "text": "La carte du MVP de Mathilde et le sprint 0 lancé par Fatou : avant toute fonctionnalité, un squelette en ligne."
+  },
+  "handsOffTo": {
+    "roles": ["frontend", "code-review", "devops"],
+    "text": "Une API que l'application de Thomas peut appeler, des choix techniques que Marc relit, et un squelette qu'Ibrahima met en ligne à chaque modification."
+  },
+  "screen": {
+    "component": "code-editor",
+    "toolName": "Atelier Code",
+    "props": {
+      "project": "tournee-api",
+      "branch": "main",
+      "folder": "src",
+      "explorer": [
+        "docs/adr/001-fondations.md",
+        "src/auth/",
+        "src/transmissions/",
+        "package.json",
+        "README.md"
+      ],
+      "files": [
+        { "name": "app.ts", "source": "atelier-lumen/nouveau-produit/08-backend/app.ts.txt" },
+        {
+          "name": "tourneeDuJour.ts",
+          "source": "atelier-lumen/nouveau-produit/08-backend/tourneeDuJour.ts.txt"
+        },
+        {
+          "name": "squelette.e2e.test.ts",
+          "source": "atelier-lumen/nouveau-produit/08-backend/squelette.e2e.test.ts.txt"
+        }
+      ],
+      "initialFile": 0,
+      "terminal": {
+        "command": "npm run test:e2e -- --env hds-test",
+        "lines": [
+          {
+            "kind": "info",
+            "text": "Environnement : hébergement HDS de test · mercredi 10 novembre 2027"
+          },
+          {
+            "kind": "pass",
+            "text": "squelette de bout en bout › répond depuis l'hébergement HDS (84 ms)"
+          },
+          {
+            "kind": "pass",
+            "text": "squelette de bout en bout › renvoie la tournée du jour de Karine, dans son ordre"
+          },
+          {
+            "kind": "pass",
+            "text": "squelette de bout en bout › ne montre jamais les patients d'un autre cabinet"
+          },
+          {
+            "kind": "summary",
+            "text": "3 tests réussis · téléphone → API → base de données → retour : tout s'emboîte"
+          }
+        ]
+      }
+    },
+    "annotations": [
+      {
+        "id": "adr",
+        "zone": "adr",
+        "title": "Des fondations sans aventure",
+        "text": "L'[[adr|ADR-001]] tient en une page : reprendre les technologies déjà maîtrisées sur Pocket Santé. Le risque de Tournée, c'est de ne pas trouver de clientes, pas la technique. Inutile d'ajouter un second risque."
+      },
+      {
+        "id": "skeleton",
+        "zone": "skeleton",
+        "title": "Le squelette de bout en bout",
+        "text": "Une seule route utile, la tournée du jour, mais qui traverse tout : téléphone, [[api]], [[base-de-donnees|base de données]], mise en ligne sur l'hébergement [[hds|HDS]]. C'est le [[squelette-de-bout-en-bout|squelette de bout en bout]] : il était en ligne le 3e jour du [[sprint-zero|sprint 0]]."
+      },
+      {
+        "id": "cabinet",
+        "zone": "cabinet",
+        "title": "Chacune son cabinet",
+        "text": "Le serveur filtre lui-même les patients par cabinet. On ne fait jamais confiance à ce que demande le téléphone : c'est la règle que Léa (sécurité) a demandée dès la première ligne."
+      },
+      {
+        "id": "minimal",
+        "zone": "minimal",
+        "title": "Le strict nécessaire",
+        "text": "Pas de numéro de sécurité sociale ni d'ordonnance dans Tournée : pour faire sa tournée, Karine n'en a pas besoin. Moins de données de santé, c'est moins de risques en cas de fuite. Le [[rgpd|RGPD]] appelle ça la minimisation."
+      },
+      {
+        "id": "e2e",
+        "zone": "e2e",
+        "title": "La preuve que tout s'emboîte",
+        "text": "Ce [[test-automatise|test]] appelle la vraie API en ligne, comme le fera le téléphone. Le terminal le montre : les trois tests passent. Dès ce jour, chaque modification sera vérifiée de la même façon."
+      }
+    ]
+  }
+}

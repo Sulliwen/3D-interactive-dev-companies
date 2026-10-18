@@ -1,0 +1,23 @@
+{
+  "id": "backend",
+  "desk": 8,
+  "title": "Développeur·se back-end",
+  "person": {
+    "firstName": "Awa",
+    "lastName": "Diallo",
+    "role": "Développeuse back-end"
+  },
+  "tagline": "Je construis ce qui se passe en coulisses quand le patient appuie sur « Annuler » : les règles, les données, la sécurité.",
+  "missions": [
+    "Traduire les [[user-story|user stories]] et leurs [[critere-acceptation|critères d'acceptation]] en [[code-source|code]] qui tourne sur le [[serveur]].",
+    "Concevoir l'[[api|API]] que l'application mobile appellera, en accord avec le développeur [[front-end]].",
+    "Lire et modifier la [[base-de-donnees|base de données]] sans jamais perdre ni mélanger d'informations.",
+    "Écrire des [[test-automatise|tests automatisés]] qui prouvent que tout fonctionne, aujourd'hui et après chaque modification.",
+    "Faire relire son code en [[revue-de-code|revue de code]], et relire celui de ses collègues."
+  ],
+  "myth": {
+    "myth": "Un développeur passe ses journées seul, casque sur les oreilles, à taper du code.",
+    "reality": "Écrire du code n'occupe souvent qu'une partie de la journée. Le reste : comprendre le besoin avec la Product Owner, se mettre d'accord avec le front-end sur l'[[api|API]], relire le code des collègues, tester, corriger. C'est un métier d'équipe."
+  },
+  "realTools": ["VS Code", "IntelliJ IDEA", "Git", "Node.js", "PostgreSQL", "Postman"]
+}

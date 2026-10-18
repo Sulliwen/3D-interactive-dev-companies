@@ -4,7 +4,12 @@ export const researchBoardPropsSchema = z.object({
   /** Nom de l'étude (titre de la fenêtre). */
   study: z.string(),
   /** Qui a été interrogé. */
-  sources: z.object({ patients: z.number().int(), secretaries: z.number().int() }),
+  sources: z.object({
+    patients: z.number().int(),
+    secretaries: z.number().int(),
+    /** Libellés des deux groupes interrogés (par défaut : patients, secrétaires médicales). */
+    labels: z.tuple([z.string(), z.string()]).default(['patients', 'secrétaires médicales']),
+  }),
   /** Carte d'affinités : citations d'entretiens regroupées par thème. */
   themes: z
     .array(
@@ -34,6 +39,10 @@ export const researchBoardPropsSchema = z.object({
     )
     .min(3)
     .max(6),
+  /** Titre du parcours (par défaut : « Parcours de <persona> pour annuler un rendez-vous »). */
+  journeyTitle: z.string().optional(),
+  /** Durée d'un entretien, affichée avec les sources. */
+  interviewLength: z.string().default('45 min'),
   /** Le problème qualifié, en une phrase. */
   problem: z.string(),
 })

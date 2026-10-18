@@ -86,8 +86,11 @@ kbd {
 }
 
 .hud__brand {
+  min-width: 0;
+  overflow: hidden;
   font-weight: 700;
   white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .hud__brand span {
@@ -106,8 +109,19 @@ kbd {
   pointer-events: auto;
 }
 
+.hud__menu .button {
+  white-space: nowrap;
+}
+
 .hud__menu .button--ghost {
   background: var(--paper-glass);
+}
+
+/* Le titre du scénario reste dans le carnet et sur l'écran de fin quand la place manque. */
+@media (max-width: 1400px) {
+  .hud__brand span {
+    display: none;
+  }
 }
 
 @media (max-width: 1100px) {
@@ -303,6 +317,7 @@ kbd {
 
 .carnet__toggle {
   padding: 0.4rem 0.8rem;
+  white-space: nowrap;
   border: 0;
   border-radius: var(--radius);
   background: var(--paper-glass);
@@ -370,6 +385,10 @@ kbd {
 .is-seen .carnet__mark {
   background: #17692f;
   color: #fff;
+}
+
+.carnet__list li.is-bystander {
+  opacity: 0.62;
 }
 
 .is-next .carnet__mark {
@@ -492,6 +511,15 @@ kbd {
   fill: #c9b8f0;
 }
 
+.minimap__station.is-bystander circle {
+  fill: #9aa3ad;
+  stroke: #5b6672;
+}
+
+.minimap__station.is-bystander text {
+  fill: #2b333c;
+}
+
 .minimap__station .minimap__halo {
   fill: none;
   stroke: #f2a541;
@@ -554,6 +582,10 @@ kbd {
 
 .minimap__legend i.is-seen {
   background: #2fa04f;
+}
+
+.minimap__legend i.is-bystander {
+  background: #9aa3ad;
 }
 
 .minimap__bar button {
@@ -805,9 +837,9 @@ kbd {
 
 .finale__actions {
   display: flex;
+  flex-wrap: wrap;
   justify-content: flex-end;
   gap: 0.6rem;
-  margin-top: 1.2rem;
 }
 
 /* --- Personnages, accueil --------------------------------------------------- */
@@ -1040,6 +1072,11 @@ kbd {
   background: #fbf3e8;
 }
 
+.sheet--bystander .sheet__feature {
+  border-left-color: #8a96a3;
+  background: #eef1f4;
+}
+
 .sheet__step {
   margin: 0.2rem 0 0.4rem;
   font-weight: 700;
@@ -1245,6 +1282,7 @@ kbd {
   inset: 0;
   z-index: 50;
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   place-items: center;
   padding: 1rem;
   background: rgb(23 32 43 / 0.45);
@@ -1254,7 +1292,10 @@ kbd {
   display: flex;
   flex-direction: column;
   width: min(44rem, 100%);
-  max-height: 100%;
+  /* Hauteur bornée par la fenêtre (et non par la grille, qui s'adapterait au contenu) :
+     le pied de la fenêtre et ses boutons restent toujours à l'écran. */
+  max-height: calc(100vh - 2rem);
+  max-height: calc(100dvh - 2rem);
   border-radius: var(--radius);
   background: var(--paper);
   box-shadow: 0 20px 60px rgb(0 0 0 / 0.3);
@@ -1262,7 +1303,8 @@ kbd {
 
 .dialog--wide {
   width: min(84rem, 100%);
-  height: 100%;
+  height: calc(100vh - 2rem);
+  height: calc(100dvh - 2rem);
 }
 
 .dialog__head {
@@ -1283,6 +1325,36 @@ kbd {
   min-height: 0;
   overflow-y: auto;
   padding: 1rem 1.2rem;
+}
+
+.dialog__foot {
+  flex: none;
+  padding: 0.75rem 1.2rem;
+  border-top: 1px solid #e3e7eb;
+}
+
+@media (max-height: 40rem) {
+  .dialog-backdrop {
+    padding: 0.5rem;
+  }
+
+  .dialog {
+    max-height: calc(100vh - 1rem);
+    max-height: calc(100dvh - 1rem);
+  }
+
+  .dialog__head,
+  .dialog__foot {
+    padding-block: 0.5rem;
+  }
+
+  .dialog__body {
+    padding-block: 0.7rem;
+  }
+
+  .avatar-picker img {
+    max-width: 4.5rem;
+  }
 }
 
 /* --- Tous les postes ----------------------------------------------------------- */
@@ -1425,4 +1497,408 @@ kbd {
     transition: none !important;
     animation: none !important;
   }
+}
+
+/* --- Choix de la visite (structure, puis scénario) -------------------------- */
+
+.picker__lead {
+  margin: 0 0 0.8rem;
+  color: var(--ink-soft);
+}
+
+/* --- Carrousel : une seule rangée de cartes, défilement gauche / droite -------- */
+
+.carousel__row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.carousel__track {
+  --fade: 2.2rem;
+
+  display: flex;
+  flex: 1;
+  gap: 0.8rem;
+  min-width: 0;
+  margin: 0;
+  padding: 0.3rem 0.2rem 0.5rem;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: 0.2rem;
+  scrollbar-width: none;
+  list-style: none;
+}
+
+.carousel__track::-webkit-scrollbar {
+  display: none;
+}
+
+/* Fondu sur le bord où il reste des cartes à voir. */
+.carousel__track.has-after {
+  mask-image: linear-gradient(to right, #000 calc(100% - var(--fade)), transparent);
+}
+
+.carousel__track.has-before {
+  mask-image: linear-gradient(to left, #000 calc(100% - var(--fade)), transparent);
+}
+
+.carousel__track.has-before.has-after {
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    #000 var(--fade),
+    #000 calc(100% - var(--fade)),
+    transparent
+  );
+}
+
+.carousel__track > li {
+  flex: 0 0 min(17.5rem, 78%);
+  scroll-snap-align: start;
+}
+
+.carousel__arrow {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 2.6rem;
+  height: 2.6rem;
+  padding: 0 0 0.15rem;
+  border: 1px solid #d5dbe2;
+  border-radius: 50%;
+  background: #fff;
+  color: var(--ink);
+  font: inherit;
+  font-size: 1.6rem;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgb(23 32 43 / 0.08);
+  transition:
+    border-color 0.15s,
+    color 0.15s,
+    opacity 0.15s;
+}
+
+.carousel__arrow:hover:not(:disabled) {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.carousel__arrow:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+.carousel__arrow[hidden] {
+  display: none;
+}
+
+.carousel__dots {
+  display: flex;
+  justify-content: center;
+  gap: 0.45rem;
+  margin-top: 0.4rem;
+}
+
+.carousel__dots button {
+  width: 0.55rem;
+  height: 0.55rem;
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
+  background: #cfd6de;
+  cursor: pointer;
+  transition:
+    width 0.2s,
+    background 0.2s;
+}
+
+.carousel__dots button.is-current {
+  width: 1.4rem;
+  background: var(--accent);
+}
+
+@media (max-width: 30rem) {
+  .carousel__arrow {
+    display: none;
+  }
+}
+
+.picker__card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  width: 100%;
+  height: 100%;
+  padding: 0.85rem 0.95rem;
+  border: 1px solid #d5dbe2;
+  border-radius: var(--radius);
+  background: #fff;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.picker__card:hover:not(:disabled),
+.picker__card.is-current {
+  border-color: var(--accent);
+  box-shadow: inset 0 0 0 1px var(--accent);
+}
+
+.picker__card:disabled {
+  background: #f3f5f7;
+  color: var(--ink-soft);
+  cursor: default;
+}
+
+.picker__kind {
+  margin: 0;
+  color: var(--accent);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.picker__card:disabled .picker__kind {
+  color: var(--ink-soft);
+}
+
+.picker__title {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 800;
+}
+
+.picker__summary {
+  margin: 0;
+  font-size: 0.92rem;
+}
+
+.picker__facts {
+  margin: 0.2rem 0 0;
+  padding-left: 1.1rem;
+  color: var(--ink-soft);
+  font-size: 0.85rem;
+}
+
+.picker__meta {
+  margin-top: auto;
+  padding-top: 0.3rem;
+  color: var(--ink-soft);
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
+.picker__soon {
+  align-self: flex-start;
+  padding: 0.1rem 0.5rem;
+  border-radius: 999px;
+  background: #e2e6ea;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.picker__back {
+  margin-bottom: 0.7rem;
+}
+
+.picker__section {
+  margin: 1.1rem 0 0.5rem;
+  font-size: 0.95rem;
+}
+
+.welcome--picker {
+  width: min(62rem, 100%);
+}
+
+.welcome__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.6rem;
+}
+
+.welcome__actions .welcome__start {
+  margin: 0;
+}
+
+.catalog__nav li.is-bystander {
+  opacity: 0.62;
+}
+
+/* --- Menu de lancement et présentation du scénario ---------------------------- */
+
+.menu__current {
+  margin: 1rem 0 1.2rem;
+  padding: 0.8rem 1rem;
+  border: 1px solid #e3e7eb;
+  border-left: 4px solid var(--accent);
+  border-radius: var(--radius);
+}
+
+.menu__current p {
+  margin: 0.15rem 0;
+}
+
+.menu__group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.tour {
+  position: absolute;
+  bottom: 1.4rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(40rem, calc(100% - 2rem));
+  overflow: hidden;
+  border-radius: var(--radius);
+  background: var(--ink);
+  color: #fff;
+  box-shadow: 0 14px 40px rgb(0 0 0 / 0.3);
+  pointer-events: auto;
+}
+
+.tour__card {
+  padding: 1rem 1.2rem 0.6rem;
+  animation: tour-in 0.45s ease both;
+}
+
+.tour__card p {
+  margin: 0;
+}
+
+.tour__kicker {
+  color: #f2a541;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.tour__title {
+  margin: 0.25rem 0 0.3rem !important;
+  font-size: 1.25rem;
+  font-weight: 800;
+}
+
+.tour__card--opening .tour__title {
+  font-size: 1.5rem;
+}
+
+.tour__text {
+  color: #e4e9ee;
+  font-size: 1.02rem;
+  line-height: 1.45;
+}
+
+.tour__hint {
+  margin-top: 0.5rem !important;
+  color: #aab4bf;
+  font-size: 0.9rem;
+}
+
+.tour__timer {
+  display: block;
+  height: 3px;
+  background: var(--accent);
+  transform-origin: left;
+  animation: tour-timer linear both;
+}
+
+.tour__controls {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.8rem;
+  background: rgb(255 255 255 / 0.06);
+}
+
+.tour__controls .button--ghost {
+  min-width: 2.2rem;
+  color: #fff;
+  font-size: 1.2rem;
+  line-height: 1;
+}
+
+.tour__controls .button--ghost:disabled {
+  opacity: 0.35;
+}
+
+.tour__dots {
+  display: flex;
+  flex: 1;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.35rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tour__dots li {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: #4a5563;
+}
+
+.tour__dots li.is-done {
+  background: #c9d1da;
+}
+
+.tour__dots li.is-current {
+  background: #f2a541;
+}
+
+.tour__pause {
+  min-width: 2.4rem;
+  font-size: 0.8rem;
+  letter-spacing: -0.05em;
+}
+
+.tour.is-paused .tour__pause {
+  background: rgb(255 255 255 / 0.18);
+}
+
+.tour.is-paused .tour__timer {
+  opacity: 0.45;
+}
+
+.tour__skip {
+  background: var(--accent);
+  white-space: nowrap;
+}
+
+.tour__skip kbd,
+.tour__hint kbd {
+  margin-left: 0.3rem;
+  color: var(--ink);
+  font-size: 0.8em;
+}
+
+@keyframes tour-in {
+  from {
+    opacity: 0;
+    transform: translateY(0.4rem);
+  }
+}
+
+@keyframes tour-timer {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+:root[data-reduced-motion='true'] .tour__card {
+  animation: none;
 }

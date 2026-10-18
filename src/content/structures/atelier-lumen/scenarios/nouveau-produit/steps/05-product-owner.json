@@ -1,0 +1,166 @@
+{
+  "role": "product-owner",
+  "order": 5,
+  "featureStep": "On choisit la plus petite version utile, et ce qu'on retire exprès",
+  "tagline": "Mon travail sur Tournée, c'est surtout de dire non : la première version doit être la plus petite qui rende vraiment service à Karine.",
+  "missions": [
+    "Découper Tournée en [[user-story|user stories]] et dessiner la carte du [[mvp|MVP]] : ce qui entre dans le pilote, et ce qui attendra.",
+    "Retirer volontairement des idées séduisantes (itinéraire automatique, facturation) en expliquant pourquoi.",
+    "Écrire les [[critere-acceptation|critères d'acceptation]] des premières stories avec l'équipe.",
+    "Rester en contact avec les infirmières du pilote pour réordonner le [[backlog]] chaque semaine."
+  ],
+  "takeaways": [
+    "Un [[mvp|MVP]] n'est pas un produit au rabais : c'est la plus petite version qui permet de vérifier les [[hypothese|hypothèses]].",
+    "Ce qu'on retire est aussi important que ce qu'on garde : trois idées écartées, avec leur raison écrite.",
+    "La story suivie, TRN-4 « écrire une transmission », est au cœur du problème découvert par Samir."
+  ],
+  "receivesFrom": {
+    "roles": ["product-manager", "design"],
+    "text": "Le budget de trois mois fixé par Claire, et le prototype corrigé par Hugo après 6 tests : transmissions d'abord, pas d'itinéraire."
+  },
+  "handsOffTo": {
+    "roles": ["scrum-master", "backend", "frontend"],
+    "text": "Une carte du MVP de 32 points, prête pour les premiers sprints que Fatou va lancer avec Awa et Thomas."
+  },
+  "screen": {
+    "component": "backlog",
+    "toolName": "Lumen Board",
+    "props": {
+      "board": "Tournée · carte du MVP",
+      "views": ["MVP (pilote)", "Après le pilote", "Idées écartées"],
+      "items": [
+        {
+          "id": "TRN-1",
+          "title": "Voir ma tournée du jour, même sans réseau",
+          "project": "tournee",
+          "estimate": 8,
+          "status": "ready"
+        },
+        {
+          "id": "TRN-4",
+          "title": "Écrire une transmission pour mes collègues",
+          "project": "tournee",
+          "estimate": 5,
+          "status": "ready",
+          "story": {
+            "asA": "infirmière d'un cabinet",
+            "iWant": "écrire une transmission sur la fiche d'un patient, juste après le soin",
+            "soThat": "ma collègue sache ce que j'ai fait avant de passer chez lui"
+          },
+          "origin": "Le problème cité dans 13 entretiens sur 15 · 41 % des 214 réponses au questionnaire · demandé « en premier » par 4 testeuses sur 6.",
+          "criteria": [
+            "La transmission s'écrit en deux gestes depuis la tournée du jour.",
+            {
+              "given": "une infirmière sans réseau,",
+              "when": "elle écrit une transmission,",
+              "then": "elle est gardée sur le téléphone et envoyée dès le retour du réseau."
+            },
+            {
+              "given": "une transmission envoyée,",
+              "when": "une collègue du cabinet ouvre la fiche du patient,",
+              "then": "elle la voit en premier, avec l'heure et le nom de l'autrice."
+            },
+            "Seules les infirmières du même cabinet voient les transmissions."
+          ],
+          "estimateNote": "estimée par l'équipe le 19 novembre (sprint 0)",
+          "links": [
+            { "label": "Prototype « Tournée v3 » (après 6 tests)", "kind": "design" },
+            { "label": "Sprint 2 (6 → 17 décembre)", "kind": "sprint" }
+          ]
+        },
+        {
+          "id": "TRN-5",
+          "title": "Lire les transmissions avant ma tournée",
+          "project": "tournee",
+          "estimate": 3,
+          "status": "ready"
+        },
+        {
+          "id": "TRN-2",
+          "title": "Ouvrir la fiche d'un patient",
+          "project": "tournee",
+          "estimate": 5,
+          "status": "ready"
+        },
+        {
+          "id": "TRN-3",
+          "title": "Cocher un soin fait",
+          "project": "tournee",
+          "estimate": 3,
+          "status": "ready"
+        },
+        {
+          "id": "TRN-6",
+          "title": "Réordonner ma tournée à la main",
+          "project": "tournee",
+          "estimate": 3,
+          "status": "ready"
+        },
+        {
+          "id": "TRN-7",
+          "title": "Inviter les collègues de mon cabinet",
+          "project": "tournee",
+          "estimate": 5,
+          "status": "refine"
+        },
+        {
+          "id": "TRN-8",
+          "title": "Calcul automatique de l'itinéraire",
+          "project": "tournee",
+          "estimate": null,
+          "status": "idea",
+          "description": "Écartée : 5 infirmières sur 6 l'ignorent au test du prototype."
+        },
+        {
+          "id": "TRN-9",
+          "title": "Facturation et télétransmission",
+          "project": "tournee",
+          "estimate": null,
+          "status": "idea",
+          "description": "Écartée : leur logiciel actuel le fait déjà."
+        },
+        {
+          "id": "TRN-10",
+          "title": "Prise de rendez-vous par les patients",
+          "project": "tournee",
+          "estimate": null,
+          "status": "idea",
+          "description": "Écartée pour le pilote : un autre problème, pour d'autres utilisateurs."
+        }
+      ],
+      "selected": "TRN-4"
+    },
+    "annotations": [
+      {
+        "id": "backlog",
+        "zone": "backlog",
+        "title": "La carte du MVP",
+        "text": "Sept stories, 32 points : c'est tout le [[mvp|MVP]] du pilote. Elles suivent la journée de Karine : voir sa tournée, ouvrir une fiche, cocher un soin, écrire et lire des transmissions. Le reste attendra que les [[hypothese|hypothèses]] soient vérifiées."
+      },
+      {
+        "id": "filters",
+        "zone": "filters",
+        "title": "Un nouveau projet dans l'outil",
+        "text": "Tournée apparaît pour la première fois à côté de Pocket Santé, Facturo et Mutuelle Horizon. Ses tickets commencent par **TRN**. C'est le même outil et la même méthode que pour les autres produits : seule l'équipe change."
+      },
+      {
+        "id": "story",
+        "zone": "story",
+        "title": "La story au cœur du problème",
+        "text": "TRN-4 répond directement à la phrase de Samir : les transmissions qui se perdent. La [[user-story|user story]] est écrite du point de vue d'une infirmière d'un cabinet, la cible désignée par Julien."
+      },
+      {
+        "id": "criteria",
+        "zone": "criteria",
+        "title": "Sans réseau, dès la première version",
+        "text": "Le deuxième [[critere-acceptation|critère]] vient des tournées accompagnées par Samir : la moitié des passages se font sans réseau. Une transmission doit pouvoir s'écrire [[hors-connexion|hors connexion]], sinon l'application ne servira pas sur le terrain."
+      },
+      {
+        "id": "estimate",
+        "zone": "estimate",
+        "title": "Estimée au sprint 0",
+        "text": "L'équipe a estimé TRN-4 à **5 [[point-effort|points]]** pendant le [[sprint-zero|sprint 0]]. Les trois idées écartées, elles, n'ont pas d'estimation : on ne chiffre pas ce qu'on a décidé de ne pas faire."
+      }
+    ]
+  }
+}

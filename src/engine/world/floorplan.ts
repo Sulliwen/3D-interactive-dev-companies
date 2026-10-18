@@ -52,7 +52,7 @@ export interface Zone {
 }
 
 export interface StationAnchor {
-  /** Numéro du poste dans le fil rouge (1 à 14), relié au contenu par ce numéro. */
+  /** Numéro du poste de l'étage, relié au métier qui l'occupe (`desk` des fichiers roles/). */
   number: number
   /** Centre de l'écran du poste. */
   screenPosition: Vec3

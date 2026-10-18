@@ -3,7 +3,7 @@ import { useLoader, useThree } from '@react-three/fiber'
 import { suspend } from 'suspend-react'
 import { Audio, AudioListener, AudioLoader, PositionalAudio, type Object3D } from 'three'
 import { floorPlan } from '../world/floorplan'
-import { npcs } from '../world/npcs'
+import { stationNpcs } from '../world/npcs'
 import { useGameStore } from '../../state/useGameStore'
 
 const BASE = `${import.meta.env.BASE_URL}audio/`
@@ -90,7 +90,7 @@ function AmbienceSources() {
       return a
     }
     // Un clavier par personne qui tape, décalé dans le fichier pour éviter l'écho.
-    const typists = npcs.filter((n) => n.clip === 'type' || n.clip === 'stand_type')
+    const typists = stationNpcs.filter((n) => n.clip === 'type' || n.clip === 'stand_type')
     typists.forEach((n) => at(n.position[0], 0.8, n.position[1], keyboard, 0.5, true))
     const machine = floorPlan.boxes.find((b) => b.name === 'coffee_machine')
     const coffeeSound = machine

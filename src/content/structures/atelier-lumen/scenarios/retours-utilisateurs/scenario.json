@@ -1,0 +1,40 @@
+{
+  "id": "retours-utilisateurs",
+  "order": 1,
+  "kind": "Évolution du produit",
+  "title": "Une fonctionnalité réclamée par les utilisateurs",
+  "summary": "Des patients se plaignent au support de ne pas pouvoir annuler un rendez-vous. L'équipe comprend le problème, le chiffre, décide, construit et met en ligne la fonctionnalité.",
+  "workItem": {
+    "label": "La fonctionnalité « Annuler un rendez-vous », ici",
+    "title": "Permettre au patient d'annuler son rendez-vous et libérer automatiquement le créneau pour d'autres patients.",
+    "project": "pocket-sante"
+  },
+  "intro": "De la plainte d'un patient jusqu'aux statistiques après la mise en ligne, quatorze métiers font avancer cette fonctionnalité de l'application Pocket Santé.",
+  "finale": {
+    "lead": "Il a fallu quatorze métiers, de la plainte d'un patient jusqu'aux statistiques après la mise en ligne. Et la boucle repart : de nouveaux retours arrivent déjà au support.",
+    "outcomesTitle": "Ce que la fonctionnalité a changé",
+    "outcomes": [
+      {
+        "label": "Rendez-vous non honorés",
+        "before": "18 %",
+        "after": "13 %"
+      },
+      {
+        "label": "Créneaux libérés la 1re semaine",
+        "before": "0",
+        "after": "1 240"
+      },
+      {
+        "label": "Créneaux repris par un autre patient",
+        "before": "—",
+        "after": "61 %"
+      },
+      {
+        "label": "Tickets « annulation » au support",
+        "before": "214 / mois",
+        "after": "−70 %"
+      }
+    ]
+  },
+  "bystanders": []
+}

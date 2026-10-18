@@ -1,0 +1,169 @@
+{
+  "role": "ux-research",
+  "order": 1,
+  "featureStep": "On vérifie que le problème existe, avant de parler de solution",
+  "tagline": "Avant qu'on dessine ou qu'on code quoi que ce soit, je vais voir si le problème existe vraiment, chez les personnes qui le vivent.",
+  "missions": [
+    "Mener la [[decouverte]] : des [[entretien-utilisateur|entretiens]] avec des infirmières libérales, et des patients qu'elles soignent à domicile.",
+    "Accompagner des tournées en voiture, dès 6 h 30, pour voir le travail réel et pas seulement ce qu'on en raconte.",
+    "Regrouper ce qui revient d'un entretien à l'autre sur une [[carte-affinites|carte d'affinités]], et décrire le problème en une phrase.",
+    "Ne jamais présenter la solution pendant un entretien : on écoute les problèmes, on ne vend rien."
+  ],
+  "takeaways": [
+    "Un nouveau produit commence par un **problème**, pas par une idée d'application : Samir n'a montré aucun écran pendant ses 15 entretiens.",
+    "Accompagner 3 tournées en voiture a révélé ce qu'aucun entretien ne disait : la moitié des passages se font sans réseau.",
+    "Le problème qui ressort n'est pas celui imaginé au départ : ce n'est pas l'itinéraire, ce sont les **transmissions** entre collègues."
+  ],
+  "receivesFrom": {
+    "roles": ["product-manager"],
+    "text": "Dix semaines d'exploration accordées par Claire, après une découverte faite par hasard pendant les entretiens de Pocket Santé : deux infirmières libérales et leur cahier de tournée."
+  },
+  "handsOffTo": {
+    "roles": ["data", "product-manager"],
+    "text": "Un problème qualifié et une persona, Karine. Julien vérifie combien d'infirmières sont concernées ; Claire s'en servira pour décider si l'on continue."
+  },
+  "screen": {
+    "component": "research-board",
+    "toolName": "Carnet UX",
+    "props": {
+      "study": "Découverte « la tournée des infirmières libérales » — été 2027",
+      "sources": {
+        "patients": 12,
+        "secretaries": 3,
+        "labels": ["infirmières libérales", "patients soignés à domicile"]
+      },
+      "themes": [
+        {
+          "title": "Les transmissions",
+          "notes": [
+            {
+              "text": "Le soir, je passe quarante minutes à écrire des SMS à mes collègues.",
+              "who": "Infirmière, cabinet de 3"
+            },
+            {
+              "text": "Le pansement de M. Roux avait déjà été refait le matin. Personne ne me l'avait dit.",
+              "who": "Infirmière remplaçante"
+            },
+            {
+              "text": "Tout est dans le cahier. Le problème, c'est que le cahier est dans ma voiture.",
+              "who": "Infirmière, 52 ans"
+            }
+          ]
+        },
+        {
+          "title": "Sur la route",
+          "notes": [
+            {
+              "text": "Dans les monts du Beaujolais, je n'ai pas de réseau une maison sur deux.",
+              "who": "Infirmière, zone rurale"
+            },
+            {
+              "text": "Je lis mes messages au feu rouge. Je sais, ce n'est pas bien.",
+              "who": "Infirmière, 38 ans"
+            }
+          ]
+        },
+        {
+          "title": "L'ordre de passage",
+          "notes": [
+            {
+              "text": "Mon ordre, je le connais par cœur : l'insuline de Mme Faure, c'est 7 h, pas autrement.",
+              "who": "Infirmière, 46 ans"
+            },
+            {
+              "text": "Les GPS me font passer par des routes où je ne passe jamais.",
+              "who": "Infirmière, 41 ans"
+            }
+          ]
+        },
+        {
+          "title": "Côté patients",
+          "notes": [
+            {
+              "text": "Chaque infirmière me repose les mêmes questions.",
+              "who": "Patient, 81 ans"
+            },
+            {
+              "text": "Ma fille veut savoir si le soin a été fait.",
+              "who": "Patiente, 77 ans"
+            }
+          ]
+        }
+      ],
+      "persona": {
+        "name": "Karine",
+        "age": 46,
+        "role": "Infirmière libérale à Villefranche-sur-Saône, cabinet de 3, environ 30 patients par jour",
+        "quote": "Le soir, je passe quarante minutes à écrire des SMS à mes collègues pour leur dire où en sont mes patients.",
+        "needs": [
+          "Savoir ce que sa collègue a fait chez un patient, avant d'y aller",
+          "Prévenir le cabinet d'un changement sans passer sa soirée au téléphone",
+          "Travailler même sans réseau"
+        ],
+        "frustrations": [
+          "Les SMS perdus dans la conversation du cabinet",
+          "Les soins faits deux fois, ou oubliés",
+          "La remplaçante qui ne trouve pas l'information"
+        ]
+      },
+      "journey": [
+        {
+          "step": "6 h 30, relit le cahier",
+          "feeling": "neutral"
+        },
+        {
+          "step": "Premier patient",
+          "feeling": "good"
+        },
+        {
+          "step": "Soin déjà fait par une collègue",
+          "feeling": "bad",
+          "pain": "Personne ne l'avait prévenue"
+        },
+        {
+          "step": "Tournée sans réseau",
+          "feeling": "neutral"
+        },
+        {
+          "step": "Le soir, SMS aux collègues",
+          "feeling": "bad",
+          "pain": "Quarante minutes, après une journée de 11 h"
+        }
+      ],
+      "problem": "Les infirmières d'un même cabinet se partagent les patients, mais tout ce qu'elles doivent se transmettre passe par des SMS et un cahier : oublis, soins faits deux fois, remplaçante perdue.",
+      "journeyTitle": "Une journée de Karine, de 6 h 30 au soir"
+    },
+    "annotations": [
+      {
+        "id": "sources",
+        "zone": "sources",
+        "title": "Aller là où le problème se vit",
+        "text": "Samir a mené **15 entretiens** (12 infirmières libérales, 3 patients) et accompagné **3 tournées** en voiture, départ 6 h 30. C'est la [[decouverte]] : observer le travail réel avant d'imaginer quoi que ce soit."
+      },
+      {
+        "id": "affinity",
+        "zone": "affinity",
+        "title": "Ce qui revient partout",
+        "text": "Sur la [[carte-affinites|carte d'affinités]], un thème écrase les autres : les **transmissions** entre collègues. **13 entretiens sur 15** en parlent sans qu'on leur pose la question. L'itinéraire, que l'équipe croyait central, n'intéresse presque personne."
+      },
+      {
+        "id": "persona",
+        "zone": "persona",
+        "title": "Karine, une nouvelle persona",
+        "text": "Pour Pocket Santé, l'équipe pensait à Sarah, une patiente. Pour Tournée, la [[persona]] est une **professionnelle** : Karine, infirmière libérale. C'est d'ailleurs en interrogeant des mères comme Sarah, infirmières elles aussi, que Samir a découvert le problème."
+      },
+      {
+        "id": "journey",
+        "zone": "journey",
+        "title": "La journée de Karine",
+        "text": "Le [[parcours-utilisateur|parcours]] couvre une journée entière, pas un écran. Les deux moments rouges sont liés : l'information n'a pas circulé le matin, et Karine la rattrape le soir, par SMS."
+      },
+      {
+        "id": "problem",
+        "zone": "problem",
+        "title": "Un problème, pas une solution",
+        "text": "Cette phrase ne parle ni d'application ni de téléphone. Elle décrit ce que vivent les infirmières. Si elle avait été fausse, l'aventure se serait arrêtée ici, pour le prix de dix semaines d'étude."
+      }
+    ]
+  }
+}

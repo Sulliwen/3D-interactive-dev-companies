@@ -1,0 +1,40 @@
+{
+  "id": "atelier-lumen",
+  "order": 1,
+  "name": "Atelier Lumen",
+  "kind": "Start-up / scale-up SaaS",
+  "tagline": "Des logiciels utiles, fabriqués avec soin.",
+  "summary": "Une jeune entreprise lyonnaise qui édite ses propres applications, vendues sur abonnement. Un plateau ouvert, un mur Scrum et un coin café.",
+  "facts": [
+    "≈ 25 personnes",
+    "Scrum, sprints de 2 semaines",
+    "Produit phare : Pocket Santé (prise de rendez-vous médicaux)"
+  ],
+  "world": "atelier-lumen",
+  "projects": [
+    {
+      "id": "pocket-sante",
+      "name": "Pocket Santé",
+      "description": "Application mobile de prise de rendez-vous médicaux.",
+      "featured": true
+    },
+    {
+      "id": "facturo",
+      "name": "Facturo",
+      "description": "Logiciel en ligne de facturation pour les artisans.",
+      "featured": false
+    },
+    {
+      "id": "refonte-mutuelle",
+      "name": "Refonte du site de la mutuelle",
+      "description": "Nouveau site web pour une mutuelle cliente.",
+      "featured": false
+    },
+    {
+      "id": "tournee",
+      "name": "Tournée",
+      "description": "Outil de tournées pour infirmières libérales (nouveau produit, en pilote).",
+      "featured": false
+    }
+  ]
+}

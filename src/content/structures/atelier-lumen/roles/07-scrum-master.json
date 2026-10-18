@@ -1,0 +1,23 @@
+{
+  "id": "scrum-master",
+  "desk": 7,
+  "title": "Scrum Master",
+  "person": {
+    "firstName": "Fatou",
+    "lastName": "Sow",
+    "role": "Scrum Master"
+  },
+  "tagline": "Je ne dis pas à l'équipe quoi faire : je l'aide à bien travailler ensemble, à tenir son rythme et à lever ce qui la bloque.",
+  "missions": [
+    "Animer les rendez-vous de [[scrum]] : planification du sprint, [[daily]], [[sprint-review|revue de sprint]] et [[retrospective|rétrospective]].",
+    "Repérer et lever les blocages : un accès manquant, un téléphone de test en panne, une question restée sans réponse.",
+    "Rendre l'avancement visible pour tous : le tableau du sprint, au mur comme à l'écran, et le [[burndown|graphique d'avancement]].",
+    "Protéger l'équipe des interruptions pendant le sprint : une nouvelle demande va dans le [[backlog]], pas directement sur le bureau d'un développeur.",
+    "Aider l'équipe à s'améliorer d'un sprint à l'autre, à partir de ce qu'elle décide elle-même en rétrospective."
+  ],
+  "myth": {
+    "myth": "Les réunions Scrum font perdre du temps aux développeurs.",
+    "reality": "Les rendez-vous sont courts et cadrés : le [[daily]] dure 15 minutes, debout. Ils évitent des heures de malentendus : chacun sait ce que font les autres, et un blocage signalé le matin est souvent levé avant midi."
+  },
+  "realTools": ["Jira", "Trello", "Azure DevOps", "Miro", "Confluence", "Microsoft Teams"]
+}

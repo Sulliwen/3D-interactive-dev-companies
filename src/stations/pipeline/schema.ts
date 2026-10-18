@@ -9,6 +9,8 @@ export const pipelinePropsSchema = z.object({
     trigger: z.string(),
     branch: z.string(),
     commit: z.string(),
+    /** Application et environnement visés (barre d'état). */
+    target: z.string().default('pocket-sante · production'),
   }),
   /** Étapes, dans l'ordre ; `zone` permet d'y poser une pastille. */
   stages: z

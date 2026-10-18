@@ -6,20 +6,32 @@ import { floorPlan, type StationAnchor } from '../world/floorplan'
 import { INTERACTION_RADIUS, findNearbyStation } from './proximity'
 import { runtime } from '../runtime'
 import { standPoint } from './standPoint'
-import { getStationByNumber } from '../../content/loader'
+import { stationAtDesk, type Visit } from '../../content/loader'
 import { isExploring, useGameStore } from '../../state/useGameStore'
+import { useVisit } from '../../state/visit'
 import { SCREEN_HEIGHT, SCREEN_WIDTH, ScreenFrame } from '../../stations/ScreenFrame'
 
-// Captures des écrans (`npm run screens:capture`) : station-08.jpg → poste 8.
-const captures: Record<number, string> = Object.fromEntries(
+// Captures des écrans (`npm run screens:capture`) :
+// <structure>/<scénario>/station-08.jpg → clé « structure/scénario/8 ».
+const captures: Record<string, string> = Object.fromEntries(
   Object.entries(
-    import.meta.glob<string>('../../assets/screens/station-*.jpg', {
+    import.meta.glob<string>('../../assets/screens/*/*/station-*.jpg', {
       eager: true,
       query: '?url',
       import: 'default',
     }),
-  ).map(([path, url]) => [Number(/station-(\d+)\.jpg$/.exec(path)?.[1]), url]),
+  ).map(([path, url]) => {
+    const [, structure, scenario, desk] = /([^/]+)\/([^/]+)\/station-(\d+)\.jpg$/.exec(path)!
+    return [`${structure}/${scenario}/${Number(desk)}`, url]
+  }),
 )
+
+/** Image fixe de l'écran d'un poste, pour la visite en cours. */
+function captureFor(visit: Visit, desk: number): string | undefined {
+  const station = stationAtDesk(visit, desk)
+  if (!station?.screenScenario) return undefined
+  return captures[`${visit.structure.id}/${station.screenScenario}/${desk}`]
+}
 
 /**
  * Écrans des postes. De loin : une image fixe et légère. Pendant le zoom : la
@@ -28,22 +40,38 @@ const captures: Record<number, string> = Object.fromEntries(
 export function StationScreens() {
   const nearby = useGameStore((s) => s.nearbyStation)
   const active = useGameStore((s) => s.activeStation)
+  const visit = useVisit()
   return (
     <group>
       {floorPlan.stations.map((anchor) => (
         <group key={anchor.number}>
           <Suspense fallback={<StaticScreen anchor={anchor} highlighted={false} />}>
-            <StaticScreen anchor={anchor} highlighted={nearby === anchor.number} />
+            <StaticScreen
+              anchor={anchor}
+              url={captureFor(visit, anchor.number)}
+              off={stationAtDesk(visit, anchor.number)?.absent}
+              highlighted={nearby === anchor.number}
+            />
           </Suspense>
-          {active === anchor.number && <LiveScreen anchor={anchor} />}
+          {active === anchor.number && <LiveScreen anchor={anchor} visit={visit} />}
         </group>
       ))}
     </group>
   )
 }
 
-function StaticScreen({ anchor, highlighted }: { anchor: StationAnchor; highlighted: boolean }) {
-  const url = captures[anchor.number]
+function StaticScreen({
+  anchor,
+  url,
+  off = false,
+  highlighted,
+}: {
+  anchor: StationAnchor
+  url?: string
+  /** Bureau vide : écran éteint. */
+  off?: boolean
+  highlighted: boolean
+}) {
   const onClick = useScreenClick(anchor)
   const [hovered, setHovered] = useState(false)
   useEffect(() => {
@@ -62,7 +90,9 @@ function StaticScreen({ anchor, highlighted }: { anchor: StationAnchor; highligh
       onPointerOut={() => setHovered(false)}
     >
       <planeGeometry args={anchor.screenSize} />
-      {url ? (
+      {off ? (
+        <meshBasicMaterial color={highlighted || hovered ? '#2a3442' : '#0e1218'} />
+      ) : url ? (
         <CapturedMaterial url={url} highlighted={highlighted || hovered} />
       ) : (
         <NumberMaterial n={anchor.number} highlighted={highlighted || hovered} />
@@ -115,8 +145,8 @@ function useScreenClick(anchor: StationAnchor) {
 }
 
 /** Interface interactive posée sur le moniteur (1 px CSS = largeur de l'écran / 960). */
-function LiveScreen({ anchor }: { anchor: StationAnchor }) {
-  const station = getStationByNumber(anchor.number)
+function LiveScreen({ anchor, visit }: { anchor: StationAnchor; visit: Visit }) {
+  const station = stationAtDesk(visit, anchor.number)
   if (!station) return null
   const [x, y, z] = anchor.screenPosition
   const r = anchor.screenRotationY

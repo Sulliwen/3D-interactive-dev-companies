@@ -24,11 +24,13 @@ export function PeopleScreen({ toolName, props: rawProps }: ScreenComponentProps
   return (
     <AppWindow
       toolName={toolName}
-      title="Équipe Pocket Santé"
+      title={props.team.name}
       titleRight="Nadia B. · Engineering Manager"
       status={
         <>
-          <span>Équipe Pocket Santé · 7 personnes</span>
+          <span>
+            {props.team.name} · {props.team.size} personnes
+          </span>
           <span>{workload.sprint}</span>
           <span className="pp__status-right">Visible par Nadia uniquement</span>
         </>

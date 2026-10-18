@@ -6,7 +6,8 @@ import { floorPlan } from '../world/floorplan'
 import { readMoveInput } from '../player/input'
 import { runtime } from '../runtime'
 import { isExploring, useGameStore } from '../../state/useGameStore'
-import { computeScreenPose } from './screenPose'
+import { getVisit } from '../../content/loader'
+import { OVERVIEW_SHOT, computeScreenPose, computeTourShot } from './screenPose'
 
 const HEAD_HEIGHT = 1.55
 const SHOULDER_OFFSET = 0.35
@@ -19,8 +20,12 @@ const DRAG_SENSITIVITY = 0.005
 const ARROW_TURN_SPEED = 1.8
 /** Durée du passage avatar ↔ écran, en secondes. */
 const TRANSITION = 0.8
+/** Durée d'un déplacement d'un plan à l'autre pendant la présentation. */
+const TOUR_FLIGHT = 1.6
+/** Lent travelling avant pendant qu'un plan de la présentation reste affiché (m/s). */
+const TOUR_DRIFT = 0.06
 
-type Mode = 'follow' | 'toScreen' | 'screen' | 'toFollow'
+type Mode = 'follow' | 'toScreen' | 'screen' | 'toFollow' | 'toTour' | 'tour'
 
 const easeInOutCubic = (t: number) => (t < 0.5 ? 4 * t * t * t : 1 - (-2 * t + 2) ** 3 / 2)
 
@@ -30,6 +35,8 @@ const easeInOutCubic = (t: number) => (t < 0.5 ? 4 * t * t * t : 1 - (-2 * t + 2
  *   zoome à la molette et se rapproche quand un obstacle s'interpose.
  * - Devant un poste : elle quitte l'avatar et vient se placer face à l'écran,
  *   cadré à gauche de la fiche du poste.
+ * - Pendant la présentation du scénario : vue d'ensemble, puis survol des postes du
+ *   parcours dans l'ordre, avant de revenir derrière l'avatar.
  */
 export function CameraRig() {
   const camera = useThree((s) => s.camera) as PerspectiveCamera
@@ -43,7 +50,7 @@ export function CameraRig() {
     distance: 4,
   })
   const follow = useRef({ distance: 4, initialized: false })
-  const rig = useRef({ mode: 'follow' as Mode, t: 0 })
+  const rig = useRef({ mode: 'follow' as Mode, t: 0, duration: TRANSITION, shot: '', hold: 0 })
   const probe = useMemo(() => new rapier.Ball(PROBE_RADIUS), [rapier])
   const tmp = useMemo(
     () => ({
@@ -57,6 +64,10 @@ export function CameraRig() {
       fromPos: new Vector3(),
       fromQuat: new Quaternion(),
       matrix: new Matrix4(),
+      tourPos: new Vector3(),
+      tourQuat: new Quaternion(),
+      tourTarget: new Vector3(),
+      tourFrom: new Vector3(),
     }),
     [],
   )
@@ -135,6 +146,10 @@ export function CameraRig() {
       fromPos,
       fromQuat,
       matrix,
+      tourPos,
+      tourQuat,
+      tourTarget,
+      tourFrom,
     } = tmp
 
     // --- Pose « derrière l'épaule » (calculée en permanence) --------------------
@@ -191,16 +206,57 @@ export function CameraRig() {
       screenQuat.setFromRotationMatrix(matrix.lookAt(screenPos, look, camera.up))
     }
 
+    // --- Plan de la présentation ------------------------------------------------
+    let shotKey = ''
+    if (store.tour !== null) {
+      const station = getVisit(store.visit).pathStations[store.tour]
+      const stationAnchor = station && floorPlan.stations.find((s) => s.number === station.desk)
+      const shot = stationAnchor ? computeTourShot(stationAnchor) : OVERVIEW_SHOT
+      shotKey = stationAnchor ? `poste-${stationAnchor.number}` : 'ensemble'
+      tourTarget.set(...shot.target)
+      tourPos.set(...shot.position)
+      // Un mur ou une cloison entre le poste et la caméra : on se rapproche. Le test se
+      // fait à hauteur de caméra, au-dessus des bureaux, des chaises et des personnes assises.
+      tourFrom.set(tourTarget.x, tourPos.y, tourTarget.z)
+      dir.subVectors(tourPos, tourFrom)
+      const span = dir.length()
+      dir.divideScalar(span)
+      const blocked =
+        stationAnchor &&
+        world.castShape(
+          tourFrom,
+          { x: 0, y: 0, z: 0, w: 1 },
+          dir,
+          probe,
+          0,
+          span,
+          true,
+          rapier.QueryFilterFlags.EXCLUDE_KINEMATIC,
+        )
+      if (blocked)
+        tourPos.copy(tourFrom).addScaledVector(dir, Math.max(0.6, blocked.time_of_impact - 0.1))
+      tourQuat.setFromRotationMatrix(matrix.lookAt(tourPos, tourTarget, camera.up))
+    }
+
     // --- Changements de mode ----------------------------------------------------
     const r = rig.current
-    const start = (mode: Mode) => {
+    const start = (mode: Mode, duration = TRANSITION) => {
       r.mode = mode
       r.t = 0
+      r.duration = duration
       fromPos.copy(camera.position)
       fromQuat.copy(camera.quaternion)
     }
-    if (anchor && (r.mode === 'follow' || r.mode === 'toFollow')) start('toScreen')
-    if (!anchor && (r.mode === 'screen' || r.mode === 'toScreen')) start('toFollow')
+    const touring = r.mode === 'tour' || r.mode === 'toTour'
+    if (shotKey && (!touring || shotKey !== r.shot)) {
+      start('toTour', TOUR_FLIGHT)
+      r.shot = shotKey
+      r.hold = 0
+    } else if (!shotKey && touring) {
+      start('toFollow', TOUR_FLIGHT)
+      r.shot = ''
+    } else if (anchor && (r.mode === 'follow' || r.mode === 'toFollow')) start('toScreen')
+    else if (!anchor && (r.mode === 'screen' || r.mode === 'toScreen')) start('toFollow')
 
     // --- Application ------------------------------------------------------------
     if (r.mode === 'follow') {
@@ -210,13 +266,24 @@ export function CameraRig() {
     } else if (r.mode === 'screen') {
       camera.position.copy(screenPos)
       camera.quaternion.copy(screenQuat)
+    } else if (r.mode === 'tour') {
+      // Le plan reste vivant : la caméra avance doucement vers le poste.
+      if (!reducedMotion) r.hold = Math.min(r.hold + dt, 6)
+      dir.subVectors(tourTarget, tourPos).normalize()
+      camera.position.copy(tourPos).addScaledVector(dir, r.hold * TOUR_DRIFT)
+      camera.quaternion.copy(tourQuat)
     } else {
-      r.t = reducedMotion ? 1 : Math.min(1, r.t + dt / TRANSITION)
+      r.t = reducedMotion ? 1 : Math.min(1, r.t + dt / r.duration)
       const e = easeInOutCubic(r.t)
-      const toScreen = r.mode === 'toScreen'
-      camera.position.lerpVectors(fromPos, toScreen ? screenPos : target, e)
-      camera.quaternion.slerpQuaternions(fromQuat, toScreen ? screenQuat : followQuat, e)
-      if (r.t >= 1) r.mode = toScreen ? 'screen' : 'follow'
+      const [toPos, toQuat, next] =
+        r.mode === 'toScreen'
+          ? ([screenPos, screenQuat, 'screen'] as const)
+          : r.mode === 'toTour'
+            ? ([tourPos, tourQuat, 'tour'] as const)
+            : ([target, followQuat, 'follow'] as const)
+      camera.position.lerpVectors(fromPos, toPos, e)
+      camera.quaternion.slerpQuaternions(fromQuat, toQuat, e)
+      if (r.t >= 1) r.mode = next
     }
     c.initialized = true
     runtime.cameraPosition.copy(camera.position)

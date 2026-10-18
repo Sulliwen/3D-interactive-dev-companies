@@ -1,0 +1,172 @@
+{
+  "role": "ux-research",
+  "order": 3,
+  "featureStep": "On comprend comment les familles gèrent leur santé, et on teste un prototype",
+  "tagline": "Je vais voir les parents chez eux, au moment où ils prennent un rendez-vous pour leur enfant, pour que la v2 soit pensée pour leur vraie vie.",
+  "missions": [
+    "Mener des [[entretien-utilisateur|entretiens]] avec des parents et des secrétaires médicales sur la façon dont une famille gère sa santé.",
+    "Faire tester un [[prototype]] de la v2 à des patients, avant qu'une seule ligne de code soit écrite.",
+    "Mettre à jour le [[persona]] et le [[parcours-utilisateur|parcours]] de référence de l'équipe.",
+    "Dire clairement ce que la recherche ne permet pas encore de savoir."
+  ],
+  "takeaways": [
+    "Les chiffres disaient **combien** de patients bricolent ; les entretiens expliquent **pourquoi** et **comment**.",
+    "Un prototype testé avec 8 parents a évité des semaines de développement dans la mauvaise direction.",
+    "Avec la v2, prendre rendez-vous pour un enfant passe de **3 min 40** à **1 min 10**, et 7 parents sur 8 y arrivent sans aide."
+  ],
+  "receivesFrom": {
+    "roles": ["product-manager", "data"],
+    "text": "Le cap fixé par Claire (une application pour toute la famille) et les chiffres de Julien : 31 % de rendez-vous pour un proche, 4 200 comptes en double."
+  },
+  "handsOffTo": {
+    "roles": ["design", "product-owner"],
+    "text": "Un problème compris et un prototype validé : Hugo (Design) dessine la v2 à partir des résultats, Mathilde (Product Owner) en tire les premières user stories."
+  },
+  "screen": {
+    "component": "research-board",
+    "toolName": "Carnet UX",
+    "props": {
+      "study": "Étude « la santé de toute la famille » — janvier 2027",
+      "sources": {
+        "patients": 10,
+        "secretaries": 4
+      },
+      "themes": [
+        {
+          "title": "Le parent gère tout",
+          "notes": [
+            {
+              "text": "Je gère la santé de toute la famille, mais l'application ne connaît que moi.",
+              "who": "Mère de deux enfants"
+            },
+            {
+              "text": "Je prends aussi les rendez-vous de ma mère, elle n'a pas de smartphone.",
+              "who": "Patient, 48 ans"
+            },
+            {
+              "text": "Mon mari et moi, on ne sait jamais qui a pris quel rendez-vous.",
+              "who": "Patiente, 39 ans"
+            }
+          ]
+        },
+        {
+          "title": "Les bricolages",
+          "notes": [
+            {
+              "text": "J'écris le prénom de ma fille dans le motif de consultation.",
+              "who": "Patiente, 34 ans"
+            },
+            {
+              "text": "J'ai créé un deuxième compte avec une autre adresse mail.",
+              "who": "Père de trois enfants"
+            },
+            {
+              "text": "Le rappel SMS arrive sur mon téléphone, je ne sais plus pour qui c'est.",
+              "who": "Patiente, 41 ans"
+            }
+          ]
+        },
+        {
+          "title": "Côté cabinet",
+          "notes": [
+            {
+              "text": "On reçoit l'enfant sous le nom de la mère : il faut tout corriger à la main.",
+              "who": "Secrétaire médicale, pédiatrie"
+            },
+            {
+              "text": "Pour un mineur, on doit savoir qui a l'autorité parentale.",
+              "who": "Secrétaire médicale"
+            }
+          ]
+        },
+        {
+          "title": "Test du prototype v2",
+          "notes": [
+            {
+              "text": "Choisir « Léo » avant le créneau, c'est évident.",
+              "who": "Test n° 3, mère de deux enfants"
+            },
+            {
+              "text": "Je n'ai pas vu où ajouter ma mère.",
+              "who": "Test n° 6, patient, 52 ans"
+            }
+          ]
+        }
+      ],
+      "persona": {
+        "name": "Sarah",
+        "age": 34,
+        "role": "Infirmière en horaires décalés, mère de Léo (6 ans) et Jade (3 ans)",
+        "quote": "Je gère la santé de toute la famille, mais l'application ne connaît que moi.",
+        "needs": [
+          "Choisir pour qui elle prend le rendez-vous",
+          "Voir les rendez-vous de toute la famille au même endroit",
+          "Partager le suivi avec le père des enfants"
+        ],
+        "frustrations": [
+          "Changer le nom à chaque rendez-vous",
+          "Rappels SMS sans savoir pour quel enfant",
+          "Deux comptes à gérer"
+        ]
+      },
+      "journey": [
+        {
+          "step": "Jade a de la fièvre",
+          "feeling": "neutral"
+        },
+        {
+          "step": "Ouvre Pocket Santé",
+          "feeling": "good"
+        },
+        {
+          "step": "Choisit le pédiatre",
+          "feeling": "good"
+        },
+        {
+          "step": "Indique que c'est pour Jade",
+          "feeling": "bad",
+          "pain": "Aucun champ prévu : elle bricole le motif"
+        },
+        {
+          "step": "Reçoit le rappel",
+          "feeling": "bad",
+          "pain": "Au nom de Sarah, pas de Jade"
+        }
+      ],
+      "problem": "Les parents gèrent la santé de toute la famille, mais Pocket Santé ne connaît qu'une personne par compte. Ils bricolent, se trompent, et les cabinets corrigent à la main.",
+      "journeyTitle": "Parcours de Sarah pour prendre rendez-vous pour Jade"
+    },
+    "annotations": [
+      {
+        "id": "sources",
+        "zone": "sources",
+        "title": "Peu de personnes, beaucoup d'enseignements",
+        "text": "Samir a mené **14 entretiens** (10 parents, 4 secrétaires médicales) puis fait tester un [[prototype]] à 8 parents. C'est peu, mais suffisant pour comprendre les comportements. Les chiffres de Julien, eux, disent combien de familles sont concernées."
+      },
+      {
+        "id": "affinity",
+        "zone": "affinity",
+        "title": "Les bricolages des parents",
+        "text": "Sur la [[carte-affinites|carte d'affinités]], les citations regroupées montrent que les parents ont déjà inventé leurs solutions : un prénom dans le motif, un second compte. Une bonne v2 part de ces bricolages pour les rendre inutiles."
+      },
+      {
+        "id": "persona",
+        "zone": "persona",
+        "title": "Sarah, deux ans plus tard",
+        "text": "C'est la même [[persona]] que lors de la fonctionnalité d'annulation : l'équipe la connaît bien. Samir l'a complétée avec ses deux enfants et sa mère. Garder la même personne imaginaire aide toute l'équipe à parler du même patient."
+      },
+      {
+        "id": "journey",
+        "zone": "journey",
+        "title": "Là où ça coince",
+        "text": "Le [[parcours-utilisateur|parcours]] montre deux moments difficiles : indiquer pour qui est le rendez-vous, puis recevoir un rappel au mauvais nom. La v2 commence par là : choisir le profil **avant** de choisir le créneau."
+      },
+      {
+        "id": "problem",
+        "zone": "problem",
+        "title": "Le problème, en une phrase",
+        "text": "Cette phrase sera citée en tête de toutes les épopées de la v2. Elle ne parle pas de technique : elle décrit ce que vivent les familles. C'est à Hugo (Design) et à Mathilde (Product Owner) de proposer la solution."
+      }
+    ]
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "id": "nouveau-produit",
+  "order": 3,
+  "kind": "Nouveau produit",
+  "title": "Lancer un nouveau produit : de l'idée au premier client",
+  "summary": "Atelier Lumen explore une nouvelle idée : une application pour les infirmières libérales. Avant de coder, l'équipe vérifie que le problème existe, puis construit une première version, la confie à 20 infirmières et attend ses premiers clients.",
+  "workItem": {
+    "label": "Tournée, le nouveau produit, ici",
+    "title": "Savoir si « Tournée », une application pour les infirmières libérales qui soignent à domicile, mérite de devenir un vrai produit, avec un budget de trois mois.",
+    "project": "tournee"
+  },
+  "intro": "Nous sommes le jeudi 10 février 2028. Depuis l'été, Atelier Lumen explore une idée née pendant les entretiens de Pocket Santé : aider les infirmières libérales à organiser leurs tournées. Chaque poste vous montre le moment où il a fait avancer Tournée, de la première conversation au premier client payant.",
+  "finale": {
+    "lead": "De l'idée au premier client, il a fallu huit mois, treize métiers et beaucoup de questions avant la première ligne de code. La plupart des idées s'arrêtent au comité de l'étape 3, et c'est normal. Tournée a passé ce cap ; le comité du 14 mars dira si elle devient un vrai produit.",
+    "outcomesTitle": "Où en est Tournée après un mois de pilote",
+    "outcomes": [
+      {
+        "label": "Entretiens de découverte",
+        "before": "0",
+        "after": "15 (et 3 tournées accompagnées)"
+      },
+      { "label": "Hypothèses risquées tranchées", "before": "0 / 4", "after": "4 / 4" },
+      {
+        "label": "Infirmières pilotes actives chaque semaine",
+        "before": "0",
+        "after": "9 sur 20"
+      },
+      { "label": "Cabinets abonnés payants", "before": "0", "after": "3" }
+    ]
+  },
+  "bystanders": [
+    {
+      "role": "support",
+      "note": "Lucie continue de répondre aux patients de **Pocket Santé**. Tournée n'a pas encore de vrais clients : pendant le [[pilote]], les 20 infirmières écrivent directement à Samir et à Inès. Le support viendra quand le produit sera lancé pour de bon.",
+      "screenFrom": "retours-utilisateurs"
+    }
+  ]
+}

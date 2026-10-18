@@ -47,3 +47,32 @@ export function computeScreenPose(anchor: StationAnchor, fit: ViewportFit): Scre
     direction: [-nx, 0, -nz],
   }
 }
+
+/** Plan de la présentation : d'où regarde la caméra, et quel point elle vise. */
+export interface TourShot {
+  position: Vec3
+  target: Vec3
+}
+
+/** Ouverture de la présentation : vue d'ensemble du plateau depuis l'accueil. */
+export const OVERVIEW_SHOT: TourShot = { position: [9.6, 2.5, 8.6], target: [-3, 0.6, -3] }
+
+/**
+ * Plan d'un poste pendant la présentation : en hauteur, de trois quarts derrière la
+ * personne assise, pour voir à la fois la personne et son écran.
+ */
+export function computeTourShot(anchor: StationAnchor): TourShot {
+  const [w] = anchor.screenSize
+  const r = anchor.screenRotationY
+  const nx = Math.sin(r)
+  const nz = Math.cos(r)
+  const rightX = Math.cos(r)
+  const rightZ = -Math.sin(r)
+  const [cx, cy, cz] = anchor.screenPosition
+  const back = 1.7 + w * 0.9
+  const side = 0.8 + w * 0.3
+  return {
+    position: [cx + nx * back + rightX * side, cy + 0.95, cz + nz * back + rightZ * side],
+    target: [cx + nx * 0.35, cy - 0.15, cz + nz * 0.35],
+  }
+}

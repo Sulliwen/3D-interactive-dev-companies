@@ -1,0 +1,37 @@
+import { describe, expect, it } from 'vitest'
+import { migrateAccount } from './migrateAccountsToHouseholds'
+import { givenV1Account, householdOf } from '../testing/fixtures'
+
+describe('migrateAccount', () => {
+  it('transforme un compte v1 en foyer avec un profil principal', async () => {
+    const account = await givenV1Account({ name: 'Sarah L.' })
+    await migrateAccount(account, { dryRun: false })
+    expect((await householdOf(account)).profiles).toHaveLength(1)
+  })
+
+  it("rattache le compte en double d'un enfant au foyer du parent", async () => {
+    const sarah = await givenV1Account({ name: 'Sarah L.', phone: '06 00 00 00 01' })
+    const leo = await givenV1Account({ name: 'Léo L.', phone: '06 00 00 00 01' })
+    await migrateAccount(sarah, { dryRun: false })
+    await migrateAccount(leo, { dryRun: false })
+    expect((await householdOf(sarah)).profiles.map((p) => p.firstName)).toEqual(['Sarah', 'Léo'])
+  })
+
+  it('peut être relancé sans rien dupliquer', async () => {
+    const account = await givenV1Account({ name: 'Karim B.' })
+    await migrateAccount(account, { dryRun: false })
+    expect(await migrateAccount(account, { dryRun: false })).toBe('already-migrated')
+  })
+
+  it("garde l'heure exacte des rendez-vous (BUG-131)", async () => {
+    const account = await givenV1Account({ appointmentAt: '2027-05-03 10:30' })
+    await migrateAccount(account, { dryRun: false })
+    expect((await householdOf(account)).appointments[0].localTime).toBe('10:30')
+  })
+
+  it("n'écrit rien en mode essai à blanc", async () => {
+    const account = await givenV1Account({ name: 'Inès T.' })
+    await migrateAccount(account, { dryRun: true })
+    expect(await householdOf(account)).toBeNull()
+  })
+})

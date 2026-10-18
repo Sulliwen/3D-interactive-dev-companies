@@ -1,0 +1,170 @@
+{
+  "role": "frontend",
+  "order": 4,
+  "featureStep": "Le premier recruté construit l'appli mobile et consolide le code",
+  "tagline": "Je suis le premier développeur recruté : je construis l'application mobile, et je rembourse les premiers raccourcis avant qu'ils ne coûtent cher.",
+  "missions": [
+    "Construire l'application mobile (iPhone et Android), à partir de la version web d'Awa.",
+    "Écrire les tout premiers [[test-automatise|tests automatisés]] du projet.",
+    "Repérer dans le code « fait vite » ce qui risque de casser, et le réparer avant le lancement public.",
+    "Relire le code d'Awa, et faire relire le mien (le travail de Marc, plus tard)."
+  ],
+  "takeaways": [
+    "Le premier recruté découvre un code écrit vite : son rôle n'est pas de tout réécrire, mais de **consolider** ce qui risque de casser.",
+    "Les premiers [[test-automatise|tests automatisés]] arrivent avec la première personne qui en a besoin : à deux, on ne peut plus tout vérifier de tête.",
+    "Une heure enregistrée sans fuseau horaire, c'est un rappel envoyé trop tôt au passage à l'heure d'été. Ce choix de 2024 compte encore en 2027, dans la migration de la v2."
+  ],
+  "receivesFrom": {
+    "roles": ["backend"],
+    "text": "La version web d'Awa, en bêta depuis le 6 novembre 2023 avec 3 cabinets, et sa liste de [[raccourci-assume|raccourcis assumés]]. Le n° 2 (aucun test automatique) est pour lui."
+  },
+  "handsOffTo": {
+    "roles": ["support"],
+    "text": "L'application mobile, publiée sur les magasins d'applications ce jeudi 4 avril 2024. Lucie va la présenter aux cabinets et répondre à leurs questions."
+  },
+  "screen": {
+    "component": "pull-request",
+    "toolName": "Lumen Git",
+    "props": {
+      "number": 41,
+      "title": "Heures des rendez-vous en temps universel + premiers tests automatiques",
+      "authors": ["Thomas Petit"],
+      "branch": "fix/heures-utc",
+      "base": "main",
+      "commits": 5,
+      "description": "Avant le passage à l'heure d'été (dimanche 31 mars), les heures des rendez-vous sont enregistrées en temps universel (UTC) au lieu d'un texte « 10:30 » sans fuseau : sinon, les rappels partiraient une heure trop tôt. La fonction qui affiche un créneau existait en 3 copies (web, mobile, e-mails) : remplacée par une seule, formatSlot. Et les 23 premiers tests automatiques du projet.",
+      "changedFiles": [
+        { "path": "src/slots.ts", "additions": 18, "deletions": 9 },
+        { "path": "src/formatSlot.ts", "additions": 21, "deletions": 0 },
+        { "path": "src/formatSlot.test.ts", "additions": 64, "deletions": 0 },
+        { "path": "web/agenda.js", "additions": 2, "deletions": 14 },
+        { "path": "app/screens/BookSlot.tsx", "additions": 3, "deletions": 15 }
+      ],
+      "diffs": [
+        {
+          "path": "src/slots.ts",
+          "hunk": "enregistrer l'heure",
+          "lines": [
+            {
+              "t": " ",
+              "n": 12,
+              "text": "export async function addSlot(practitionerId: string, day: string, time: string) {"
+            },
+            {
+              "t": "-",
+              "n": 13,
+              "text": "  // On garde l'heure telle que saisie par le cabinet, c'est plus simple"
+            },
+            {
+              "t": "-",
+              "n": 14,
+              "text": "  return db.slots.insert({ practitionerId, day, time }) // ex. '10:30'"
+            },
+            {
+              "t": "+",
+              "n": 13,
+              "text": "  // Heure de Paris saisie par le cabinet → instant universel (UTC) en base"
+            },
+            {
+              "t": "+",
+              "n": 14,
+              "text": "  const startsAt = fromZonedTime(`${day}T${time}`, 'Europe/Paris')"
+            },
+            { "t": "+", "n": 15, "text": "  return db.slots.insert({ practitionerId, startsAt })" },
+            { "t": " ", "n": 16, "text": "}" }
+          ],
+          "inlineComment": {
+            "after": 5,
+            "resolved": true,
+            "thread": [
+              {
+                "author": "Awa Diallo",
+                "when": "mar. 26 mars · 18:05",
+                "text": "Bien vu, c'était mon raccourci « c'est plus simple » d'août… Et les 640 créneaux déjà en base ?"
+              },
+              {
+                "author": "Thomas Petit",
+                "when": "mar. 26 mars · 18:40",
+                "text": "Un script les convertit depuis l'heure de Paris, une seule fois. Je l'ai essayé sur une copie de la base : 640 créneaux, 0 écart."
+              }
+            ]
+          }
+        },
+        {
+          "path": "src/formatSlot.test.ts",
+          "hunk": "le cas qui aurait cassé",
+          "lines": [
+            {
+              "t": "+",
+              "n": 31,
+              "text": "it('garde 10:30 à Paris après le passage à l’heure d’été', () => {"
+            },
+            {
+              "t": "+",
+              "n": 32,
+              "text": "  const slot = { startsAt: new Date('2024-04-02T08:30:00Z') }"
+            },
+            {
+              "t": "+",
+              "n": 33,
+              "text": "  expect(formatSlot(slot)).toBe('mardi 2 avril à 10:30')"
+            },
+            { "t": "+", "n": 34, "text": "})" }
+          ]
+        }
+      ],
+      "timeline": [
+        {
+          "author": "Thomas Petit",
+          "when": "mar. 26 mars · 17:20",
+          "text": "J'ai trouvé ça en écrivant le premier test : un rendez-vous du 2 avril, saisi en mars, s'affichait bien, mais le rappel partait à 9:30 au lieu de 10:30. Personne ne l'aurait vu avant dimanche."
+        },
+        {
+          "author": "Awa Diallo",
+          "when": "mer. 27 mars · 09:10",
+          "text": "Merci. Je raye le raccourci n° 2 de RACCOURCIS.md : on a enfin des tests. Prochaine étape : les lancer à chaque modification."
+        },
+        {
+          "author": "Claire Dubois",
+          "when": "mer. 27 mars · 09:32",
+          "text": "Je n'ai pas tout compris au code, mais j'ai compris « rappels une heure trop tôt pour les 3 cabinets ». Merci d'avoir vu ça avant le lancement !"
+        }
+      ],
+      "checks": [
+        { "label": "Tests automatiques", "detail": "23 réussis · les premiers du projet" },
+        {
+          "label": "Conversion des créneaux (copie de la base)",
+          "detail": "640 créneaux · 0 écart"
+        }
+      ],
+      "reviewers": [{ "name": "Awa Diallo", "state": "approved" }],
+      "mergedMessage": "Fusionnée le jeudi 28 mars 2024 · déployée par Awa avec ./deploy.sh"
+    },
+    "annotations": [
+      {
+        "id": "description",
+        "zone": "description",
+        "title": "Consolider, pas tout réécrire",
+        "text": "Thomas aurait pu dire « ce code est mal fait, je recommence tout ». Il fait l'inverse : il repère ce qui risque de casser bientôt (les heures, avant l'heure d'été) et ce qui est copié en trois endroits, et il le répare. Le reste attendra."
+      },
+      {
+        "id": "inline-comment",
+        "zone": "inline-comment",
+        "title": "Le piège de l'heure d'été",
+        "text": "Le code d'origine gardait « 10:30 » en texte, sans fuseau. Thomas enregistre désormais l'instant exact en temps universel, et ne le convertit en heure de Paris qu'à l'affichage. En 2027, c'est justement parce que la v1 stocke ses heures en UTC que la migration de la v2 aura un bug de [[fuseau-horaire|fuseau horaire]]."
+      },
+      {
+        "id": "checks",
+        "zone": "checks",
+        "title": "Les 23 premiers tests",
+        "text": "Jusqu'ici, chacun vérifiait son travail à la main. Thomas écrit les premiers [[test-automatise|tests automatisés]] du projet. En novembre 2026, il y en aura 412, et Inès (QA) en surveillera des centaines d'autres."
+      },
+      {
+        "id": "approval",
+        "zone": "approval",
+        "title": "Une relecture, même à deux",
+        "text": "Pas encore de relecteur dédié (Marc arrivera en juin 2024) : Awa relit le code de Thomas, Thomas relit celui d'Awa. C'est déjà une [[revue-de-code|revue de code]], la première habitude d'équipe."
+      }
+    ]
+  }
+}

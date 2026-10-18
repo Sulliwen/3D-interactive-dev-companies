@@ -4,20 +4,25 @@ import { useEscape } from './escapeStack'
 /**
  * Fenêtre modale accessible : focus placé dedans à l'ouverture et rendu à
  * l'élément d'origine à la fermeture, Tab qui reste à l'intérieur, Échap pour fermer.
+ * Sans `onClose`, elle ne se ferme pas (menu de lancement sans visite choisie).
+ * `footer` reste visible en bas, hors de la zone qui défile : les boutons de validation
+ * restent accessibles même sur un écran peu haut.
  */
 export function Dialog({
   title,
   onClose,
   className,
+  footer,
   children,
 }: {
   title: string
-  onClose: () => void
+  onClose?: () => void
   className?: string
+  footer?: ReactNode
   children: ReactNode
 }) {
   const box = useRef<HTMLDivElement>(null)
-  useEscape(onClose)
+  useEscape(() => onClose?.(), onClose !== undefined)
 
   useEffect(() => {
     const previous = document.activeElement as HTMLElement | null
@@ -49,7 +54,10 @@ export function Dialog({
   }
 
   return (
-    <div className="dialog-backdrop" onMouseDown={(e) => e.target === e.currentTarget && onClose()}>
+    <div
+      className="dialog-backdrop"
+      onMouseDown={(e) => e.target === e.currentTarget && onClose?.()}
+    >
       <div
         ref={box}
         className={`dialog ${className ?? ''}`}
@@ -60,11 +68,14 @@ export function Dialog({
       >
         <div className="dialog__head">
           <h2>{title}</h2>
-          <button type="button" className="button button--ghost" onClick={onClose}>
-            Fermer
-          </button>
+          {onClose && (
+            <button type="button" className="button button--ghost" onClick={onClose}>
+              Fermer
+            </button>
+          )}
         </div>
         <div className="dialog__body">{children}</div>
+        {footer && <div className="dialog__foot">{footer}</div>}
       </div>
     </div>
   )

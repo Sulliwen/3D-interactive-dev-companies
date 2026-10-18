@@ -1,0 +1,168 @@
+{
+  "role": "product-manager",
+  "order": 1,
+  "featureStep": "On décide de faire une v2, et pourquoi maintenant",
+  "tagline": "Je décide quand une application a besoin d'une nouvelle version, et je m'assure qu'on ne sacrifie pas les patients d'aujourd'hui pour ceux de demain.",
+  "missions": [
+    "Repérer, dans les chiffres et les retours, les signes qu'une simple amélioration ne suffit plus : l'application doit changer de fond en comble.",
+    "Défendre la [[version-majeure|v2]] devant la direction : pourquoi maintenant, ce qu'elle coûte, ce qu'elle rapporte, et ce qu'on arrête pour la faire.",
+    "Fixer des objectifs mesurables, sous forme d'[[okr|OKR]], qui protègent aussi la v1 encore utilisée par tous les patients.",
+    "Tenir une [[feuille-de-route|feuille de route]] honnête, avec des étapes (bêta privée, bêta ouverte, bascule) plutôt qu'une seule grande date."
+  ],
+  "takeaways": [
+    "Une v2 se décide quand le produit doit changer **de nature** (ici : passer d'une personne à toute la famille), pas pour le plaisir de tout refaire.",
+    "Pendant que la v2 se construit, la v1 continue de servir 120 000 patients : on lui réserve **30 % de l'équipe**.",
+    "La sortie se fait par étapes : bêta privée, bêta ouverte, puis bascule générale. Chaque étape permet d'apprendre et de corriger."
+  ],
+  "receivesFrom": {
+    "roles": ["data", "code-review"],
+    "text": "Des signaux accumulés depuis un an : de plus en plus de rendez-vous pris pour un proche (analyse de Julien, poste Data), et un code v1 de plus en plus difficile à faire évoluer ([[dette-technique|dette technique]] signalée par Marc)."
+  },
+  "handsOffTo": {
+    "roles": ["data", "ux-research", "code-review"],
+    "text": "Une décision et un cap : Julien vérifie ce qu'il faut garder de la v1, Samir étudie l'usage familial, et Marc propose l'architecture de la v2."
+  },
+  "screen": {
+    "component": "roadmap",
+    "toolName": "Lumen Roadmap",
+    "props": {
+      "view": "Feuille de route 2027 — Pocket Santé 2",
+      "okr": {
+        "objective": "Pocket Santé devient l'application de santé de toute la famille",
+        "keyResults": [
+          "2 100 comptes en bêta privée fin mai, satisfaction ≥ 4,3 / 5",
+          "Aucun compte perdu à la migration (répétée 3 fois avant la bêta)",
+          "Aucun incident majeur sur la v1 pendant la construction"
+        ]
+      },
+      "months": ["janv.", "févr.", "mars", "avr.", "mai", "juin", "juil.", "août"],
+      "lanes": [
+        {
+          "project": "pocket-sante",
+          "name": "Pocket Santé",
+          "items": [
+            {
+              "title": "Cadrage v2",
+              "start": 0,
+              "end": 0
+            },
+            {
+              "title": "Construction v2 (+ v1 maintenue)",
+              "start": 1,
+              "end": 3
+            },
+            {
+              "title": "Bêta privée",
+              "start": 4,
+              "end": 5,
+              "highlight": true
+            },
+            {
+              "title": "Bêta ouverte",
+              "start": 6,
+              "end": 7
+            }
+          ]
+        },
+        {
+          "project": "facturo",
+          "name": "Facturo",
+          "items": [
+            {
+              "title": "Export comptable",
+              "start": 0,
+              "end": 1
+            },
+            {
+              "title": "Application mobile",
+              "start": 3,
+              "end": 6
+            }
+          ]
+        },
+        {
+          "project": "mutuelle",
+          "name": "Mutuelle Horizon",
+          "items": [
+            {
+              "title": "Maintenance du site",
+              "start": 0,
+              "end": 7
+            }
+          ]
+        }
+      ],
+      "matrix": [
+        {
+          "label": "v2 progressive",
+          "impact": 0.88,
+          "effort": 0.7,
+          "highlight": true,
+          "note": "reconstruire à côté de la v1, morceau par morceau, avec une bêta. Gros effort, mais le risque reste maîtrisé. Retenue."
+        },
+        {
+          "label": "Tout réécrire d'un coup",
+          "impact": 0.8,
+          "effort": 0.97,
+          "note": "des mois sans rien livrer, puis une bascule de tous les patients en une nuit. Trop risqué."
+        },
+        {
+          "label": "Profils dans la v1",
+          "impact": 0.52,
+          "effort": 0.62,
+          "note": "ajouter des profils à l'ancienne application : le modèle « un compte = une personne » est partout dans le code. Coûteux pour un résultat bancal."
+        },
+        {
+          "label": "Paiement en ligne",
+          "impact": 0.6,
+          "effort": 0.75,
+          "note": "reporté : il sera construit directement dans la v2, pour ne pas le faire deux fois."
+        },
+        {
+          "label": "Carnet de vaccination",
+          "impact": 0.4,
+          "effort": 0.45,
+          "note": "bonne idée pour les familles, mais pas indispensable à la bêta. Après la bascule."
+        },
+        {
+          "label": "Messagerie cabinet",
+          "impact": 0.1,
+          "effort": 0.35,
+          "note": "utilisée par 1,8 % des comptes : elle ne sera pas reconstruite en v2."
+        }
+      ],
+      "why": [
+        "31 % des rendez-vous sont déjà pris pour un proche, en bricolant : la v1 ne connaît qu'une personne par compte.",
+        "Chaque évolution de la v1 coûte de plus en plus cher : mieux vaut reconstruire les fondations maintenant.",
+        "Une bêta au printemps laisse l'été pour corriger, avant la rentrée et ses rendez-vous d'enfants."
+      ],
+      "validated": "Validée en comité de direction le 12 janvier 2027"
+    },
+    "annotations": [
+      {
+        "id": "okr",
+        "zone": "okr",
+        "title": "Protéger aussi la v1",
+        "text": "Claire ne fixe pas seulement « livrer la v2 ». Ses trois résultats clés mesurent la bêta, la migration **et** la santé de la v1 : aucun incident majeur pendant la construction. C'est un [[okr|OKR]] qui rappelle que les patients d'aujourd'hui comptent autant que ceux de demain."
+      },
+      {
+        "id": "matrix",
+        "zone": "matrix",
+        "title": "Trois façons de faire une v2",
+        "text": "La [[matrice-impact-effort|matrice]] compare trois chemins : tout réécrire d'un coup, ajouter des profils à la v1, ou reconstruire progressivement. Le troisième demande un gros effort mais limite les risques : c'est celui retenu. Survolez les points pour lire chaque justification."
+      },
+      {
+        "id": "timeline",
+        "zone": "timeline",
+        "title": "Des étapes, pas une seule grande date",
+        "text": "La [[feuille-de-route|feuille de route]] ne dit pas « v2 le 1er septembre ». Elle enchaîne cadrage, construction, [[beta|bêta]] privée puis bêta ouverte, avant la bascule de tous les patients à la rentrée. Pendant ce temps, la v1 est maintenue et les autres projets continuent."
+      },
+      {
+        "id": "why",
+        "zone": "why",
+        "title": "Pourquoi maintenant ?",
+        "text": "Claire a présenté ces trois arguments au comité de direction du **12 janvier 2027**. Le premier vient des usages réels, le deuxième de la [[dette-technique|dette technique]], le troisième du calendrier des familles. Une [[version-majeure|version majeure]] coûte cher : il faut des raisons solides."
+      }
+    ]
+  }
+}

@@ -1,0 +1,245 @@
+{
+  "role": "scrum-master",
+  "order": 7,
+  "featureStep": "La v2 avance sprint après sprint, pendant que la v1 reste entretenue",
+  "tagline": "Sur un projet de plusieurs mois, j'aide l'équipe à tenir un rythme régulier, à garder du temps pour la v1, et à ne pas s'épuiser avant la ligne d'arrivée.",
+  "missions": [
+    "Animer les rendez-vous de [[scrum]] sprint après sprint : planification, [[daily]], [[sprint-review|revue]], [[retrospective|rétrospective]].",
+    "Aider l'équipe à répartir sa capacité entre la v2 (le « build ») et la v1 (le « run », la [[maintenance]]).",
+    "Rendre visible l'avancement d'un projet long, sprint par sprint, jusqu'à la [[beta|bêta]].",
+    "Lever les blocages, et protéger l'équipe des interruptions qui ne sont pas urgentes."
+  ],
+  "takeaways": [
+    "La v2 se construit en **7 sprints** de deux semaines (30 à 36) ; chacun livre un morceau utilisable, pas seulement du code « presque fini ».",
+    "À chaque sprint, **12 points sur 40** sont réservés à la v1 : une personne est « de garde v1 » chaque semaine, à tour de rôle.",
+    "La rétrospective a changé l'organisation : sans temps réservé, les urgences de la v1 interrompaient sans cesse la v2."
+  ],
+  "receivesFrom": {
+    "roles": ["product-owner"],
+    "text": "Un [[backlog]] trié par Mathilde, avec les épopées de la v2, le périmètre de la bêta et les correctifs de la v1 qui ne peuvent pas attendre."
+  },
+  "handsOffTo": {
+    "roles": ["backend", "frontend"],
+    "text": "Des sprints planifiés avec un objectif clair et une capacité réaliste : Awa, Thomas et Yanis construisent la v2, sans oublier la v1."
+  },
+  "screen": {
+    "component": "sprint-board",
+    "toolName": "Lumen Board",
+    "props": {
+      "sprint": {
+        "name": "Sprint 36",
+        "dates": "19 → 30 avril 2027",
+        "day": "Jour 9 sur 10",
+        "goal": "Ouvrir la bêta privée aux premières familles, sans rien casser dans la v1."
+      },
+      "columns": [
+        {
+          "id": "todo",
+          "title": "À faire",
+          "cards": [
+            {
+              "id": "t-faq",
+              "title": "FAQ de la bêta pour le support",
+              "project": "pocket-sante",
+              "tag": "PS2-5",
+              "assignee": "Lucie"
+            },
+            {
+              "id": "t-vague3",
+              "title": "Préparer la vague 3 (2 100 comptes)",
+              "project": "pocket-sante",
+              "tag": "PS2-5",
+              "assignee": "Ibrahima"
+            }
+          ]
+        },
+        {
+          "id": "doing",
+          "title": "En cours",
+          "cards": [
+            {
+              "id": "PS2-5",
+              "title": "Bêta privée : premières familles invitées",
+              "project": "pocket-sante",
+              "estimate": 13,
+              "tag": "v2",
+              "highlight": true,
+              "zone": "beta-card"
+            },
+            {
+              "id": "PS-161",
+              "title": "v1 · Rappel SMS envoyé deux fois",
+              "project": "pocket-sante",
+              "estimate": 2,
+              "tag": "v1",
+              "assignee": "Marc",
+              "zone": "v1-card"
+            },
+            {
+              "id": "t-retours",
+              "title": "Bouton « Donner mon avis » dans la v2",
+              "project": "pocket-sante",
+              "tag": "PS2-5",
+              "assignee": "Yanis"
+            }
+          ]
+        },
+        {
+          "id": "review",
+          "title": "En revue",
+          "cards": [
+            {
+              "id": "t-proche",
+              "title": "« Ajouter un proche » en haut de l'écran Famille",
+              "project": "pocket-sante",
+              "tag": "PS2-1",
+              "assignee": "Thomas"
+            },
+            {
+              "id": "FA-97",
+              "title": "Export comptable mensuel",
+              "project": "facturo",
+              "estimate": 5,
+              "assignee": "Paul"
+            }
+          ]
+        },
+        {
+          "id": "done",
+          "title": "Terminé",
+          "cards": [
+            {
+              "id": "t-repet3",
+              "title": "Répétition de migration n° 3",
+              "project": "pocket-sante",
+              "tag": "PS2-3",
+              "assignee": "Inès"
+            },
+            {
+              "id": "t-bug131",
+              "title": "Correctif BUG-131 (fuseau horaire)",
+              "project": "pocket-sante",
+              "tag": "PS2-3",
+              "assignee": "Awa"
+            },
+            {
+              "id": "t-retour-v1",
+              "title": "Revenir à la v1 en un clic",
+              "project": "pocket-sante",
+              "tag": "PS2-5",
+              "assignee": "Thomas"
+            },
+            {
+              "id": "PS2-24",
+              "title": "Ajouter un parent âgé au foyer",
+              "project": "pocket-sante",
+              "estimate": 5,
+              "tag": "v2"
+            },
+            {
+              "id": "PS-158",
+              "title": "v1 · Mise à jour de sécurité",
+              "project": "pocket-sante",
+              "estimate": 2,
+              "tag": "v1"
+            },
+            {
+              "id": "MH-34",
+              "title": "Mentions légales du site",
+              "project": "mutuelle",
+              "estimate": 2
+            }
+          ]
+        }
+      ],
+      "burndown": {
+        "labels": [
+          "Déb.",
+          "L 19",
+          "M 20",
+          "M 21",
+          "J 22",
+          "V 23",
+          "L 26",
+          "M 27",
+          "M 28",
+          "J 29",
+          "V 30"
+        ],
+        "actual": [40, 40, 37, 33, 30, 27, 23, 18, 12],
+        "total": 40,
+        "todayIndex": 9
+      },
+      "daily": {
+        "when": "Jeudi 29 avril · 9 h 30, devant le mur Scrum",
+        "entries": [
+          {
+            "person": "Ibrahima",
+            "yesterday": "170 comptes en bêta depuis mardi, aucune erreur.",
+            "today": "ouvrir la bêta aux 850 premières familles invitées."
+          },
+          {
+            "person": "Awa",
+            "yesterday": "répétition de migration n° 3, avec le correctif du BUG-131 : 0 compte perdu.",
+            "today": "aider Ibrahima à vérifier les comptes de la vague 2."
+          },
+          {
+            "person": "Marc",
+            "yesterday": "de garde v1 : enquête sur les rappels SMS en double.",
+            "today": "corriger PS-161 sur la v1.",
+            "blocker": "Le correctif v1 demande 2 points de plus. Fatou propose de les prendre sur la réserve v1."
+          }
+        ]
+      },
+      "retro": {
+        "sprint": "sprint 35",
+        "good": [
+          "Répétition de migration n° 3 : aucun compte perdu.",
+          "Démo de la v2 appréciée par deux secrétaires médicales."
+        ],
+        "improve": ["Deux urgences de la v1 ont interrompu toute l'équipe en plein sprint."],
+        "actions": [
+          "Garder 12 points par sprint pour la v1, avec une personne « de garde v1 » chaque semaine, à tour de rôle (toute l'équipe)."
+        ]
+      }
+    },
+    "annotations": [
+      {
+        "id": "goal",
+        "zone": "goal",
+        "title": "Un objectif à deux faces",
+        "text": "L'objectif du sprint 36 parle de la v2 (ouvrir la [[beta|bêta]]) **et** de la v1 (ne rien casser). Pour une [[version-majeure|version majeure]], c'est le vrai défi : construire du neuf sans abîmer ce que 120 000 patients utilisent tous les jours."
+      },
+      {
+        "id": "beta-card",
+        "zone": "beta-card",
+        "title": "Le dernier sprint avant la bêta",
+        "text": "La v2 a été construite en sept sprints, du 30 au 36. Chacun a livré un morceau qui marche : les profils, puis le rendez-vous pour un enfant, puis la migration. Aujourd'hui, la carte « Bêta privée » est en cours : les premières familles reçoivent l'application."
+      },
+      {
+        "id": "v1-card",
+        "zone": "v1-card",
+        "title": "La v1 a toujours sa place",
+        "text": "Sur le même tableau, une carte « v1 » : des rappels SMS envoyés en double à 300 patients. C'est de la [[maintenance]] : elle ne peut pas attendre septembre. Cette semaine, Marc est « de garde v1 » : il s'en occupe pendant que les autres avancent sur la v2."
+      },
+      {
+        "id": "burndown",
+        "zone": "burndown",
+        "title": "Le rythme du sprint",
+        "text": "Le [[burndown]] montre qu'il reste 12 points sur 40 à deux jours de la fin du sprint, un peu au-dessus de la ligne idéale. Sur un projet long, ce graphique se regarde aussi sprint après sprint : l'équipe livre régulièrement environ 40 points, sans à-coups."
+      },
+      {
+        "id": "daily",
+        "zone": "daily",
+        "title": "Un imprévu sur la v1",
+        "text": "Au [[daily]] de ce matin, Marc annonce que le correctif de la v1 demande un peu plus de temps. Fatou ne réorganise pas tout : elle prend sur la réserve prévue pour la v1. C'est à ça que sert la capacité réservée : absorber les imprévus sans arrêter la v2."
+      },
+      {
+        "id": "retro",
+        "zone": "retro",
+        "title": "Une règle née d'une rétrospective",
+        "text": "Au sprint 35, l'équipe s'est plainte d'être sans cesse interrompue par des urgences de la v1. La [[retrospective|rétrospective]] a produit une règle simple : 12 points réservés à la v1, et une personne de garde chaque semaine. Le reste de l'équipe peut se concentrer."
+      }
+    ]
+  }
+}

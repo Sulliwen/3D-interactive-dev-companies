@@ -1,6 +1,10 @@
 import { z } from 'zod'
 
 export const peoplePropsSchema = z.object({
+  /** Équipe affichée (par défaut : l'équipe Pocket Santé, 7 personnes). */
+  team: z
+    .object({ name: z.string(), size: z.number().int().positive() })
+    .default({ name: 'Équipe Pocket Santé', size: 7 }),
   oneOnOne: z.object({
     with: z.string(),
     when: z.string(),

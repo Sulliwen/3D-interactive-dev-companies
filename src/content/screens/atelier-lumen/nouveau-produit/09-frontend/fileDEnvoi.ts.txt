@@ -1,0 +1,32 @@
+import { baseLocale } from '../stockage/baseLocale'
+import { api } from '../api'
+
+/**
+ * Les transmissions écrites sans réseau attendent ici, sur le téléphone,
+ * puis partent toutes seules quand le réseau revient.
+ */
+
+// @zone outbox
+// Écrire une transmission ne demande jamais le réseau : on la range dans la file.
+// Pour Karine, c'est instantané, dans une cour d'immeuble comme en pleine campagne.
+export async function ecrireTransmission(passageId: string, texte: string) {
+  await baseLocale.fileDEnvoi.ajouter({
+    passageId,
+    texte,
+    ecriteLe: new Date().toISOString(),
+    envoyee: false,
+  })
+}
+// @end
+
+// @zone sync
+// Dès que le téléphone retrouve le réseau, on envoie tout ce qui attend, dans l'ordre.
+// Si l'envoi échoue, rien n'est perdu : on réessaiera au prochain retour du réseau.
+export async function envoyerCeQuiAttend() {
+  const enAttente = await baseLocale.fileDEnvoi.nonEnvoyees()
+  if (enAttente.length === 0) return 0
+  await api.post('/transmissions', { transmissions: enAttente })
+  await baseLocale.fileDEnvoi.marquerEnvoyees(enAttente.map((t) => t.id))
+  return enAttente.length
+}
+// @end

@@ -1,0 +1,119 @@
+{
+  "role": "engineering-manager",
+  "offPath": true,
+  "featureStep": "Hors parcours : on compose l'équipe Tournée sans affaiblir Pocket Santé",
+  "tagline": "Lancer un nouveau produit, c'est aussi déplacer des personnes. Je compose l'équipe Tournée sans laisser Pocket Santé à court de monde.",
+  "missions": [
+    "Composer l'équipe Tournée avec des volontaires, en accord avec chacun et avec Claire.",
+    "Vérifier que Pocket Santé garde de quoi fonctionner, et recruter pour combler le départ d'Inès.",
+    "Accompagner Awa, Thomas et Inès dans le changement d'équipe lors des [[entretien-individuel|entretiens individuels]].",
+    "Organiser l'[[onboarding]] des personnes qui rejoignent Tournée : nouveau métier, nouvelles utilisatrices."
+  ],
+  "takeaways": [
+    "Un nouveau produit se lance avec une **petite** équipe : cinq personnes, dont deux à mi-temps.",
+    "Nadia déplace des volontaires, et protège l'équipe Pocket Santé : Chloé et Yanis restent, un·e QA est recruté·e.",
+    "Changer d'équipe, c'est presque changer de métier : il faut découvrir les infirmières comme on avait appris les patients."
+  ],
+  "receivesFrom": {
+    "roles": ["product-manager"],
+    "text": "Le feu vert du comité du 5 octobre : une équipe de cinq pour trois mois."
+  },
+  "handsOffTo": {
+    "roles": ["scrum-master", "backend", "frontend", "qa"],
+    "text": "Une équipe composée pour Fatou : Mathilde, Hugo, Awa, Thomas et Inès, qui rejoignent Tournée le 8 novembre."
+  },
+  "screen": {
+    "component": "people",
+    "toolName": "Lumen People",
+    "props": {
+      "team": { "name": "Équipe Tournée", "size": 5 },
+      "oneOnOne": {
+        "with": "Awa Diallo",
+        "when": "Jeudi 10 février · 14:00 · 30 min, toutes les deux semaines",
+        "agenda": [
+          "Trois mois après avoir quitté Pocket Santé : qu'est-ce qui te manque, qu'est-ce qui te plaît ?",
+          "Le BUG-T-14 : ce qu'on retient de la synchronisation, sans chercher de coupable",
+          "Si le comité dit oui en mars : veux-tu devenir référente technique de Tournée ?"
+        ],
+        "goals": [
+          { "label": "Poser les fondations de Tournée", "progress": 90 },
+          { "label": "Transmettre la migration v2 à Chloé", "progress": 100 },
+          { "label": "Rencontrer des infirmières sur le terrain", "progress": 40 }
+        ],
+        "kudos": {
+          "from": "Thomas",
+          "text": "Le squelette en ligne au 3e jour, c'était fou. On a pu montrer quelque chose aux infirmières dès le premier sprint."
+        }
+      },
+      "hiring": {
+        "role": "QA / testeur·se · équipe Pocket Santé",
+        "stages": [
+          { "label": "Candidatures", "count": 41 },
+          { "label": "Premier échange", "count": 11 },
+          { "label": "Exercice pratique", "count": 5 },
+          { "label": "Rencontre équipe", "count": 2 },
+          { "label": "Proposition acceptée", "count": 1 }
+        ],
+        "note": "Lancé en octobre, quand Inès a rejoint Tournée. Inès a préparé l'exercice pratique. Arrivée prévue le 6 mars."
+      },
+      "workload": {
+        "sprint": "Tournée · sprint 5 · 31 janvier → 11 février",
+        "members": [
+          { "name": "Awa", "role": "Back-end", "committed": 8, "capacity": 10 },
+          { "name": "Thomas", "role": "Front-end / mobile", "committed": 9, "capacity": 10 },
+          {
+            "name": "Inès",
+            "role": "QA · retours du pilote",
+            "committed": 9,
+            "capacity": 10,
+            "note": "Lit aussi les retours chaque jour : à surveiller"
+          },
+          { "name": "Hugo", "role": "Design · mi-temps", "committed": 4, "capacity": 5 },
+          { "name": "Mathilde", "role": "Product Owner · mi-temps", "committed": 5, "capacity": 5 }
+        ]
+      },
+      "onboarding": {
+        "title": "Rejoindre l'équipe Tournée",
+        "tasks": [
+          { "label": "Accompagner une tournée en voiture, avec Samir", "done": true },
+          { "label": "Lire la synthèse de découverte et la persona Karine", "done": true },
+          { "label": "Lire l'ADR-001 et l'accord d'équipe", "done": true },
+          { "label": "Écrire une transmission dans Tournée, en mode avion", "done": true },
+          { "label": "Assister à une démo avec les infirmières pilotes", "done": false }
+        ]
+      }
+    },
+    "annotations": [
+      {
+        "id": "workload",
+        "zone": "workload",
+        "title": "Une équipe de cinq",
+        "text": "Trois personnes à temps plein (Awa, Thomas, Inès) et deux à mi-temps (Hugo, Mathilde), qui gardent un pied dans Pocket Santé. Un nouveau produit n'a pas besoin d'une grande équipe : il a besoin d'une équipe qui apprend vite."
+      },
+      {
+        "id": "hiring",
+        "zone": "hiring",
+        "title": "Ne pas affaiblir Pocket Santé",
+        "text": "Quand Inès a rejoint Tournée, Pocket Santé a perdu sa testeuse. Nadia a lancé un recrutement dès octobre. Chloé (back-end) et Yanis (front-end) restent sur Pocket Santé : 120 000 patients comptent toujours sur l'application."
+      },
+      {
+        "id": "one-on-one",
+        "zone": "one-on-one",
+        "title": "Changer d'équipe, ça se suit",
+        "text": "Lors de cet [[entretien-individuel|entretien individuel]], Nadia demande à Awa ce que le changement lui a coûté et apporté. Elle prépare aussi la suite : si Tournée continue, Awa pourrait en devenir la référente technique."
+      },
+      {
+        "id": "goals",
+        "zone": "goals",
+        "title": "Transmettre avant de partir",
+        "text": "Avant de rejoindre Tournée, Awa a transmis la migration v2 à Chloé, arrivée en mai. Partir sans transmettre aurait laissé Pocket Santé fragile : c'est un objectif à part entière, atteint à 100 %."
+      },
+      {
+        "id": "onboarding",
+        "zone": "onboarding",
+        "title": "Découvrir un nouveau métier",
+        "text": "L'[[onboarding]] de l'équipe Tournée commence sur le terrain : une tournée en voiture avec Samir, avant même de lire le code. Pour construire pour les infirmières, il faut d'abord voir comment elles travaillent."
+      }
+    ]
+  }
+}

@@ -1,0 +1,203 @@
+{
+  "role": "support",
+  "order": 1,
+  "featureStep": "Le besoin émerge des retours des utilisateurs",
+  "takeaways": [
+    "Un message isolé est une anecdote ; **214 messages sur le même sujet**, c'est un signal que l'équipe ne peut pas ignorer.",
+    "Le support ne corrige pas le logiciel lui-même : il **écoute, classe et fait remonter** les problèmes aux bonnes personnes.",
+    "Les idées de fonctionnalités viennent souvent des utilisateurs eux-mêmes : c'est la [[boucle-de-retour|boucle de retour]]."
+  ],
+  "receivesFrom": {
+    "roles": ["monitoring"],
+    "text": "Les retours après chaque mise en ligne : le poste [[supervision]] signale ce qui change chez les utilisateurs, et de nouveaux messages arrivent. La boucle recommence."
+  },
+  "handsOffTo": {
+    "roles": ["ux-research", "data"],
+    "text": "Les messages des patients et le classement des motifs : le chercheur UX va comprendre le problème en profondeur, l'analyste data va le chiffrer."
+  },
+  "screen": {
+    "component": "ticket-desk",
+    "toolName": "Lumen Desk",
+    "props": {
+      "filters": [
+        {
+          "label": "Tous",
+          "count": 38
+        },
+        {
+          "label": "Non lus",
+          "count": 6
+        },
+        {
+          "label": "Annulation",
+          "count": 9
+        }
+      ],
+      "inbox": [
+        {
+          "id": "4521",
+          "from": "Sophie L.",
+          "subject": "Impossible d'annuler mon rendez-vous",
+          "tag": "Annulation",
+          "time": "21:47",
+          "unread": false
+        },
+        {
+          "id": "4520",
+          "from": "Marc D.",
+          "subject": "Comment annuler le RDV de ma fille ?",
+          "tag": "Annulation",
+          "time": "20:12",
+          "unread": true
+        },
+        {
+          "id": "4518",
+          "from": "Cabinet des Lilas",
+          "subject": "Encore 4 patients absents ce matin",
+          "tag": "Annulation",
+          "time": "13:05",
+          "unread": true
+        },
+        {
+          "id": "4516",
+          "from": "Julie P.",
+          "subject": "Je ne reçois pas le code de connexion",
+          "tag": "Connexion",
+          "time": "11:38",
+          "unread": false
+        },
+        {
+          "id": "4514",
+          "from": "Ahmed K.",
+          "subject": "Rappel reçu deux fois",
+          "tag": "Notifications",
+          "time": "10:02",
+          "unread": false
+        },
+        {
+          "id": "4512",
+          "from": "Hélène R.",
+          "subject": "Je voudrais annuler, le cabinet est fermé",
+          "tag": "Annulation",
+          "time": "Hier",
+          "unread": false
+        },
+        {
+          "id": "4509",
+          "from": "Paul V.",
+          "subject": "Changer mon numéro de téléphone",
+          "tag": "Compte",
+          "time": "Hier",
+          "unread": false
+        }
+      ],
+      "ticket": {
+        "id": "4521",
+        "subject": "Impossible d'annuler mon rendez-vous",
+        "messages": [
+          {
+            "author": "Sophie L.",
+            "kind": "patient",
+            "time": "Mer. 13 nov. · 21:47",
+            "text": "Bonjour, j'ai pris un rendez-vous par erreur, je ne trouve pas comment l'annuler. Le cabinet ne répond pas. Je ne veux pas bloquer la place de quelqu'un… Merci de votre aide."
+          },
+          {
+            "author": "Lucie",
+            "kind": "agent",
+            "time": "Jeu. 14 nov. · 09:12",
+            "text": "Bonjour Sophie, merci de nous avoir prévenus ! Pour l'instant, l'annulation se fait uniquement auprès du cabinet. Je viens de les contacter : votre créneau sera libéré ce matin. Belle journée, Lucie"
+          },
+          {
+            "author": "Lucie",
+            "kind": "note",
+            "time": "09:15",
+            "text": "Encore une demande d'annulation impossible (3e cette semaine pour ce cabinet). Taguée « Annulation », ajoutée au rapport du mois pour Claire et Samir."
+          }
+        ],
+        "reply": "« Annulation par téléphone » · insérée et personnalisée"
+      },
+      "customer": {
+        "name": "Sophie L.",
+        "details": [
+          {
+            "label": "Patiente depuis",
+            "value": "mars 2024"
+          },
+          {
+            "label": "Rendez-vous pris",
+            "value": "6"
+          },
+          {
+            "label": "Plateforme",
+            "value": "Application iPhone"
+          }
+        ],
+        "tags": ["Annulation", "Cabinet des Lilas"]
+      },
+      "reasons": {
+        "title": "Motifs du mois",
+        "items": [
+          {
+            "label": "Annulation",
+            "count": 214
+          },
+          {
+            "label": "Connexion",
+            "count": 131
+          },
+          {
+            "label": "Notifications",
+            "count": 88
+          },
+          {
+            "label": "Compte",
+            "count": 57
+          }
+        ],
+        "note": "« Annulation » : 1er motif de contact, 214 tickets ce mois-ci."
+      },
+      "escalation": {
+        "action": "Remonter au produit",
+        "done": "Remonté à Claire (produit) et Samir (UX) avec les 214 tickets en exemple."
+      }
+    },
+    "annotations": [
+      {
+        "id": "inbox",
+        "zone": "inbox",
+        "title": "Tous les messages au même endroit",
+        "text": "Chaque message de patient ou de cabinet devient un [[ticket]], rangé dans une boîte de réception partagée par toute l'équipe support. Personne ne se perd dans ses mails, et l'on voit d'un coup d'œil ce qui attend une réponse."
+      },
+      {
+        "id": "conversation",
+        "zone": "conversation",
+        "title": "La voix du patient",
+        "text": "Sophie ne parle pas de « fonctionnalité » : elle raconte son problème avec ses mots. C'est précieux. Lucie répond vite, avec une solution de dépannage (prévenir le cabinet), en attendant que l'application sache faire mieux."
+      },
+      {
+        "id": "note",
+        "zone": "note",
+        "title": "La note interne",
+        "text": "Cette note n'est visible que par l'équipe. Lucie y garde la mémoire du dossier : c'est la troisième demande de ce type cette semaine. Ces petites observations, mises bout à bout, font apparaître une tendance."
+      },
+      {
+        "id": "tags",
+        "zone": "tags",
+        "title": "Classer pour pouvoir compter",
+        "text": "Chaque ticket reçoit un **motif** (« Annulation », « Connexion »…). Ce geste semble anodin, mais sans lui, impossible de savoir de quoi les patients se plaignent le plus."
+      },
+      {
+        "id": "reasons",
+        "zone": "reasons",
+        "title": "214 tickets : le signal",
+        "text": "Ce mois-ci, « Annulation » est le **premier motif de contact**, avec 214 tickets. Un message isolé ne change pas les priorités d'une entreprise ; un chiffre comme celui-là, oui."
+      },
+      {
+        "id": "escalation",
+        "zone": "escalation",
+        "title": "Remonter au produit",
+        "text": "Le support ne modifie pas l'application lui-même : il fait une [[escalade]] vers l'équipe produit, chiffres et exemples à l'appui. C'est ici que démarre le voyage de la fonctionnalité « annuler un rendez-vous »."
+      }
+    ]
+  }
+}

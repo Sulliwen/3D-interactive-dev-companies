@@ -1,0 +1,74 @@
+[
+  {
+    "id": "decouverte",
+    "term": "Découverte (discovery)",
+    "definition": "La phase où l'on cherche à comprendre un problème avant de construire quoi que ce soit : entretiens, observation sur le terrain, chiffres, questionnaires. Elle se termine par une décision : le problème existe-t-il vraiment, et vaut-il la peine d'être résolu ?",
+    "analogy": "Un médecin examine et interroge avant de prescrire."
+  },
+  {
+    "id": "hypothese",
+    "term": "Hypothèse risquée",
+    "definition": "Une croyance dont dépend le succès d'un produit, mais qui n'a pas encore été vérifiée (« elles paieront 19 € par mois », « elles l'utiliseront sans réseau »). On commence par vérifier les plus risquées, avec le moyen le moins cher possible.",
+    "analogy": "Avant de construire un pont, on vérifie que le sol tient."
+  },
+  {
+    "id": "adequation-produit-marche",
+    "term": "Adéquation produit-marché",
+    "definition": "Le moment où un produit répond si bien à un vrai besoin que des clients l'utilisent régulièrement et acceptent de payer pour lui. Les jeunes produits la cherchent ; tant qu'elle n'est pas trouvée, il est risqué d'agrandir l'équipe.",
+    "analogy": "Une boulangerie qui a trouvé sa clientèle : les habitués reviennent chaque matin, sans publicité."
+  },
+  {
+    "id": "prototype-cliquable",
+    "term": "Prototype cliquable",
+    "definition": "Une suite de maquettes reliées entre elles, sur laquelle on peut cliquer comme dans une vraie application, alors qu'il n'y a aucun code derrière. On le fait tester à de futurs utilisateurs pour apprendre en quelques jours ce que coûterait des semaines de développement.",
+    "analogy": "Une maquette de cuisine en carton, pour vérifier qu'on peut ouvrir le four sans se cogner."
+  },
+  {
+    "id": "squelette-de-bout-en-bout",
+    "term": "Squelette de bout en bout",
+    "definition": "La toute première version d'un logiciel : une seule fonction, minuscule, qui traverse tout le système (téléphone, serveur, base de données, mise en ligne). Elle prouve que toutes les pièces s'emboîtent avant qu'on ajoute la moindre fonctionnalité.",
+    "analogy": "Avant de meubler une maison, on vérifie que l'eau coule du compteur jusqu'au robinet."
+  },
+  {
+    "id": "sprint-zero",
+    "term": "Sprint 0",
+    "definition": "Le tout premier sprint d'une nouvelle équipe, consacré à se préparer plutôt qu'à livrer des fonctionnalités : règles de travail communes, dépôt de code, chaîne de déploiement, squelette du logiciel.",
+    "analogy": "Installer l'atelier et ranger les outils avant de fabriquer le premier meuble."
+  },
+  {
+    "id": "convention-de-code",
+    "term": "Convention de code",
+    "definition": "Les règles qu'une équipe se donne pour écrire du code de la même façon : présentation, nommage, taille des modifications, manière de relire. Des outils (« lint », formatage automatique) les vérifient à chaque modification.",
+    "analogy": "Le guide de style d'un journal : tout le monde écrit les dates et les noms de la même manière."
+  },
+  {
+    "id": "aipd",
+    "term": "AIPD (analyse d'impact)",
+    "definition": "« Analyse d'impact relative à la protection des données » : une étude obligatoire selon le RGPD avant de traiter des données sensibles à grande échelle, comme des données de santé. On y décrit les données, les risques pour les personnes et les protections prévues.",
+    "analogy": "L'étude de sécurité exigée avant d'ouvrir un bâtiment au public."
+  },
+  {
+    "id": "pilote",
+    "term": "Pilote",
+    "definition": "Une période d'essai réel avec un petit groupe de premiers utilisateurs choisis, qui utilisent le produit dans leur travail quotidien. L'équipe observe, corrige vite et mesure si le produit tient ses promesses.",
+    "analogy": "Une ligne de bus testée quelques mois sur un seul quartier avant d'équiper toute la ville."
+  },
+  {
+    "id": "activation",
+    "term": "Activation",
+    "definition": "Le moment où un nouvel utilisateur fait pour la première fois ce qui rend le produit utile (ici : préparer sa tournée et écrire une transmission). Un produit peut avoir beaucoup d'inscrits et peu d'utilisateurs activés.",
+    "analogy": "Avoir la carte d'une salle de sport, ce n'est pas encore y aller."
+  },
+  {
+    "id": "retention",
+    "term": "Rétention",
+    "definition": "La part des utilisateurs qui continuent d'utiliser un produit, semaine après semaine. Au début, la curiosité fait monter les chiffres ; c'est la rétention, une fois la nouveauté passée, qui dit si le produit est vraiment utile.",
+    "analogy": "Les clients qui reviennent au restaurant, et pas seulement ceux du soir de l'ouverture."
+  },
+  {
+    "id": "hors-connexion",
+    "term": "Hors connexion (offline first)",
+    "definition": "Une application conçue pour fonctionner sans réseau : elle garde les données sur le téléphone, enregistre ce qu'on y fait, puis l'envoie au serveur dès que le réseau revient (on parle de synchronisation).",
+    "analogy": "Écrire une lettre dans le train et la poster en arrivant à la gare."
+  }
+]

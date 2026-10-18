@@ -32,9 +32,9 @@ export const qaConsolePropsSchema = z.object({
     statusBefore: z.string(),
     statusAfter: z.string(),
     retestLabel: z.string(),
-    /** Date affichée sur la capture du téléphone. */
-    when: z.string(),
-    caption: z.string(),
+    /** Date affichée sur la capture du téléphone Pocket Santé (sans elle : pas de capture). */
+    when: z.string().optional(),
+    caption: z.string().optional(),
   }),
 })
 

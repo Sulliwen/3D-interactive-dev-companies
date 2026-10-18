@@ -1,0 +1,164 @@
+{
+  "role": "design",
+  "order": 4,
+  "featureStep": "On teste une maquette cliquable, avant d'écrire une ligne de code",
+  "tagline": "Je fabrique en quelques jours un faux Tournée, sur lequel on peut cliquer, pour apprendre ce que des semaines de code nous auraient appris trop tard.",
+  "missions": [
+    "Dessiner un [[prototype-cliquable|prototype cliquable]] : des [[maquette|maquettes]] reliées entre elles, sans aucun code derrière.",
+    "Le faire tester à des infirmières, avec de vraies tâches (« trouvez votre prochain patient »), en observant sans aider.",
+    "Noter ce qui marche, ce qui bloque, et ce que personne n'utilise.",
+    "Mettre en ligne la page de présentation de Tournée, qui a recueilli la liste d'attente."
+  ],
+  "takeaways": [
+    "Un prototype cliquable coûte quelques jours ; la même erreur découverte après le développement aurait coûté des semaines.",
+    "Le test a **invalidé** une hypothèse : 5 infirmières sur 6 ignorent l'itinéraire automatique. Il ne sera pas construit.",
+    "Les infirmières ont réorganisé l'écran elles-mêmes : les transmissions passent avant la liste des patients."
+  ],
+  "receivesFrom": {
+    "roles": ["product-manager"],
+    "text": "Le feu vert du comité et les quatre hypothèses de Claire, dont une à vérifier en priorité : l'itinéraire automatique."
+  },
+  "handsOffTo": {
+    "roles": ["product-owner", "frontend"],
+    "text": "Un prototype corrigé après 6 tests : Mathilde en tire la carte du MVP, Thomas s'en sert comme modèle pour l'application."
+  },
+  "screen": {
+    "component": "research-board",
+    "toolName": "Carnet UX",
+    "props": {
+      "study": "Test du prototype cliquable de Tournée — 11 → 22 octobre 2027",
+      "sources": {
+        "patients": 4,
+        "secretaries": 2,
+        "labels": ["infirmières libérales", "infirmières de centre de soins"]
+      },
+      "themes": [
+        {
+          "title": "Ce qui marche",
+          "notes": [
+            {
+              "text": "Le patient suivant, je le vois tout de suite.",
+              "who": "Test n° 2, libérale, 46 ans"
+            },
+            {
+              "text": "Le point rouge sur la fiche, c'est la transmission. Évident.",
+              "who": "Test n° 5, centre de soins"
+            }
+          ]
+        },
+        {
+          "title": "Ce qui bloque",
+          "notes": [
+            {
+              "text": "Où est-ce que j'écris pour ma collègue ? Il faut trois clics.",
+              "who": "Test n° 1, libérale, 38 ans"
+            },
+            {
+              "text": "Les boutons sont trop petits avec des gants.",
+              "who": "Test n° 4, libérale, 55 ans"
+            }
+          ]
+        },
+        {
+          "title": "L'itinéraire automatique",
+          "notes": [
+            {
+              "text": "Je ne m'en servirai pas : mon ordre dépend des soins, pas des kilomètres.",
+              "who": "Test n° 3, libérale, 41 ans"
+            },
+            {
+              "text": "L'insuline de 7 h, aucun calcul ne la déplacera.",
+              "who": "Test n° 6, libérale, 49 ans"
+            }
+          ]
+        },
+        {
+          "title": "Ce qu'elles demandent",
+          "notes": [
+            {
+              "text": "Les transmissions d'abord. La liste, je la connais.",
+              "who": "Test n° 2, libérale, 46 ans"
+            },
+            {
+              "text": "Et si je n'ai pas de réseau, ça marche ?",
+              "who": "Test n° 4, libérale, 55 ans"
+            }
+          ]
+        }
+      ],
+      "persona": {
+        "name": "Karine",
+        "age": 46,
+        "role": "Infirmière libérale à Villefranche-sur-Saône, cabinet de 3, environ 30 patients par jour",
+        "quote": "Les transmissions d'abord. La liste de mes patients, je la connais par cœur.",
+        "needs": [
+          "Lire les transmissions de ses collègues en ouvrant l'application",
+          "Écrire une transmission en deux gestes, entre deux patients",
+          "Des boutons utilisables avec des gants"
+        ],
+        "frustrations": [
+          "Un calcul d'itinéraire qui ignore les horaires des soins",
+          "Trois clics pour écrire à une collègue"
+        ]
+      },
+      "journey": [
+        {
+          "step": "Ouvre le prototype",
+          "feeling": "good"
+        },
+        {
+          "step": "Trouve son prochain patient",
+          "feeling": "good"
+        },
+        {
+          "step": "Cherche où écrire une transmission",
+          "feeling": "bad",
+          "pain": "Trois clics, caché dans la fiche"
+        },
+        {
+          "step": "Voit l'itinéraire proposé",
+          "feeling": "neutral",
+          "pain": "L'ignore : 5 testeuses sur 6"
+        },
+        {
+          "step": "Coche le soin fait",
+          "feeling": "good"
+        }
+      ],
+      "problem": "Le prototype est compris sans aide (6 sur 6), mais il met en avant ce qui compte le moins : l'itinéraire. Les transmissions doivent passer en premier.",
+      "journeyTitle": "Le test : « trouvez votre prochain patient, puis écrivez à votre collègue »"
+    },
+    "annotations": [
+      {
+        "id": "sources",
+        "zone": "sources",
+        "title": "Six tests suffisent",
+        "text": "Hugo a fait tester son [[prototype-cliquable|prototype cliquable]] à **6 infirmières**, 45 minutes chacune. Après cinq ou six personnes, les mêmes difficultés reviennent : on en apprend assez pour corriger, puis on peut retester."
+      },
+      {
+        "id": "affinity",
+        "zone": "affinity",
+        "title": "Rien n'est codé",
+        "text": "Toutes ces réactions portent sur des [[maquette|maquettes]] reliées entre elles : aucun développeur n'a encore travaillé. Corriger un écran mal pensé prend ici une heure ; après le développement, ce serait une semaine."
+      },
+      {
+        "id": "journey",
+        "zone": "journey",
+        "title": "Une hypothèse tombe",
+        "text": "Claire voulait savoir si les infirmières veulent un itinéraire calculé. Réponse : **5 sur 6** l'ignorent, parce que leur ordre dépend des soins (l'insuline à heure fixe), pas des kilomètres. L'[[hypothese|hypothèse]] est invalidée : des semaines de travail économisées."
+      },
+      {
+        "id": "persona",
+        "zone": "persona",
+        "title": "Karine précise ses besoins",
+        "text": "La [[persona]] de Samir s'enrichit de ce que le test a appris : les transmissions d'abord, des boutons utilisables avec des gants, et un fonctionnement sans réseau. Ce sont des [[accessibilite|besoins d'accessibilité]] très concrets."
+      },
+      {
+        "id": "problem",
+        "zone": "problem",
+        "title": "La conclusion du test",
+        "text": "Hugo réorganise l'écran d'accueil : les transmissions en haut, la liste en dessous, l'itinéraire supprimé. Le prototype corrigé devient le modèle de l'application que Thomas construira."
+      }
+    ]
+  }
+}

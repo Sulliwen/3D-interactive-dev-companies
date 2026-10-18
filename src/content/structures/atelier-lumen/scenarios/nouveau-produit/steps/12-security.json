@@ -1,0 +1,181 @@
+{
+  "role": "security",
+  "order": 10,
+  "featureStep": "Données de santé : hébergement certifié et analyse RGPD dès le départ",
+  "tagline": "Sur un nouveau produit, la sécurité coûte peu si elle est là dès le premier jour, et très cher si on l'ajoute après le lancement.",
+  "missions": [
+    "Exiger un hébergement certifié [[hds|HDS]] avant que la moindre donnée de vraie patiente soit enregistrée.",
+    "Mener l'[[aipd|analyse d'impact]] demandée par le [[rgpd|RGPD]] : quelles données, quels risques, quelles protections.",
+    "Réduire les données au strict nécessaire, et protéger celles qui dorment sur les téléphones.",
+    "Vérifier, avec des tests, qu'une infirmière ne voit jamais les patients d'un autre cabinet."
+  ],
+  "takeaways": [
+    "Pour des données de santé, l'hébergement **HDS** et l'**analyse d'impact** ne sont pas des options : ils sont obligatoires avant le pilote.",
+    "La meilleure protection d'une donnée, c'est de ne pas la collecter : pas de numéro de sécurité sociale dans Tournée.",
+    "Avec le mode hors connexion, des données de santé dorment dans des téléphones qui peuvent se perdre : il faut les chiffrer et pouvoir les effacer à distance."
+  ],
+  "receivesFrom": {
+    "roles": ["code-review", "backend"],
+    "text": "Un dépôt avec des règles communes (Marc) et les fondations d'Awa, où le filtre par cabinet est déjà écrit."
+  },
+  "handsOffTo": {
+    "roles": ["devops", "qa"],
+    "text": "Un feu vert pour le pilote : Ibrahima peut ouvrir l'hébergement HDS aux 20 infirmières, Inès ajoute les cas de sécurité à sa recette."
+  },
+  "screen": {
+    "component": "security-review",
+    "toolName": "Lumen Secure",
+    "props": {
+      "feature": "Tournée · fondations et données de santé (avant le pilote)",
+      "reviewer": "Léa Kowalski",
+      "checklist": [
+        {
+          "zone": "hds",
+          "title": "Hébergement de données de santé",
+          "items": [
+            {
+              "label": "Hébergeur certifié HDS, en France",
+              "state": "done"
+            },
+            {
+              "label": "Contrat signé avant la première donnée réelle",
+              "state": "done",
+              "note": "28 oct. 2027"
+            },
+            {
+              "label": "Sauvegardes chiffrées dans un second centre HDS",
+              "state": "done"
+            }
+          ]
+        },
+        {
+          "zone": "aipd",
+          "title": "RGPD : analyse d'impact (AIPD)",
+          "items": [
+            {
+              "label": "Analyse d'impact rédigée et signée",
+              "state": "done",
+              "note": "29 oct. 2027"
+            },
+            {
+              "label": "Information des patients, via leur infirmière",
+              "state": "done"
+            },
+            {
+              "label": "Pas de numéro de sécurité sociale ni d'ordonnance",
+              "state": "done",
+              "note": "minimisation"
+            }
+          ]
+        },
+        {
+          "zone": "phone",
+          "title": "Données sur le téléphone",
+          "items": [
+            {
+              "label": "Base locale chiffrée",
+              "state": "done"
+            },
+            {
+              "label": "Verrouillage par code ou empreinte",
+              "state": "done"
+            },
+            {
+              "label": "Effacement à distance d'un téléphone perdu",
+              "state": "in-progress",
+              "note": "avant la fin du pilote"
+            }
+          ]
+        }
+      ],
+      "accessCheck": {
+        "title": "Une infirmière ne voit que les patients de son cabinet",
+        "source": "tournee-api/src/tournees/tourneeDuJour.ts",
+        "code": [
+          "where: {",
+          "  cabinetId: infirmiere.cabinetId,",
+          "  infirmiereId: infirmiere.id,",
+          "  jour: aujourdhui,",
+          "}"
+        ],
+        "result": "12 cas testés : aucune fiche d'un autre cabinet visible"
+      },
+      "dependencies": [
+        {
+          "name": "express",
+          "version": "5.1.0",
+          "severity": "none",
+          "note": "À jour."
+        },
+        {
+          "name": "react-native-sqlite",
+          "version": "6.0.3",
+          "severity": "none",
+          "note": "Mise à jour avant le pilote : corrige une faille moyenne de la 6.0.1."
+        },
+        {
+          "name": "pg",
+          "version": "8.13.0",
+          "severity": "none",
+          "note": "À jour."
+        }
+      ],
+      "auditLog": [
+        {
+          "time": "10/02 07:02",
+          "event": "Lecture de la tournée du jour",
+          "actor": "Infirmière n° 14 (cabinet des Tilleuls)",
+          "resource": "Tournée du 10/02",
+          "result": "ok"
+        },
+        {
+          "time": "10/02 07:41",
+          "event": "Écriture d'une transmission",
+          "actor": "Infirmière n° 14 (cabinet des Tilleuls)",
+          "resource": "Fiche patient n° 2208",
+          "result": "ok"
+        },
+        {
+          "time": "10/02 08:15",
+          "event": "Lecture d'une fiche patient",
+          "actor": "Infirmière n° 6 (autre cabinet)",
+          "resource": "Fiche patient n° 2208",
+          "result": "denied"
+        }
+      ],
+      "auditTitle": "Journal d'accès · fiches patients (extrait)"
+    },
+    "annotations": [
+      {
+        "id": "hds",
+        "zone": "hds",
+        "title": "Un hébergeur certifié, dès le pilote",
+        "text": "En France, les données de santé doivent être hébergées chez un prestataire certifié [[hds|HDS]]. Léa a exigé le contrat **avant** la première donnée réelle. Le squelette d'Awa y tournait déjà : il n'y a rien eu à déménager."
+      },
+      {
+        "id": "aipd",
+        "zone": "aipd",
+        "title": "L'analyse d'impact",
+        "text": "Le [[rgpd|RGPD]] impose une [[aipd|analyse d'impact]] avant de traiter des données de santé à grande échelle. Léa y a décrit chaque donnée, chaque risque et chaque protection. Elle a aussi obtenu qu'on retire ce dont le MVP n'a pas besoin, comme le numéro de sécurité sociale."
+      },
+      {
+        "id": "phone",
+        "zone": "phone",
+        "title": "Le revers du hors connexion",
+        "text": "Le mode [[hors-connexion|hors connexion]] garde des données de santé sur les téléphones, qui peuvent se perdre dans une voiture ou une salle d'attente. D'où une base chiffrée, un verrouillage, et l'effacement à distance, encore en cours."
+      },
+      {
+        "id": "ownership",
+        "zone": "ownership",
+        "title": "Chacune son cabinet, vérifié",
+        "text": "Le filtre écrit par Awa est testé dans 12 cas : une infirmière ne voit jamais la fiche d'un patient d'un autre cabinet, même en bricolant sa demande. Ce test tourne à chaque modification."
+      },
+      {
+        "id": "audit-log",
+        "zone": "audit-log",
+        "title": "Une tentative refusée",
+        "text": "Le [[journal-acces|journal des accès]] garde une trace de chaque consultation. Ce matin, une infirmière d'un autre cabinet a tenté d'ouvrir la fiche n° 2208 : refusé. C'était une erreur de manipulation, mais le système l'a bloquée."
+      }
+    ]
+  }
+}

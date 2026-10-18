@@ -1,0 +1,23 @@
+{
+  "id": "product-owner",
+  "desk": 5,
+  "title": "Product Owner",
+  "person": {
+    "firstName": "Mathilde",
+    "lastName": "Nguyen",
+    "role": "Product Owner"
+  },
+  "tagline": "Je transforme « il faudrait pouvoir annuler » en une demande si claire que l'équipe sait exactement quoi construire, et comment savoir que c'est fini.",
+  "missions": [
+    "Tenir le [[backlog]] : la liste de toutes les demandes des projets, triée par priorité et mise à jour chaque semaine.",
+    "Écrire les [[user-story|user stories]] et leurs [[critere-acceptation|critères d'acceptation]], en s'appuyant sur la recherche (poste 2) et les chiffres (poste 3).",
+    "Faire estimer les demandes par l'équipe, puis choisir avec elle ce qui entre dans le prochain [[sprint]].",
+    "Répondre aux questions de l'équipe pendant le sprint : c'est elle qui tranche sur le « quoi ».",
+    "Vérifier que ce qui est livré respecte les critères, lors de la [[sprint-review|revue de sprint]]."
+  ],
+  "myth": {
+    "myth": "La Product Owner est la cheffe de l'équipe : elle distribue le travail.",
+    "reality": "Elle ne répartit pas les tâches et ne dit pas comment coder. Elle est la gardienne de la valeur : elle choisit ce qui compte le plus pour les patients et les cabinets, et l'explique. L'équipe s'organise elle-même pour le réaliser."
+  },
+  "realTools": ["Jira", "Linear", "Azure DevOps", "Trello", "Notion", "Productboard"]
+}

@@ -1,0 +1,193 @@
+{
+  "role": "code-review",
+  "order": 4,
+  "featureStep": "On choisit les fondations techniques de la v2, et on l'écrit noir sur blanc",
+  "tagline": "Avant que l'équipe écrive la première ligne de la v2, je propose comment la construire, et je la fais relire comme n'importe quel code.",
+  "missions": [
+    "Étudier plusieurs façons de construire la v2 et comparer honnêtement leurs risques.",
+    "Rédiger la décision dans un [[adr|ADR]] : un document court, relu par l'équipe et gardé pour les années suivantes.",
+    "Faire relire cette décision en [[pull-request|pull request]], comme du code, par le back-end, le front-end, le DevOps et la sécurité.",
+    "Continuer de relire le code de l'équipe, sur la v1 comme sur la v2."
+  ],
+  "takeaways": [
+    "Marc écarte le « grand soir » où l'on réécrit tout puis bascule tout le monde d'un coup : c'est la cause classique des v2 en retard ou ratées.",
+    "La v2 sera construite **à côté de la v1**, sur la même base de données, avec une [[api]] numérotée : `/v1` et `/v2` répondent en même temps.",
+    "Une décision technique importante s'écrit et se relit : dans deux ans, un nouveau développeur saura **pourquoi** l'application est construite ainsi."
+  ],
+  "receivesFrom": {
+    "roles": ["product-manager"],
+    "text": "La décision de Claire : une v2 pensée pour la famille, avec une bêta au printemps, sans interrompre la v1. Marc y ajoute ce qu'il sait de la [[dette-technique|dette technique]] de la v1."
+  },
+  "handsOffTo": {
+    "roles": ["backend", "frontend", "devops", "security"],
+    "text": "Une décision relue et fusionnée, l'ADR-007 : Awa et Thomas savent comment construire, Ibrahima comment déployer les deux versions côte à côte, Léa ce qu'elle devra contrôler."
+  },
+  "screen": {
+    "component": "pull-request",
+    "toolName": "Lumen Git",
+    "props": {
+      "number": 352,
+      "title": "ADR-007 : reconstruire Pocket Santé 2 pièce par pièce, à côté de la v1",
+      "authors": ["Marc Rousseau"],
+      "branch": "docs/adr-007-architecture-v2",
+      "base": "main",
+      "commits": 4,
+      "description": "Propose l'architecture de Pocket Santé 2 : une API v2 versionnée à côté de la v1, sur la même base de données, avec un nouveau modèle « foyer + profils ». La nouvelle application est livrée derrière l'interrupteur app-v2-beta. Options écartées : tout réécrire d'un coup, ou ajouter des profils à la v1.",
+      "changedFiles": [
+        { "path": "docs/adr/007-architecture-v2.md", "additions": 86, "deletions": 0 },
+        { "path": "docs/adr/README.md", "additions": 1, "deletions": 0 },
+        { "path": "docs/schemas/foyer-profils.png", "additions": 0, "deletions": 0 }
+      ],
+      "diffs": [
+        {
+          "path": "docs/adr/007-architecture-v2.md",
+          "hunk": "options étudiées",
+          "lines": [
+            { "t": "+", "n": 12, "text": "## Options étudiées" },
+            {
+              "t": "+",
+              "n": 13,
+              "text": "A. Tout réécrire, puis basculer tous les patients en une nuit."
+            },
+            {
+              "t": "+",
+              "n": 14,
+              "text": "   → Refusée : 8 mois sans rien livrer, un seul jour à très haut risque."
+            },
+            { "t": "+", "n": 15, "text": "B. Ajouter des profils dans la v1." },
+            {
+              "t": "+",
+              "n": 16,
+              "text": "   → Refusée : « un compte = une personne » est utilisé dans 140 fichiers."
+            },
+            {
+              "t": "+",
+              "n": 17,
+              "text": "C. Construire la v2 à côté de la v1, morceau par morceau. ✓ Retenue"
+            }
+          ]
+        },
+        {
+          "path": "docs/adr/007-architecture-v2.md",
+          "hunk": "décision",
+          "lines": [
+            { "t": "+", "n": 21, "text": "## Décision" },
+            {
+              "t": "+",
+              "n": 22,
+              "text": "- Une API /v2 à côté de /v1 ; les deux répondent jusqu'à l'arrêt de la v1."
+            },
+            {
+              "t": "+",
+              "n": 23,
+              "text": "- Même base de données : chaque compte devient un foyer avec des profils."
+            },
+            {
+              "t": "+",
+              "n": 24,
+              "text": "- La v1 lit le profil principal du foyer : elle continue de marcher."
+            },
+            {
+              "t": "+",
+              "n": 25,
+              "text": "- Nouvelle application derrière l'interrupteur app-v2-beta."
+            },
+            {
+              "t": "+",
+              "n": 26,
+              "text": "- Migration des comptes répétée 3 fois sur une copie anonymisée."
+            }
+          ],
+          "inlineComment": {
+            "after": 2,
+            "resolved": true,
+            "suggestion": {
+              "from": "- Même base de données : chaque compte devient un foyer avec des profils.",
+              "to": "- Même base de données : chaque compte devient un foyer avec des profils ; les profils de mineurs suivent des règles d'accès propres (voir § Sécurité)."
+            },
+            "thread": [
+              {
+                "author": "Léa Kowalski",
+                "when": "19 janv. 10:14",
+                "text": "Des profils d'enfants, ce sont des données de santé de mineurs. Qui peut les voir, et que se passe-t-il à 18 ans ? Il faut que ce soit écrit dès la décision, pas découvert pendant le développement."
+              },
+              {
+                "author": "Marc Rousseau",
+                "when": "19 janv. 11:02",
+                "text": "Tu as raison. J'ajoute ta phrase et une section « Sécurité » que tu pourras compléter."
+              }
+            ]
+          }
+        }
+      ],
+      "timeline": [
+        {
+          "author": "Awa Diallo",
+          "when": "18 janv. 15:20",
+          "text": "Je préfère C. Question : la v1 et la v2 écrivent dans les mêmes tables, comment évite-t-on qu'elles se marchent dessus ?"
+        },
+        {
+          "author": "Marc Rousseau",
+          "when": "18 janv. 16:05",
+          "text": "Seule la v2 modifie la structure des tables ; la v1 continue de lire le profil principal. J'ai précisé ce point dans la section Décision."
+        },
+        {
+          "author": "Ibrahima Ndiaye",
+          "when": "20 janv. 09:40",
+          "text": "Deux versions en ligne pendant des mois, ça veut dire deux fois plus de choses à surveiller. C'est d'accord si on prévoit l'arrêt de la v1 dans le planning (décembre)."
+        },
+        {
+          "author": "Léa Kowalski",
+          "when": "21 janv. 10:30",
+          "text": "✓ A approuvé ces modifications, avec la section Sécurité."
+        }
+      ],
+      "checks": [
+        { "label": "Orthographe et liens", "detail": "Aucun lien cassé" },
+        {
+          "label": "Format des ADR",
+          "detail": "Contexte, options, décision, conséquences : présents"
+        }
+      ],
+      "reviewers": [
+        { "name": "Awa Diallo", "state": "approved" },
+        { "name": "Thomas Petit", "state": "approved" },
+        { "name": "Ibrahima Ndiaye", "state": "approved" },
+        { "name": "Léa Kowalski", "state": "approved" }
+      ],
+      "mergedMessage": "✓ Fusionnée dans main le 21 janvier 2027. L'ADR-007 devient la référence de l'équipe pour toute la v2."
+    },
+    "annotations": [
+      {
+        "id": "pr-header",
+        "zone": "pr-header",
+        "title": "Une décision relue comme du code",
+        "text": "Ce n'est pas du code, mais un texte : l'[[adr|ADR]] n° 7. Marc le propose quand même en [[pull-request|pull request]], pour que toute l'équipe technique puisse commenter ligne par ligne, puis approuver. La décision est ensuite gardée avec le code, pour toujours."
+      },
+      {
+        "id": "diff",
+        "zone": "diff",
+        "title": "Trois options, une seule retenue",
+        "text": "Marc écrit aussi ce qu'il **refuse**, et pourquoi. Réécrire tout d'un coup ? Des mois sans rien livrer, puis une bascule de 120 000 patients en une nuit. Il retient la [[refonte-progressive|refonte progressive]] : construire la v2 à côté de la v1, morceau par morceau."
+      },
+      {
+        "id": "inline-comment",
+        "zone": "inline-comment",
+        "title": "La sécurité, dès la décision",
+        "text": "Léa (sécurité) relit aussi les décisions d'architecture. Les profils d'enfants sont des données de santé de mineurs : elle demande que les règles d'accès soient écrites **maintenant**. Marc accepte sa suggestion. C'est bien moins cher qu'une correction après coup."
+      },
+      {
+        "id": "timeline",
+        "zone": "timeline",
+        "title": "Chacun regarde avec ses yeux",
+        "text": "Awa pense aux données, Ibrahima au coût de deux versions en ligne pendant des mois. Grâce au [[version-api|versionnement de l'API]], `/v1` et `/v2` répondent en même temps : la v1 continue de marcher pendant que la v2 se construit."
+      },
+      {
+        "id": "approval",
+        "zone": "approval",
+        "title": "Quatre approbations",
+        "text": "Pour une décision qui engage l'équipe pendant des mois, Marc a demandé l'avis de quatre personnes, pas d'une seule. Une fois tout le monde d'accord, la [[fusion]] a lieu le **21 janvier 2027** : la construction peut commencer."
+      }
+    ]
+  }
+}

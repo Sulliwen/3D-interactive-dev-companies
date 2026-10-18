@@ -15,8 +15,8 @@ export const runtime = {
   playerSpeed: 0,
   /** Itinéraire du parcours guidé (vers le prochain poste), ou `null`. */
   guidePath: null as ReadonlyArray<readonly [number, number]> | null,
-  /** État de la caméra : suivi de l'avatar, zoom sur un écran, ou transition. */
-  cameraMode: 'follow' as 'follow' | 'toScreen' | 'screen' | 'toFollow',
+  /** État de la caméra : suivi de l'avatar, zoom sur un écran, présentation, ou transition. */
+  cameraMode: 'follow' as 'follow' | 'toScreen' | 'screen' | 'toFollow' | 'toTour' | 'tour',
 }
 
 if (import.meta.env.DEV && typeof window !== 'undefined') {

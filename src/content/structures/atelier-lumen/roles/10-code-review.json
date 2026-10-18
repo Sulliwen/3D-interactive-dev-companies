@@ -1,0 +1,23 @@
+{
+  "id": "code-review",
+  "desk": 10,
+  "title": "Revue de code",
+  "person": {
+    "firstName": "Marc",
+    "lastName": "Rousseau",
+    "role": "Développeur senior"
+  },
+  "tagline": "Je relis le code de mes collègues avant qu'il rejoigne le logiciel : un deuxième regard pour éviter les erreurs et partager les bonnes idées.",
+  "missions": [
+    "Relire les [[pull-request|pull requests]] de l'équipe : le code est-il clair, juste, testé ?",
+    "Repérer ce qui pourrait poser problème plus tard : un cas oublié, une règle mal appliquée, une faille de sécurité.",
+    "Proposer des améliorations précises et bienveillantes, ligne par ligne.",
+    "Accompagner les développeurs moins expérimentés et garder un code cohérent dans tout le projet.",
+    "Donner le feu vert (l'approbation) qui autorise la [[fusion]] du code dans la version principale."
+  ],
+  "myth": {
+    "myth": "La revue de code sert à juger ou à corriger les mauvais développeurs.",
+    "reality": "Tout le monde est relu, y compris Marc lui-même. La revue sert à attraper les erreurs tôt, quand elles coûtent peu à corriger, et à apprendre les uns des autres. Le ton est celui d'une relecture entre collègues, pas d'un examen."
+  },
+  "realTools": ["GitHub", "GitLab", "Bitbucket", "Gerrit", "SonarQube"]
+}

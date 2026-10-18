@@ -1,0 +1,23 @@
+{
+  "id": "ux-research",
+  "desk": 2,
+  "title": "Recherche utilisateur",
+  "person": {
+    "firstName": "Samir",
+    "lastName": "Haddad",
+    "role": "Chercheur UX"
+  },
+  "tagline": "Je vais à la rencontre des patients pour comprendre **pourquoi** ils ne préviennent pas quand ils ne peuvent pas venir.",
+  "missions": [
+    "Préparer et mener des [[entretien-utilisateur|entretiens]] avec des patients et des secrétaires médicales, sans jamais orienter leurs réponses.",
+    "Regrouper ce que les gens disent pour faire apparaître les vrais problèmes, avec une [[carte-affinites|carte d'affinités]].",
+    "Résumer les profils rencontrés dans un [[persona]], pour que toute l'équipe ait le même patient en tête.",
+    "Dessiner le [[parcours-utilisateur|parcours]] du patient étape par étape, et repérer où il bloque.",
+    "Formuler le problème en une phrase claire, partagée avec la Product Manager et le Designer."
+  ],
+  "myth": {
+    "myth": "Il suffit de demander aux utilisateurs ce qu'ils veulent, puis de le faire.",
+    "reality": "Les gens décrivent mal leurs besoins, mais racontent très bien leurs difficultés. Le chercheur écoute les situations vécues, repère ce qui revient d'un entretien à l'autre, puis laisse l'équipe imaginer la solution."
+  },
+  "realTools": ["Dovetail", "Miro", "FigJam", "Notion", "Lookback", "Google Meet"]
+}

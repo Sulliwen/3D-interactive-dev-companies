@@ -1,0 +1,80 @@
+[
+  {
+    "id": "version-majeure",
+    "term": "Version majeure",
+    "definition": "Une nouvelle version d'un logiciel qui change beaucoup de choses à la fois (fonctionnement, apparence, fondations techniques), au point que les utilisateurs passent d'une « v1 » à une « v2 ».",
+    "analogy": "Comme un nouveau modèle de voiture, et pas seulement une révision de l'ancien."
+  },
+  {
+    "id": "maintenance",
+    "term": "Maintenance (le « run »)",
+    "definition": "Le travail qui garde un logiciel en ligne en bon état : corriger les bugs, appliquer les mises à jour de sécurité, faire de petites évolutions. Les équipes distinguent souvent le « run » (faire tourner l'existant) du « build » (construire du neuf).",
+    "analogy": "Un restaurant qui prépare sa nouvelle carte doit continuer à servir ses clients tous les soirs."
+  },
+  {
+    "id": "dette-technique",
+    "term": "Dette technique",
+    "definition": "Les raccourcis et les choix anciens d'un logiciel qui le rendent plus lent et plus risqué à faire évoluer. Comme une dette d'argent, elle coûte des « intérêts » à chaque modification, tant qu'on ne la rembourse pas.",
+    "analogy": "Une maison où l'on a ajouté des pièces au fil des ans sans revoir l'électricité : chaque nouveau branchement devient compliqué."
+  },
+  {
+    "id": "adr",
+    "term": "ADR (décision d'architecture)",
+    "definition": "« Architecture Decision Record » : un document court qui explique une décision technique importante, les options étudiées, celle retenue et pourquoi. Il est relu par l'équipe et gardé pour les années suivantes.",
+    "analogy": "Le compte rendu d'une réunion de chantier où l'on a choisi les fondations de la maison."
+  },
+  {
+    "id": "refonte-progressive",
+    "term": "Refonte progressive",
+    "definition": "Remplacer un logiciel morceau par morceau, en faisant cohabiter l'ancien et le nouveau, plutôt que de tout réécrire d'un coup et de basculer un soir. Les développeurs parlent parfois du motif de l'« étrangleur » (« strangler »), d'après une plante qui pousse autour d'un arbre.",
+    "analogy": "Rénover une gare sans la fermer : on refait un quai après l'autre, les trains continuent de passer."
+  },
+  {
+    "id": "version-api",
+    "term": "Versionnement d'API",
+    "definition": "Donner un numéro à une API (`/v1`, `/v2`) pour pouvoir la faire évoluer sans casser les applications qui utilisent l'ancienne version. Les deux versions répondent en même temps, le temps que tout le monde passe à la nouvelle.",
+    "analogy": "Un guichet rénové qui garde l'ancien guichet ouvert le temps que les habitués s'habituent."
+  },
+  {
+    "id": "migration-donnees",
+    "term": "Migration de données",
+    "definition": "Transformer les données existantes pour qu'elles entrent dans une nouvelle organisation (par exemple : chaque compte devient un foyer avec des profils), sans rien perdre. On la répète plusieurs fois sur une copie avant de la faire pour de vrai.",
+    "analogy": "Un déménagement où chaque carton doit arriver dans la bonne pièce, et où l'on fait d'abord une répétition avec des cartons vides."
+  },
+  {
+    "id": "anonymisation",
+    "term": "Anonymisation",
+    "definition": "Transformer des données personnelles pour qu'il soit impossible de retrouver les personnes : noms, adresses et numéros remplacés par des valeurs inventées. Une copie anonymisée permet de tester avec des volumes réalistes sans exposer de vraies données de santé.",
+    "analogy": "Un dossier où tous les noms ont été noircis et remplacés par des prénoms au hasard."
+  },
+  {
+    "id": "beta",
+    "term": "Bêta (privée, ouverte)",
+    "definition": "Une période où une nouvelle version est utilisée par un petit groupe de volontaires avant tout le monde. « Privée » : sur invitation ; « ouverte » : à tous ceux qui le souhaitent. On y apprend ce que les tests n'ont pas vu.",
+    "analogy": "L'avant-première d'un film, ou le « soft opening » d'un restaurant avec des clients invités."
+  },
+  {
+    "id": "epopee",
+    "term": "Épopée (epic)",
+    "definition": "Un grand morceau de travail, trop gros pour un seul sprint, qui regroupe plusieurs user stories autour d'un même objectif (« Foyer et profils », « Migration des comptes »).",
+    "analogy": "Un chapitre d'un livre, découpé ensuite en pages."
+  },
+  {
+    "id": "mvp",
+    "term": "Périmètre minimal (MVP)",
+    "definition": "« Minimum Viable Product » : le plus petit ensemble de fonctions qui apporte déjà un vrai service et permet d'apprendre des utilisateurs. Tout le reste attend la suite.",
+    "analogy": "Ouvrir la boulangerie avec le pain et les croissants, et ajouter les gâteaux plus tard."
+  },
+  {
+    "id": "modele-de-menace",
+    "term": "Modèle de menace",
+    "definition": "Un exercice où l'équipe imagine qui pourrait mal utiliser le logiciel, comment, et ce qu'il faut prévoir pour l'en empêcher. On le fait avant de construire, pas après un incident.",
+    "analogy": "Avant d'organiser un concert, se demander par où quelqu'un pourrait entrer sans billet."
+  },
+  {
+    "id": "fuseau-horaire",
+    "term": "Fuseau horaire (UTC)",
+    "definition": "Les ordinateurs enregistrent souvent l'heure en temps universel (UTC), puis l'affichent à l'heure locale. À Paris, il y a 1 à 2 heures d'écart avec l'UTC selon la saison : confondre les deux décale les rendez-vous.",
+    "analogy": "Noter « 10 h » dans un agenda partagé avec un collègue à Londres, sans préciser de quelle ville on parle."
+  }
+]

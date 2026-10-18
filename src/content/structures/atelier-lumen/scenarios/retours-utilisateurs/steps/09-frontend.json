@@ -1,0 +1,113 @@
+{
+  "role": "frontend",
+  "order": 9,
+  "featureStep": "On construit ce que le patient voit",
+  "takeaways": [
+    "Le [[front-end]] est la partie que le patient touche : chaque mot, chaque bouton compte.",
+    "Le téléphone et le [[serveur]] doivent appliquer **exactement la même règle**, sinon les patients reçoivent des réponses contradictoires.",
+    "Bien gérer les erreurs fait partie du travail : un refus clair, avec le numéro du cabinet, vaut mieux qu'un écran bloqué."
+  ],
+  "receivesFrom": {
+    "roles": ["design", "backend"],
+    "text": "Les [[maquette|maquettes]] et le [[prototype]] de l'écran d'annulation (Designer), et l'[[api|API]] d'annulation prête à être appelée (développeuse back-end)."
+  },
+  "handsOffTo": {
+    "roles": ["code-review", "qa"],
+    "text": "Le code à faire relire (revue de code), puis l'application à vérifier sur de vrais téléphones ([[recette]] par la QA)."
+  },
+  "screen": {
+    "component": "code-editor",
+    "toolName": "Atelier Code",
+    "props": {
+      "project": "pocket-sante-app",
+      "branch": "feature/annulation-rdv",
+      "folder": "appointments",
+      "explorer": ["src/api/", "src/design-system/", "src/ui/", "app.json", "package.json"],
+      "files": [
+        {
+          "name": "AppointmentCard.tsx",
+          "source": "atelier-lumen/retours-utilisateurs/09-frontend/AppointmentCard.tsx.txt"
+        },
+        {
+          "name": "useCancelAppointment.ts",
+          "source": "atelier-lumen/retours-utilisateurs/09-frontend/useCancelAppointment.ts.txt"
+        },
+        {
+          "name": "AppointmentCard.test.tsx",
+          "source": "atelier-lumen/retours-utilisateurs/09-frontend/AppointmentCard.test.tsx.txt"
+        }
+      ],
+      "initialFile": 0,
+      "preview": {
+        "kind": "phone",
+        "title": "Simulateur · téléphone",
+        "state": "appointments",
+        "outcome": "cancelled",
+        "caption": "Essayez : touchez « Annuler »"
+      },
+      "terminal": {
+        "command": "npm test AppointmentCard",
+        "lines": [
+          {
+            "kind": "info",
+            "text": "RUN  src/appointments/AppointmentCard.test.tsx"
+          },
+          {
+            "kind": "pass",
+            "text": "demande une confirmation avant d'annuler  31 ms"
+          },
+          {
+            "kind": "pass",
+            "text": "accepte un rendez-vous dans exactement 24 h (BUG-77)  18 ms"
+          },
+          {
+            "kind": "pass",
+            "text": "affiche le numéro du cabinet à moins de 24 h  15 ms"
+          },
+          {
+            "kind": "summary",
+            "text": "Tests  3 passed (3)   ·   Duration 0.62 s"
+          }
+        ]
+      }
+    },
+    "annotations": [
+      {
+        "id": "cancel-button",
+        "zone": "cancel-button",
+        "title": "Le bouton que le patient touche",
+        "text": "Thomas ne redessine pas le bouton : il reprend le [[composant]] « danger » du [[design-system]] dessiné par Hugo. Le libellé `Annuler le rendez-vous` est lu à voix haute par les lecteurs d'écran des personnes malvoyantes ([[accessibilite|accessibilité]])."
+      },
+      {
+        "id": "confirm",
+        "zone": "confirm",
+        "title": "Une confirmation avant d'agir",
+        "text": "Une annulation ne se rattrape pas : on demande donc confirmation, avec les mots exacts de la [[maquette]]. Le bouton « Garder mon rendez-vous » évite les annulations faites par mégarde, d'un pouce distrait."
+      },
+      {
+        "id": "rule-24h",
+        "zone": "rule-24h",
+        "title": "La même règle que le serveur",
+        "text": "Le téléphone vérifie lui aussi la règle des 24 h, pour répondre tout de suite sans attendre le [[serveur]]. Pendant la [[recette]], la QA a trouvé un [[bug]] ici : le téléphone refusait un rendez-vous dans **exactement** 24 h, alors que le serveur l'acceptait. Un `<=` à la place d'un `<` ! C'est corrigé (voir poste 11)."
+      },
+      {
+        "id": "api-call",
+        "zone": "api-call",
+        "title": "L'appel à l'API d'Awa",
+        "text": "C'est ici que le téléphone envoie sa demande à l'[[api|API]] construite au poste 8. Pendant l'attente, le bouton affiche un indicateur de chargement : le patient sait que sa demande est partie."
+      },
+      {
+        "id": "too-late",
+        "zone": "too-late",
+        "title": "Un refus clair et utile",
+        "text": "Si le serveur refuse, l'application explique pourquoi et donne **le numéro du cabinet**. Cette idée vient de la [[revue-de-code|revue de code]] de Marc (poste 10) : un refus sans solution, c'est un patient bloqué."
+      },
+      {
+        "id": "preview",
+        "zone": "preview",
+        "title": "Voir le résultat sans téléphone",
+        "text": "Le [[simulateur]] affiche l'application sur l'écran de l'ordinateur : Thomas voit l'effet de chaque modification en quelques secondes. Essayez vous-même : touchez « Annuler », puis confirmez."
+      }
+    ]
+  }
+}

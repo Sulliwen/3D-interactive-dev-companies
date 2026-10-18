@@ -1,0 +1,80 @@
+{
+  "id": "debuts",
+  "order": 0,
+  "kind": "Création du produit",
+  "title": "Les débuts d'Atelier Lumen",
+  "summary": "Avant les 25 personnes et les sprints, il y avait trois cofondateurs et une idée. Des premiers entretiens au premier client payant, revivez la naissance de Pocket Santé, quand chacun portait plusieurs casquettes.",
+  "workItem": {
+    "label": "Pocket Santé à ses débuts, ici",
+    "title": "Transformer une idée (prendre rendez-vous chez un soignant sans passer des heures au téléphone) en une application que de premiers cabinets acceptent de payer.",
+    "project": "pocket-sante"
+  },
+  "intro": "Retour en arrière : nous sommes le jeudi 4 avril 2024. Atelier Lumen a un an, cinq personnes et un seul coin de ce plateau ; les autres bureaux sont encore vides. Aujourd'hui, Pocket Santé sort sur les magasins d'applications, et les trois cabinets de la bêta viennent de devenir les premiers clients payants.",
+  "finale": {
+    "lead": "Cinq personnes, un an, beaucoup de casquettes et quelques raccourcis assumés : c'est ainsi que naissent la plupart des produits. Les autres visites montrent la suite. Quand l'équipe grandit, chaque casquette devient un métier, avec son bureau, ses outils et sa place dans la chaîne.",
+    "outcomesTitle": "Le chemin parcouru, d'avril 2024 à novembre 2026",
+    "outcomes": [
+      { "label": "Personnes chez Atelier Lumen", "before": "3 (2023)", "after": "25" },
+      { "label": "Praticiens sur Pocket Santé", "before": "11 (3 cabinets)", "after": "2 400" },
+      { "label": "Patients actifs par mois", "before": "≈ 280", "after": "120 000" },
+      { "label": "Tests automatiques", "before": "0", "after": "412" },
+      {
+        "label": "Organisation de l'équipe",
+        "before": "un mur de post-its",
+        "after": "Scrum, sprints de 2 semaines"
+      }
+    ]
+  },
+  "bystanders": [
+    {
+      "role": "ux-research",
+      "absent": true,
+      "note": "Samir arrivera en **mars 2025**. En attendant, c'est Claire qui mène elle-même les [[entretien-utilisateur|entretiens]] avec les patients et les secrétaires."
+    },
+    {
+      "role": "data",
+      "absent": true,
+      "note": "Julien arrivera en **juin 2025**, quand il y aura assez de rendez-vous pour que les chiffres racontent quelque chose. Aujourd'hui, Claire compte les inscrits dans un tableur."
+    },
+    {
+      "role": "product-owner",
+      "absent": true,
+      "note": "Mathilde arrivera en **janvier 2025**, quand Claire ne pourra plus écrire seule toutes les demandes pour l'équipe. Aujourd'hui, le [[backlog]] tient sur un mur de post-its."
+    },
+    {
+      "role": "scrum-master",
+      "absent": true,
+      "note": "Fatou arrivera en **septembre 2025**, quand l'équipe passera à 15 personnes et adoptera [[scrum|Scrum]]. À cinq, un point rapide chaque matin devant les post-its suffit."
+    },
+    {
+      "role": "code-review",
+      "absent": true,
+      "note": "Marc arrivera en **juin 2024**, juste après la [[levee-de-fonds|levée de fonds]]. Il rendra la [[revue-de-code|relecture du code]] systématique ; aujourd'hui, Awa et Thomas se relisent quand ils ont le temps."
+    },
+    {
+      "role": "qa",
+      "absent": true,
+      "note": "Inès arrivera en **novembre 2024** : avec 400 cabinets, un bug coûtera trop cher pour le découvrir en production. Aujourd'hui, chacun teste son propre travail sur son téléphone."
+    },
+    {
+      "role": "security",
+      "absent": true,
+      "note": "Léa arrivera en **avril 2025**. En attendant, Awa s'occupe de la sécurité : l'hébergement [[hds|HDS]] a été choisi dès le premier jour, ce n'est pas un raccourci possible."
+    },
+    {
+      "role": "devops",
+      "absent": true,
+      "note": "Ibrahima arrivera en **septembre 2024**, pour en finir avec les mises en ligne à la main. Aujourd'hui, Awa lance elle-même `./deploy.sh` sur l'unique serveur."
+    },
+    {
+      "role": "monitoring",
+      "absent": true,
+      "note": "Camille arrivera en **février 2026**. Aujourd'hui, si le site tombe, c'est un cabinet qui appelle Lucie, puis Lucie qui appelle Awa."
+    },
+    {
+      "role": "engineering-manager",
+      "absent": true,
+      "note": "Nadia arrivera en **janvier 2026**, quand l'équipe dépassera vingt personnes. À cinq, ce sont les [[cofondateur|cofondateurs]] qui recrutent et accompagnent chacun."
+    }
+  ]
+}

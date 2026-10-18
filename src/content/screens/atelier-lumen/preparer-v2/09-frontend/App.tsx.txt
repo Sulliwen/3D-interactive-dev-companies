@@ -1,0 +1,17 @@
+import { useFeatureFlag } from './flags'
+import { AppV1 } from './v1/AppV1'
+import { AppV2 } from './v2/AppV2'
+
+export function App() {
+  // @zone feature-flag
+  // Interrupteur « app-v2-beta » : seules les familles invitées voient la v2.
+  // Tous les autres patients gardent la v1, dans la même application installée.
+  const v2 = useFeatureFlag('app-v2-beta')
+  // @end
+
+  // @zone back-to-v1
+  // Bêta oblige : la famille peut revenir à la v1 en un clic, depuis les réglages.
+  // Ses rendez-vous restent là : les deux versions lisent les mêmes données.
+  return v2.enabled ? <AppV2 onLeaveBeta={v2.optOut} /> : <AppV1 />
+  // @end
+}

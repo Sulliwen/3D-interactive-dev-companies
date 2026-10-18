@@ -39,6 +39,8 @@ export const securityReviewPropsSchema = z.object({
       note: z.string(),
     }),
   ),
+  /** Titre du journal d'accès (par défaut : les annulations de Pocket Santé). */
+  auditTitle: z.string().default("Journal d'accès · annulations (extrait)"),
   auditLog: z.array(
     z.object({
       time: z.string(),

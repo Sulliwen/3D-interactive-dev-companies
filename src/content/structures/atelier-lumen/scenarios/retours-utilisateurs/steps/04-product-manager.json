@@ -1,0 +1,170 @@
+{
+  "role": "product-manager",
+  "order": 4,
+  "featureStep": "On décide de faire la fonctionnalité, et pourquoi maintenant",
+  "takeaways": [
+    "La Product Manager décide **quoi** faire et **pourquoi** ; l'équipe décide **comment** le faire.",
+    "« Annuler un rendez-vous » passe en priorité n° 1 : impact fort, effort moyen, et un problème qui ne disparaîtra pas seul.",
+    "Un objectif chiffré (−30 % de créneaux perdus en 3 mois) permettra de savoir si la fonctionnalité a réussi."
+  ],
+  "receivesFrom": {
+    "roles": ["ux-research", "data"],
+    "text": "Un problème qualifié par le chercheur UX (les patients ne peuvent pas prévenir) et chiffré par l'analyste data (18 % de rendez-vous non honorés, environ 3 100 créneaux perdus par mois)."
+  },
+  "handsOffTo": {
+    "roles": ["product-owner"],
+    "text": "Une décision et un objectif : la Product Owner transforme cette priorité en [[user-story|user story]] précise (PS-142), prête pour un prochain [[sprint]]."
+  },
+  "screen": {
+    "component": "roadmap",
+    "toolName": "Lumen Roadmap",
+    "props": {
+      "view": "Feuille de route — novembre 2026 à avril 2027",
+      "okr": {
+        "objective": "Ne plus perdre les créneaux des patients qui ne peuvent pas venir",
+        "keyResults": [
+          "−30 % de créneaux perdus en 3 mois (3 100 → 2 170 par mois)",
+          "La moitié des créneaux libérés repris par un autre patient",
+          "Tickets « annulation » divisés par deux"
+        ]
+      },
+      "months": ["nov.", "déc.", "janv.", "févr.", "mars", "avr."],
+      "lanes": [
+        {
+          "project": "pocket-sante",
+          "name": "Pocket Santé",
+          "items": [
+            {
+              "title": "Annulation RDV",
+              "start": 0,
+              "end": 0,
+              "highlight": true
+            },
+            {
+              "title": "Rappels SMS la veille",
+              "start": 1,
+              "end": 1
+            },
+            {
+              "title": "Paiement en ligne",
+              "start": 2,
+              "end": 3
+            },
+            {
+              "title": "Téléconsultation",
+              "start": 4,
+              "end": 5
+            }
+          ]
+        },
+        {
+          "project": "facturo",
+          "name": "Facturo",
+          "items": [
+            {
+              "title": "Relances automatiques",
+              "start": 0,
+              "end": 1
+            },
+            {
+              "title": "Export comptable",
+              "start": 3,
+              "end": 4
+            }
+          ]
+        },
+        {
+          "project": "mutuelle",
+          "name": "Mutuelle Horizon",
+          "items": [
+            {
+              "title": "Maquettes",
+              "start": 0,
+              "end": 0
+            },
+            {
+              "title": "Développement du site",
+              "start": 1,
+              "end": 3
+            },
+            {
+              "title": "Mise en ligne",
+              "start": 4,
+              "end": 4
+            }
+          ]
+        }
+      ],
+      "matrix": [
+        {
+          "label": "Annulation RDV",
+          "impact": 0.85,
+          "effort": 0.4,
+          "highlight": true,
+          "note": "impact fort (environ 930 créneaux récupérables par mois), effort moyen (un sprint). Priorité n° 1."
+        },
+        {
+          "label": "Paiement en ligne",
+          "impact": 0.68,
+          "effort": 0.8,
+          "note": "utile, mais gros chantier (banque, sécurité des paiements). Prévu en janvier."
+        },
+        {
+          "label": "Téléconsultation",
+          "impact": 0.78,
+          "effort": 0.95,
+          "note": "fort impact, mais plusieurs mois de travail et des règles strictes. Prévu au printemps."
+        },
+        {
+          "label": "Rappels SMS",
+          "impact": 0.45,
+          "effort": 0.18,
+          "note": "rapide à faire, mais inutile si le patient n'a aucun moyen d'annuler. Juste après."
+        },
+        {
+          "label": "Avis praticiens",
+          "impact": 0.28,
+          "effort": 0.62,
+          "note": "sujet sensible pour les médecins, peu d'effet sur l'objectif du trimestre."
+        },
+        {
+          "label": "Mode sombre",
+          "impact": 0.12,
+          "effort": 0.3,
+          "note": "demandé par quelques utilisateurs, sans effet sur les créneaux perdus."
+        }
+      ],
+      "why": [
+        "1er motif de contact au support : 214 tickets « annulation » en octobre.",
+        "18 % de rendez-vous non honorés, stable depuis un an : le problème ne se réglera pas seul.",
+        "Réalisable en un sprint : livré avant l'hiver, quand les cabinets sont les plus demandés."
+      ]
+    },
+    "annotations": [
+      {
+        "id": "okr",
+        "zone": "okr",
+        "title": "Un objectif, pas une liste de tâches",
+        "text": "Claire ne fixe pas « faire un bouton Annuler » mais un résultat : perdre **30 % de créneaux en moins** en trois mois. C'est un [[okr|OKR]] : un objectif clair et des chiffres qui diront s'il est atteint."
+      },
+      {
+        "id": "matrix",
+        "zone": "matrix",
+        "title": "Choisir, c'est renoncer",
+        "text": "Chaque idée est placée selon le bénéfice attendu et le travail nécessaire : c'est la [[matrice-impact-effort|matrice impact / effort]]. L'annulation tombe dans la case « à faire en premier ». Survolez les points pour lire la justification de chaque choix."
+      },
+      {
+        "id": "timeline",
+        "zone": "timeline",
+        "title": "Trois projets, une seule équipe",
+        "text": "La [[feuille-de-route|feuille de route]] montre l'ordre des chantiers sur six mois, pour les trois projets d'Atelier Lumen. Elle reste volontairement floue au-delà de quelques semaines : on ajuste chaque trimestre avec ce qu'on apprend."
+      },
+      {
+        "id": "why",
+        "zone": "why",
+        "title": "Pourquoi maintenant ?",
+        "text": "Claire résume sa décision en trois arguments, tous tirés du travail des postes précédents : les tickets du support, les chiffres de la data, et une estimation d'effort réaliste. C'est ce qu'elle présentera en comité produit."
+      }
+    ]
+  }
+}

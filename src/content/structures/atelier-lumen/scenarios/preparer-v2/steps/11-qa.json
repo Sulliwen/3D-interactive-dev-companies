@@ -1,0 +1,133 @@
+{
+  "role": "qa",
+  "order": 11,
+  "featureStep": "On vérifie la v2, on répète la migration, et on s'assure que la v1 n'a rien perdu",
+  "tagline": "Pour une v2, je teste deux applications à la fois : la nouvelle, qui doit marcher, et l'ancienne, qui ne doit pas casser. Et je fais répéter le déménagement des comptes jusqu'à ce qu'il soit parfait.",
+  "missions": [
+    "Faire tourner les tests de [[non-regression|non-régression]] de la v1 à chaque changement : la v1 doit marcher exactement comme avant.",
+    "Préparer et mener la [[recette]] de la v2 sur iPhone et Android, avec les [[cas-limite|cas limites]] propres aux familles.",
+    "Organiser les répétitions de [[migration-donnees|migration]] sur une copie anonymisée et contrôler qu'aucun compte ni rendez-vous ne se perd.",
+    "Recueillir et trier les retours des premiers testeurs de la [[beta|bêta]]."
+  ],
+  "takeaways": [
+    "La migration a été répétée **trois fois** : 37 comptes perdus à la première, puis 0 à la troisième.",
+    "Les **468 tests de la v1** tournent toujours : une v2 ne doit jamais abîmer l'application que tout le monde utilise encore.",
+    "Le BUG-131 venait d'une erreur d'heure dans la migration : trouvé sur une copie, il n'a touché aucun vrai patient."
+  ],
+  "receivesFrom": {
+    "roles": ["backend", "frontend", "security"],
+    "text": "Le script de migration d'Awa, la v2 de Thomas derrière son interrupteur, et la liste des cas d'accès sensibles préparée par Léa (sécurité)."
+  },
+  "handsOffTo": {
+    "roles": ["backend", "devops"],
+    "text": "Le BUG-131 renvoyé à Awa, puis retesté ; et le feu vert pour qu'Ibrahima (DevOps) ouvre la bêta privée aux premières familles."
+  },
+  "screen": {
+    "component": "qa-console",
+    "toolName": "Lumen Test",
+    "props": {
+      "campaign": "Pocket Santé 2 · Bêta privée · Répétition de migration n° 3",
+      "status": "Sprint 36 · mercredi 28 avril · Inès G.",
+      "suites": [
+        { "label": "Non-régression v1", "passed": 468, "total": 468 },
+        { "label": "Tests v2", "passed": 1140, "total": 1140 },
+        { "label": "Contrôles de migration", "passed": 24, "total": 24 }
+      ],
+      "cases": [
+        { "label": "v1 : annuler un RDV dans 3 jours", "device": "iPhone 13", "result": "pass" },
+        { "label": "v2 : RDV pour Léo, 6 ans", "device": "iPhone 13", "result": "pass" },
+        { "label": "v2 : ajouter un parent âgé au foyer", "device": "Android", "result": "pass" },
+        { "label": "RDV pris en v2, visible dans la v1", "device": "Android", "result": "pass" },
+        { "label": "Revenir à la v1 en un clic", "device": "iPhone 13", "result": "pass" },
+        {
+          "label": "Compte en double rattaché au parent",
+          "device": "Web",
+          "result": "pass",
+          "edge": true
+        },
+        {
+          "label": "Profil qui a 18 ans le jour de la migration",
+          "device": "Android",
+          "result": "pass",
+          "edge": true
+        },
+        {
+          "label": "RDV migré : heure inchangée (10:30)",
+          "device": "iPhone 13",
+          "result": "fail",
+          "edge": true,
+          "bug": "BUG-131"
+        },
+        {
+          "label": "Lecteur d'écran : choix du profil annoncé",
+          "device": "iPhone 13",
+          "result": "pass"
+        },
+        { "label": "Texte en très grande taille (v2)", "device": "Android", "result": "pass" },
+        { "label": "Profil de Léo invisible hors du foyer", "device": "Web", "result": "pass" }
+      ],
+      "bug": {
+        "id": "BUG-131",
+        "title": "Après migration, rendez-vous avancés de 2 h : annulation refusée à tort",
+        "severity": "Bloquante pour la bêta",
+        "device": "iPhone 13 · application 5.0 bêta",
+        "steps": [
+          "Sur la copie anonymisée, choisir un compte v1 avec un rendez-vous lundi 3 mai à 10:30.",
+          "Lancer la répétition de migration n° 2.",
+          "Dans la v2, dimanche 2 mai à 9:45, toucher « Annuler »."
+        ],
+        "expected": "Rendez-vous affiché à 10:30 ; annulation acceptée (24 h 45 avant).",
+        "actual": "Rendez-vous affiché à 08:30 ; « Annulation impossible en ligne ».",
+        "cause": {
+          "text": "La v1 enregistrait déjà les heures en temps universel (UTC). Le script les convertissait une seconde fois depuis l'heure de Paris : −2 h en été. 2 300 rendez-vous touchés dans la copie.",
+          "before": "fromZonedTime(row.starts_at, 'Europe/Paris')",
+          "after": "fromZonedTime(row.starts_at, 'UTC')"
+        },
+        "assignee": "Awa D.",
+        "statusBefore": "Corrigé · à retester",
+        "statusAfter": "Retesté · clos",
+        "retestLabel": "Retester",
+        "when": "Lun. 3 mai · 08:30",
+        "caption": "Capture de la répétition n° 2"
+      }
+    },
+    "annotations": [
+      {
+        "id": "auto-tests",
+        "zone": "auto-tests",
+        "title": "Deux applications à surveiller",
+        "text": "Trois familles de [[test-automatise|tests automatisés]] : les 468 tests de la v1 (la [[non-regression|non-régression]] : rien ne doit avoir cassé), les 1 140 tests de la v2, et 24 contrôles de migration (nombre de comptes, de rendez-vous, de profils avant et après). Tout est au vert."
+      },
+      {
+        "id": "manual-plan",
+        "zone": "manual-plan",
+        "title": "La v1 et la v2, côte à côte",
+        "text": "Le plan de [[recette]] mélange les deux versions. Un rendez-vous pris dans la v2 apparaît-il bien dans la v1 ? Une famille peut-elle revenir à la v1 en un clic ? Pendant des mois, les deux applications vont vivre ensemble : Inès vérifie qu'elles se comprennent."
+      },
+      {
+        "id": "edge-cases",
+        "zone": "edge-cases",
+        "title": "Les cas limites des familles",
+        "text": "Un compte en double à rattacher, un enfant qui a 18 ans le jour même de la migration, un rendez-vous dont l'heure ne doit pas bouger : ce sont les [[cas-limite|cas limites]] propres à la v2. C'est là qu'Inès a trouvé le défaut."
+      },
+      {
+        "id": "bug-report",
+        "zone": "bug-report",
+        "title": "Trouvé sur une copie, pas chez un patient",
+        "text": "Lors de la répétition n° 2, sur la copie [[anonymisation|anonymisée]], le rendez-vous de 10:30 s'affichait à 08:30, et l'annulation était refusée « à moins de 24 h ». Inès décrit le [[bug]] pour qu'on puisse le reproduire. Aucun vrai patient n'a été touché : c'est tout l'intérêt de répéter."
+      },
+      {
+        "id": "bug-cause",
+        "zone": "bug-cause",
+        "title": "Une heure convertie deux fois",
+        "text": "Awa a trouvé la cause : la v1 enregistrait déjà les heures en temps universel, et le script les convertissait une seconde fois. C'est une erreur de [[fuseau-horaire|fuseau horaire]], très fréquente lors d'une [[migration-donnees|migration]]. La correction tient en un mot."
+      },
+      {
+        "id": "retest",
+        "zone": "retest",
+        "title": "Répéter jusqu'à zéro",
+        "text": "Après la correction, la migration a été rejouée une troisième fois : **0 compte perdu**, 0 heure décalée. Cliquez sur « Retester » : le bug passe à « clos ». La [[beta|bêta]] peut ouvrir."
+      }
+    ]
+  }
+}

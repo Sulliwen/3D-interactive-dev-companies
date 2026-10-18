@@ -1,0 +1,38 @@
+[
+  {
+    "id": "cofondateur",
+    "term": "Cofondateur, cofondatrice",
+    "definition": "Une des personnes qui ont créé l'entreprise ensemble. Au début, chacune porte plusieurs métiers à la fois, et partage les risques comme les décisions.",
+    "analogy": "Comme les premiers membres d'un groupe de musique : chacun joue de plusieurs instruments avant que le groupe ne grandisse."
+  },
+  {
+    "id": "levee-de-fonds",
+    "term": "Levée de fonds",
+    "definition": "Une jeune entreprise vend une partie de son capital à des investisseurs en échange d'argent, pour recruter et grandir plus vite que ses seules ventes ne le permettraient.",
+    "analogy": "Comme des amis qui financent votre restaurant en échange d'une part des bénéfices futurs."
+  },
+  {
+    "id": "page-de-destination",
+    "term": "Page de destination",
+    "definition": "Une page web unique qui présente un produit, parfois avant même qu'il existe, et invite à laisser son adresse. Le nombre d'inscrits mesure l'intérêt réel pour l'idée.",
+    "analogy": "Comme une affiche « bientôt ouvert, inscrivez-vous » sur la vitrine d'une boutique encore en travaux."
+  },
+  {
+    "id": "premier-client",
+    "term": "Premier client payant",
+    "definition": "Le premier utilisateur qui accepte de payer pour le produit. C'est la preuve la plus solide qu'un produit résout un vrai problème : beaucoup de gens disent « bonne idée », beaucoup moins sortent leur carte bancaire.",
+    "analogy": "Comme le premier billet de vente épinglé au mur d'un commerce."
+  },
+  {
+    "id": "incubateur",
+    "term": "Incubateur",
+    "definition": "Une structure qui accueille des entreprises tout juste créées : des bureaux partagés, des conseils, des contacts et parfois un premier financement, pendant un ou deux ans.",
+    "analogy": "Comme une couveuse, qui garde les œufs au chaud le temps qu'ils éclosent."
+  },
+  {
+    "id": "raccourci-assume",
+    "term": "Raccourci assumé",
+    "definition": "Une simplification choisie volontairement pour aller plus vite (pas de tests, travail fait à la main…), écrite noir sur blanc avec le moment où il faudra la reprendre. C'est une dette technique décidée, pas subie.",
+    "analogy": "Comme un emprunt pour acheter une voiture : utile si on sait quand et comment on le rembourse."
+  }
+]

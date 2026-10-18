@@ -1,0 +1,23 @@
+{
+  "id": "design",
+  "desk": 6,
+  "title": "Designer UX/UI",
+  "person": {
+    "firstName": "Hugo",
+    "lastName": "Lefèvre",
+    "role": "Designer UX/UI"
+  },
+  "tagline": "Je dessine l'annulation avant qu'une seule ligne de code soit écrite : chaque écran, chaque message, chaque cas difficile.",
+  "missions": [
+    "Imaginer le parcours du patient, du bouton « Annuler » jusqu'au message final, en partant de la recherche utilisateur ([[ux-ui|UX]]).",
+    "Dessiner les [[maquette|maquettes]] de chaque écran, y compris les cas moins joyeux : le refus à moins de 24 h, l'erreur réseau.",
+    "Construire un [[prototype]] cliquable et le faire essayer à de vrais patients avant le développement.",
+    "Tenir à jour le [[design-system]] : les [[composant|composants]], couleurs et textes partagés avec les développeurs.",
+    "Vérifier l'[[accessibilite|accessibilité]] : contrastes, taille des boutons, textes compréhensibles par tous."
+  ],
+  "myth": {
+    "myth": "Le designer « fait joli » à la fin, quand tout le reste est terminé.",
+    "reality": "Le design intervient **avant** le code : il décide de ce que le patient voit, comprend et ressent. La couleur n'est qu'une petite partie du travail ; l'essentiel, c'est que le parcours soit simple et sans piège."
+  },
+  "realTools": ["Figma", "Penpot", "Sketch", "Adobe XD", "Maze"]
+}

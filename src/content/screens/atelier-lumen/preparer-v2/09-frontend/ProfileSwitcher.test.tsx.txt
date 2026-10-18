@@ -1,0 +1,25 @@
+import { render, screen, fireEvent } from '@testing-library/react-native'
+import { ProfileSwitcher } from './ProfileSwitcher'
+import { givenHousehold } from '../testing/fixtures'
+
+describe('ProfileSwitcher', () => {
+  it('affiche un profil par membre du foyer', async () => {
+    givenHousehold(['Sarah', 'Léo', 'Jade'])
+    render(<ProfileSwitcher onSelect={jest.fn()} />)
+    expect(await screen.findAllByRole('button', { name: /Prendre rendez-vous pour/ })).toHaveLength(3)
+  })
+
+  it("transmet le profil choisi à l'écran suivant", async () => {
+    givenHousehold(['Sarah', 'Léo'])
+    const onSelect = jest.fn()
+    render(<ProfileSwitcher onSelect={onSelect} />)
+    fireEvent.press(await screen.findByLabelText('Prendre rendez-vous pour Léo'))
+    expect(onSelect).toHaveBeenCalledWith(expect.objectContaining({ firstName: 'Léo' }))
+  })
+
+  it('propose toujours « Ajouter un proche »', async () => {
+    givenHousehold(['Sarah'])
+    render(<ProfileSwitcher onSelect={jest.fn()} />)
+    expect(await screen.findByText('Ajouter un proche')).toBeTruthy()
+  })
+})

@@ -1,0 +1,36 @@
+import { FlatList } from 'react-native'
+import { Button, ProfileCard, Heading } from '@lumiere/design-system'
+import { useHousehold } from '../api/useHousehold'
+
+export function ProfileSwitcher({ onSelect }: Props) {
+  // @zone api-v2
+  // Les profils du foyer viennent de la nouvelle API : GET /v2/households/me
+  const { profiles, isLoading } = useHousehold()
+  // @end
+
+  return (
+    <>
+      <Heading level={1}>Pour qui est ce rendez-vous ?</Heading>
+
+      // @zone design-system
+      {/* Composants Lumière 2, dessinés par Hugo : aucun style écrit à la main ici */}
+      <FlatList
+        data={profiles}
+        renderItem={({ item }) => (
+          <ProfileCard
+            firstName={item.firstName}
+            age={item.age}
+            accessibilityLabel={`Prendre rendez-vous pour ${item.firstName}`}
+            onPress={() => onSelect(item)}
+          />
+        )}
+      />
+      // @end
+
+      // @zone add-relative
+      {/* Remonté en haut de l'écran après le test n° 6 du prototype (Samir) */}
+      <Button variant="secondary" label="Ajouter un proche" onPress={openAddRelative} />
+      // @end
+    </>
+  )
+}

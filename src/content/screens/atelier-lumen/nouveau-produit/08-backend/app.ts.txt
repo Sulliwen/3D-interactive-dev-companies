@@ -1,0 +1,30 @@
+import express from 'express'
+import { requireNurse } from './auth/requireNurse'
+import { tourneeDuJour } from './tournees/tourneeDuJour'
+import { enregistrerTransmissions } from './transmissions/enregistrerTransmissions'
+
+// @zone adr
+// ADR-001 « Fondations de Tournée » (fusionnée le 9 novembre 2027) :
+// - des technologies que l'équipe maîtrise déjà avec Pocket Santé
+//   (TypeScript, Node.js, PostgreSQL, React Native) : pas d'aventure technique
+//   tant qu'on ne sait pas si le produit trouvera ses clientes ;
+// - les données vivent d'abord sur le téléphone, puis se synchronisent ;
+// - hébergement certifié HDS dès le premier jour (données de santé).
+// @end
+export const app = express()
+app.use(express.json())
+
+// @zone skeleton
+// Le squelette de bout en bout (sprint 0, semaine 1) : une seule route,
+// mais qui traverse tout le système. Téléphone → API → base de données → retour,
+// déployée sur l'hébergement HDS dès le 10 novembre 2027.
+app.get('/sante', (_req, res) => res.json({ statut: 'ok' }))
+app.get('/tournees/aujourdhui', requireNurse, async (req, res) => {
+  res.json(await tourneeDuJour(req.infirmiere))
+})
+// @end
+
+app.post('/transmissions', requireNurse, async (req, res) => {
+  const resultat = await enregistrerTransmissions(req.infirmiere, req.body.transmissions)
+  res.status(201).json(resultat)
+})

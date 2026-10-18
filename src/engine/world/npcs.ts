@@ -119,7 +119,8 @@ function stationPlacement(p: StationPerson): NpcPlacement {
   }
 }
 
-function figurants(): NpcPlacement[] {
+/** Figurants par défaut : café, salle de réunion, mur Scrum. */
+function defaultFigurants(): NpcPlacement[] {
   const meetingChair = floorPlan.boxes.find((b) => b.name === 'meeting_chair_4')!
   return [
     {
@@ -171,15 +172,27 @@ function figurants(): NpcPlacement[] {
   ]
 }
 
-export const npcs: NpcPlacement[] = [...STATION_PEOPLE.map(stationPlacement), ...figurants()]
+/** Assis à une chaise du plan (par son nom), tourné vers `facing`. */
+export function seatedAt(chairName: string, facing: number): Vec2 {
+  const chair = floorPlan.boxes.find((b) => b.name === chairName)
+  if (!chair) throw new Error(`Chaise « ${chairName} » absente du plan`)
+  return seated([chair.position[0], chair.position[2]], facing)
+}
+
+/** Les titulaires des postes : ils restent à leur bureau quel que soit le scénario. */
+export const stationNpcs: NpcPlacement[] = STATION_PEOPLE.map(stationPlacement)
+
+export const figurants: NpcPlacement[] = defaultFigurants()
 
 /** Les personnages debout comme obstacles (collisions, itinéraires). */
-export const npcObstacles: BoxElement[] = npcs
-  .filter((n) => n.standing)
-  .map((n) => ({
-    name: `col_npc_${n.id}`,
-    material: 'fabric',
-    position: [n.position[0], 0.9, n.position[1]],
-    size: [0.5, 1.8, 0.5],
-    collider: true,
-  }))
+export function obstaclesOf(people: readonly NpcPlacement[]): BoxElement[] {
+  return people
+    .filter((n) => n.standing)
+    .map((n) => ({
+      name: `col_npc_${n.id}`,
+      material: 'fabric',
+      position: [n.position[0], 0.9, n.position[1]],
+      size: [0.5, 1.8, 0.5],
+      collider: true,
+    }))
+}

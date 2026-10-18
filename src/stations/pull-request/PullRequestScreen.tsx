@@ -52,7 +52,7 @@ export function PullRequestScreen({ toolName, props: rawProps }: ScreenComponent
           <span>
             {pr.commits} commits · {pr.changedFiles.length} fichiers
           </span>
-          <span className="pr__status-right">pocket-sante</span>
+          <span className="pr__status-right">{pr.repo}</span>
         </>
       }
     >
@@ -66,7 +66,8 @@ export function PullRequestScreen({ toolName, props: rawProps }: ScreenComponent
               <span className={`pr__state ${merged ? 'pr__state--merged' : ''}`}>
                 {merged ? '✓ Fusionnée' : '● Ouverte'}
               </span>
-              <strong>{pr.authors.join(' et ')}</strong> veulent intégrer {pr.commits} commits de{' '}
+              <strong>{pr.authors.join(' et ')}</strong>{' '}
+              {pr.authors.length > 1 ? 'veulent' : 'veut'} intégrer {pr.commits} commits de{' '}
               <code>{pr.branch}</code> dans <code>{pr.base}</code>
             </p>
           </Zone>
@@ -182,7 +183,7 @@ function FilesTab({ pr }: { pr: PullRequestProps }) {
         ))}
       </Zone>
       {pr.diffs.map((d, i) => (
-        <Diff key={d.path} diff={d} zone={i === 0 ? 'diff' : undefined} />
+        <Diff key={`${d.path}-${i}`} diff={d} zone={i === 0 ? 'diff' : undefined} />
       ))}
     </>
   )

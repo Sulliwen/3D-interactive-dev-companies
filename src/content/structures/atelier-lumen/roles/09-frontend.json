@@ -1,0 +1,23 @@
+{
+  "id": "frontend",
+  "desk": 9,
+  "title": "Développeur·se front-end / mobile",
+  "person": {
+    "firstName": "Thomas",
+    "lastName": "Petit",
+    "role": "Développeur front-end / mobile"
+  },
+  "tagline": "Je transforme les maquettes en un vrai écran qui réagit au doigt du patient, et je le relie au serveur.",
+  "missions": [
+    "Reproduire fidèlement les [[maquette|maquettes]] du designer, sur iPhone comme sur Android, en réutilisant les [[composant|composants]] du [[design-system]].",
+    "Relier l'écran à l'[[api|API]] préparée par la développeuse [[back-end]] : envoyer la demande, attendre, afficher la réponse.",
+    "Prévoir tous les cas : succès, refus, réseau coupé, chargement un peu long… Le patient ne doit jamais rester sans explication.",
+    "Rendre l'application utilisable par tous : textes lus par les lecteurs d'écran, boutons assez grands ([[accessibilite|accessibilité]]).",
+    "Écrire des [[test-automatise|tests automatisés]] et vérifier le résultat dans le [[simulateur]] avant de faire relire son code."
+  ],
+  "myth": {
+    "myth": "Le front-end, c'est « juste mettre de la couleur » sur ce que fait le back-end.",
+    "reality": "Le front-end gère aussi des règles, des attentes réseau, des erreurs, l'[[accessibilite|accessibilité]] et des dizaines de modèles de téléphones différents. C'est un vrai travail d'ingénierie, au plus près des utilisateurs."
+  },
+  "realTools": ["VS Code", "React Native", "Flutter", "Xcode", "Android Studio", "Expo"]
+}

@@ -1,6 +1,6 @@
 import { z } from 'zod'
 
-const project = z.enum(['pocket-sante', 'facturo', 'mutuelle'])
+const project = z.enum(['pocket-sante', 'facturo', 'mutuelle', 'tournee'])
 
 export const roadmapPropsSchema = z.object({
   /** Titre de la vue (fenêtre). */
@@ -36,6 +36,9 @@ export const roadmapPropsSchema = z.object({
       highlight: z.boolean().optional(),
     }),
   ),
+  /** Barre d'état : quand la feuille de route a été validée, et à quel rythme elle est revue. */
+  validated: z.string().default('Validée en comité produit le 21 octobre 2026'),
+  review: z.string().default('Revue chaque trimestre'),
   /** « Pourquoi maintenant ? » */
   why: z.array(z.string()).min(1).max(4),
 })

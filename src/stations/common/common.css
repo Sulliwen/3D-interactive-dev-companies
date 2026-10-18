@@ -12,6 +12,7 @@
   --series-1: #3987e5;
   --series-2: #d95926;
   --series-3: #199e70;
+  --series-4: #a77ce8;
   /* États : toujours avec icône + libellé. */
   --status-good: #0ca30c;
   --status-warning: #fab219;
@@ -287,6 +288,10 @@
 
 .kanban__card--mutuelle {
   border-left-color: var(--series-3);
+}
+
+.kanban__card--tournee {
+  border-left-color: var(--series-4);
 }
 
 .kanban__card--highlight {

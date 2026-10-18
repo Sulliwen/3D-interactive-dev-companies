@@ -1,0 +1,32 @@
+import { useEffect, useState } from 'react'
+import { baseLocale } from '../stockage/baseLocale'
+import { api } from '../api'
+import { useReseau } from '../reseau/useReseau'
+
+/** La tournée du jour, affichée tout de suite, même sans réseau. */
+export function useTourneeDuJour() {
+  const [tournee, setTournee] = useState<Passage[]>([])
+  const enLigne = useReseau()
+
+  // @zone local-first
+  // 1. On affiche d'abord ce qui est déjà sur le téléphone : la tournée
+  //    s'ouvre en moins d'une seconde, avec ou sans réseau.
+  useEffect(() => {
+    baseLocale.tourneeDuJour().then(setTournee)
+  }, [])
+  // @end
+
+  // @zone refresh
+  // 2. Puis, s'il y a du réseau, on demande la version à jour au serveur
+  //    et on la range dans la base locale pour la prochaine fois.
+  useEffect(() => {
+    if (!enLigne) return
+    api.get<Passage[]>('/tournees/aujourdhui').then(async (aJour) => {
+      await baseLocale.enregistrerTournee(aJour)
+      setTournee(aJour)
+    })
+  }, [enLigne])
+  // @end
+
+  return tournee
+}

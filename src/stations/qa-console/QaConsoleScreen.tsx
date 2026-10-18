@@ -99,12 +99,14 @@ export function QaConsoleScreen({ toolName, props: rawProps }: ScreenComponentPr
         </div>
         <p className="qa__bug-title">{props.bug.title}</p>
         <div className="qa__bug-body">
-          <PocketSantePhone
-            state="too-late"
-            when={props.bug.when}
-            caption={props.bug.caption}
-            width={118}
-          />
+          {props.bug.when && (
+            <PocketSantePhone
+              state="too-late"
+              when={props.bug.when}
+              caption={props.bug.caption}
+              width={118}
+            />
+          )}
           <div className="qa__bug-details">
             <p className="qa__label">Étapes pour reproduire</p>
             <ol>

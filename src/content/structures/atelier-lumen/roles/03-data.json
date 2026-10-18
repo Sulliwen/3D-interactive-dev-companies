@@ -1,0 +1,23 @@
+{
+  "id": "data",
+  "desk": 3,
+  "title": "Data / analyste",
+  "person": {
+    "firstName": "Julien",
+    "lastName": "Moreau",
+    "role": "Analyste data"
+  },
+  "tagline": "Je transforme les millions de lignes de la base de données en quelques chiffres fiables, pour que l'équipe décide sur des faits.",
+  "missions": [
+    "Interroger la [[base-de-donnees|base de données]] avec des [[requete-sql|requêtes]] pour répondre aux questions de l'équipe produit.",
+    "Construire et maintenir des [[tableau-de-bord|tableaux de bord]] mis à jour automatiquement chaque matin.",
+    "Choisir les bons [[indicateur|indicateurs]] et vérifier qu'ils mesurent vraiment ce qu'on croit.",
+    "Estimer ce que pourrait rapporter une idée **avant** qu'on la construise.",
+    "Protéger la vie privée : travailler sur des données anonymisées, jamais sur des noms de patients."
+  ],
+  "myth": {
+    "myth": "Les chiffres parlent d'eux-mêmes.",
+    "reality": "Un chiffre dépend toujours de sa définition : qu'appelle-t-on un [[rendez-vous-non-honore|rendez-vous non honoré]] ? Un retard de 20 minutes compte-t-il ? L'analyste passe beaucoup de temps à fixer ces règles avec l'équipe, puis à vérifier que les données sont justes."
+  },
+  "realTools": ["Metabase", "Looker Studio", "Tableau", "Power BI", "PostgreSQL", "Python"]
+}

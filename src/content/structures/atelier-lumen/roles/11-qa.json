@@ -1,0 +1,23 @@
+{
+  "id": "qa",
+  "desk": 11,
+  "title": "QA / testeur·se",
+  "person": {
+    "firstName": "Inès",
+    "lastName": "Garcia",
+    "role": "Testeuse QA"
+  },
+  "tagline": "Mon métier, c'est d'essayer de casser l'application avant que les patients ne le fassent par accident.",
+  "missions": [
+    "Préparer le plan de [[recette]] à partir des [[critere-acceptation|critères d'acceptation]] : quoi tester, sur quels téléphones, avec quel résultat attendu.",
+    "Tester à la main sur de vrais iPhone et Android, en se mettant à la place de patients très différents.",
+    "Traquer les [[cas-limite|cas limites]] : 23 h 59, 24 h pile, réseau coupé, double appui sur le bouton…",
+    "Décrire chaque [[bug]] trouvé de façon précise, pour que le développeur puisse le reproduire et le corriger.",
+    "Faire grandir la base de [[test-automatise|tests automatisés]], pour qu'un bug corrigé ne revienne jamais ([[non-regression|non-régression]])."
+  ],
+  "myth": {
+    "myth": "Les testeurs cliquent un peu partout au hasard en espérant tomber sur une erreur.",
+    "reality": "La QA suit un plan précis, construit à partir des règles du produit, et cherche méthodiquement là où les erreurs sont probables. Elle travaille avec les développeurs dès le début, pas seulement à la fin."
+  },
+  "realTools": ["Xray", "TestRail", "Jira", "Playwright", "Appium", "BrowserStack"]
+}

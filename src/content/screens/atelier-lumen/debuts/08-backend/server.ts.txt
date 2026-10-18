@@ -1,0 +1,48 @@
+import express from 'express'
+import { db } from './db'
+import { sendEmail } from './email'
+import { requireAuth, requireCabinet } from './auth'
+
+// Pocket Santé · première version (Awa, août → octobre 2023)
+// Tout le serveur tient dans ce fichier : c'est voulu (voir RACCOURCIS.md).
+const app = express()
+app.use(express.json())
+
+// @zone concierge
+// Raccourci n° 1 : pas de lien avec le logiciel d'agenda des cabinets.
+// Les créneaux libres sont saisis à la main, chaque matin, dans /admin.
+app.post('/admin/slots', requireAuth, requireCabinet, async (req, res) => {
+  const slots = await db.slots.insertMany(req.body.slots)
+  res.json({ added: slots.length })
+})
+// @end
+
+app.get('/slots', requireAuth, async (req, res) => {
+  const slots = await db.slots.findFree({ practitionerId: req.query.practitioner })
+  res.json(slots)
+})
+
+app.post('/appointments', requireAuth, async (req, res) => {
+  const slot = await db.slots.reserve(req.body.slotId, req.user.id)
+  if (!slot) return res.status(409).json({ error: 'Ce créneau vient d’être pris.' })
+  // @zone email
+  // Raccourci n° 5 : un e-mail de rappel plutôt qu'un SMS (gratuit, et ça suffit pour la bêta).
+  await sendEmail(req.user.email, 'Votre rendez-vous est confirmé', slot)
+  // @end
+  res.status(201).json(slot)
+})
+
+// @zone not-a-shortcut
+// PAS un raccourci : un patient ne voit que SES rendez-vous, un cabinet que les siens.
+// Données de santé : serveur chez un hébergeur certifié HDS, base chiffrée.
+app.get('/appointments', requireAuth, async (req, res) => {
+  res.json(await db.appointments.findByPatient(req.user.id))
+})
+// @end
+
+// @zone todo
+// TODO (raccourci n° 2) : aucun test automatique pour l'instant.
+// À rembourser avant le lancement public : Thomas s'en charge.
+// @end
+
+app.listen(3000)

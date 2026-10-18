@@ -1,0 +1,130 @@
+{
+  "role": "devops",
+  "order": 11,
+  "featureStep": "Toute l'infrastructure est créée, et le pilote s'ouvre aux infirmières",
+  "tagline": "Sur un nouveau produit, il n'y a rien : pas de serveur, pas de chaîne de mise en ligne. Je la construis la première semaine, pour que l'équipe livre dès le début.",
+  "missions": [
+    "Créer l'infrastructure de Tournée sur l'hébergement [[hds|HDS]], décrite dans du code pour pouvoir la reconstruire à l'identique.",
+    "Monter la [[pipeline-ci-cd|chaîne de mise en ligne]] dès la première semaine : chaque [[fusion]] est testée puis déployée automatiquement.",
+    "Ouvrir le [[pilote]] par étapes, avec un [[feature-flag|interrupteur]] : l'équipe, un premier cabinet, puis les sept.",
+    "Préparer le [[retour-arriere|retour arrière]] et les sauvegardes avant d'accueillir la première infirmière."
+  ],
+  "takeaways": [
+    "La chaîne de mise en ligne existe depuis la première semaine : le pipeline n° 1 a tourné le 10 novembre, celui-ci est le n° 212.",
+    "Livrer souvent dès le début rend chaque mise en ligne banale, et donc moins risquée.",
+    "Même pour 20 infirmières, l'ouverture se fait par étapes : un premier cabinet de 3 d'abord, les sept cabinets ensuite."
+  ],
+  "receivesFrom": {
+    "roles": ["code-review", "security", "scrum-master"],
+    "text": "Un dépôt avec des règles vérifiées (Marc), le feu vert de Léa pour les données de santé, et le rythme de sprints lancé par Fatou."
+  },
+  "handsOffTo": {
+    "roles": ["qa", "monitoring"],
+    "text": "Un pilote ouvert à 20 infirmières : Inès trie leurs retours, Camille mesure si elles l'utilisent vraiment."
+  },
+  "screen": {
+    "component": "pipeline",
+    "toolName": "Lumen CI",
+    "props": {
+      "run": {
+        "id": 212,
+        "title": "Tournée · ouverture du pilote",
+        "trigger": "Déclenché par Ibrahima · lundi 10 janvier 2028 · feu vert de Léa et Inès",
+        "branch": "main",
+        "commit": "a3f9e27",
+        "target": "tournee · hébergement HDS"
+      },
+      "stages": [
+        {
+          "label": "Construction",
+          "detail": "API et application mobile",
+          "duration": "1 min 12 s"
+        },
+        {
+          "label": "Tests",
+          "detail": "186 tests, dont 6 sans réseau",
+          "duration": "2 min 40 s",
+          "zone": "stage-tests"
+        },
+        {
+          "label": "Analyse de sécurité",
+          "detail": "Code et dépendances",
+          "duration": "1 min 30 s"
+        },
+        {
+          "label": "Infrastructure",
+          "detail": "Décrite dans le code · hébergement HDS",
+          "duration": "3 min 05 s",
+          "zone": "stage-infra"
+        },
+        { "label": "Déploiement", "detail": "API · application de test", "duration": "2 min 20 s" },
+        { "label": "Pilote", "detail": "Ouverture par étapes", "duration": "en cours" }
+      ],
+      "rollout": {
+        "flag": "pilote-tournee",
+        "steps": [
+          {
+            "percent": 0,
+            "label": "Équipe Atelier Lumen · 5 comptes de test",
+            "check": "Une tournée complète faite en mode avion"
+          },
+          {
+            "percent": 15,
+            "label": "Cabinet des Tilleuls, Villefranche · 3 infirmières",
+            "check": "Deux journées sans transmission perdue"
+          },
+          {
+            "percent": 100,
+            "label": "7 cabinets du Rhône · 20 infirmières",
+            "check": "Retours lus chaque jour par Inès et Samir"
+          }
+        ],
+        "rollbackMessage": "Pilote coupé : les infirmières retrouvent leur cahier et leurs SMS ; leurs transmissions restent sauvegardées. (Simulation : rien n'a été coupé pour de vrai.)"
+      },
+      "log": [
+        "$ lumen-ci run --pipeline 212",
+        "▸ build      api + app ok (1m12s)",
+        "▸ tests      186 passed · offline 6/6 (2m40s)",
+        "▸ security   0 critical · react-native-sqlite 6.0.3 ✓",
+        "▸ infra      plan: 0 to add, 2 to change · host: HDS (fr) ✓",
+        "▸ deploy     api v0.9.0 · health ok",
+        "$ flag pilote-tournee --cohort equipe          # 5 comptes de test",
+        "$ flag pilote-tournee --cohort cabinet-tilleuls  # 3 infirmières",
+        "$ flag pilote-tournee --cohort pilote-complet    # 20 infirmières, 7 cabinets",
+        "  ✓ pilote-tournee on · sauvegarde chiffrée vérifiée à 02:00"
+      ]
+    },
+    "annotations": [
+      {
+        "id": "pipeline-header",
+        "zone": "pipeline-header",
+        "title": "Le pipeline n° 212",
+        "text": "Le tout premier a tourné le 10 novembre, au 3e jour du [[sprint-zero|sprint 0]]. Depuis, chaque [[fusion]] passe par cette [[pipeline-ci-cd|chaîne]] : 212 fois en deux mois. Mettre en ligne est devenu un geste ordinaire."
+      },
+      {
+        "id": "stage-infra",
+        "zone": "stage-infra",
+        "title": "Une infrastructure écrite dans le code",
+        "text": "Serveurs, base de données, sauvegardes : tout est décrit dans des fichiers, relus comme du code. Si l'hébergement [[hds|HDS]] devait être reconstruit, il le serait à l'identique, en quelques minutes."
+      },
+      {
+        "id": "stage-tests",
+        "zone": "stage-tests",
+        "title": "Des tests sans réseau",
+        "text": "Parmi les 186 [[test-automatise|tests]], six coupent le réseau exprès, comme celui de Thomas. Si l'un d'eux échoue, rien ne part chez les infirmières."
+      },
+      {
+        "id": "rollout",
+        "zone": "rollout",
+        "title": "Un pilote ouvert par étapes",
+        "text": "D'abord l'équipe, puis le cabinet des Tilleuls (3 infirmières), puis les 7 cabinets. Chaque étape a sa condition pour passer à la suivante. C'est un [[deploiement-progressif|déploiement progressif]], même pour 20 personnes."
+      },
+      {
+        "id": "feature-flag",
+        "zone": "feature-flag",
+        "title": "Un interrupteur pour le pilote",
+        "text": "L'[[feature-flag|interrupteur]] `pilote-tournee` décide qui a accès à Tournée. En cas de problème grave, un clic coupe tout ; les transmissions restent sauvegardées. Essayez le bouton de [[retour-arriere|retour arrière]]."
+      }
+    ]
+  }
+}

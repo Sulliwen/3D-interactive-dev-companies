@@ -61,6 +61,9 @@ export function SprintBoardScreen({ toolName, props: rawProps }: ScreenComponent
               <span className="sb__legend--pocket-sante">Pocket Santé</span>
               <span className="sb__legend--facturo">Facturo</span>
               <span className="sb__legend--mutuelle">Mutuelle Horizon</span>
+              {props.columns.some((c) => c.cards.some((k) => k.project === 'tournee')) && (
+                <span className="sb__legend--tournee">Tournée</span>
+              )}
             </p>
           </Zone>
 

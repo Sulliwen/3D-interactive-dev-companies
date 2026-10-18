@@ -1,0 +1,89 @@
+{
+  "role": "backend",
+  "order": 3,
+  "featureStep": "La première version en huit semaines, avec des raccourcis écrits",
+  "tagline": "Je suis la [[cofondateur|cofondatrice]] technique : toute seule, je fais le serveur, la base de données, la sécurité et la mise en ligne. Pour aller vite, je choisis mes raccourcis… et je les écris.",
+  "missions": [
+    "Construire la première version : prise de rendez-vous côté patient, espace cabinet, rappels.",
+    "Choisir l'hébergement et protéger les données de santé (le travail de Léa, plus tard).",
+    "Mettre en ligne moi-même chaque nouvelle version (le travail d'Ibrahima, plus tard).",
+    "Tenir la liste des [[raccourci-assume|raccourcis assumés]] et décider avec Claire quand les rembourser.",
+    "Recruter et accompagner Thomas, le premier développeur de l'équipe."
+  ],
+  "takeaways": [
+    "Une première version n'a pas besoin d'être parfaite : elle doit permettre d'apprendre vite avec de vrais utilisateurs. **Huit semaines**, pas un an.",
+    "Un [[raccourci-assume|raccourci]] devient dangereux quand on l'oublie. Awa les écrit, avec le moment où il faudra les reprendre : c'est une [[dette-technique|dette]] choisie, pas subie.",
+    "Certaines choses ne se négocient jamais, même au début : les données de santé sont hébergées chez un hébergeur certifié [[hds|HDS]] dès le premier jour."
+  ],
+  "receivesFrom": {
+    "roles": ["design", "product-manager"],
+    "text": "La maquette d'Hugo, testée et validée, et les 412 inscrits qui attendent la bêta. Claire a obtenu une place à l'[[incubateur]] : un bureau, dans un coin de ce plateau."
+  },
+  "handsOffTo": {
+    "roles": ["frontend"],
+    "text": "Une version web qui fonctionne, ouverte en bêta à 3 cabinets le 6 novembre 2023, et une liste de raccourcis à rembourser. Thomas, recruté en octobre, construit l'application mobile et rembourse le premier."
+  },
+  "screen": {
+    "component": "code-editor",
+    "toolName": "Atelier Code",
+    "props": {
+      "project": "pocket-sante",
+      "branch": "main",
+      "folder": "src",
+      "explorer": ["admin/", "web/", "deploy.sh", "package.json", "README.md"],
+      "files": [
+        { "name": "server.ts", "source": "atelier-lumen/debuts/08-backend/server.ts.txt" },
+        { "name": "RACCOURCIS.md", "source": "atelier-lumen/debuts/08-backend/RACCOURCIS.md.txt" }
+      ],
+      "initialFile": 0,
+      "terminal": {
+        "command": "./deploy.sh",
+        "lines": [
+          {
+            "kind": "info",
+            "text": "Copie du code sur le serveur (hébergeur certifié HDS, Lyon)…"
+          },
+          { "kind": "pass", "text": "Base de données chiffrée · sauvegarde de la nuit vérifiée" },
+          { "kind": "pass", "text": "Redémarrage du serveur unique · 4 s d'interruption" },
+          { "kind": "info", "text": "Tests automatiques : aucun (raccourci n° 2)" },
+          {
+            "kind": "summary",
+            "text": "En ligne · vendredi 13 octobre 2023, 18:42 · déployé par Awa"
+          }
+        ]
+      }
+    },
+    "annotations": [
+      {
+        "id": "one-file",
+        "zone": "tabs",
+        "title": "Tout dans un seul fichier",
+        "text": "Dans les autres visites, le code de Pocket Santé est rangé en dizaines de dossiers. Ici, en octobre 2023, tout le serveur tient dans `server.ts`. Ce n'est pas de la négligence : à une seule développeuse, c'est le plus rapide à écrire et à comprendre."
+      },
+      {
+        "id": "concierge",
+        "zone": "concierge",
+        "title": "Faire à la main ce qui n'est pas encore automatisé",
+        "text": "Relier Pocket Santé aux logiciels d'agenda des cabinets aurait pris des mois. Raccourci : chaque matin, les créneaux libres sont saisis à la main. Avec 3 cabinets, cela prend une heure par jour ; avec 300, ce serait impossible. Le raccourci a une date de fin."
+      },
+      {
+        "id": "not-a-shortcut",
+        "zone": "not-a-shortcut",
+        "title": "Ce qui n'est jamais un raccourci",
+        "text": "Un patient ne voit que ses propres rendez-vous, et les données sont chez un hébergeur certifié [[hds|HDS]]. Même pressée, Awa ne transige pas là-dessus : une fuite de données de santé ferait disparaître la jeune entreprise, et ferait du tort aux patients."
+      },
+      {
+        "id": "list",
+        "zone": "list",
+        "title": "Une dette écrite noir sur blanc",
+        "text": "Ouvrez l'onglet `RACCOURCIS.md` : chaque [[raccourci-assume|raccourci]] est écrit avec son risque et le moment où il faudra le rembourser. Le n° 2 (aucun test) sera remboursé par Thomas en mars 2024 ; le n° 3 (mise en ligne à la main) par Ibrahima, à son arrivée en septembre 2024."
+      },
+      {
+        "id": "terminal",
+        "zone": "terminal",
+        "title": "Mettre en ligne… à la main",
+        "text": "Pas encore de [[pipeline-ci-cd|chaîne automatique]] : Awa lance elle-même le script `./deploy.sh`, et le serveur s'arrête quelques secondes. Si elle est malade, personne d'autre ne sait le faire. Comparez avec le poste DevOps des autres visites."
+      }
+    ]
+  }
+}

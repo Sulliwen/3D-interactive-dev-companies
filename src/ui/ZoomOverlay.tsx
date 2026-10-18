@@ -1,6 +1,7 @@
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
-import { getStationByNumber } from '../content/loader'
+import { stationAtDesk } from '../content/loader'
 import { useGameStore } from '../state/useGameStore'
+import { useVisit } from '../state/visit'
 import { useEscape } from './escapeStack'
 import { StationSheet } from './StationSheet'
 
@@ -13,7 +14,8 @@ export function ZoomOverlay() {
   const closeStation = useGameStore((s) => s.closeStation)
   const setSheetWidth = useGameStore((s) => s.setSheetWidth)
   const requestAnnotation = useGameStore((s) => s.requestAnnotation)
-  const station = active === null ? undefined : getStationByNumber(active)
+  const visit = useVisit()
+  const station = active === null ? undefined : stationAtDesk(visit, active)
   const panel = useRef<HTMLElement>(null)
   const [narrow, setNarrow] = useState(() => window.innerWidth < NARROW)
   const [sheetOpen, setSheetOpen] = useState(() => window.innerWidth >= NARROW)
@@ -66,12 +68,12 @@ export function ZoomOverlay() {
         )}
       </div>
 
-      {station.details && (
+      {station.screen && (
         <div className="zoom__hint">
           <button
             type="button"
             className="button"
-            onClick={() => requestAnnotation(station.details!.screen.annotations[0]!.id)}
+            onClick={() => requestAnnotation(station.screen!.annotations[0]!.id)}
           >
             ▶ Parcourir les explications
           </button>

@@ -149,7 +149,7 @@ export function SecurityReviewScreen({ toolName, props: rawProps }: ScreenCompon
             </div>
 
             <Zone id="audit-log" className="sr__card sr__log">
-              <p className="sr__card-title">Journal d'accès · annulations (extrait)</p>
+              <p className="sr__card-title">{props.auditTitle}</p>
               <table>
                 <thead>
                   <tr>

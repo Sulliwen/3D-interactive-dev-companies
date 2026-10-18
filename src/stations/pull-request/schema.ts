@@ -16,6 +16,8 @@ const comment = z.object({
 
 export const pullRequestPropsSchema = z.object({
   number: z.number().int().positive(),
+  /** Dépôt de code (barre d'état). */
+  repo: z.string().default('pocket-sante'),
   title: z.string(),
   authors: z.array(z.string()).min(1),
   branch: z.string(),

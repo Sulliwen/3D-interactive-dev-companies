@@ -3,7 +3,7 @@ import { z } from 'zod'
 const card = z.object({
   id: z.string(),
   title: z.string(),
-  project: z.enum(['pocket-sante', 'facturo', 'mutuelle']),
+  project: z.enum(['pocket-sante', 'facturo', 'mutuelle', 'tournee']),
   estimate: z.number().optional(),
   assignee: z.string().optional(),
   tag: z.string().optional(),

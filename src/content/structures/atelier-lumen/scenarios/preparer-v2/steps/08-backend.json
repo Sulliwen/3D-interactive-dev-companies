@@ -1,0 +1,117 @@
+{
+  "role": "backend",
+  "order": 8,
+  "featureStep": "On construit l'API v2 à côté de la v1, et on prépare la migration des comptes",
+  "tagline": "Je construis les fondations de la v2 sans débrancher la v1 : deux versions de l'API qui répondent en même temps, et un déménagement des comptes où rien ne doit se perdre.",
+  "missions": [
+    "Construire la nouvelle [[api]] `/v2` (foyers, profils, rendez-vous pour un proche) à côté de la `/v1`, qui continue de répondre.",
+    "Écrire le script de [[migration-donnees|migration]] qui transforme chaque compte de la v1 en foyer, sans perdre un seul rendez-vous.",
+    "Répéter cette migration sur une copie [[anonymisation|anonymisée]] de la base, et la rendre relançable sans dégât.",
+    "Écrire les [[test-automatise|tests automatisés]] de la v2, et continuer de corriger la v1 quand c'est mon tour « de garde »."
+  ],
+  "takeaways": [
+    "Grâce au [[version-api|versionnement]], `/v1` et `/v2` répondent en même temps : la v1 continue de servir 120 000 patients pendant que la v2 se construit.",
+    "Une migration se **répète** plusieurs fois sur une copie anonymisée avant d'être faite pour de vrai : elle doit pouvoir être relancée sans rien dupliquer.",
+    "Les 4 200 comptes en double repérés par Julien deviennent des profils d'enfants, rattachés au foyer de leur parent."
+  ],
+  "receivesFrom": {
+    "roles": ["code-review", "product-owner", "scrum-master"],
+    "text": "L'architecture décidée dans l'[[adr|ADR-007]] (Marc), les épopées « Foyer et profils » et « Migration des comptes » (Mathilde) et les sprints planifiés par Fatou."
+  },
+  "handsOffTo": {
+    "roles": ["frontend", "qa", "security"],
+    "text": "Une API v2 que l'application de Thomas peut appeler, et un script de migration qu'Inès (QA) va répéter et que Léa (sécurité) va vérifier."
+  },
+  "screen": {
+    "component": "code-editor",
+    "toolName": "Atelier Code",
+    "props": {
+      "project": "pocket-sante-api",
+      "branch": "feature/v2-foyers",
+      "folder": "migrations",
+      "explorer": ["src/v1/", "src/v2/", "src/database/", "package.json", "README.md"],
+      "files": [
+        {
+          "name": "app.ts",
+          "source": "atelier-lumen/preparer-v2/08-backend/app.ts.txt"
+        },
+        {
+          "name": "migrateAccountsToHouseholds.ts",
+          "source": "atelier-lumen/preparer-v2/08-backend/migrateAccountsToHouseholds.ts.txt"
+        },
+        {
+          "name": "migrateAccountsToHouseholds.test.ts",
+          "source": "atelier-lumen/preparer-v2/08-backend/migrateAccountsToHouseholds.test.ts.txt"
+        }
+      ],
+      "initialFile": 1,
+      "terminal": {
+        "command": "npm run migrate:households -- --dry-run --database copie-anonymisee",
+        "lines": [
+          {
+            "kind": "info",
+            "text": "Essai à blanc sur la copie anonymisée · 96 400 comptes v1"
+          },
+          {
+            "kind": "pass",
+            "text": "92 200 comptes → 92 200 foyers (profil principal)"
+          },
+          {
+            "kind": "pass",
+            "text": "4 200 comptes en double → profils d'enfants rattachés à un parent"
+          },
+          {
+            "kind": "pass",
+            "text": "1 236 400 rendez-vous repris · heures vérifiées (UTC → Europe/Paris)"
+          },
+          {
+            "kind": "pass",
+            "text": "Relance : 0 doublon créé"
+          },
+          {
+            "kind": "summary",
+            "text": "0 compte perdu · 0 erreur · Durée 41 min (rien n'a été écrit)"
+          }
+        ]
+      }
+    },
+    "annotations": [
+      {
+        "id": "versions",
+        "zone": "versions",
+        "title": "Deux versions en même temps",
+        "text": "Ces deux lignes résument l'[[adr|ADR-007]] : `/v1` et `/v2` répondent en même temps. L'ancienne application continue d'appeler la v1 ; la nouvelle appelle la v2. C'est le [[version-api|versionnement de l'API]] : on peut construire du neuf sans débrancher l'ancien."
+      },
+      {
+        "id": "household",
+        "zone": "household",
+        "title": "Un compte devient un foyer",
+        "text": "Le cœur de la v2 : la v1 connaissait des **comptes** (une personne), la v2 connaît des **foyers** (plusieurs profils). Le script de [[migration-donnees|migration]] transforme chacun des 96 400 comptes. Le titulaire devient le profil principal de son foyer."
+      },
+      {
+        "id": "duplicates",
+        "zone": "duplicates",
+        "title": "Les bricolages réparés",
+        "text": "Vous vous souvenez des 4 200 comptes en double repérés par Julien (Data) ? Le script les reconnaît (même téléphone) et les rattache au foyer du parent, comme profils d'enfants. Le bricolage des parents disparaît, sans qu'ils aient rien à faire."
+      },
+      {
+        "id": "idempotent",
+        "zone": "idempotent",
+        "title": "Relançable sans dégât",
+        "text": "Si la migration s'arrête au milieu (panne, coupure), on doit pouvoir la relancer sans créer de doublons. Cette ligne vérifie d'abord si le compte a déjà été migré. Les développeurs disent que le script est « idempotent » : le lancer une fois ou dix fois donne le même résultat."
+      },
+      {
+        "id": "dry-run",
+        "zone": "dry-run",
+        "title": "La répétition générale",
+        "text": "En « essai à blanc », le script calcule tout mais n'écrit rien. Awa l'a lancé sur une copie [[anonymisation|anonymisée]] de la base : de vrais volumes, aucune vraie donnée de santé. Le terminal montre le résultat : **0 compte perdu** sur 96 400."
+      },
+      {
+        "id": "timezone",
+        "zone": "timezone",
+        "title": "Une heure qui a failli tout décaler",
+        "text": "Cette ligne a été corrigée après la répétition n° 2. La v1 enregistrait déjà les heures en temps universel ; le script les convertissait une seconde fois depuis l'heure de Paris. Résultat : des rendez-vous avancés de deux heures. C'est une erreur classique de [[fuseau-horaire|fuseau horaire]]. Inès (QA) l'a trouvée : c'est le BUG-131."
+      }
+    ]
+  }
+}

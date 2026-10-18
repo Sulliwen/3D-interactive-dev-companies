@@ -1,0 +1,139 @@
+{
+  "role": "data",
+  "order": 2,
+  "featureStep": "On estime combien d'infirmières sont concernées, et prêtes à payer",
+  "tagline": "Samir a montré que le problème existe. Moi, je vérifie qu'il concerne assez de monde pour qu'un produit en vive.",
+  "missions": [
+    "Estimer la taille du marché : combien d'infirmières libérales, où, en cabinet ou seules.",
+    "Envoyer un questionnaire pour savoir si le problème vu en entretien est partagé à grande échelle.",
+    "Mesurer l'intérêt réel avec une page de présentation et une liste d'attente, avant que le produit existe.",
+    "Dire clairement ce que les chiffres ne prouvent pas : s'inscrire sur une liste n'est pas payer."
+  ],
+  "takeaways": [
+    "Les entretiens disent **pourquoi** ; les chiffres disent **combien**. Il faut les deux pour décider.",
+    "On peut mesurer l'intérêt pour un produit qui n'existe pas encore : 640 infirmières se sont inscrites sur une liste d'attente.",
+    "Julien présente une fourchette et ses limites, pas un chiffre magique : une [[hypothese|hypothèse]] reste à vérifier, le paiement."
+  ],
+  "receivesFrom": {
+    "roles": ["ux-research"],
+    "text": "Le problème qualifié par Samir : les transmissions entre collègues, citées dans 13 entretiens sur 15."
+  },
+  "handsOffTo": {
+    "roles": ["product-manager"],
+    "text": "Une taille de marché, un intérêt mesuré et une projection de revenus, pour le comité où Claire défendra (ou non) la suite."
+  },
+  "screen": {
+    "component": "analytics-dashboard",
+    "toolName": "Lumen Analytics",
+    "props": {
+      "dashboard": "Tournée · taille du marché et intérêt",
+      "period": "Exploration · 6 juillet → 10 septembre 2027",
+      "tiles": [
+        {
+          "label": "Infirmiers libéraux en France",
+          "value": "≈ 100 000",
+          "detail": "estimation · 11 500 en Auvergne-Rhône-Alpes"
+        },
+        {
+          "label": "Exercent en cabinet de groupe",
+          "value": "62 %",
+          "detail": "la cible de Tournée"
+        },
+        {
+          "label": "Réponses au questionnaire",
+          "value": "214",
+          "detail": "en 3 semaines",
+          "status": "good"
+        },
+        {
+          "label": "Inscrits sur la liste d'attente",
+          "value": "640",
+          "detail": "en 10 semaines, sans publicité",
+          "status": "good"
+        }
+      ],
+      "trend": {
+        "title": "Inscriptions sur la liste d'attente, par semaine",
+        "seriesLabel": "Inscriptions",
+        "labels": ["S1", "S2", "S3", "S4", "S5", "S6", "S7", "S8", "S9", "S10"],
+        "values": [35, 48, 52, 61, 66, 70, 74, 76, 79, 79],
+        "unit": "",
+        "yMax": 100
+      },
+      "breakdown": {
+        "title": "Ce qui leur fait perdre le plus de temps (214 réponses, %)",
+        "valueLabel": "% des réponses",
+        "bars": [
+          {
+            "label": "Transmissions",
+            "value": 41,
+            "highlight": true
+          },
+          {
+            "label": "Itinéraire",
+            "value": 19
+          },
+          {
+            "label": "Facturation",
+            "value": 17
+          },
+          {
+            "label": "Matériel",
+            "value": 12
+          },
+          {
+            "label": "Autre",
+            "value": 11
+          }
+        ]
+      },
+      "query": {
+        "title": "Inscrits par type d'exercice",
+        "lines": [
+          "SELECT exercice, COUNT(*) AS inscrits",
+          "FROM liste_attente_tournee",
+          "WHERE inscrit_le BETWEEN '2027-07-06' AND '2027-09-10'",
+          "GROUP BY exercice;"
+        ],
+        "result": "cabinet de groupe : 451 · seule : 189 → 70 % en cabinet"
+      },
+      "hypothesis": {
+        "title": "Et si 2 % s'abonnaient ?",
+        "text": "Si 2 % des infirmiers libéraux de France payaient 19 € par mois. La région seule ne rapporterait que 52 000 € par an : il faudra viser tout le pays.",
+        "value": "≈ 456 000 € par an"
+      }
+    },
+    "annotations": [
+      {
+        "id": "tiles",
+        "zone": "tiles",
+        "title": "Un marché, en ordres de grandeur",
+        "text": "Julien ne cherche pas un chiffre exact : il veut savoir si le marché se compte en centaines ou en dizaines de milliers. Environ 100 000 infirmiers libéraux, dont 62 % en cabinet de groupe : ceux qui ont des collègues à qui transmettre."
+      },
+      {
+        "id": "trend",
+        "zone": "trend",
+        "title": "Mesurer l'intérêt sans produit",
+        "text": "Hugo a publié une simple page qui décrit Tournée, avec un bouton « Prévenez-moi au lancement ». **640 inscriptions** en 10 semaines, sans publicité : le signe d'un vrai besoin. Mais s'inscrire est gratuit ; payer est une autre [[hypothese|hypothèse]]."
+      },
+      {
+        "id": "breakdown",
+        "zone": "breakdown",
+        "title": "Le questionnaire confirme les entretiens",
+        "text": "Samir avait entendu « transmissions » dans 13 entretiens sur 15. Sur 214 réponses, c'est encore la première perte de temps (41 %). Ce qu'on voit sur 15 personnes se vérifie à grande échelle."
+      },
+      {
+        "id": "query",
+        "zone": "query",
+        "title": "Qui s'inscrit ?",
+        "text": "70 % des inscrites travaillent en cabinet de groupe, plus que dans la population (62 %). C'est logique : le problème des transmissions se pose quand on partage ses patients. Tournée visera d'abord les cabinets."
+      },
+      {
+        "id": "hypothesis",
+        "zone": "hypothesis",
+        "title": "Une projection prudente",
+        "text": "2 % d'abonnées, c'est une hypothèse modeste. Elle montre que Tournée pourrait faire vivre une petite équipe, à condition de viser toute la France. De quoi justifier trois mois d'essai, pas encore une grande équipe permanente."
+      }
+    ]
+  }
+}

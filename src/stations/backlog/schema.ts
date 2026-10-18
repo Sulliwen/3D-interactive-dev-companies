@@ -6,7 +6,7 @@ export const backlogItemSchema = z.object({
   /** Identifiant du ticket (ex. PS-142). */
   id: z.string(),
   title: z.string(),
-  project: z.enum(['pocket-sante', 'facturo', 'mutuelle']),
+  project: z.enum(['pocket-sante', 'facturo', 'mutuelle', 'tournee']),
   /** Estimation en points ; `null` : pas encore estimée. */
   estimate: z.number().nullable(),
   /** Prête pour un sprint, à affiner, ou simple idée. */

@@ -1,0 +1,23 @@
+{
+  "id": "support",
+  "desk": 1,
+  "title": "Support client",
+  "person": {
+    "firstName": "Lucie",
+    "lastName": "Martin",
+    "role": "Chargée de support client"
+  },
+  "tagline": "Je suis la première à entendre les patients quand quelque chose coince. Leurs messages sont souvent le point de départ d'une nouvelle fonctionnalité.",
+  "missions": [
+    "Répondre aux patients et aux cabinets médicaux qui écrivent au support, avec des réponses claires et humaines.",
+    "Classer chaque [[ticket]] par motif, pour que l'équipe sache **ce qui revient le plus souvent**.",
+    "Chercher une solution immédiate quand c'est possible (ici : prévenir le cabinet pour libérer le créneau).",
+    "Faire l'[[escalade|escalade]] vers l'équipe produit quand un problème touche beaucoup de monde.",
+    "Partager chaque mois les tendances du support avec la Product Manager et le chercheur UX."
+  ],
+  "myth": {
+    "myth": "Le support, c'est juste répondre au téléphone et aux mails, sans lien avec la fabrication du produit.",
+    "reality": "Le support est les oreilles de l'entreprise. Ses chiffres guident les priorités : la fonctionnalité « annuler un rendez-vous » est née ici, de centaines de messages comme celui de Sophie."
+  },
+  "realTools": ["Zendesk", "Freshdesk", "Intercom", "HubSpot Service Hub", "Crisp"]
+}

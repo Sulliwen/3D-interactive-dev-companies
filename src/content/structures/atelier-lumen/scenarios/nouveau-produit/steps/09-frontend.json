@@ -1,0 +1,94 @@
+{
+  "role": "frontend",
+  "order": 8,
+  "featureStep": "On construit une application qui marche aussi sans réseau",
+  "tagline": "Karine soigne dans des fermes et des sous-sols où le réseau ne passe pas. Mon application doit marcher là-bas, pas seulement au bureau.",
+  "missions": [
+    "Construire l'application mobile de Tournée à partir du prototype corrigé de Hugo.",
+    "La rendre utilisable [[hors-connexion|hors connexion]] : données gardées sur le téléphone, envoi automatique au retour du réseau.",
+    "Respecter les besoins vus au test : transmissions en premier, gros boutons utilisables avec des gants.",
+    "Écrire des [[test-automatise|tests automatisés]] qui coupent le réseau exprès."
+  ],
+  "takeaways": [
+    "« Hors connexion d'abord » : l'application lit le téléphone avant le serveur, et s'ouvre en moins d'une seconde, même en mode avion.",
+    "Une transmission écrite sans réseau attend dans une file d'envoi, puis part toute seule : Karine n'a rien à faire.",
+    "Ce choix vient des tournées accompagnées par Samir : sans le terrain, personne n'y aurait pensé."
+  ],
+  "receivesFrom": {
+    "roles": ["design", "backend", "product-owner"],
+    "text": "Le prototype de Hugo, l'API d'Awa et les critères de Mathilde, dont le plus exigeant : « une transmission s'écrit même sans réseau »."
+  },
+  "handsOffTo": {
+    "roles": ["code-review", "qa"],
+    "text": "Du code relu selon les conventions de l'équipe (Marc), puis une application qu'Inès teste en mode avion avant le pilote."
+  },
+  "screen": {
+    "component": "code-editor",
+    "toolName": "Atelier Code",
+    "props": {
+      "project": "tournee-app",
+      "branch": "feature/TRN-4-transmissions",
+      "folder": "transmissions",
+      "explorer": ["src/stockage/", "src/reseau/", "src/tournee/", "app.json", "package.json"],
+      "files": [
+        {
+          "name": "useTourneeDuJour.ts",
+          "source": "atelier-lumen/nouveau-produit/09-frontend/useTourneeDuJour.ts.txt"
+        },
+        {
+          "name": "fileDEnvoi.ts",
+          "source": "atelier-lumen/nouveau-produit/09-frontend/fileDEnvoi.ts.txt"
+        },
+        {
+          "name": "fileDEnvoi.test.ts",
+          "source": "atelier-lumen/nouveau-produit/09-frontend/fileDEnvoi.test.ts.txt"
+        }
+      ],
+      "initialFile": 1,
+      "terminal": {
+        "command": "npm test -- transmissions",
+        "lines": [
+          { "kind": "info", "text": "Tests de la file d'envoi · réseau simulé" },
+          {
+            "kind": "pass",
+            "text": "garde une transmission écrite en mode avion, puis l'envoie au retour du réseau"
+          },
+          { "kind": "pass", "text": "ne perd rien si l'envoi échoue" },
+          { "kind": "summary", "text": "2 tests réussis · 0 transmission perdue" }
+        ]
+      }
+    },
+    "annotations": [
+      {
+        "id": "local-first",
+        "zone": "local-first",
+        "title": "Le téléphone d'abord",
+        "text": "L'application ne commence pas par appeler le serveur : elle affiche ce qui est déjà sur le téléphone. C'est le principe [[hors-connexion|hors connexion d'abord]]. Dans une cave sans réseau, Karine voit quand même sa tournée."
+      },
+      {
+        "id": "refresh",
+        "zone": "refresh",
+        "title": "Puis la mise à jour",
+        "text": "Quand le réseau est là, l'application demande la version à jour à l'[[api]] d'Awa et la range sur le téléphone. La fois suivante, même sans réseau, Karine aura la dernière version connue."
+      },
+      {
+        "id": "outbox",
+        "zone": "outbox",
+        "title": "La file d'envoi",
+        "text": "Écrire une transmission ne demande jamais le réseau : elle est rangée dans une file sur le téléphone. C'est le cœur de TRN-4, la story suivie depuis la carte du [[mvp|MVP]] de Mathilde."
+      },
+      {
+        "id": "sync",
+        "zone": "sync",
+        "title": "Au retour du réseau",
+        "text": "Dès que le réseau revient, tout ce qui attend part au serveur. Si l'envoi échoue, rien n'est effacé : on réessaiera. Inès trouvera pourtant un cas que personne n'avait prévu : deux collègues qui modifient la même fiche."
+      },
+      {
+        "id": "offline-test",
+        "zone": "offline-test",
+        "title": "Un test qui coupe le réseau",
+        "text": "Ce [[test-automatise|test]] coupe le réseau exprès, écrit une transmission, puis le rétablit. Il tourne à chaque modification : si quelqu'un casse le mode hors connexion, l'équipe le saura dans la minute."
+      }
+    ]
+  }
+}

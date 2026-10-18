@@ -17,7 +17,7 @@ const REFRESH = 0.3
 
 /**
  * Parcours guidé : une ligne lumineuse discrète au sol, en tirets qui avancent,
- * du visiteur jusqu'au prochain poste du fil rouge (itinéraire qui contourne le mobilier).
+ * du visiteur jusqu'au prochain poste du parcours (itinéraire qui contourne le mobilier).
  */
 export function GuideLine() {
   const enabled = useGameStore((s) => s.settings.guidedPath)

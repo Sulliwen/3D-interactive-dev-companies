@@ -1,0 +1,23 @@
+{
+  "id": "product-manager",
+  "desk": 4,
+  "title": "Product Manager",
+  "person": {
+    "firstName": "Claire",
+    "lastName": "Dubois",
+    "role": "Product Manager"
+  },
+  "tagline": "Je choisis les problèmes sur lesquels l'équipe va travailler, et je m'assure qu'on mesure si on les a vraiment résolus.",
+  "missions": [
+    "Fixer chaque trimestre des objectifs mesurables, avec la direction, sous forme d'[[okr|OKR]].",
+    "Comparer les idées avec une [[matrice-impact-effort|matrice impact / effort]] et décider de l'ordre de passage.",
+    "Tenir à jour la [[feuille-de-route|feuille de route]] des produits et l'expliquer aux équipes, aux commerciaux et aux clients.",
+    "Dire **non**, ou « pas maintenant », à beaucoup de bonnes idées pour rester concentrée sur l'essentiel.",
+    "Vérifier après la mise en ligne que l'[[indicateur]] visé a bien bougé."
+  ],
+  "myth": {
+    "myth": "La Product Manager est la cheffe des développeurs et leur dit quoi coder.",
+    "reality": "Elle n'est la responsable hiérarchique de personne dans l'équipe. Elle convainc avec des faits (entretiens, chiffres) et des objectifs clairs. Le détail des tâches est préparé avec la Product Owner, et l'équipe technique choisit les solutions."
+  },
+  "realTools": ["Productboard", "Jira Product Discovery", "Aha!", "Notion", "Miro", "Google Slides"]
+}

@@ -1,0 +1,160 @@
+{
+  "role": "design",
+  "order": 6,
+  "featureStep": "On dessine l'expérience d'annulation",
+  "takeaways": [
+    "Corriger une [[maquette]] prend quelques minutes ; corriger une application déjà codée prend des jours.",
+    "Le designer dessine aussi les erreurs et les refus : ce sont eux qui font la différence entre une application frustrante et une application rassurante.",
+    "Le [[design-system]] fait gagner du temps à tout le monde : le bouton « Annuler » est dessiné une fois, puis réutilisé partout."
+  ],
+  "receivesFrom": {
+    "roles": ["ux-research", "product-owner"],
+    "text": "Le persona et les citations de patients (recherche utilisateur), puis la [[user-story|user story]] et ses [[critere-acceptation|critères d'acceptation]] (Product Owner)."
+  },
+  "handsOffTo": {
+    "roles": ["backend", "frontend"],
+    "text": "Des [[maquette|maquettes]] validées et un [[prototype]] testé : la développeuse back-end y voit les règles à respecter, le développeur front-end l'écran exact à construire."
+  },
+  "screen": {
+    "component": "design-tool",
+    "toolName": "Atelier Design",
+    "props": {
+      "file": "Pocket Santé · Annulation RDV",
+      "pages": ["Annulation RDV — v3", "Annulation RDV — v2", "Recherche & idées", "Design system"],
+      "collaborators": ["HL", "MN", "TP"],
+      "frames": [
+        {
+          "state": "appointments",
+          "caption": "Mes rendez-vous"
+        },
+        {
+          "state": "confirm",
+          "caption": "Confirmation"
+        },
+        {
+          "state": "cancelled",
+          "caption": "Annulation réussie"
+        },
+        {
+          "state": "too-late",
+          "caption": "Moins de 24 h",
+          "when": "Demain · 09:00"
+        }
+      ],
+      "flow": {
+        "toConfirm": "« Annuler »",
+        "toDone": "« Oui, annuler »",
+        "toTooLate": "si le rendez-vous est dans moins de 24 h"
+      },
+      "components": [
+        {
+          "name": "Bouton / Danger",
+          "kind": "danger",
+          "label": "Annuler"
+        },
+        {
+          "name": "Bouton / Secondaire",
+          "kind": "secondary",
+          "label": "Déplacer"
+        },
+        {
+          "name": "Carte / Rendez-vous",
+          "kind": "card",
+          "label": "10:30"
+        }
+      ],
+      "colors": [
+        {
+          "name": "Santé 600",
+          "hex": "#0f8b8d"
+        },
+        {
+          "name": "Danger 700",
+          "hex": "#b3261e"
+        },
+        {
+          "name": "Encre",
+          "hex": "#14232b"
+        },
+        {
+          "name": "Fond",
+          "hex": "#f3f6f7"
+        }
+      ],
+      "typography": [
+        {
+          "name": "Titre",
+          "spec": "17 px · gras"
+        },
+        {
+          "name": "Texte",
+          "spec": "15 px · normal"
+        }
+      ],
+      "accessibility": [
+        {
+          "label": "Contraste du bouton Annuler",
+          "value": "6,6 : 1 · conforme",
+          "ok": true
+        },
+        {
+          "label": "Zone tactile des boutons",
+          "value": "48 × 48 px · conforme",
+          "ok": true
+        },
+        {
+          "label": "Message de refus",
+          "value": "lu par VoiceOver",
+          "ok": true
+        }
+      ],
+      "comment": {
+        "author": "Mathilde (PO) :",
+        "initials": "MN",
+        "text": "Critère n° 2 : le message de refus doit donner le numéro du cabinet. C'est bon pour moi !"
+      },
+      "prototype": {
+        "title": "Mode prototype",
+        "hint": "Les maquettes sont reliées entre elles : on clique comme un vrai patient. Ce prototype a été essayé par 5 patients avant le moindre code. Essayez : « Annuler », puis « Oui, annuler »."
+      }
+    },
+    "annotations": [
+      {
+        "id": "frames",
+        "zone": "frames",
+        "title": "Un écran pour chaque étape",
+        "text": "Hugo dessine une [[maquette]] pour chaque moment du parcours : la liste des rendez-vous, la confirmation, le succès… et le refus. Les développeurs sauront exactement quoi construire, au pixel près."
+      },
+      {
+        "id": "flow",
+        "zone": "flow",
+        "title": "Prévoir aussi le « non »",
+        "text": "La flèche pointillée, c'est le chemin moins agréable : le rendez-vous est dans moins de 24 h. Hugo le dessine avec autant de soin que le reste, car c'est là qu'un patient risque de se sentir bloqué."
+      },
+      {
+        "id": "components",
+        "zone": "components",
+        "title": "Des pièces réutilisables",
+        "text": "Le bouton rouge « Annuler » est un [[composant]] du [[design-system]] : dessiné une seule fois, il sera identique partout dans l'application. Le développeur front-end (poste 9) le reprend tel quel, sans le redessiner."
+      },
+      {
+        "id": "accessibility",
+        "zone": "accessibility",
+        "title": "Pensé pour tout le monde",
+        "text": "Contraste suffisant pour les personnes malvoyantes, boutons assez grands pour un pouce qui tremble, message lu à voix haute par le téléphone : l'[[accessibilite|accessibilité]] se décide dès la maquette, pas à la fin."
+      },
+      {
+        "id": "prototype",
+        "zone": "prototype",
+        "title": "Essayer avant de construire",
+        "text": "En mode « Prototype », les maquettes deviennent cliquables : c'est un [[prototype]]. Cliquez sur l'onglet, puis jouez le patient. Hugo l'a fait tester à 5 patients : deux hésitaient sur le mot « Déplacer », il a gardé les deux boutons mais renforcé « Annuler »."
+      },
+      {
+        "id": "comment",
+        "zone": "comment",
+        "title": "Le design, ça se discute",
+        "text": "La Product Owner commente directement la maquette pour vérifier qu'elle respecte les [[critere-acceptation|critères d'acceptation]]. Designers, produit et développeurs travaillent sur le même fichier, en même temps."
+      }
+    ]
+  }
+}

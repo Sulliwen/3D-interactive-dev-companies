@@ -15,11 +15,12 @@ const STEPS: Step[] = [
 ]
 
 /**
- * Tutoriel d'une vingtaine de secondes, après l'accueil : chaque étape se valide d'elle-même
+ * Tutoriel d'une vingtaine de secondes, après la présentation : chaque étape se valide d'elle-même
  * dès que le geste est fait. On peut le passer.
  */
 export function Tutorial() {
-  const welcomed = useGameStore((s) => s.settings.welcomed)
+  // Après le menu et la présentation.
+  const welcomed = useGameStore((s) => s.menu === null && s.tour === null)
   const done = useGameStore((s) => s.settings.tutorialDone)
   const setSetting = useGameStore((s) => s.setSetting)
   const [step, setStep] = useState(0)

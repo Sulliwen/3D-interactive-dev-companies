@@ -30,9 +30,9 @@ export function TicketDeskScreen({ toolName, props: rawProps }: ScreenComponentP
       titleRight="Lucie M. · Support"
       status={
         <>
-          <span>File : Patients</span>
-          <span>Délai moyen de première réponse : 3 h 40</span>
-          <span className="td__status-right">Satisfaction : 4,6 / 5</span>
+          <span>File : {props.status.queue}</span>
+          <span>Délai moyen de première réponse : {props.status.firstReply}</span>
+          <span className="td__status-right">Satisfaction : {props.status.satisfaction}</span>
         </>
       }
     >
@@ -96,7 +96,7 @@ export function TicketDeskScreen({ toolName, props: rawProps }: ScreenComponentP
 
       <aside className="td__side">
         <Zone id="tags" className="td__card">
-          <p className="td__card-title">Patient·e</p>
+          <p className="td__card-title">{props.customer.kind}</p>
           <p className="td__customer">{props.customer.name}</p>
           <dl className="td__details">
             {props.customer.details.map((d) => (

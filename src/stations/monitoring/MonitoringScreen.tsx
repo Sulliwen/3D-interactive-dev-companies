@@ -48,7 +48,7 @@ export function MonitoringScreen({ toolName, props: rawProps }: ScreenComponentP
   return (
     <AppWindow
       toolName={toolName}
-      title="Pocket Santé · Annulation des rendez-vous"
+      title={props.title}
       titleRight={
         <span className="mon__live">
           <i aria-hidden="true" /> En direct
@@ -56,8 +56,9 @@ export function MonitoringScreen({ toolName, props: rawProps }: ScreenComponentP
       }
       status={
         <>
-          <span>Production · 100 % des utilisateurs</span>
-          <span>Interrupteur « annulation-rdv » : activé</span>
+          {props.statusItems.map((s) => (
+            <span key={s}>{s}</span>
+          ))}
           <span className="mon__status-right">{props.period}</span>
         </>
       }
@@ -105,7 +106,7 @@ export function MonitoringScreen({ toolName, props: rawProps }: ScreenComponentP
             <LineChart
               width={436}
               height={168}
-              yMax={20}
+              yMax={props.noShow.yMax}
               format={percent}
               labels={props.noShow.labels}
               marker={{ index: props.noShow.launchIndex, label: props.noShow.launchLabel }}

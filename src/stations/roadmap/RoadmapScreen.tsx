@@ -6,7 +6,7 @@ import type { ScreenComponentProps } from '../types'
 import { roadmapPropsSchema, type RoadmapProps } from './schema'
 import './roadmap.css'
 
-const SLOT = { 'pocket-sante': 1, facturo: 2, mutuelle: 3 } as const
+const SLOT = { 'pocket-sante': 1, facturo: 2, mutuelle: 3, tournee: 4 } as const
 
 /** « Lumen Roadmap » : objectif du trimestre, feuille de route, priorisation impact / effort. */
 export function RoadmapScreen({ toolName, props: raw }: ScreenComponentProps) {
@@ -22,8 +22,8 @@ export function RoadmapScreen({ toolName, props: raw }: ScreenComponentProps) {
       title={props.view}
       status={
         <>
-          <span>Validée en comité produit le 21 octobre 2026</span>
-          <span style={{ marginLeft: 'auto' }}>Revue chaque trimestre</span>
+          <span>{props.validated}</span>
+          <span style={{ marginLeft: 'auto' }}>{props.review}</span>
         </>
       }
     >

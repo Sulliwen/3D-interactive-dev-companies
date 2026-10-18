@@ -1,11 +1,12 @@
 import { useEffect, useMemo, useRef } from 'react'
-import { pathStations, stations } from '../content/loader'
+import { stationAtDesk, stationLabel } from '../content/loader'
 import { floorPlan, type StationAnchor } from '../engine/world/floorplan'
 import { FLOORS } from '../engine/world/materials'
 import { runtime } from '../engine/runtime'
 import { standPoint } from '../engine/stations/standPoint'
 import { useNextStation } from '../engine/stations/useNextStation'
 import { isExploring, useGameStore } from '../state/useGameStore'
+import { useProgress, useVisit } from '../state/visit'
 
 const DEG = 180 / Math.PI
 const SIZES = { small: 290, large: 470 } as const
@@ -18,9 +19,14 @@ const PAD = 0.6
 export function Minimap() {
   const size = useGameStore((s) => s.settings.minimap)
   const setSetting = useGameStore((s) => s.setSetting)
-  const visited = useGameStore((s) => s.progress.visited)
+  const visit = useVisit()
+  const visited = useProgress().visited
   const setMoveTarget = useGameStore((s) => s.setMoveTarget)
   const next = useNextStation()
+  // Pendant la présentation, la carte suit le poste survolé.
+  const tourDesk = useGameStore((s) =>
+    s.tour === null ? null : (visit.pathStations[s.tour]?.desk ?? null),
+  )
   const player = useRef<SVGGElement>(null)
   const guide = useRef<SVGPolylineElement>(null)
 
@@ -74,16 +80,26 @@ export function Minimap() {
         {background}
         <polyline ref={guide} className="minimap__guide" fill="none" />
         {floorPlan.stations.map((anchor) => {
-          const station = stations.find((s) => s.number === anchor.number)
+          const station = stationAtDesk(visit, anchor.number)
           if (!station) return null
-          const seen = visited.includes(station.id)
-          const isNext = next?.number === anchor.number
+          const bystander = station.status === 'bystander'
+          const seen = !bystander && visited.includes(station.id)
+          const isNext =
+            tourDesk === null ? next?.number === anchor.number : tourDesk === anchor.number
           const [x, z] = standPoint(anchor, 0.9)
-          const label = `${station.offPath ? 'Poste bonus' : `Poste ${anchor.number}`} : ${station.title}${seen ? ', déjà vu' : ''}${isNext ? ', prochain poste' : ''}. Y aller`
+          const kind =
+            station.status === 'bonus'
+              ? 'Poste bonus : '
+              : station.absent
+                ? 'Bureau vide : '
+                : bystander
+                  ? 'Hors de ce scénario : '
+                  : 'Étape '
+          const label = `${kind}${stationLabel(station)}${seen ? ', déjà vue' : ''}${isNext ? ', prochaine étape' : ''}. Y aller`
           return (
             <g
               key={anchor.number}
-              className={`minimap__station ${seen ? 'is-seen' : ''} ${isNext ? 'is-next' : ''} ${station.offPath ? 'is-bonus' : ''}`}
+              className={`minimap__station ${seen ? 'is-seen' : ''} ${isNext ? 'is-next' : ''} ${station.status === 'bonus' ? 'is-bonus' : ''} ${bystander ? 'is-bystander' : ''}`}
               transform={`translate(${x} ${z})`}
               role="button"
               tabIndex={0}
@@ -99,7 +115,9 @@ export function Minimap() {
               <title>{label}</title>
               {isNext && <circle r={0.95} className="minimap__halo" />}
               <circle r={0.58} />
-              <text y={0.2}>{seen ? '✓' : station.offPath ? '★' : anchor.number}</text>
+              <text y={0.2}>
+                {seen ? '✓' : station.status === 'bonus' ? '★' : bystander ? '–' : station.step}
+              </text>
             </g>
           )
         })}
@@ -109,7 +127,8 @@ export function Minimap() {
       </svg>
       <div className="minimap__bar">
         <span className="minimap__legend">
-          <i className="is-next" /> prochain · <i className="is-seen" /> vu
+          <i className="is-next" /> prochain · <i className="is-seen" /> vu ·{' '}
+          <i className="is-bystander" /> hors scénario
         </span>
         <button
           type="button"
@@ -127,7 +146,8 @@ export function Minimap() {
         </button>
       </div>
       <p className="visually-hidden">
-        {pathStations.length} postes ; utilisez Tab pour choisir un poste et Entrée pour y aller.
+        {visit.pathStations.length} étapes ; utilisez Tab pour choisir un poste et Entrée pour y
+        aller.
       </p>
     </section>
   )

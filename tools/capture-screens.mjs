@@ -1,9 +1,9 @@
 /**
  * Génère l'image fixe de chaque écran simulé (vue de loin dans la 3D) :
- * src/assets/screens/station-NN.jpg. À relancer après avoir modifié un écran.
+ * src/assets/screens/<structure>/<scénario>/station-NN.jpg (NN : numéro du poste). À relancer après avoir modifié un écran.
  *
- *   npm run screens:capture          (tous les postes rédigés)
- *   npm run screens:capture -- 1 14  (seulement les postes 1 et 14)
+ *   npm run screens:capture                                (tous les écrans rédigés)
+ *   npm run screens:capture -- atelier-lumen/preparer-v2   (un seul scénario)
  *
  * Nécessite Chrome ou Chromium. Chemin personnalisé : CHROME_PATH=/chemin/vers/chrome
  */
@@ -14,7 +14,7 @@ import { chromium } from 'playwright-core'
 
 const root = resolve(import.meta.dirname, '..')
 const outDir = join(root, 'src/assets/screens')
-const stationsDir = join(root, 'src/content/stations')
+const structuresDir = join(root, 'src/content/structures')
 
 const CHROME_CANDIDATES = [
   process.env.CHROME_PATH,
@@ -32,15 +32,32 @@ if (!executablePath) {
   process.exit(1)
 }
 
-const only = process.argv.slice(2).map(Number).filter(Number.isFinite)
+// Filtre facultatif : `atelier-lumen/preparer-v2` (un scénario) ou `atelier-lumen` (une structure).
+const only = process.argv.slice(2)
 
-const numbers = readdirSync(stationsDir)
-  .filter((f) => f.endsWith('.json'))
-  .map((f) => JSON.parse(readFileSync(join(stationsDir, f), 'utf8')))
-  .filter((s) => s.details?.screen)
-  .map((s) => s.number)
-  .filter((n) => only.length === 0 || only.includes(n))
-  .sort((a, b) => a - b)
+/** Chaque écran rédigé : structures/<s>/scenarios/<sc>/steps/*.json → poste (desk) du métier. */
+const targets = []
+for (const structure of readdirSync(structuresDir, { withFileTypes: true })) {
+  if (!structure.isDirectory()) continue
+  const base = join(structuresDir, structure.name)
+  const desks = new Map(
+    readdirSync(join(base, 'roles'))
+      .map((f) => JSON.parse(readFileSync(join(base, 'roles', f), 'utf8')))
+      .map((r) => [r.id, r.desk]),
+  )
+  for (const scenario of readdirSync(join(base, 'scenarios'))) {
+    const steps = join(base, 'scenarios', scenario, 'steps')
+    for (const f of readdirSync(steps).filter((f) => f.endsWith('.json'))) {
+      const step = JSON.parse(readFileSync(join(steps, f), 'utf8'))
+      targets.push({ structure: structure.name, scenario, desk: desks.get(step.role) })
+    }
+  }
+}
+const selected = targets.filter(
+  (t) =>
+    only.length === 0 ||
+    only.some((o) => `${t.structure}/${t.scenario}/`.startsWith(o.replace(/\/?$/, '/'))),
+)
 
 mkdirSync(outDir, { recursive: true })
 const server = await createServer({ root, logLevel: 'error', server: { port: 0 } })
@@ -53,14 +70,16 @@ try {
     viewport: { width: 1000, height: 600 },
     deviceScaleFactor: 1,
   })
-  for (const n of numbers) {
-    await page.goto(`${url}?capture=${n}`)
+  for (const t of selected) {
+    await page.goto(`${url}?capture=${t.structure}/${t.scenario}/${t.desk}`)
     const screen = page.locator('#capture')
     await screen.waitFor()
     await page.evaluate(() => document.fonts.ready)
-    const file = join(outDir, `station-${String(n).padStart(2, '0')}.jpg`)
+    const dir = join(outDir, t.structure, t.scenario)
+    mkdirSync(dir, { recursive: true })
+    const file = join(dir, `station-${String(t.desk).padStart(2, '0')}.jpg`)
     await screen.screenshot({ path: file, type: 'jpeg', quality: 85 })
-    console.log(`✓ poste ${n} → ${file.replace(root + '/', '')}`)
+    console.log(`✓ ${t.structure}/${t.scenario}, poste ${t.desk} → ${file.replace(root + '/', '')}`)
   }
 } finally {
   await browser.close()

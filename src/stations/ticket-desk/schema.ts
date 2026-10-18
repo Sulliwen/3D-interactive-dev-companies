@@ -29,7 +29,13 @@ export const ticketDeskPropsSchema = z.object({
     ),
     reply: z.string(),
   }),
+  /** Barre d'état : file, délai moyen, satisfaction. */
+  status: z
+    .object({ queue: z.string(), firstReply: z.string(), satisfaction: z.string() })
+    .default({ queue: 'Patients', firstReply: '3 h 40', satisfaction: '4,6 / 5' }),
   customer: z.object({
+    /** Type de contact affiché au-dessus du nom (« Patient·e », « Cabinet »…). */
+    kind: z.string().default('Patient·e'),
     name: z.string(),
     details: z.array(z.object({ label: z.string(), value: z.string() })),
     tags: z.array(z.string()),

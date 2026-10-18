@@ -1,0 +1,130 @@
+{
+  "role": "engineering-manager",
+  "offPath": true,
+  "featureStep": "Hors parcours : on tient la distance sur un projet de huit mois",
+  "tagline": "Une v2, c'est un marathon, pas un sprint : je veille à ce que l'équipe arrive au bout en bonne santé, avec les bonnes personnes, et sans abandonner la v1.",
+  "missions": [
+    "Organiser l'équipe pour un projet long : qui travaille sur la v2, qui est « de garde » sur la v1, et à quel rythme on change.",
+    "Repérer les signes d'épuisement lors des [[entretien-individuel|entretiens individuels]], avant qu'ils deviennent des arrêts maladie ou des départs.",
+    "Recruter quand la charge dépasse durablement ce que l'équipe peut absorber, et réussir l'[[onboarding]] des nouveaux.",
+    "Expliquer à la direction ce que coûte vraiment une [[version-majeure|version majeure]] : du temps, des personnes, et des choses qu'on ne fait pas à côté."
+  ],
+  "takeaways": [
+    "Sur un projet de plusieurs mois, le risque n'est pas seulement technique : c'est aussi la fatigue de l'équipe.",
+    "La garde v1 tournante protège tout le monde : personne n'est coincé sur l'ancienne application pendant que les autres construisent la nouvelle.",
+    "Nadia recrute une développeuse back-end pour la bascule de septembre : **Chloé** arrive le lundi 3 mai."
+  ],
+  "receivesFrom": {
+    "roles": ["scrum-master", "code-review"],
+    "text": "Les rétrospectives de Fatou (les urgences de la v1 qui interrompaient tout) et l'estimation de Marc : huit mois de travail pour la v2, jusqu'à l'arrêt de la v1."
+  },
+  "handsOffTo": {
+    "roles": ["backend", "frontend", "devops"],
+    "text": "Une organisation qui tient sur la durée : la garde v1 tournante, une charge raisonnable par personne, et une nouvelle collègue pour renforcer le back-end avant la bascule."
+  },
+  "screen": {
+    "component": "people",
+    "toolName": "Lumen People",
+    "props": {
+      "oneOnOne": {
+        "with": "Awa Diallo",
+        "when": "Jeudi 29 avril · 14:00 · 30 min, toutes les deux semaines",
+        "agenda": [
+          "Comment vas-tu, après trois répétitions de migration en un mois ?",
+          "Le BUG-131 : ce qu'on retient, sans chercher de coupable",
+          "Parrainer Chloé, qui arrive lundi ?"
+        ],
+        "goals": [
+          { "label": "Porter la migration jusqu'à la bascule", "progress": 70 },
+          { "label": "Partager la connaissance de la migration", "progress": 35 },
+          { "label": "Parrainer une nouvelle arrivée", "progress": 10 }
+        ],
+        "kudos": {
+          "from": "Inès",
+          "text": "Ta répétition n° 3 était impeccable : zéro compte perdu, bravo !"
+        }
+      },
+      "hiring": {
+        "role": "Développeur·se back-end confirmé·e",
+        "stages": [
+          { "label": "Candidatures", "count": 58 },
+          { "label": "Premier échange", "count": 14 },
+          { "label": "Exercice pratique", "count": 6 },
+          { "label": "Rencontre équipe", "count": 3 },
+          { "label": "Proposition acceptée", "count": 1 }
+        ],
+        "note": "Recrutement lancé en février, quand la charge de la v2 s'est confirmée. Awa et Marc ont participé aux entretiens."
+      },
+      "workload": {
+        "sprint": "Sprint 36 · 19 → 30 avril",
+        "members": [
+          {
+            "name": "Awa",
+            "role": "Back-end · migration",
+            "committed": 9,
+            "capacity": 10,
+            "note": "Trois répétitions en un mois : à surveiller"
+          },
+          { "name": "Thomas", "role": "Front-end · v2", "committed": 8, "capacity": 10 },
+          { "name": "Yanis", "role": "Front-end · v2", "committed": 7, "capacity": 8 },
+          {
+            "name": "Marc",
+            "role": "Dev senior · de garde v1",
+            "committed": 6,
+            "capacity": 8,
+            "note": "Garde v1 cette semaine : PS-161"
+          },
+          { "name": "Inès", "role": "QA · v1 et v2", "committed": 8, "capacity": 8 },
+          {
+            "name": "Ibrahima",
+            "role": "DevOps · bêta",
+            "committed": 6,
+            "capacity": 6,
+            "note": "Pas d'astreinte pendant l'ouverture de la bêta"
+          }
+        ]
+      },
+      "onboarding": {
+        "title": "Arrivée de Chloé · lundi 3 mai",
+        "tasks": [
+          { "label": "Ordinateur et accès prêts", "done": true },
+          { "label": "Lire l'ADR-007 avec Marc", "done": false },
+          { "label": "Marraine désignée : Awa", "done": false },
+          { "label": "Premier ticket : un correctif simple de la v1", "done": false }
+        ]
+      }
+    },
+    "annotations": [
+      {
+        "id": "workload",
+        "zone": "workload",
+        "title": "Tenir la distance",
+        "text": "Nadia regarde la charge de chacun, sprint après sprint. Awa porte la migration depuis janvier : trois répétitions en un mois, c'est beaucoup. Une v2 dure huit mois ; une équipe qui s'épuise en avril n'arrivera pas à la bascule de septembre."
+      },
+      {
+        "id": "one-on-one",
+        "zone": "one-on-one",
+        "title": "Parler du bug sans chercher de coupable",
+        "text": "À l'[[entretien-individuel|entretien individuel]], Nadia revient sur le BUG-131 avec Awa. Pas pour la juger : pour comprendre ce qui a permis à l'erreur de passer, et ce que l'équipe change. C'est la culture « sans reproche » : on corrige les processus, pas les personnes."
+      },
+      {
+        "id": "goals",
+        "zone": "goals",
+        "title": "Ne pas dépendre d'une seule personne",
+        "text": "Si Awa est la seule à connaître la migration, que se passe-t-il si elle tombe malade la semaine de la bascule ? L'un de ses objectifs est de **partager** ce savoir. Sur un projet long, c'est une protection pour l'équipe… et pour elle."
+      },
+      {
+        "id": "hiring",
+        "zone": "hiring",
+        "title": "Recruter au bon moment",
+        "text": "Recruter prend des mois : Nadia a lancé la recherche en février, dès que la charge de la v2 s'est confirmée. Résultat : 58 candidatures, une proposition acceptée. Chloé arrivera assez tôt pour être à l'aise avant la bascule de septembre."
+      },
+      {
+        "id": "onboarding",
+        "zone": "onboarding",
+        "title": "Commencer par la v1",
+        "text": "Le premier ticket de Chloé sera un petit correctif de la v1 : idéal pour découvrir le code et l'équipe sans pression. Elle lira aussi l'[[adr|ADR-007]] avec Marc : en une heure, elle saura **pourquoi** la v2 est construite ainsi. Une bonne [[onboarding|arrivée]] se prépare."
+      }
+    ]
+  }
+}
