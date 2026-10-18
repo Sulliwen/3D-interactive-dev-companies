@@ -1,0 +1,86 @@
+[
+  {
+    "id": "pull-request",
+    "term": "Pull request",
+    "definition": "Demande d'intégration d'un ensemble de modifications du code, que des collègues relisent, commentent puis approuvent avant qu'elle rejoigne le logiciel.",
+    "analogy": "Un document envoyé en relecture avec le mode « suivi des modifications » activé : chacun voit ce qui change et peut commenter dans la marge."
+  },
+  {
+    "id": "branche",
+    "term": "Branche",
+    "definition": "Copie de travail du code où l'on développe une fonctionnalité à l'écart, sans gêner les autres, avant de la réunir à la version principale.",
+    "analogy": "Une copie d'un contrat sur laquelle on fait ses corrections, avant de les reporter dans l'original."
+  },
+  {
+    "id": "commit",
+    "term": "Commit",
+    "definition": "Enregistrement d'une étape de travail dans l'historique du code, avec un message qui explique ce qui a changé.",
+    "analogy": "Une sauvegarde datée et commentée : « v3 : ajout du paragraphe sur les tarifs »."
+  },
+  {
+    "id": "fusion",
+    "term": "Fusion (merge)",
+    "definition": "Action qui réunit les modifications d'une branche dans la version principale du code, une fois la relecture terminée.",
+    "analogy": "Reporter les corrections validées dans la version officielle du document."
+  },
+  {
+    "id": "pipeline-ci-cd",
+    "term": "Pipeline CI/CD",
+    "definition": "Chaîne automatique qui, à chaque modification, construit le logiciel, lance les tests et les contrôles, puis le déploie. CI : intégration continue ; CD : déploiement continu.",
+    "analogy": "Une chaîne de montage avec des postes de contrôle qualité : si un contrôle échoue, la chaîne s'arrête avant que le produit sorte de l'usine."
+  },
+  {
+    "id": "deploiement-progressif",
+    "term": "Déploiement progressif",
+    "definition": "Mise en ligne d'une nouvelle version pour une petite partie des utilisateurs d'abord (5 %, puis 25 %…), en surveillant que tout va bien avant d'élargir.",
+    "analogy": "Ouvrir un nouveau service dans une seule agence pilote avant de l'étendre à tout le réseau."
+  },
+  {
+    "id": "feature-flag",
+    "term": "Interrupteur de fonctionnalité",
+    "definition": "Réglage qui permet d'activer ou de désactiver une fonctionnalité déjà installée, sans réinstaller le logiciel (en anglais : feature flag).",
+    "analogy": "Le disjoncteur d'une pièce : on coupe un seul circuit sans éteindre toute la maison."
+  },
+  {
+    "id": "retour-arriere",
+    "term": "Retour arrière",
+    "definition": "Revenir rapidement à la version précédente, ou couper une fonctionnalité, quand un problème apparaît après une mise en ligne (en anglais : rollback).",
+    "analogy": "Rappeler un lot de produits défectueux, mais en quelques secondes."
+  },
+  {
+    "id": "rgpd",
+    "term": "RGPD",
+    "definition": "Règlement général sur la protection des données : la loi européenne qui encadre la collecte et l'usage des données personnelles (ne collecter que le nécessaire, informer, protéger, effacer).",
+    "analogy": "Le règlement intérieur de tout ce qu'on a le droit de faire avec les informations des gens."
+  },
+  {
+    "id": "hds",
+    "term": "HDS (hébergement de données de santé)",
+    "definition": "Certification obligatoire en France pour tout hébergeur qui stocke des données de santé : sécurité renforcée, contrôles, audits réguliers.",
+    "analogy": "Un coffre-fort agréé, réservé aux documents les plus sensibles."
+  },
+  {
+    "id": "dependance",
+    "term": "Dépendance",
+    "definition": "Brique de logiciel écrite par d'autres (souvent en open source) que l'équipe réutilise au lieu de la réécrire : gestion des dates, envoi de messages…",
+    "analogy": "Les pièces achetées chez un fournisseur pour construire un meuble : pratiques, mais il faut surveiller les rappels du fabricant."
+  },
+  {
+    "id": "vulnerabilite",
+    "term": "Vulnérabilité",
+    "definition": "Faille de sécurité connue dans un logiciel, qu'une personne malveillante pourrait exploiter. On la corrige le plus souvent en installant une version à jour.",
+    "analogy": "Un défaut signalé sur un modèle de serrure : il faut changer le barillet avant qu'un cambrioleur en profite."
+  },
+  {
+    "id": "journal-acces",
+    "term": "Journal d'accès",
+    "definition": "Registre automatique qui note qui a fait quoi, et quand, sur les données sensibles. Il permet de vérifier et d'enquêter en cas de problème.",
+    "analogy": "Le registre des entrées et sorties d'un bâtiment sécurisé."
+  },
+  {
+    "id": "pseudonymisation",
+    "term": "Pseudonymisation",
+    "definition": "Remplacer le nom d'une personne par un identifiant neutre (par exemple « pat_7f3a »), pour que les personnes qui consultent les données ne sachent pas de qui il s'agit.",
+    "analogy": "Les copies d'examen anonymisées par un numéro avant la correction."
+  }
+]

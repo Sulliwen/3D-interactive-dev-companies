@@ -1,0 +1,24 @@
+import { fireEvent, render, screen } from '@testing-library/react-native'
+import { AppointmentCard } from './AppointmentCard'
+import { givenAppointment, mockApi } from '../testing/fixtures'
+
+describe('AppointmentCard', () => {
+  it('demande une confirmation avant d’annuler', () => {
+    render(<AppointmentCard appointment={givenAppointment({ inHours: 72 })} />)
+    fireEvent.press(screen.getByLabelText('Annuler le rendez-vous'))
+    expect(screen.getByText('Annuler ce rendez-vous ?')).toBeTruthy()
+  })
+
+  it('accepte un rendez-vous dans exactement 24 h (BUG-77)', async () => {
+    mockApi.cancel.respondWith(200)
+    render(<AppointmentCard appointment={givenAppointment({ inHours: 24 })} />)
+    await confirmCancellation()
+    expect(mockApi.cancel).toHaveBeenCalled()
+  })
+
+  it('affiche le numéro du cabinet à moins de 24 h', async () => {
+    render(<AppointmentCard appointment={givenAppointment({ inHours: 5 })} />)
+    await confirmCancellation()
+    expect(screen.getByText(/04 72 00 00 00/)).toBeTruthy()
+  })
+})

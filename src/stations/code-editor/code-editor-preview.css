@@ -1,0 +1,25 @@
+/* Simulateur de téléphone à droite de l'éditeur (postes front-end / mobile). */
+
+.ce--with-preview .ce__explorer {
+  width: 150px;
+}
+
+.ce__preview {
+  flex: none;
+  width: 214px;
+  padding: 8px 18px 0;
+  border-left: 1px solid #262d3f;
+  background: #121620;
+  overflow: hidden;
+}
+
+.ce__preview .ce__section {
+  padding: 0 0 8px;
+}
+
+.ce--with-preview .ce__project,
+.ce--with-preview .ce__entry {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

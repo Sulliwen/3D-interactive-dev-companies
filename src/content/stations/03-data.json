@@ -1,0 +1,145 @@
+{
+  "id": "data",
+  "number": 3,
+  "title": "Data / analyste",
+  "featureStep": "Le problème est chiffré",
+  "details": {
+    "person": { "firstName": "Julien", "lastName": "Moreau", "role": "Analyste data" },
+    "tagline": "Je transforme les millions de lignes de la base de données en quelques chiffres fiables, pour que l'équipe décide sur des faits.",
+    "missions": [
+      "Interroger la [[base-de-donnees|base de données]] avec des [[requete-sql|requêtes]] pour répondre aux questions de l'équipe produit.",
+      "Construire et maintenir des [[tableau-de-bord|tableaux de bord]] mis à jour automatiquement chaque matin.",
+      "Choisir les bons [[indicateur|indicateurs]] et vérifier qu'ils mesurent vraiment ce qu'on croit.",
+      "Estimer ce que pourrait rapporter une idée **avant** qu'on la construise.",
+      "Protéger la vie privée : travailler sur des données anonymisées, jamais sur des noms de patients."
+    ],
+    "takeaways": [
+      "Le chiffre clé : **18 %** des rendez-vous ne sont pas honorés, soit environ **3 100 créneaux perdus par mois**.",
+      "La tendance est stable depuis un an : le problème ne va pas disparaître tout seul.",
+      "Une estimation prudente (« et si 30 % des patients prévenaient ? ») aide à décider si l'effort en vaut la peine."
+    ],
+    "myth": {
+      "myth": "Les chiffres parlent d'eux-mêmes.",
+      "reality": "Un chiffre dépend toujours de sa définition : qu'appelle-t-on un [[rendez-vous-non-honore|rendez-vous non honoré]] ? Un retard de 20 minutes compte-t-il ? L'analyste passe beaucoup de temps à fixer ces règles avec l'équipe, puis à vérifier que les données sont justes."
+    },
+    "receivesFrom": {
+      "stations": [1, 2],
+      "text": "Les demandes remontées par le support et les hypothèses du chercheur UX : « les patients ne préviennent pas faute de moyen simple ». Il faut maintenant mesurer l'ampleur du problème."
+    },
+    "handsOffTo": {
+      "stations": [4],
+      "text": "Des chiffres solides et une estimation du gain possible : la Product Manager s'en sert pour fixer un objectif et prioriser la fonctionnalité."
+    },
+    "realTools": ["Metabase", "Looker Studio", "Tableau", "Power BI", "PostgreSQL", "Python"],
+    "screen": {
+      "component": "analytics-dashboard",
+      "toolName": "Lumen Insights",
+      "props": {
+        "dashboard": "Rendez-vous non honorés — Pocket Santé",
+        "period": "Octobre 2026",
+        "tiles": [
+          {
+            "label": "Rendez-vous non honorés",
+            "value": "18 %",
+            "detail": "Stable depuis 12 mois",
+            "status": "serious"
+          },
+          {
+            "label": "Créneaux perdus / mois",
+            "value": "≈ 3 100",
+            "detail": "Sur toute la plateforme"
+          },
+          { "label": "Rendez-vous pris / mois", "value": "≈ 17 200", "detail": "2 400 praticiens" },
+          {
+            "label": "Tickets « annulation »",
+            "value": "214",
+            "detail": "1er motif de contact",
+            "status": "warning"
+          }
+        ],
+        "trend": {
+          "title": "Taux de rendez-vous non honorés, sur 12 mois",
+          "seriesLabel": "Rendez-vous non honorés",
+          "labels": [
+            "nov.",
+            "déc.",
+            "janv.",
+            "févr.",
+            "mars",
+            "avr.",
+            "mai",
+            "juin",
+            "juil.",
+            "août",
+            "sept.",
+            "oct."
+          ],
+          "values": [17.6, 18.3, 17.9, 17.4, 17.8, 18.1, 18.4, 17.7, 18.6, 18.2, 17.9, 18.0],
+          "unit": " %",
+          "yMax": 25
+        },
+        "breakdown": {
+          "title": "Créneaux perdus par spécialité, octobre",
+          "valueLabel": "Créneaux perdus",
+          "bars": [
+            { "label": "Généralistes", "value": 1240, "highlight": true },
+            { "label": "Dentistes", "value": 610 },
+            { "label": "Kinés", "value": 520 },
+            { "label": "Dermatos", "value": 330 },
+            { "label": "Ophtalmos", "value": 260 },
+            { "label": "Autres", "value": 140 }
+          ]
+        },
+        "query": {
+          "title": "Comment le chiffre est calculé",
+          "lines": [
+            "-- Part des rendez-vous non honorés en octobre 2026",
+            "SELECT ROUND(100.0 * COUNT(*) FILTER (WHERE status = 'no_show')",
+            "             / COUNT(*), 1) AS taux_non_honores",
+            "  FROM appointments",
+            " WHERE starts_at >= '2026-10-01'",
+            "   AND starts_at <  '2026-11-01';"
+          ],
+          "result": "18,0 %"
+        },
+        "hypothesis": {
+          "title": "Et si…",
+          "value": "≈ 930 créneaux / mois",
+          "text": "Si seulement 30 % des patients qui ne viennent pas pouvaient prévenir à temps, environ 930 créneaux par mois seraient proposés à d'autres patients."
+        }
+      },
+      "annotations": [
+        {
+          "id": "tiles",
+          "zone": "tiles",
+          "title": "Le problème en quatre chiffres",
+          "text": "Près d'un rendez-vous sur cinq n'est pas honoré : c'est le [[rendez-vous-non-honore|« lapin »]]. Ces tuiles résument la situation pour quelqu'un qui n'a que dix secondes. Le pictogramme et le texte accompagnent toujours la couleur, pour rester lisibles par tous."
+        },
+        {
+          "id": "trend",
+          "zone": "trend",
+          "title": "Ce n'est pas un mauvais mois",
+          "text": "La courbe montre le même [[indicateur]] sur douze mois : il reste autour de 18 %. Ce n'est donc pas un accident passager, mais un problème de fond. Survolez la courbe pour lire chaque mois."
+        },
+        {
+          "id": "breakdown",
+          "zone": "breakdown",
+          "title": "Qui est le plus touché ?",
+          "text": "Les médecins généralistes perdent le plus de créneaux, car ils ont le plus de rendez-vous. C'est utile pour la suite : le Designer et la Product Owner penseront d'abord à ces cabinets."
+        },
+        {
+          "id": "query",
+          "zone": "query",
+          "title": "D'où vient le chiffre",
+          "text": "Chaque tuile repose sur une [[requete-sql|requête]] envoyée à la [[base-de-donnees|base de données]]. Celle-ci compte les rendez-vous marqués « non honoré » et les divise par le total du mois. Écrire la définition noir sur blanc évite les débats sur « le bon chiffre »."
+        },
+        {
+          "id": "hypothesis",
+          "zone": "hypothesis",
+          "title": "Combien pourrait-on gagner ?",
+          "text": "Julien fait une estimation **prudente** : si 30 % des absents prévenaient, on récupérerait environ 930 créneaux par mois. Ce calcul donne à la Product Manager (poste 4) un ordre de grandeur pour fixer son objectif."
+        }
+      ]
+    }
+  }
+}

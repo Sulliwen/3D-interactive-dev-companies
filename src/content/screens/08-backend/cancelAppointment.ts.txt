@@ -1,0 +1,52 @@
+import { db } from '../database'
+import { HttpError } from '../errors'
+import { waitingList } from '../notifications/waitingList'
+import { auditLog } from '../security/auditLog'
+
+// Délai minimal pour annuler en ligne (règle validée avec les cabinets médicaux)
+const MIN_NOTICE_HOURS = 24
+
+export async function cancelAppointment(appointmentId: string, patientId: string) {
+  const appointment = await db.appointments.findById(appointmentId)
+
+  // @zone ownership
+  // Le rendez-vous doit exister ET appartenir au patient connecté
+  if (!appointment || appointment.patientId !== patientId) {
+    throw new HttpError(404, 'Rendez-vous introuvable')
+  }
+  // @end
+
+  // @zone rule-24h
+  const hoursLeft = (appointment.startsAt.getTime() - Date.now()) / 3_600_000
+  if (hoursLeft < MIN_NOTICE_HOURS) {
+    // Ce message est affiché tel quel dans l'application
+    throw new HttpError(409, 'Annulation impossible à moins de 24 h : appelez le cabinet.')
+  }
+  // @end
+
+  // @zone transaction
+  // Tout ou rien : le rendez-vous est annulé ET le créneau libéré, ou rien ne change
+  await db.transaction(async (tx) => {
+    await tx.query(
+      `UPDATE appointments
+          SET status = 'cancelled', cancelled_at = now()
+        WHERE id = $1`,
+      [appointmentId],
+    )
+    await tx.query(
+      `UPDATE slots SET status = 'available' WHERE id = $1`,
+      [appointment.slotId],
+    )
+  })
+  // @end
+
+  // @zone notify
+  // Les patients en liste d'attente sont prévenus qu'un créneau vient de se libérer
+  await waitingList.notify(appointment.practitionerId, appointment.slotId)
+  // @end
+
+  // Trace conservée pour la sécurité : qui a annulé quoi, et quand
+  auditLog.record('appointment.cancelled', { appointmentId, patientId })
+
+  return { status: 'cancelled' }
+}

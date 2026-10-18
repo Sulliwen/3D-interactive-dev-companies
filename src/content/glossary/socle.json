@@ -1,0 +1,78 @@
+[
+  {
+    "id": "api",
+    "term": "API",
+    "definition": "Porte d'entrée par laquelle deux logiciels communiquent : l'un envoie une demande précise, l'autre répond.",
+    "analogy": "Le guichet d'une administration : on dépose un formulaire normalisé, on reçoit une réponse, sans jamais entrer dans les bureaux."
+  },
+  {
+    "id": "back-end",
+    "term": "Back-end",
+    "definition": "Partie d'un logiciel qui tourne sur les serveurs de l'entreprise : règles, données, calculs. L'utilisateur ne la voit jamais.",
+    "analogy": "La cuisine d'un restaurant : invisible depuis la salle, mais c'est là que tout se prépare."
+  },
+  {
+    "id": "front-end",
+    "term": "Front-end",
+    "definition": "Partie visible d'un logiciel : les écrans, les boutons, tout ce que l'utilisateur touche.",
+    "analogy": "La salle du restaurant, avec le menu et le service."
+  },
+  {
+    "id": "serveur",
+    "term": "Serveur",
+    "definition": "Ordinateur allumé en permanence dans un centre de données, qui fait tourner le back-end et répond aux demandes des applications."
+  },
+  {
+    "id": "base-de-donnees",
+    "term": "Base de données",
+    "definition": "Logiciel qui range et retrouve des informations de façon fiable : patients, rendez-vous, créneaux…",
+    "analogy": "Un classeur géant, parfaitement rangé, que des milliers de personnes consultent en même temps sans rien abîmer."
+  },
+  {
+    "id": "requete-sql",
+    "term": "Requête (SQL)",
+    "definition": "Instruction envoyée à la base de données pour lire ou modifier des informations. SQL est le langage le plus courant pour les écrire.",
+    "analogy": "Une demande précise faite à l'archiviste : « Passe le créneau n° 4521 au statut libre. »"
+  },
+  {
+    "id": "transaction",
+    "term": "Transaction",
+    "definition": "Groupe de modifications de la base de données appliquées en « tout ou rien » : soit toutes réussissent, soit aucune n'est enregistrée.",
+    "analogy": "Un virement bancaire : l'argent ne peut pas quitter un compte sans arriver sur l'autre."
+  },
+  {
+    "id": "test-automatise",
+    "term": "Test automatisé",
+    "definition": "Petit programme qui vérifie tout seul qu'une partie du logiciel se comporte comme prévu. On les relance à chaque modification.",
+    "analogy": "Une checklist qu'un robot repasse en quelques secondes, aussi souvent qu'on le lui demande."
+  },
+  {
+    "id": "critere-acceptation",
+    "term": "Critère d'acceptation",
+    "definition": "Condition précise, écrite avant de coder, qui dit quand une fonctionnalité est terminée et correcte.",
+    "analogy": "Le cahier des charges d'une commande : « livré avant vendredi, en bleu, avec la notice »."
+  },
+  {
+    "id": "user-story",
+    "term": "User story",
+    "definition": "Besoin formulé du point de vue de l'utilisateur, en une phrase : « En tant que patient, je veux annuler mon rendez-vous, afin de libérer ma place. »"
+  },
+  {
+    "id": "sprint",
+    "term": "Sprint",
+    "definition": "Période fixe (ici, deux semaines) pendant laquelle l'équipe s'engage sur une liste de tâches, puis montre le résultat.",
+    "analogy": "Une étape d'un chantier, avec sa réunion de lancement et sa visite de fin."
+  },
+  {
+    "id": "revue-de-code",
+    "term": "Revue de code",
+    "definition": "Relecture du code par un ou une collègue avant qu'il soit intégré au logiciel.",
+    "analogy": "La relecture d'un courrier important par un collègue avant de l'envoyer."
+  },
+  {
+    "id": "code-source",
+    "term": "Code source",
+    "definition": "Le texte, écrit dans un langage de programmation, qui décrit précisément ce que le logiciel doit faire.",
+    "analogy": "La recette détaillée, que l'ordinateur suit à la lettre."
+  }
+]

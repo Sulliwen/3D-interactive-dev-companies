@@ -1,0 +1,151 @@
+/* Lumen Watch : outil de supervision fictif (préfixe mon__). */
+
+.mon {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 10px;
+}
+
+.mon__live {
+  color: #7ee07e;
+  font-weight: 700;
+}
+
+.mon__live i {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  margin-right: 4px;
+  border-radius: 50%;
+  background: var(--status-good);
+  vertical-align: middle;
+  animation: mon-pulse 1.6s ease-in-out infinite;
+}
+
+:root[data-reduced-motion='true'] .mon__live i {
+  animation: none;
+}
+
+@keyframes mon-pulse {
+  50% {
+    opacity: 0.3;
+  }
+}
+
+.mon__tiles {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  padding-right: 34px;
+}
+
+.mon__tiles .stat__value {
+  font-size: 22px;
+}
+
+.mon__charts {
+  display: flex;
+  gap: 8px;
+}
+
+.mon__panel {
+  padding: 8px 10px;
+  border-radius: 8px;
+  background: var(--surface-2);
+}
+
+.mon__charts .mon__panel {
+  flex: 1;
+}
+
+.mon__panel-title {
+  margin-bottom: 4px !important;
+  padding-right: 26px;
+  color: var(--ink-muted);
+  font-size: 10.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.mon__bottom {
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: 1.25fr 1fr 1fr;
+  gap: 8px;
+}
+
+.mon__services ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.mon__services li {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 11.5px;
+}
+
+.mon__service {
+  color: var(--ink);
+}
+
+.mon__service-detail {
+  margin-left: auto;
+  color: var(--ink-muted);
+  font-size: 10.5px;
+}
+
+.mon__incident-title,
+.mon__incident-detail {
+  color: var(--ink);
+  font-size: 11.5px;
+  line-height: 1.4;
+}
+
+.mon__incident-detail {
+  margin-top: 6px !important;
+}
+
+.mon__muted {
+  margin-top: 2px !important;
+  color: var(--ink-muted);
+  font-size: 10.5px;
+}
+
+.mon__loop {
+  border: 1px solid rgb(242 165 65 / 0.45);
+}
+
+.mon__loop-count {
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.mon__quote {
+  margin-top: 4px !important;
+  color: var(--ink);
+  font-size: 11.5px;
+  font-style: italic;
+  line-height: 1.4;
+}
+
+.mon__loop-action {
+  margin-top: 6px !important;
+  color: var(--lumen);
+  font-size: 11.5px;
+  font-weight: 700;
+}
+
+.mon__status-right {
+  margin-left: auto;
+}

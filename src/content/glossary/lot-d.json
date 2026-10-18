@@ -1,0 +1,68 @@
+[
+  {
+    "id": "ux-ui",
+    "term": "UX / UI",
+    "definition": "UX (expérience utilisateur) : la facilité et le confort avec lesquels on accomplit ce qu'on est venu faire. UI (interface utilisateur) : l'apparence des écrans, couleurs, boutons, textes.",
+    "analogy": "Pour un magasin, l'UX c'est le parcours jusqu'à la caisse sans se perdre ; l'UI, c'est la vitrine et les étiquettes."
+  },
+  {
+    "id": "maquette",
+    "term": "Maquette",
+    "definition": "Dessin précis d'un écran tel qu'il apparaîtra dans l'application, réalisé avant d'écrire le moindre code.",
+    "analogy": "Le plan d'un architecte : on corrige un trait de crayon, pas un mur déjà construit."
+  },
+  {
+    "id": "prototype",
+    "term": "Prototype",
+    "definition": "Enchaînement de maquettes rendues cliquables, pour essayer le parcours comme si l'application existait déjà.",
+    "analogy": "L'appartement témoin : on peut s'y promener et donner son avis avant que l'immeuble soit fini."
+  },
+  {
+    "id": "composant",
+    "term": "Composant d'interface",
+    "definition": "Élément d'écran réutilisable (bouton, carte, fenêtre de confirmation…), dessiné une fois et utilisé partout de la même façon.",
+    "analogy": "Une pièce de jeu de construction : la même brique sert dans plusieurs modèles."
+  },
+  {
+    "id": "design-system",
+    "term": "Design system",
+    "definition": "Catalogue partagé des composants, couleurs, typographies et règles d'usage d'un produit, commun aux designers et aux développeurs.",
+    "analogy": "La charte graphique d'une marque, mais vivante et directement utilisable."
+  },
+  {
+    "id": "accessibilite",
+    "term": "Accessibilité",
+    "definition": "Le fait qu'un service soit utilisable par tout le monde, y compris les personnes malvoyantes, malentendantes, ayant des difficultés motrices ou cognitives.",
+    "analogy": "Une rampe d'accès à côté de l'escalier : indispensable pour certains, pratique pour tous."
+  },
+  {
+    "id": "simulateur",
+    "term": "Simulateur",
+    "definition": "Logiciel qui imite un téléphone sur l'ordinateur du développeur, pour voir et tester l'application sans avoir l'appareil en main.",
+    "analogy": "Un simulateur de vol : on essaie tout au sol avant de décoller."
+  },
+  {
+    "id": "recette",
+    "term": "Recette",
+    "definition": "Phase où l'on vérifie, souvent à la main et sur de vrais appareils, qu'une fonctionnalité respecte ce qui était demandé avant de la livrer.",
+    "analogy": "La visite de réception d'un logement neuf, liste de contrôle en main, avant de signer."
+  },
+  {
+    "id": "cas-limite",
+    "term": "Cas limite",
+    "definition": "Situation à la frontière d'une règle (exactement 24 h, zéro élément, la dernière seconde…), là où les erreurs se cachent le plus souvent.",
+    "analogy": "Vérifier qu'une porte ferme bien quand on la pousse… mais aussi quand on la claque."
+  },
+  {
+    "id": "bug",
+    "term": "Bug",
+    "definition": "Comportement du logiciel différent de ce qui était prévu : une erreur dans le code ou dans la compréhension d'une règle.",
+    "analogy": "Une coquille dans un document imprimé : parfois anodine, parfois elle change tout le sens."
+  },
+  {
+    "id": "non-regression",
+    "term": "Test de non-régression",
+    "definition": "Test relancé à chaque modification pour s'assurer que ce qui marchait hier marche toujours aujourd'hui.",
+    "analogy": "Après avoir réparé la fuite de la cuisine, vérifier que la salle de bains n'a pas perdu l'eau chaude."
+  }
+]

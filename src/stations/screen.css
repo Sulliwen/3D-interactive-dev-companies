@@ -1,0 +1,496 @@
+/* Écrans simulés : 960 × 557 px CSS, identité visuelle propre à Atelier Lumen. */
+
+.screen {
+  position: relative;
+  overflow: hidden;
+  background: #171c28;
+  color: #d7dce6;
+  font-family:
+    system-ui,
+    -apple-system,
+    'Segoe UI',
+    Roboto,
+    sans-serif;
+  font-size: 13px;
+  line-height: 1.4;
+  text-align: left;
+  user-select: text;
+  --mono: ui-monospace, 'Cascadia Code', 'JetBrains Mono', Consolas, 'Liberation Mono', monospace;
+}
+
+.screen p {
+  margin: 0;
+}
+
+.screen button {
+  font: inherit;
+  color: inherit;
+}
+
+/* --- Zones et pastilles ------------------------------------------------------ */
+
+.zone {
+  position: relative;
+}
+
+.zone--active {
+  outline: 2px solid #f2a541;
+  outline-offset: -2px;
+  background-color: rgb(242 165 65 / 0.09);
+}
+
+.pastille {
+  position: absolute;
+  top: 4px;
+  right: 8px;
+  z-index: 2;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: 2px solid #171c28;
+  border-radius: 50%;
+  background: #f2a541;
+  color: #1a1206 !important;
+  font-weight: 800 !important;
+  font-size: 13px !important;
+  line-height: 20px;
+  cursor: pointer;
+  box-shadow: 0 0 0 0 rgb(242 165 65 / 0.6);
+  animation: pastille-pulse 2.2s ease-out infinite;
+}
+
+.pastille:hover,
+.pastille--active {
+  background: #fff;
+  animation: none;
+}
+
+@keyframes pastille-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgb(242 165 65 / 0.6);
+  }
+  70%,
+  100% {
+    box-shadow: 0 0 0 10px rgb(242 165 65 / 0);
+  }
+}
+
+:root[data-reduced-motion='true'] .pastille {
+  animation: none;
+}
+
+/* --- Bulle d'explication ------------------------------------------------------ */
+
+.bubble {
+  position: absolute;
+  z-index: 5;
+  padding: 12px 14px 12px;
+  border-radius: 10px;
+  background: #ffffff;
+  color: #17202b;
+  font-size: 14px;
+  line-height: 1.45;
+  box-shadow:
+    0 12px 32px rgb(0 0 0 / 0.45),
+    0 0 0 2px #f2a541;
+}
+
+.bubble:focus {
+  outline: none;
+}
+
+.bubble__head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.bubble__count {
+  color: #9a4a08;
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.04em;
+}
+
+.bubble__close {
+  border: 0;
+  background: none;
+  font-size: 20px !important;
+  line-height: 1;
+  cursor: pointer;
+  color: #3f4c5a !important;
+}
+
+.bubble__title {
+  margin: 2px 0 6px !important;
+  font-weight: 700;
+  font-size: 15px;
+}
+
+.bubble__nav {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.bubble__nav button {
+  padding: 4px 10px;
+  border: 1px solid #c9d1da;
+  border-radius: 6px;
+  background: #fff;
+  cursor: pointer;
+  color: #17202b !important;
+}
+
+.bubble__nav button:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.bubble__nav .bubble__next {
+  border-color: #17202b;
+  background: #17202b;
+  color: #fff !important;
+}
+
+/* --- Éditeur de code « Atelier Code » ----------------------------------------- */
+
+.ce {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.ce__titlebar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  height: 28px;
+  padding: 0 10px;
+  background: #121620;
+  color: #8a93a6;
+  font-size: 12px;
+}
+
+.ce__dots i {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  margin-right: 5px;
+  border-radius: 50%;
+  background: #3a4256;
+}
+
+.ce__dots i:first-child {
+  background: #f2a541;
+}
+
+.ce__body {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+}
+
+.ce__activity {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  width: 40px;
+  padding-top: 12px;
+  background: #121620;
+  color: #5d6780;
+  font-size: 17px;
+}
+
+.ce__icon--active {
+  color: #f2a541;
+}
+
+.ce__explorer {
+  width: 186px;
+  padding: 8px 0;
+  background: #1b2130;
+  border-right: 1px solid #262d3f;
+  font-size: 12.5px;
+  overflow: hidden;
+}
+
+.ce__section {
+  padding: 0 12px 6px;
+  color: #8a93a6;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.ce__project {
+  padding: 2px 12px;
+  font-weight: 700;
+}
+
+.ce__entry {
+  display: block;
+  width: 100%;
+  padding: 2px 12px 2px 24px;
+  border: 0;
+  background: none;
+  text-align: left;
+  color: #b4bccb;
+  white-space: nowrap;
+}
+
+.ce__entry--file {
+  padding-left: 36px;
+  cursor: pointer;
+}
+
+.ce__entry--file:hover {
+  background: #232a3b;
+}
+
+.ce__entry--active {
+  background: #2a3247 !important;
+  color: #fff !important;
+}
+
+.ce__entry--root {
+  padding-left: 24px;
+  color: #8a93a6;
+}
+
+.ce__main {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.ce__tabs [role='tablist'] {
+  display: flex;
+  height: 30px;
+  background: #141925;
+}
+
+.ce__tab {
+  padding: 0 14px;
+  border: 0;
+  border-right: 1px solid #222939;
+  background: #141925;
+  color: #8a93a6 !important;
+  font-size: 12.5px !important;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.ce__tab--active {
+  background: #171c28;
+  color: #fff !important;
+  box-shadow: inset 0 2px 0 #f2a541;
+}
+
+.ce__editor {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  padding: 6px 0 12px;
+  scroll-behavior: smooth;
+}
+
+:root[data-reduced-motion='true'] .ce__editor {
+  scroll-behavior: auto;
+}
+
+.ce__code {
+  /* Les zones gardent la largeur visible de l'éditeur : leurs pastilles restent à
+     l'écran même quand une ligne de code dépasse (elle déborde, on peut défiler). */
+  width: 100%;
+  font-family: var(--mono);
+  font-size: 12.5px;
+  line-height: 19px;
+}
+
+.ce__zone {
+  padding-right: 40px;
+}
+
+.ce__line {
+  display: flex;
+  white-space: pre;
+}
+
+.ce__ln {
+  position: sticky;
+  left: 0;
+  z-index: 1;
+  background: #171c28;
+  flex: none;
+  width: 42px;
+  padding-right: 14px;
+  text-align: right;
+  color: #4b5469;
+  user-select: none;
+}
+
+.ce__line code {
+  font-family: inherit;
+}
+
+.tk-keyword {
+  color: #ff9e64;
+}
+
+.tk-string {
+  color: #a5d97a;
+}
+
+.tk-comment {
+  color: #8692ab;
+  font-style: italic;
+}
+
+.tk-number {
+  color: #e8c26b;
+}
+
+.tk-function {
+  color: #82aaff;
+}
+
+.tk-type {
+  color: #4fd1e8;
+}
+
+.ce__terminal {
+  flex: none;
+  height: 152px;
+  border-top: 1px solid #262d3f;
+  background: #121620;
+}
+
+.ce__terminal-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 26px;
+  padding: 0 44px 0 12px;
+}
+
+.ce__terminal-tab {
+  color: #d7dce6;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  box-shadow: inset 0 -1px 0 #f2a541;
+}
+
+.ce__run {
+  padding: 1px 8px;
+  border: 1px solid #3a4256;
+  border-radius: 4px;
+  background: #1b2130;
+  font-size: 11.5px !important;
+  cursor: pointer;
+}
+
+.ce__run:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.ce__terminal-body {
+  height: calc(100% - 26px);
+  overflow: hidden;
+  padding: 2px 12px;
+  font-family: var(--mono);
+  font-size: 12px;
+  line-height: 17px;
+}
+
+.ce__prompt span {
+  color: #82aaff;
+}
+
+.ce__out--info {
+  color: #8692ab;
+}
+
+.ce__out--pass {
+  color: #d7dce6;
+}
+
+.ce__out--fail {
+  color: #ff8b8b;
+}
+
+.ce__out--summary {
+  margin-top: 4px !important;
+  color: #a5d97a;
+  font-weight: 700;
+}
+
+.ce__check {
+  margin: 0 8px 0 10px;
+  color: #a5d97a;
+}
+
+.ce__cross {
+  margin: 0 8px 0 10px;
+  color: #ff8b8b;
+}
+
+.ce__cursor {
+  color: #d7dce6;
+  animation: blink 1s steps(1) infinite;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+.ce__status {
+  display: flex;
+  gap: 18px;
+  align-items: center;
+  height: 22px;
+  padding: 0 12px;
+  background: #b5560b;
+  color: #fff;
+  font-size: 11.5px;
+}
+
+.ce__status-right {
+  margin-left: auto;
+}
+
+/* --- Écran pas encore rédigé --------------------------------------------------- */
+
+.placeholder {
+  display: grid;
+  place-content: center;
+  gap: 8px;
+  height: 100%;
+  text-align: center;
+  background: linear-gradient(160deg, #1d2536, #151a26);
+  font-size: 16px;
+}
+
+.placeholder__number {
+  color: #f2a541;
+  font-weight: 800;
+  font-size: 15px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.placeholder__title {
+  font-size: 30px;
+  font-weight: 700;
+}
+
+.placeholder__soon {
+  margin-top: 18px !important;
+  color: #8a93a6;
+}

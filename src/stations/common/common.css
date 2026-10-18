@@ -1,0 +1,532 @@
+/* Briques communes des écrans simulés (fond sombre, 960 × 557 px). */
+
+.screen {
+  --surface: #171c28;
+  --surface-2: #1f2534;
+  --surface-3: #262d3f;
+  --ink: #d7dce6;
+  --ink-muted: #8a93a6;
+  --line: #2c3447;
+  --lumen: #f2a541;
+  /* Palette catégorielle validée (dataviz) sur #171c28 : ordre fixe. */
+  --series-1: #3987e5;
+  --series-2: #d95926;
+  --series-3: #199e70;
+  /* États : toujours avec icône + libellé. */
+  --status-good: #0ca30c;
+  --status-warning: #fab219;
+  --status-serious: #ec835a;
+  --status-critical: #d03b3b;
+}
+
+/* --- Fenêtre ------------------------------------------------------------------ */
+
+.aw {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.aw__titlebar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  height: 28px;
+  flex: none;
+  padding: 0 10px;
+  background: #121620;
+  color: var(--ink-muted);
+  font-size: 12px;
+}
+
+.aw__dots i {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  margin-right: 5px;
+  border-radius: 50%;
+  background: #3a4256;
+}
+
+.aw__dots i:first-child {
+  background: var(--lumen);
+}
+
+.aw__title-right {
+  margin-left: auto;
+}
+
+.aw__body {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+}
+
+.aw__status {
+  display: flex;
+  gap: 18px;
+  align-items: center;
+  height: 22px;
+  flex: none;
+  padding: 0 12px;
+  background: #b5560b;
+  color: #fff;
+  font-size: 11.5px;
+}
+
+/* --- Graphiques ------------------------------------------------------------------ */
+
+.chart {
+  position: relative;
+}
+
+.chart svg {
+  display: block;
+  overflow: visible;
+}
+
+.chart__grid {
+  stroke: var(--line);
+  stroke-width: 1;
+}
+
+.chart__tick {
+  fill: var(--ink-muted);
+  font-size: 10px;
+}
+
+.chart__cross {
+  stroke: var(--ink-muted);
+  stroke-dasharray: 3 3;
+}
+
+.chart__marker {
+  stroke: var(--lumen);
+  stroke-width: 1.5;
+  stroke-dasharray: 4 3;
+}
+
+.chart__marker-label {
+  fill: var(--ink);
+  font-size: 10px;
+}
+
+.chart__legend {
+  display: flex;
+  gap: 14px;
+  margin-bottom: 4px !important;
+  color: var(--ink);
+  font-size: 11px;
+}
+
+.chart__legend i,
+.chart__tooltip i {
+  display: inline-block;
+  width: 10px;
+  height: 3px;
+  margin-right: 4px;
+  border-radius: 2px;
+  vertical-align: middle;
+}
+
+.chart__tooltip {
+  position: absolute;
+  top: 8px;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 6px 8px;
+  border-radius: 6px;
+  background: #0d1018;
+  box-shadow: 0 4px 14px rgb(0 0 0 / 0.5);
+  color: var(--ink);
+  font-size: 11px;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.stat {
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: var(--surface-2);
+}
+
+.stat__label {
+  color: var(--ink-muted);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.stat__value {
+  margin-top: 2px !important;
+  font-size: 26px;
+  font-weight: 700;
+  color: #fff;
+  font-variant-numeric: tabular-nums;
+}
+
+.stat__detail {
+  color: var(--ink-muted);
+  font-size: 11.5px;
+}
+
+.stat__detail--good {
+  color: #5fd35f;
+}
+
+.stat__detail--warning {
+  color: var(--status-warning);
+}
+
+.stat__detail--serious {
+  color: var(--status-serious);
+}
+
+.stat__detail--critical {
+  color: #ff7b7b;
+}
+
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 1px 7px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.status-badge--good {
+  background: rgb(12 163 12 / 0.18);
+  color: #7ee07e;
+}
+
+.status-badge--warning {
+  background: rgb(250 178 25 / 0.16);
+  color: var(--status-warning);
+}
+
+.status-badge--serious {
+  background: rgb(236 131 90 / 0.16);
+  color: var(--status-serious);
+}
+
+.status-badge--critical {
+  background: rgb(208 59 59 / 0.2);
+  color: #ff8b8b;
+}
+
+.status-badge--neutral {
+  background: var(--surface-3);
+  color: var(--ink);
+}
+
+/* --- Tableau en colonnes ------------------------------------------------------------ */
+
+.kanban {
+  display: flex;
+  gap: 10px;
+  height: 100%;
+  padding: 10px;
+}
+
+.kanban__col {
+  flex: 1;
+  min-width: 0;
+  padding: 8px;
+  border-radius: 8px;
+  background: var(--surface-2);
+}
+
+.kanban__col-title {
+  margin-bottom: 8px !important;
+  color: var(--ink-muted);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.kanban__col-title span {
+  margin-left: 4px;
+  padding: 0 6px;
+  border-radius: 999px;
+  background: var(--surface-3);
+}
+
+.kanban__cards {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.kanban__card {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  width: 100%;
+  padding: 6px 8px 6px 10px;
+  border: 0;
+  border-left: 3px solid var(--series-1);
+  border-radius: 6px;
+  background: var(--surface-3);
+  text-align: left;
+  cursor: default;
+}
+
+.kanban__card[tabindex='0'] {
+  cursor: pointer;
+}
+
+.kanban__card--facturo {
+  border-left-color: var(--series-2);
+}
+
+.kanban__card--mutuelle {
+  border-left-color: var(--series-3);
+}
+
+.kanban__card--highlight {
+  box-shadow: inset 0 0 0 1px var(--lumen);
+}
+
+.kanban__card--selected {
+  background: #313a51;
+}
+
+.kanban__project {
+  color: var(--ink-muted);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.kanban__title {
+  color: #fff;
+  font-size: 12px;
+  line-height: 1.3;
+}
+
+.kanban__meta {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  font-size: 10.5px;
+  color: var(--ink-muted);
+}
+
+.kanban__tag {
+  padding: 0 5px;
+  border-radius: 4px;
+  background: #3a4256;
+  color: var(--ink);
+}
+
+.kanban__assignee {
+  margin-left: auto;
+}
+
+/* --- Téléphone Pocket Santé (thème clair de l'application) ------------------------- */
+
+.phone {
+  margin: 0;
+  text-align: center;
+}
+
+.phone__device {
+  position: relative;
+  padding: 0.5em;
+  border-radius: 1.8em;
+  background: #0b0d12;
+  box-shadow:
+    0 0 0 1px #3a4256,
+    0 10px 30px rgb(0 0 0 / 0.5);
+}
+
+.phone__notch {
+  position: absolute;
+  top: 0.55em;
+  left: 50%;
+  z-index: 2;
+  width: 32%;
+  height: 1.1em;
+  transform: translateX(-50%);
+  border-radius: 0 0 0.7em 0.7em;
+  background: #0b0d12;
+}
+
+.phone__screen {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 9 / 18.5;
+  border-radius: 1.4em;
+  background: #f3f6f7;
+  color: #14232b;
+  text-align: left;
+  line-height: 1.3;
+}
+
+.phone__statusbar {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.35em 1.1em 0;
+  font-size: 0.7em;
+  font-weight: 600;
+}
+
+.phone__appbar {
+  display: flex;
+  align-items: center;
+  gap: 0.45em;
+  padding: 0.9em 0.9em 0.6em;
+  font-size: 1.05em;
+  font-weight: 800;
+}
+
+.phone__logo {
+  display: inline-grid;
+  place-content: center;
+  width: 1.4em;
+  height: 1.4em;
+  border-radius: 0.4em;
+  background: #0f8b8d;
+  color: #fff;
+  font-weight: 900;
+}
+
+.phone__content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6em;
+  padding: 0 0.7em;
+}
+
+.phone__card {
+  padding: 0.7em 0.8em;
+  border-radius: 0.8em;
+  background: #fff;
+  box-shadow: 0 1px 3px rgb(0 0 0 / 0.08);
+}
+
+.phone__card--ghost {
+  opacity: 0.7;
+}
+
+.phone__card--cancelled .phone__doctor,
+.phone__card--cancelled .phone__when {
+  text-decoration: line-through;
+  color: #6b7a82;
+}
+
+.phone__doctor {
+  font-weight: 800;
+}
+
+.phone__muted {
+  color: #5b6b73;
+  font-size: 0.82em;
+}
+
+.phone__when {
+  margin: 0.3em 0 0.1em !important;
+  color: #0f6f71;
+  font-weight: 700;
+}
+
+.phone__actions {
+  display: flex;
+  gap: 0.4em;
+  margin-top: 0.6em;
+}
+
+.phone__btn {
+  flex: 1;
+  padding: 0.45em 0.5em;
+  border: 1px solid #c5d0d5;
+  border-radius: 0.6em;
+  background: #fff;
+  color: #14232b !important;
+  font-size: 0.85em !important;
+  font-weight: 700;
+}
+
+.phone__btn[tabindex='0'] {
+  cursor: pointer;
+}
+
+.phone__btn--danger {
+  border-color: #b3261e;
+  background: #b3261e;
+  color: #fff !important;
+}
+
+.phone__btn--block {
+  display: block;
+  width: 100%;
+  margin-top: 0.5em;
+}
+
+.phone__badge {
+  display: inline-block;
+  margin-top: 0.5em !important;
+  padding: 0.1em 0.6em;
+  border-radius: 999px;
+  background: #e4e9eb;
+  color: #3d4b52;
+  font-size: 0.8em;
+  font-weight: 700;
+}
+
+.phone__sheet {
+  position: absolute;
+  inset: auto 0 0;
+  padding: 1em 0.9em 1.2em;
+  border-radius: 1.1em 1.1em 0 0;
+  background: #fff;
+  box-shadow: 0 -10px 30px rgb(0 0 0 / 0.25);
+}
+
+.phone__sheet-title {
+  margin-bottom: 0.3em !important;
+  font-size: 1.05em;
+  font-weight: 800;
+}
+
+.phone__call {
+  margin-top: 0.4em !important;
+  color: #0f6f71;
+  font-weight: 800;
+}
+
+.phone__toast {
+  position: absolute;
+  inset: auto 0.7em 1em;
+  padding: 0.6em 0.8em;
+  border-radius: 0.7em;
+  font-size: 0.85em;
+  font-weight: 700;
+}
+
+.phone__toast--good {
+  background: #1e6b3a;
+  color: #fff;
+}
+
+.phone__reset {
+  margin-top: 6px;
+  padding: 2px 8px;
+  border: 1px solid #3a4256;
+  border-radius: 4px;
+  background: var(--surface-2);
+  font-size: 11px !important;
+  cursor: pointer;
+}
+
+.phone__caption {
+  margin-top: 6px;
+  color: var(--ink-muted);
+  font-size: 11px;
+}

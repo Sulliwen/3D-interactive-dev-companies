@@ -1,0 +1,41 @@
+import { Alert, Text, View } from 'react-native'
+import { Button } from '../design-system/Button'
+import { useCancelAppointment } from './useCancelAppointment'
+
+const CONFIRM_TEXT = 'Le créneau sera proposé tout de suite '
+  + "aux patients en liste d'attente."
+
+export function AppointmentCard({ appointment }: Props) {
+  const { cancel, status } = useCancelAppointment(appointment)
+
+  // @zone confirm
+  // On demande confirmation : une annulation ne se rattrape pas
+  const askConfirmation = () =>
+    Alert.alert('Annuler ce rendez-vous ?', CONFIRM_TEXT, [
+      { text: 'Garder mon rendez-vous', style: 'cancel' },
+      {
+        text: 'Oui, annuler',
+        style: 'destructive',
+        onPress: cancel,
+      },
+    ])
+  // @end
+
+  return (
+    <View style={styles.card}>
+      <Text style={styles.doctor}>{appointment.doctorName}</Text>
+      <Text style={styles.when}>{formatDate(appointment.startsAt)}</Text>
+
+      // @zone cancel-button
+      {/* Bouton du design system dessiné par Hugo (style « danger ») */}
+      <Button
+        variant="danger"
+        label="Annuler"
+        accessibilityLabel="Annuler le rendez-vous"
+        loading={status === 'pending'}
+        onPress={askConfirmation}
+      />
+      // @end
+    </View>
+  )
+}

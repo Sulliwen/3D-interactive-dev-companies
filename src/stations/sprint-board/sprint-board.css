@@ -1,0 +1,262 @@
+/* « Lumen Board », vue sprint (poste Scrum Master). */
+
+.sb {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: 0;
+}
+
+.sb__goal {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: none;
+  padding: 8px 40px 8px 12px;
+  border-bottom: 1px solid var(--line);
+  background: #1b2130;
+  font-size: 12px;
+}
+
+.sb__sprint {
+  color: #fff;
+  font-size: 15px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.sb__dates {
+  color: var(--ink-muted);
+  white-space: nowrap;
+}
+
+.sb__goal-text {
+  overflow: hidden;
+  color: var(--ink);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.sb__goal-label {
+  margin-right: 4px;
+  padding: 1px 7px;
+  border-radius: 999px;
+  background: rgb(242 165 65 / 0.18);
+  color: var(--lumen);
+  font-weight: 700;
+}
+
+.sb__main {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+}
+
+.sb__board {
+  display: flex;
+  flex: 1;
+  min-width: 0;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.sb__board .kanban {
+  flex: 1;
+  min-height: 0;
+}
+
+/* La couleur de la bordure indique le projet (légende sous le tableau). */
+.sb__board .kanban__project {
+  display: none;
+}
+
+.sb__legend {
+  display: flex;
+  gap: 14px;
+  flex: none;
+  padding: 0 10px 6px;
+  color: var(--ink-muted);
+  font-size: 10.5px;
+}
+
+.sb__legend span::before {
+  content: '';
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+  margin-right: 4px;
+  border-radius: 2px;
+  background: var(--series-1);
+}
+
+.sb__legend .sb__legend--facturo::before {
+  background: var(--series-2);
+}
+
+.sb__legend .sb__legend--mutuelle::before {
+  background: var(--series-3);
+}
+
+.sb__board .kanban {
+  gap: 6px;
+  padding: 8px 6px 8px 8px;
+}
+
+.sb__board .kanban__col {
+  padding: 6px;
+}
+
+.sb__board .kanban__card {
+  padding: 5px 6px 5px 8px;
+}
+
+.sb__board .kanban__title {
+  font-size: 11.5px;
+}
+
+.sb__side {
+  display: flex;
+  flex: none;
+  flex-direction: column;
+  gap: 8px;
+  width: 346px;
+  padding: 8px 8px 8px 0;
+}
+
+.sb__panel {
+  padding: 8px 10px;
+  border-radius: 8px;
+  background: var(--surface-2);
+}
+
+.sb__panel-title {
+  margin-bottom: 4px !important;
+  color: var(--ink-muted);
+  font-size: 10.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.sb__legend-ideal {
+  background: repeating-linear-gradient(
+    90deg,
+    var(--ink-muted) 0 3px,
+    transparent 3px 5px
+  ) !important;
+}
+
+.sb__ideal {
+  stroke: var(--ink-muted);
+  stroke-width: 1.5;
+  stroke-dasharray: 5 4;
+}
+
+.sb__notes {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+  flex-direction: column;
+  padding-top: 4px;
+}
+
+.sb__tabs {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid var(--line);
+}
+
+.sb__tab {
+  padding: 4px 8px;
+  border: 0;
+  background: none;
+  color: var(--ink-muted) !important;
+  font-size: 12px !important;
+}
+
+.sb__tab[tabindex='0'] {
+  cursor: pointer;
+}
+
+.sb__tab--active {
+  color: #fff !important;
+  box-shadow: inset 0 -2px 0 var(--lumen);
+}
+
+.sb__notes-body {
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+  padding-right: 26px;
+  font-size: 11px;
+  line-height: 1.32;
+}
+
+.sb__when {
+  margin-bottom: 4px !important;
+  color: var(--ink-muted);
+  font-size: 11px;
+}
+
+.sb__entry {
+  margin-bottom: 5px;
+}
+
+.sb__person {
+  color: #fff;
+  font-weight: 700;
+}
+
+.sb__k {
+  color: var(--ink-muted);
+}
+
+.sb__blocker {
+  color: var(--status-warning);
+}
+
+.sb__blocker .sb__k {
+  color: var(--status-warning);
+  font-weight: 700;
+}
+
+.sb__retro {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.sb__retro-col {
+  padding: 3px 8px;
+  border-left: 3px solid var(--ink-muted);
+  border-radius: 4px;
+  background: var(--surface-3);
+}
+
+.sb__retro-col--good {
+  border-left-color: var(--status-good);
+}
+
+.sb__retro-col--improve {
+  border-left-color: var(--status-warning);
+}
+
+.sb__retro-col--action {
+  border-left-color: var(--lumen);
+}
+
+.sb__retro-title {
+  color: #fff;
+  font-weight: 700;
+}
+
+.sb__retro ul {
+  margin: 2px 0 0;
+  padding-left: 16px;
+}
+
+/* Place pour la pastille posée sur la carte de la story suivie. */
+.sb__board [data-zone] .kanban__card {
+  padding-right: 30px;
+}

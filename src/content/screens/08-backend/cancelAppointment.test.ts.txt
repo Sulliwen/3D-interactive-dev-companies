@@ -1,0 +1,27 @@
+import { describe, expect, it } from 'vitest'
+import { cancelAppointment } from './cancelAppointment'
+import { givenAppointment, slotStatus, waitingListMessages } from '../testing/fixtures'
+
+describe('cancelAppointment', () => {
+  it('annule un rendez-vous pris dans 3 jours et libère le créneau', async () => {
+    const rdv = await givenAppointment({ inHours: 72 })
+    await cancelAppointment(rdv.id, rdv.patientId)
+    expect(await slotStatus(rdv.slotId)).toBe('available')
+  })
+
+  it('refuse une annulation à moins de 24 h', async () => {
+    const rdv = await givenAppointment({ inHours: 5 })
+    await expect(cancelAppointment(rdv.id, rdv.patientId)).rejects.toThrow('24 h')
+  })
+
+  it("refuse d'annuler le rendez-vous d'un autre patient", async () => {
+    const rdv = await givenAppointment({ inHours: 72 })
+    await expect(cancelAppointment(rdv.id, 'autre-patient')).rejects.toThrow('introuvable')
+  })
+
+  it("prévient la liste d'attente quand le créneau se libère", async () => {
+    const rdv = await givenAppointment({ inHours: 48, waitingPatients: 2 })
+    await cancelAppointment(rdv.id, rdv.patientId)
+    expect(await waitingListMessages(rdv.slotId)).toHaveLength(2)
+  })
+})

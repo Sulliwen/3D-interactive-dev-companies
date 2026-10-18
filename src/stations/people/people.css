@@ -1,0 +1,230 @@
+/* Lumen People : outil de management fictif (préfixe pp__). */
+
+.pp {
+  flex: 1;
+  min-width: 0;
+  display: grid;
+  grid-template-columns: 1.05fr 1fr 1.1fr;
+  gap: 8px;
+  padding: 10px;
+}
+
+.pp__col {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-height: 0;
+}
+
+.pp__card {
+  padding: 9px 30px 9px 11px;
+  border-radius: 8px;
+  background: var(--surface-2);
+}
+
+.pp__col .pp__card {
+  flex: 1;
+}
+
+.pp__title {
+  color: #fff;
+  font-size: 12.5px;
+  font-weight: 700;
+}
+
+.pp__when {
+  color: var(--lumen);
+  font-size: 11px;
+}
+
+.pp__subtitle {
+  margin: 8px 0 3px !important;
+  color: var(--ink-muted);
+  font-size: 10.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.pp__agenda {
+  margin: 0;
+  padding-left: 16px;
+  color: var(--ink);
+  font-size: 11.5px;
+  line-height: 1.45;
+}
+
+.pp__goals {
+  margin-right: -22px;
+  padding-right: 30px;
+}
+
+.pp__goal + .pp__goal {
+  margin-top: 5px;
+}
+
+.pp__goal-label {
+  display: flex;
+  justify-content: space-between;
+  gap: 6px;
+  white-space: nowrap;
+  color: var(--ink);
+  font-size: 11.5px;
+}
+
+.pp__bar {
+  display: block;
+  height: 6px;
+  margin-top: 2px;
+  border-radius: 3px;
+  background: var(--surface-3);
+}
+
+.pp__bar > span {
+  display: block;
+  height: 100%;
+  border-radius: 3px;
+  background: var(--series-1);
+}
+
+.pp__bar > span.pp__bar--warning {
+  background: var(--status-warning);
+}
+
+.pp__kudos {
+  margin-top: 10px !important;
+  padding: 6px 8px;
+  border-radius: 6px;
+  background: rgb(242 165 65 / 0.1);
+  color: var(--ink);
+  font-size: 11px;
+  line-height: 1.4;
+}
+
+.pp__kudos span {
+  color: var(--lumen);
+}
+
+.pp__funnel {
+  margin: 6px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pp__funnel li {
+  display: grid;
+  grid-template-columns: 104px 1fr 22px;
+  align-items: center;
+  gap: 6px;
+  padding: 2px 0;
+  color: var(--ink);
+  font-size: 11px;
+}
+
+.pp__funnel b {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.pp__funnel-bar {
+  height: 10px;
+}
+
+.pp__funnel-bar span {
+  display: block;
+  height: 100%;
+  border-radius: 0 4px 4px 0;
+  background: var(--series-1);
+}
+
+.pp__note {
+  margin-top: 6px !important;
+  color: var(--ink-muted);
+  font-size: 10.5px;
+  line-height: 1.4;
+}
+
+.pp__tasks {
+  margin: 6px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pp__tasks li {
+  padding: 2px 0;
+  font-size: 11.5px;
+}
+
+.pp__tasks label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--ink);
+}
+
+.pp__tasks input {
+  accent-color: var(--lumen);
+}
+
+.pp__workload ul {
+  margin: 6px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pp__workload li {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 2px 8px;
+  padding: 5px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.pp__member {
+  display: flex;
+  flex-direction: column;
+  font-size: 11.5px;
+}
+
+.pp__member b {
+  color: #fff;
+}
+
+.pp__member span {
+  color: var(--ink-muted);
+  font-size: 10.5px;
+}
+
+.pp__load {
+  grid-column: 1;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.pp__load .pp__bar {
+  flex: 1;
+  margin: 0;
+}
+
+.pp__points {
+  color: var(--ink-muted);
+  font-size: 10.5px;
+  font-variant-numeric: tabular-nums;
+}
+
+.pp__workload .status-badge {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+}
+
+.pp__member-note {
+  grid-column: 1 / -1;
+  color: var(--status-warning);
+  font-size: 10.5px;
+}
+
+.pp__status-right {
+  margin-left: auto;
+}

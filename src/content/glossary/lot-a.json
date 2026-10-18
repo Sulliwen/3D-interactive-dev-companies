@@ -1,0 +1,56 @@
+[
+  {
+    "id": "ticket",
+    "term": "Ticket",
+    "definition": "Une demande d'un utilisateur (question, problème, réclamation), enregistrée avec un numéro pour être suivie jusqu'à sa résolution.",
+    "analogy": "Le ticket numéroté d'un service après-vente : on ne perd pas votre demande, et on sait où elle en est."
+  },
+  {
+    "id": "escalade",
+    "term": "Escalade",
+    "definition": "Faire remonter un problème à l'équipe capable de le résoudre durablement, quand le support ne peut pas le régler seul.",
+    "analogy": "L'accueil d'un hôtel qui signale à la direction qu'une chambre a souvent le même souci, au lieu de s'excuser à chaque client."
+  },
+  {
+    "id": "boucle-de-retour",
+    "term": "Boucle de retour",
+    "definition": "Cycle où les réactions des utilisateurs à une nouveauté inspirent l'amélioration suivante : écouter, construire, mesurer, écouter à nouveau.",
+    "analogy": "Un restaurant qui ajuste sa carte d'après les remarques des clients, puis regarde ce qu'ils en pensent."
+  },
+  {
+    "id": "supervision",
+    "term": "Supervision",
+    "definition": "Surveillance continue, avec des tableaux de bord et des alertes, du bon fonctionnement d'un logiciel en production et de son utilisation.",
+    "analogy": "La tour de contrôle d'un aéroport : elle voit tout le trafic en direct et réagit dès qu'un problème apparaît."
+  },
+  {
+    "id": "alerte",
+    "term": "Alerte",
+    "definition": "Message automatique envoyé à l'équipe quand un indicateur dépasse un seuil (lenteur, erreurs, panne).",
+    "analogy": "Le détecteur de fumée : il ne règle pas le problème, mais il prévient tout de suite."
+  },
+  {
+    "id": "incident",
+    "term": "Incident",
+    "definition": "Une panne ou un dysfonctionnement qui gêne les utilisateurs. On le résout au plus vite, puis on en analyse la cause, sans chercher de coupable.",
+    "analogy": "Une fuite d'eau : d'abord couper l'eau et réparer, ensuite comprendre pourquoi le tuyau a cédé."
+  },
+  {
+    "id": "mise-en-ligne",
+    "term": "Mise en ligne",
+    "definition": "Le moment où une nouvelle version du logiciel devient accessible aux vrais utilisateurs (on dit aussi « mise en production »).",
+    "analogy": "L'ouverture des portes d'un magasin rénové au public."
+  },
+  {
+    "id": "entretien-individuel",
+    "term": "Entretien individuel (one-to-one)",
+    "definition": "Rendez-vous régulier, en tête-à-tête, entre un manager et une personne de son équipe, pour parler de son travail, de ses difficultés et de sa progression.",
+    "analogy": "Un point régulier avec un mentor, dont l'ordre du jour appartient à la personne accompagnée."
+  },
+  {
+    "id": "onboarding",
+    "term": "Onboarding",
+    "definition": "L'accueil et l'intégration d'une nouvelle personne dans l'équipe : accès, outils, parrain ou marraine, premières tâches simples.",
+    "analogy": "Le livret d'accueil et la visite des lieux le premier jour, mais sur plusieurs semaines."
+  }
+]

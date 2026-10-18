@@ -1,0 +1,189 @@
+{
+  "id": "product-owner",
+  "number": 5,
+  "title": "Product Owner",
+  "featureStep": "La demande devient une tâche claire pour l'équipe",
+  "details": {
+    "person": {
+      "firstName": "Mathilde",
+      "lastName": "Nguyen",
+      "role": "Product Owner"
+    },
+    "tagline": "Je transforme « il faudrait pouvoir annuler » en une demande si claire que l'équipe sait exactement quoi construire, et comment savoir que c'est fini.",
+    "missions": [
+      "Tenir le [[backlog]] : la liste de toutes les demandes des projets, triée par priorité et mise à jour chaque semaine.",
+      "Écrire les [[user-story|user stories]] et leurs [[critere-acceptation|critères d'acceptation]], en s'appuyant sur la recherche (poste 2) et les chiffres (poste 3).",
+      "Faire estimer les demandes par l'équipe, puis choisir avec elle ce qui entre dans le prochain [[sprint]].",
+      "Répondre aux questions de l'équipe pendant le sprint : c'est elle qui tranche sur le « quoi ».",
+      "Vérifier que ce qui est livré respecte les critères, lors de la [[sprint-review|revue de sprint]]."
+    ],
+    "takeaways": [
+      "La Product Owner décide du **quoi** et du **pourquoi** ; l'équipe décide du **comment**.",
+      "Une bonne user story tient en une phrase : pour qui, quoi, pourquoi. Les critères d'acceptation disent quand c'est terminé.",
+      "L'estimation est faite **par l'équipe**, en [[point-effort|points]] et non en heures : on compare la taille des demandes entre elles."
+    ],
+    "myth": {
+      "myth": "La Product Owner est la cheffe de l'équipe : elle distribue le travail.",
+      "reality": "Elle ne répartit pas les tâches et ne dit pas comment coder. Elle est la gardienne de la valeur : elle choisit ce qui compte le plus pour les patients et les cabinets, et l'explique. L'équipe s'organise elle-même pour le réaliser."
+    },
+    "receivesFrom": {
+      "stations": [2, 3, 4],
+      "text": "La décision de la Product Manager (priorité n° 1 du trimestre), nourrie par les entretiens de la recherche utilisateur et les chiffres de la data (18 % de rendez-vous non honorés)."
+    },
+    "handsOffTo": {
+      "stations": [6, 7],
+      "text": "La [[user-story|user story]] PS-142, prête : au Designer pour dessiner l'écran d'annulation, et à l'équipe, avec la Scrum Master, pour l'intégrer au [[sprint]] 24."
+    },
+    "realTools": ["Jira", "Linear", "Azure DevOps", "Trello", "Notion", "Productboard"],
+    "screen": {
+      "component": "backlog",
+      "toolName": "Lumen Board",
+      "props": {
+        "board": "Pocket Santé · Backlog produit",
+        "views": ["Backlog", "Sprint 24", "Feuille de route", "Archives"],
+        "selected": "PS-142",
+        "items": [
+          {
+            "id": "PS-142",
+            "title": "Annuler un rendez-vous depuis l'application",
+            "project": "pocket-sante",
+            "estimate": 5,
+            "status": "ready",
+            "story": {
+              "asA": "patient",
+              "iWant": "annuler mon rendez-vous depuis l'application",
+              "soThat": "libérer ma place pour quelqu'un d'autre"
+            },
+            "origin": "Origine : 214 tickets « annulation » le mois dernier, 18 % de rendez-vous non honorés.",
+            "criteria": [
+              "Le patient peut annuler en ligne un rendez-vous prévu dans 24 h ou plus.",
+              {
+                "given": "un rendez-vous prévu dans moins de 24 h,",
+                "when": "le patient veut l'annuler,",
+                "then": "l'application l'invite à appeler le cabinet et affiche son numéro."
+              },
+              {
+                "given": "des patients en liste d'attente pour ce praticien,",
+                "when": "un créneau est libéré,",
+                "then": "il leur est proposé dans la minute."
+              },
+              "Le praticien voit l'annulation dans son agenda.",
+              "Chaque annulation est tracée : qui, quoi, quand."
+            ],
+            "estimateNote": "estimée par l'équipe le 4 nov.",
+            "links": [
+              {
+                "label": "Maquettes « Annulation »",
+                "kind": "design"
+              },
+              {
+                "label": "Sprint 24 (4 → 15 nov.)",
+                "kind": "sprint"
+              },
+              {
+                "label": "Ticket support #4521",
+                "kind": "support"
+              }
+            ]
+          },
+          {
+            "id": "PS-139",
+            "title": "Rappel par SMS 48 h avant le rendez-vous",
+            "project": "pocket-sante",
+            "estimate": 3,
+            "status": "ready",
+            "story": {
+              "asA": "patient",
+              "iWant": "recevoir un rappel par SMS deux jours avant mon rendez-vous",
+              "soThat": "ne pas l'oublier"
+            }
+          },
+          {
+            "id": "FA-88",
+            "title": "Exporter les factures au format PDF",
+            "project": "facturo",
+            "estimate": 8,
+            "status": "ready",
+            "story": {
+              "asA": "artisan",
+              "iWant": "télécharger mes factures en PDF",
+              "soThat": "les envoyer à mon comptable"
+            }
+          },
+          {
+            "id": "MH-21",
+            "title": "Page « Trouver un professionnel de santé »",
+            "project": "mutuelle",
+            "estimate": 5,
+            "status": "ready",
+            "description": "Refonte du site de la Mutuelle Horizon : nouvelle page de recherche, d'après les maquettes validées par le client."
+          },
+          {
+            "id": "PS-147",
+            "title": "Payer la consultation en ligne",
+            "project": "pocket-sante",
+            "estimate": 13,
+            "status": "refine",
+            "description": "Demande importante mais encore trop grosse : à découper en plusieurs user stories avant de l'estimer de nouveau."
+          },
+          {
+            "id": "FA-93",
+            "title": "Relances automatiques des factures impayées",
+            "project": "facturo",
+            "estimate": 5,
+            "status": "refine",
+            "description": "À préciser avec deux artisans : à partir de combien de jours relancer, et sur quel ton."
+          },
+          {
+            "id": "PS-151",
+            "title": "Téléconsultation vidéo",
+            "project": "pocket-sante",
+            "estimate": null,
+            "status": "idea",
+            "description": "Idée pour le trimestre prochain. Pas encore estimée : il faut d'abord vérifier les obligations réglementaires."
+          },
+          {
+            "id": "PS-149",
+            "title": "Mode sombre de l'application",
+            "project": "pocket-sante",
+            "estimate": 2,
+            "status": "idea",
+            "description": "Demandé par plusieurs patients dans les avis de l'application. Peu d'impact sur les rendez-vous perdus : en bas de liste."
+          }
+        ]
+      },
+      "annotations": [
+        {
+          "id": "backlog",
+          "zone": "backlog",
+          "title": "La liste des demandes, triée par priorité",
+          "text": "Voici le [[backlog]] : toutes les demandes des trois projets, rangées de la plus importante à la moins importante. Comme une pile de dossiers que l'on retrie chaque semaine. Tout en haut : **PS-142**, l'annulation de rendez-vous, priorité n° 1 du trimestre."
+        },
+        {
+          "id": "story",
+          "zone": "story",
+          "title": "Une phrase, trois questions",
+          "text": "La [[user-story|user story]] répond à : pour qui ? (le patient), quoi ? (annuler depuis l'application), pourquoi ? (libérer sa place). Elle décrit un besoin, pas une solution technique : aucun mot sur les serveurs ni sur les écrans."
+        },
+        {
+          "id": "criteria",
+          "zone": "criteria",
+          "title": "Quand saura-t-on que c'est fini ?",
+          "text": "Les 5 [[critere-acceptation|critères d'acceptation]] sont la liste de contrôle de la livraison. Certains suivent la forme « Étant donné… Quand… Alors… » : une situation, une action, le résultat attendu. La développeuse (poste 8) et la testeuse (poste 11) s'en serviront mot pour mot."
+        },
+        {
+          "id": "estimate",
+          "zone": "estimate",
+          "title": "5 points, pas 5 jours",
+          "text": "L'équipe a estimé la demande en [[point-effort|points d'effort]] lors d'un [[planning-poker|planning poker]]. 5 points ne veut pas dire 5 jours : c'est « un peu plus gros que le rappel SMS, qui vaut 3 points ». Ce sont les personnes qui feront le travail qui estiment, pas la Product Owner."
+        },
+        {
+          "id": "links",
+          "zone": "links",
+          "title": "Prête pour le sprint",
+          "text": "La demande est marquée **Prête** : elle a ses critères, ses maquettes (poste 6) et son estimation. Elle peut entrer dans le [[sprint]] 24, préparé avec la Scrum Master (poste 7). Le lien vers le ticket #4521 rappelle d'où vient le besoin : un vrai message de patiente."
+        }
+      ]
+    }
+  }
+}

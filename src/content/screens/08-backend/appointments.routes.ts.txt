@@ -1,0 +1,14 @@
+import { Router } from 'express'
+import { requireAuth } from '../security/requireAuth'
+import { cancelAppointment } from './cancelAppointment'
+
+export const appointmentsRouter = Router()
+
+// @zone route
+// POST /appointments/123/cancel : l'adresse appelée par l'application mobile
+// quand le patient appuie sur « Annuler mon rendez-vous »
+appointmentsRouter.post('/appointments/:id/cancel', requireAuth, async (req, res) => {
+  const result = await cancelAppointment(req.params.id, req.user.id)
+  res.status(200).json(result)
+})
+// @end

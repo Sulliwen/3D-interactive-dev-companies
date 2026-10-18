@@ -1,0 +1,130 @@
+{
+  "comment": "Assets tiers (tous CC0, Poly Haven). Téléchargés par fetch_assets.py dans art/sources/. Les « variants » produisent des textures teintées (préparées hors de Blender, pour rester exportables en glTF).",
+  "textures": [
+    {
+      "id": "smooth_concrete_floor",
+      "use": "Béton ciré du sol",
+      "variants": {
+        "floor_concrete": {
+          "saturation": 0.0,
+          "brightness": 2.3,
+          "tint": [0.97, 0.97, 0.96],
+          "contrast": 0.7
+        }
+      }
+    },
+    {
+      "id": "poly_wool_herringbone",
+      "use": "Moquettes acoustiques, tissus des sièges et des cloisons",
+      "variants": {
+        "carpet_team": {
+          "saturation": 0.0,
+          "brightness": 1.05,
+          "tint": [0.78, 0.86, 0.82]
+        },
+        "carpet_meeting": {
+          "saturation": 0.0,
+          "brightness": 0.95,
+          "tint": [0.72, 0.78, 0.9]
+        },
+        "rug_daily": {
+          "saturation": 0.0,
+          "brightness": 1.15,
+          "tint": [0.95, 0.68, 0.55]
+        },
+        "fabric_dark": {
+          "saturation": 0.0,
+          "brightness": 0.55,
+          "tint": [0.85, 0.87, 0.92]
+        },
+        "fabric_sage": {
+          "saturation": 0.0,
+          "brightness": 1.0,
+          "tint": [0.66, 0.78, 0.7]
+        },
+        "fabric_blue": {
+          "saturation": 0.0,
+          "brightness": 0.9,
+          "tint": [0.55, 0.66, 0.86]
+        },
+        "felt_light": {
+          "saturation": 0.0,
+          "brightness": 1.55,
+          "tint": [0.9, 0.91, 0.92]
+        }
+      }
+    },
+    {
+      "id": "wood_floor",
+      "use": "Parquet (café, accueil)",
+      "variants": {
+        "parquet": {
+          "saturation": 0.8,
+          "brightness": 1.2,
+          "tint": [1.0, 0.97, 0.92]
+        }
+      }
+    },
+    {
+      "id": "white_oak_veneer",
+      "use": "Bois clair des bureaux, tables et comptoirs",
+      "variants": {
+        "oak": {
+          "saturation": 0.85,
+          "brightness": 1.15,
+          "tint": [1.0, 0.98, 0.94]
+        }
+      }
+    },
+    {
+      "id": "white_plaster_02",
+      "use": "Murs et plafond (enduit blanc)",
+      "variants": {
+        "plaster": {
+          "saturation": 0.0,
+          "brightness": 1.75,
+          "tint": [0.98, 0.98, 0.97],
+          "contrast": 0.35
+        }
+      }
+    }
+  ],
+  "models": [
+    {
+      "id": "mid_century_lounge_chair",
+      "use": "Fauteuils pivotants (salon, accueil)"
+    },
+    {
+      "id": "modern_arm_chair_01",
+      "use": "Fauteuils du coin café"
+    },
+    {
+      "id": "coffee_table_round_01",
+      "use": "Tables basses"
+    },
+    {
+      "id": "modern_ceiling_lamp_01",
+      "use": "Suspensions (café, salle de réunion)"
+    },
+    {
+      "id": "potted_plant_02",
+      "use": "Grandes plantes"
+    },
+    {
+      "id": "potted_plant_04",
+      "use": "Petites plantes de bureau"
+    },
+    {
+      "id": "office_notepads",
+      "use": "Carnets sur les bureaux"
+    },
+    {
+      "id": "wheelchair_01",
+      "use": "Fauteuil roulant de Julien (poste Data)"
+    }
+  ],
+  "hdri": {
+    "id": "kloofendal_48d_partly_cloudy_puresky",
+    "use": "Ciel : éclairage du précalcul et arrière-plan"
+  }
+}

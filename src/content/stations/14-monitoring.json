@@ -1,0 +1,143 @@
+{
+  "id": "monitoring",
+  "number": 14,
+  "title": "Supervision et retour",
+  "featureStep": "On mesure l'effet, et la boucle repart vers le support",
+  "details": {
+    "person": {
+      "firstName": "Camille",
+      "lastName": "Robert",
+      "role": "Ingénieur·e SRE, supervision"
+    },
+    "tagline": "Je veille sur l'application une fois qu'elle est entre les mains des patients : est-ce qu'elle fonctionne, et est-ce qu'elle tient ses promesses ?",
+    "missions": [
+      "Surveiller en continu le bon fonctionnement des services grâce à la [[supervision]] : lenteurs, erreurs, pannes.",
+      "Régler les [[alerte|alertes]] pour être prévenu·e avant que les patients ne remarquent un problème.",
+      "Réagir vite en cas d'[[incident]], puis en analyser la cause avec l'équipe, sans chercher de coupable.",
+      "Mesurer, avec l'équipe produit, si la fonctionnalité atteint son objectif après la [[mise-en-ligne|mise en ligne]].",
+      "Partager ce qu'on apprend avec le support et le produit, pour nourrir la suite."
+    ],
+    "takeaways": [
+      "Une fonctionnalité n'est pas « finie » à sa mise en ligne : on vérifie qu'elle **marche** et qu'elle **sert vraiment** aux patients.",
+      "Les chiffres le confirment : **1 240 créneaux libérés** la première semaine, et les rendez-vous non honorés passent de **18 % à 13 %**.",
+      "Les nouveaux retours relancent le cycle : c'est la [[boucle-de-retour|boucle de retour]], qui repart vers le support."
+    ],
+    "myth": {
+      "myth": "Une fois le logiciel en ligne, le travail de l'équipe technique est terminé.",
+      "reality": "La mise en ligne est un début. Il faut surveiller, réagir aux incidents et mesurer l'effet réel sur les utilisateurs. Sans ces mesures, impossible de savoir si l'objectif fixé par la Product Manager est atteint."
+    },
+    "receivesFrom": {
+      "stations": [13],
+      "text": "La fonctionnalité en production chez 100 % des patients, déployée progressivement par le poste DevOps, avec son interrupteur pour revenir en arrière si besoin."
+    },
+    "handsOffTo": {
+      "stations": [1, 4],
+      "text": "Les chiffres de réussite à la Product Manager, et les nouveaux retours des patients au support : la boucle repart."
+    },
+    "realTools": ["Grafana", "Datadog", "Prometheus", "Sentry", "PagerDuty", "New Relic"],
+    "screen": {
+      "component": "monitoring",
+      "toolName": "Lumen Watch",
+      "props": {
+        "period": "7 premiers jours après la mise en ligne",
+        "tiles": [
+          {
+            "label": "Créneaux libérés",
+            "value": "1 240",
+            "detail": "en 7 jours",
+            "status": "good"
+          },
+          {
+            "label": "Repris par un patient",
+            "value": "61 %",
+            "detail": "757 créneaux réattribués",
+            "status": "good"
+          },
+          {
+            "label": "RDV non honorés",
+            "value": "13 %",
+            "detail": "contre 18 % avant",
+            "status": "good"
+          },
+          {
+            "label": "Tickets « annulation »",
+            "value": "−70 %",
+            "detail": "au support, sur la semaine",
+            "status": "good"
+          }
+        ],
+        "slots": {
+          "title": "Créneaux par jour depuis la mise en ligne",
+          "labels": ["J1", "J2", "J3", "J4", "J5", "J6", "J7"],
+          "freed": { "label": "Libérés", "values": [120, 165, 178, 182, 190, 198, 207] },
+          "taken": {
+            "label": "Repris par la liste d'attente",
+            "values": [66, 99, 110, 112, 118, 122, 130]
+          }
+        },
+        "noShow": {
+          "title": "Rendez-vous non honorés",
+          "labels": ["S1", "S2", "S3", "S4", "S5", "S6", "S7", "S8"],
+          "values": [18.2, 17.9, 18.4, 18.0, 15.1, 13.9, 13.2, 13.0],
+          "launchIndex": 4,
+          "launchLabel": "Mise en ligne"
+        },
+        "services": [
+          { "name": "API rendez-vous", "status": "good", "detail": "120 ms" },
+          { "name": "Notifications liste d'attente", "status": "good", "detail": "< 1 min" },
+          { "name": "Base de données", "status": "good", "detail": "99,99 %" },
+          { "name": "Application mobile", "status": "good", "detail": "0,1 % d'erreurs" }
+        ],
+        "incident": {
+          "when": "J2 · 08:14 → 08:34",
+          "title": "Notifications de liste d'attente en retard",
+          "detail": "File d'envoi saturée, capacité doublée en 20 minutes."
+        },
+        "loop": {
+          "title": "Retour au support",
+          "count": "23 nouveaux tickets",
+          "quote": "Je voudrais déplacer mon rendez-vous plutôt que l'annuler.",
+          "action": "Transmis à Lucie (support) : une nouvelle idée pour le backlog"
+        }
+      },
+      "annotations": [
+        {
+          "id": "tiles",
+          "zone": "tiles",
+          "title": "Les chiffres qui comptent",
+          "text": "Quatre chiffres résument la première semaine. L'objectif fixé par la Product Manager était de **réduire de 30 % les créneaux perdus en 3 mois** : la tendance est très encourageante."
+        },
+        {
+          "id": "slots",
+          "zone": "slots",
+          "title": "Libérés… et surtout repris",
+          "text": "Libérer un créneau ne suffit pas : il faut qu'un autre patient le prenne. La courbe verte montre les créneaux **repris** grâce à la liste d'attente, soit 61 % des créneaux libérés. C'est la vraie mesure du succès."
+        },
+        {
+          "id": "no-show",
+          "zone": "no-show",
+          "title": "Avant / après",
+          "text": "La ligne pointillée marque la [[mise-en-ligne|mise en ligne]]. Avant, 18 % des rendez-vous n'étaient pas honorés ; après, 13 %. Comparer la même mesure avant et après permet de vérifier que la fonctionnalité a bien eu l'effet attendu."
+        },
+        {
+          "id": "services",
+          "zone": "services",
+          "title": "Tout fonctionne ?",
+          "text": "La [[supervision]] surveille chaque service en direct : temps de réponse, taux d'erreur, disponibilité. Comme une tour de contrôle, elle permet de repérer un problème avant que les patients ne s'en plaignent."
+        },
+        {
+          "id": "incident",
+          "zone": "incident",
+          "title": "Une alerte, et alors ?",
+          "text": "Le deuxième jour, une [[alerte]] a signalé des notifications en retard : trop de messages à envoyer d'un coup. L'[[incident]] a été réglé en 20 minutes, puis l'équipe a analysé la cause pour éviter qu'il se reproduise, sans chercher de coupable."
+        },
+        {
+          "id": "loop",
+          "zone": "loop",
+          "title": "La boucle repart",
+          "text": "Des patients écrivent maintenant au support : « Je voudrais **déplacer** mon rendez-vous plutôt que l'annuler. » Ces retours repartent vers le poste 1 : c'est la [[boucle-de-retour|boucle de retour]], et peut-être la prochaine fonctionnalité."
+        }
+      ]
+    }
+  }
+}

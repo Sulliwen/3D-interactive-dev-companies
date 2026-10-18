@@ -1,0 +1,116 @@
+/* « Lumen Insights » : tableau de bord d'analyse. */
+
+.ad {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  padding: 8px 10px;
+}
+
+.ad__period {
+  padding: 1px 8px;
+  border-radius: 4px;
+  background: var(--surface-3);
+  color: var(--ink);
+}
+
+.ad__tiles {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+
+.ad__tiles .stat {
+  padding: 7px 10px;
+}
+
+.ad__tiles .stat__value {
+  font-size: 22px;
+}
+
+.ad__charts {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.ad__panel {
+  padding: 7px 10px;
+  border-radius: 8px;
+  background: var(--surface-2);
+}
+
+.ad__heading {
+  display: flex;
+  align-items: center;
+  margin-bottom: 4px !important;
+  color: var(--ink-muted);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.ad__toggle {
+  margin-left: auto;
+  margin-right: 30px; /* place de la pastille */
+  padding: 0 7px;
+  border: 1px solid #3a4256;
+  border-radius: 4px;
+  background: var(--surface-3);
+  font-size: 10.5px !important;
+  letter-spacing: 0;
+  text-transform: none;
+  cursor: pointer;
+}
+
+.ad__bottom {
+  display: grid;
+  grid-template-columns: 1.35fr 1fr;
+  gap: 8px;
+  flex: 1;
+  min-height: 0;
+}
+
+.ad__code {
+  margin: 0;
+  font-family: var(--mono);
+  font-size: 11px;
+  line-height: 15px;
+  color: #82aaff;
+  white-space: pre;
+  overflow: hidden;
+}
+
+.ad__comment {
+  color: #8692ab;
+  font-style: italic;
+}
+
+.ad__result {
+  margin-top: 4px !important;
+  font-size: 11.5px;
+}
+
+.ad__result strong {
+  color: #fff;
+}
+
+.ad__hypothesis {
+  border: 1px solid var(--lumen);
+  background: rgb(242 165 65 / 0.08);
+}
+
+.ad__hyp-value {
+  color: #fff;
+  font-size: 26px;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+
+.ad__hyp-text {
+  margin-top: 2px !important;
+  font-size: 12px;
+  line-height: 1.4;
+}

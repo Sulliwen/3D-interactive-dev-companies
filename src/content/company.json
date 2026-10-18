@@ -1,0 +1,50 @@
+{
+  "name": "Atelier Lumen",
+  "tagline": "Des logiciels utiles, fabriqués avec soin.",
+  "projects": [
+    {
+      "id": "pocket-sante",
+      "name": "Pocket Santé",
+      "description": "Application mobile de prise de rendez-vous médicaux.",
+      "featured": true
+    },
+    {
+      "id": "facturo",
+      "name": "Facturo",
+      "description": "Logiciel en ligne de facturation pour les artisans.",
+      "featured": false
+    },
+    {
+      "id": "refonte-mutuelle",
+      "name": "Refonte du site de la mutuelle",
+      "description": "Nouveau site web pour une mutuelle cliente.",
+      "featured": false
+    }
+  ],
+  "feature": {
+    "project": "pocket-sante",
+    "title": "Permettre au patient d'annuler son rendez-vous et libérer automatiquement le créneau pour d'autres patients."
+  },
+  "outcomes": [
+    {
+      "label": "Rendez-vous non honorés",
+      "before": "18 %",
+      "after": "13 %"
+    },
+    {
+      "label": "Créneaux libérés la 1re semaine",
+      "before": "0",
+      "after": "1 240"
+    },
+    {
+      "label": "Créneaux repris par un autre patient",
+      "before": "—",
+      "after": "61 %"
+    },
+    {
+      "label": "Tickets « annulation » au support",
+      "before": "214 / mois",
+      "after": "−70 %"
+    }
+  ]
+}

@@ -1,0 +1,152 @@
+{
+  "id": "qa",
+  "number": 11,
+  "title": "QA / testeur·se",
+  "featureStep": "On vérifie que tout fonctionne et on trouve un bug",
+  "details": {
+    "person": { "firstName": "Inès", "lastName": "Garcia", "role": "Testeuse QA" },
+    "tagline": "Mon métier, c'est d'essayer de casser l'application avant que les patients ne le fassent par accident.",
+    "missions": [
+      "Préparer le plan de [[recette]] à partir des [[critere-acceptation|critères d'acceptation]] : quoi tester, sur quels téléphones, avec quel résultat attendu.",
+      "Tester à la main sur de vrais iPhone et Android, en se mettant à la place de patients très différents.",
+      "Traquer les [[cas-limite|cas limites]] : 23 h 59, 24 h pile, réseau coupé, double appui sur le bouton…",
+      "Décrire chaque [[bug]] trouvé de façon précise, pour que le développeur puisse le reproduire et le corriger.",
+      "Faire grandir la base de [[test-automatise|tests automatisés]], pour qu'un bug corrigé ne revienne jamais ([[non-regression|non-régression]])."
+    ],
+    "takeaways": [
+      "Trouver un bug n'est pas un échec de l'équipe : c'est exactement le rôle de la QA, et c'est bien moins cher **avant** la mise en ligne qu'après.",
+      "Les erreurs se cachent aux frontières des règles : tester « 24 h pile » est plus utile que tester « dans 3 jours ».",
+      "Un bon rapport de bug dit comment le reproduire, ce qui était attendu et ce qui s'est passé. Sans cela, personne ne peut le corriger."
+    ],
+    "myth": {
+      "myth": "Les testeurs cliquent un peu partout au hasard en espérant tomber sur une erreur.",
+      "reality": "La QA suit un plan précis, construit à partir des règles du produit, et cherche méthodiquement là où les erreurs sont probables. Elle travaille avec les développeurs dès le début, pas seulement à la fin."
+    },
+    "receivesFrom": {
+      "stations": [8, 9, 10],
+      "text": "Le serveur et l'application construits par les développeurs, une fois leur code relu et approuvé en [[revue-de-code|revue de code]]."
+    },
+    "handsOffTo": {
+      "stations": [9, 12],
+      "text": "Le [[bug]] BUG-77 renvoyé au développeur front-end pour correction, puis une fonctionnalité vérifiée, prête pour la revue de sécurité."
+    },
+    "realTools": ["Xray", "TestRail", "Jira", "Playwright", "Appium", "BrowserStack"],
+    "screen": {
+      "component": "qa-console",
+      "toolName": "Lumen Test",
+      "props": {
+        "campaign": "Campagne PS-142 · Annulation d'un rendez-vous",
+        "status": "Sprint 24 · jeudi 14 novembre · Inès G.",
+        "suites": [
+          { "label": "Serveur", "passed": 236, "total": 236 },
+          { "label": "Application", "passed": 148, "total": 148 },
+          { "label": "Parcours complets", "passed": 28, "total": 28 }
+        ],
+        "cases": [
+          { "label": "Annuler un RDV dans 3 jours", "device": "iPhone 13", "result": "pass" },
+          { "label": "Annuler un RDV dans 3 jours", "device": "Android", "result": "pass" },
+          {
+            "label": "« Garder mon rendez-vous » ne change rien",
+            "device": "iPhone 13",
+            "result": "pass"
+          },
+          {
+            "label": "RDV dans 25 h : annulation acceptée",
+            "device": "iPhone 13",
+            "result": "pass",
+            "edge": true
+          },
+          {
+            "label": "RDV dans 23 h 59 : « appelez le cabinet »",
+            "device": "iPhone 13",
+            "result": "pass",
+            "edge": true
+          },
+          {
+            "label": "RDV dans 24 h pile : annulation acceptée",
+            "device": "iPhone 13",
+            "result": "fail",
+            "edge": true,
+            "bug": "BUG-77"
+          },
+          { "label": "Réseau coupé pendant l'annulation", "device": "Android", "result": "pass" },
+          { "label": "Double appui sur « Oui, annuler »", "device": "Android", "result": "pass" },
+          {
+            "label": "Lecteur d'écran : bouton bien annoncé",
+            "device": "iPhone 13",
+            "result": "pass"
+          },
+          { "label": "Créneau libre dans l'agenda du médecin", "device": "Web", "result": "pass" },
+          {
+            "label": "Liste d'attente prévenue en moins d'1 min",
+            "device": "Android",
+            "result": "pass"
+          },
+          { "label": "Texte en très grande taille", "device": "Android", "result": "pass" }
+        ],
+        "bug": {
+          "id": "BUG-77",
+          "title": "Annulation refusée pour un rendez-vous dans exactement 24 h",
+          "severity": "Majeure",
+          "device": "iPhone 13 · application 4.12",
+          "steps": [
+            "Prendre un rendez-vous pour demain à 10:30.",
+            "Aujourd'hui à 10:30 pile, toucher « Annuler ».",
+            "Confirmer avec « Oui, annuler »."
+          ],
+          "expected": "L'annulation est acceptée (24 h ou plus, critère n° 1).",
+          "actual": "« Annulation impossible en ligne » s'affiche.",
+          "cause": {
+            "text": "Le serveur accepte « 24 h ou plus », mais l'application refusait « 24 h ou moins ». Même règle, deux interprétations.",
+            "before": "if (hoursLeft <= MIN_NOTICE_HOURS)",
+            "after": "if (hoursLeft < MIN_NOTICE_HOURS)"
+          },
+          "assignee": "Thomas P.",
+          "statusBefore": "Corrigé · à retester",
+          "statusAfter": "Retesté · clos",
+          "retestLabel": "Retester",
+          "when": "Ven. 15 nov. · 10:30",
+          "caption": "Capture du 14 nov. à 10:30"
+        }
+      },
+      "annotations": [
+        {
+          "id": "auto-tests",
+          "zone": "auto-tests",
+          "title": "412 vérifications en quelques minutes",
+          "text": "Avant même de toucher un téléphone, Inès lance les [[test-automatise|tests automatiques]] écrits par toute l'équipe : 412 vérifications, toutes au vert. Ils sont relancés à chaque modification : ce sont des [[non-regression|tests de non-régression]]."
+        },
+        {
+          "id": "manual-plan",
+          "zone": "manual-plan",
+          "title": "La recette, téléphone en main",
+          "text": "Chaque ligne est un cas de la [[recette]], préparé à partir des [[critere-acceptation|critères d'acceptation]] de la Product Owner. Inès les joue un par un sur de vrais téléphones, comme le ferait un patient."
+        },
+        {
+          "id": "edge-cases",
+          "zone": "edge-cases",
+          "title": "Chercher la petite bête aux frontières",
+          "text": "25 h, 23 h 59, 24 h pile : ce sont des [[cas-limite|cas limites]]. Les erreurs se cachent presque toujours à la frontière d'une règle. Et justement : à 24 h pile, ça ne marche pas !"
+        },
+        {
+          "id": "bug-report",
+          "zone": "bug-report",
+          "title": "Un bug bien décrit est à moitié corrigé",
+          "text": "Le rapport de [[bug]] dit tout : comment le reproduire, ce qui était attendu, ce qui s'est passé, sur quel téléphone, avec une capture d'écran. Le développeur n'a pas besoin de deviner."
+        },
+        {
+          "id": "bug-cause",
+          "zone": "bug-cause",
+          "title": "Une règle, deux interprétations",
+          "text": "Le [[serveur]] (poste 8) et l'application (poste 9) appliquaient la règle des 24 h chacun à leur façon. Un seul signe différait : `<=` au lieu de `<`. Pour le patient, c'était un refus injuste."
+        },
+        {
+          "id": "retest",
+          "zone": "retest",
+          "title": "Corrigé… puis revérifié",
+          "text": "Thomas a corrigé le bug et ajouté un [[test-automatise|test automatique]] « 24 h pile » pour qu'il ne revienne jamais. Inès doit encore le vérifier elle-même : cliquez sur « Retester »."
+        }
+      ]
+    }
+  }
+}

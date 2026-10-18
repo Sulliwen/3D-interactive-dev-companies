@@ -1,0 +1,49 @@
+import { useState } from 'react'
+import { api } from '../api/client'
+import { showMessage } from '../ui/messages'
+
+// Même règle que le serveur : en ligne, seulement à 24 h ou plus
+const MIN_NOTICE_HOURS = 24
+
+export function useCancelAppointment(appointment: Appointment) {
+  const [status, setStatus] = useState<Status>('idle')
+
+  async function cancel() {
+    // @zone rule-24h
+    const hoursLeft = hoursUntil(appointment.startsAt)
+    // Corrigé après la recette (BUG-77) : « < » et non « <= »,
+    // exactement comme le serveur
+    if (hoursLeft < MIN_NOTICE_HOURS) {
+      return showTooLate(appointment)
+    }
+    // @end
+
+    // @zone api-call
+    setStatus('pending')
+    const response = await api.post(
+      `/appointments/${appointment.id}/cancel`,
+    )
+    // @end
+
+    // @zone too-late
+    // Le serveur a le dernier mot : s'il refuse, on explique pourquoi
+    // et on donne le numéro du cabinet (suggestion de la revue de code)
+    if (response.status === 409) {
+      setStatus('idle')
+      return showTooLate(appointment)
+    }
+    // @end
+
+    setStatus('done')
+    showMessage('Rendez-vous annulé. Merci, le créneau a été libéré.')
+  }
+
+  return { cancel, status }
+}
+
+function showTooLate(appointment: Appointment) {
+  showMessage(
+    'Annulation impossible en ligne à moins de 24 h. '
+      + `Appelez le cabinet : ${appointment.practicePhone}`,
+  )
+}

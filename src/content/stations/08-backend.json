@@ -1,0 +1,114 @@
+{
+  "id": "backend",
+  "number": 8,
+  "title": "Développeur·se back-end",
+  "featureStep": "On construit la logique côté serveur",
+  "details": {
+    "person": { "firstName": "Awa", "lastName": "Diallo", "role": "Développeuse back-end" },
+    "tagline": "Je construis ce qui se passe en coulisses quand le patient appuie sur « Annuler » : les règles, les données, la sécurité.",
+    "missions": [
+      "Traduire les [[user-story|user stories]] et leurs [[critere-acceptation|critères d'acceptation]] en [[code-source|code]] qui tourne sur le [[serveur]].",
+      "Concevoir l'[[api|API]] que l'application mobile appellera, en accord avec le développeur [[front-end]].",
+      "Lire et modifier la [[base-de-donnees|base de données]] sans jamais perdre ni mélanger d'informations.",
+      "Écrire des [[test-automatise|tests automatisés]] qui prouvent que tout fonctionne, aujourd'hui et après chaque modification.",
+      "Faire relire son code en [[revue-de-code|revue de code]], et relire celui de ses collègues."
+    ],
+    "takeaways": [
+      "Le [[back-end]] est invisible pour le patient, mais c'est lui qui fait respecter les règles : ici, **pas d'annulation en ligne à moins de 24 h**.",
+      "Une règle bien écrite par la Product Owner se traduit presque mot pour mot en code.",
+      "Les tests font partie du travail du développeur : ils évitent que la fonctionnalité casse le jour où quelqu'un modifie le code."
+    ],
+    "myth": {
+      "myth": "Un développeur passe ses journées seul, casque sur les oreilles, à taper du code.",
+      "reality": "Écrire du code n'occupe souvent qu'une partie de la journée. Le reste : comprendre le besoin avec la Product Owner, se mettre d'accord avec le front-end sur l'[[api|API]], relire le code des collègues, tester, corriger. C'est un métier d'équipe."
+    },
+    "receivesFrom": {
+      "stations": [5, 6, 7],
+      "text": "La [[user-story|user story]] et ses critères (Product Owner), les maquettes de l'écran d'annulation (Designer) et le feu vert du [[sprint]] (Scrum Master)."
+    },
+    "handsOffTo": {
+      "stations": [9, 10],
+      "text": "Une [[api|API]] prête à être appelée par l'application mobile (front-end), et le code à faire relire avant intégration (revue de code)."
+    },
+    "realTools": ["VS Code", "IntelliJ IDEA", "Git", "Node.js", "PostgreSQL", "Postman"],
+    "screen": {
+      "component": "code-editor",
+      "toolName": "Atelier Code",
+      "props": {
+        "project": "pocket-sante-api",
+        "branch": "feature/annulation-rdv",
+        "explorer": [
+          "src/database/",
+          "src/notifications/",
+          "src/security/",
+          "package.json",
+          "README.md"
+        ],
+        "files": [
+          { "name": "appointments.routes.ts", "source": "08-backend/appointments.routes.ts.txt" },
+          { "name": "cancelAppointment.ts", "source": "08-backend/cancelAppointment.ts.txt" },
+          {
+            "name": "cancelAppointment.test.ts",
+            "source": "08-backend/cancelAppointment.test.ts.txt"
+          }
+        ],
+        "initialFile": 1,
+        "terminal": {
+          "command": "npm test cancelAppointment",
+          "lines": [
+            { "kind": "info", "text": "RUN  src/appointments/cancelAppointment.test.ts" },
+            {
+              "kind": "pass",
+              "text": "annule un rendez-vous pris dans 3 jours et libère le créneau  42 ms"
+            },
+            { "kind": "pass", "text": "refuse une annulation à moins de 24 h  8 ms" },
+            { "kind": "pass", "text": "refuse d'annuler le rendez-vous d'un autre patient  6 ms" },
+            {
+              "kind": "pass",
+              "text": "prévient la liste d'attente quand le créneau se libère  11 ms"
+            },
+            { "kind": "summary", "text": "Tests  4 passed (4)   ·   Duration 0.41 s" }
+          ]
+        }
+      },
+      "annotations": [
+        {
+          "id": "route",
+          "zone": "route",
+          "title": "L'adresse de la fonctionnalité",
+          "text": "Quand le patient appuie sur « Annuler », l'application envoie une demande à cette adresse : c'est l'[[api|API]]. Comme au guichet d'une administration, l'application dépose sa demande et le [[serveur]] répond. Au passage, `requireAuth` vérifie que la personne est bien connectée."
+        },
+        {
+          "id": "ownership",
+          "zone": "ownership",
+          "title": "Pas touche aux rendez-vous des autres",
+          "text": "Avant tout, on vérifie que le rendez-vous appartient bien au patient connecté. Sans ces trois lignes, quelqu'un de malveillant pourrait annuler le rendez-vous d'un inconnu. Le poste Sécurité (n° 12) contrôlera ce genre de détail."
+        },
+        {
+          "id": "rule-24h",
+          "zone": "rule-24h",
+          "title": "La règle des 24 h, traduite en code",
+          "text": "Cette règle vient des [[critere-acceptation|critères d'acceptation]] écrits par la Product Owner (poste 5) : « Si le rendez-vous a lieu dans moins de 24 h, on invite le patient à appeler le cabinet. » La développeuse traduit cette phrase en une condition : `if (hoursLeft < 24)`."
+        },
+        {
+          "id": "transaction",
+          "zone": "transaction",
+          "title": "Tout ou rien",
+          "text": "Deux [[requete-sql|requêtes]] modifient la [[base-de-donnees|base de données]] : annuler le rendez-vous, puis libérer le créneau. La [[transaction]] garantit que les deux réussissent ensemble, ou qu'aucune ne s'applique. Impossible d'avoir un rendez-vous annulé dont le créneau resterait bloqué."
+        },
+        {
+          "id": "notify",
+          "zone": "notify",
+          "title": "Prévenir la liste d'attente",
+          "text": "C'est tout l'intérêt de la fonctionnalité : un créneau libéré est aussitôt proposé aux patients en attente. L'envoi des messages est confié à un autre service, pour que le patient qui annule n'attende pas."
+        },
+        {
+          "id": "tests",
+          "zone": "terminal",
+          "title": "Les tests passent au vert",
+          "text": "Awa a aussi écrit des [[test-automatise|tests automatisés]] : de petits programmes qui vérifient chaque règle en quelques millisecondes. Ici, les 4 tests réussissent. La QA (poste 11) ira plus loin, avec des tests manuels sur un vrai téléphone."
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,199 @@
+{
+  "id": "security",
+  "number": 12,
+  "title": "Sécurité",
+  "featureStep": "On vérifie qu'on protège les données des patients",
+  "details": {
+    "person": {
+      "firstName": "Léa",
+      "lastName": "Kowalski",
+      "role": "Ingénieure sécurité"
+    },
+    "tagline": "Je m'assure que la fonctionnalité ne met jamais en danger les données des patients : qui peut faire quoi, ce qu'on enregistre, et ce qu'on ne révèle à personne.",
+    "missions": [
+      "Vérifier que chaque fonctionnalité respecte le [[rgpd|RGPD]] et les règles propres aux données de santé ([[hds|HDS]]).",
+      "Contrôler les droits : chacun ne doit pouvoir agir que sur ses propres données.",
+      "Surveiller les [[dependance|dépendances]] du logiciel et faire corriger les [[vulnerabilite|vulnérabilités]] connues.",
+      "S'assurer que les actions sensibles sont enregistrées dans le [[journal-acces|journal d'accès]].",
+      "Sensibiliser l'équipe : former, conseiller, répondre aux questions dès la conception."
+    ],
+    "takeaways": [
+      "Les données de santé font partie des plus sensibles : en France, elles doivent être stockées chez un hébergeur certifié [[hds|HDS]].",
+      "**Moins on collecte et on partage d'informations, moins on prend de risques** : c'est le principe de minimisation.",
+      "La sécurité se vérifie à chaque fonctionnalité, pas une fois par an : une petite faille dans une bibliothèque suffit."
+    ],
+    "myth": {
+      "myth": "La sécurité, c'est un expert qui arrive à la fin pour tout bloquer.",
+      "reality": "Léa travaille avec l'équipe depuis le début : elle a relu la user story, demandé le test « rendez-vous d'un autre patient » et proposé que la notification reste anonyme. Son rôle est de trouver des solutions sûres, pas de dire non."
+    },
+    "receivesFrom": {
+      "stations": [8, 11],
+      "text": "Le code d'Awa, relu en [[revue-de-code|revue de code]], et la version testée en [[recette]] par Inès (QA)."
+    },
+    "handsOffTo": {
+      "stations": [13],
+      "text": "Le feu vert sécurité : Ibrahima peut lancer la [[mise-en-ligne|mise en ligne]], une fois la bibliothèque de dates mise à jour."
+    },
+    "realTools": ["Snyk", "Dependabot", "OWASP ZAP", "Burp Suite", "SonarQube"],
+    "screen": {
+      "component": "security-review",
+      "toolName": "Lumen Shield",
+      "props": {
+        "feature": "PS-142 · Annulation d'un rendez-vous",
+        "reviewer": "Léa Kowalski",
+        "checklist": [
+          {
+            "zone": "hds",
+            "title": "Données de santé",
+            "items": [
+              {
+                "label": "Données stockées chez un hébergeur certifié HDS",
+                "state": "done"
+              },
+              {
+                "label": "Données chiffrées pendant le transport et le stockage",
+                "state": "done"
+              },
+              {
+                "label": "Accès de l'équipe limité au strict nécessaire",
+                "state": "done"
+              }
+            ]
+          },
+          {
+            "zone": "rgpd",
+            "title": "RGPD",
+            "items": [
+              {
+                "label": "Seules les données utiles sont enregistrées",
+                "state": "done"
+              },
+              {
+                "label": "La notification à la liste d'attente ne dit ni qui a annulé, ni pourquoi",
+                "state": "done"
+              },
+              {
+                "label": "Durée de conservation des annulations fixée",
+                "state": "in-progress",
+                "note": "À valider avec la déléguée à la protection des données"
+              },
+              {
+                "label": "Politique de confidentialité mise à jour",
+                "state": "in-progress",
+                "note": "Texte en relecture"
+              }
+            ]
+          }
+        ],
+        "accessCheck": {
+          "title": "Seul le patient peut annuler son rendez-vous",
+          "source": "cancelAppointment.ts · code d'Awa",
+          "code": [
+            "// Le rendez-vous doit appartenir au patient connecté",
+            "if (!appointment || appointment.patientId !== patientId) {",
+            "  throw new HttpError(404, 'Rendez-vous introuvable')",
+            "}"
+          ],
+          "result": "Tentative d'annuler le rendez-vous d'un autre patient : refusée."
+        },
+        "dependencies": [
+          {
+            "name": "express",
+            "version": "4.21.2",
+            "severity": "none",
+            "note": "Aucune faille connue"
+          },
+          {
+            "name": "date-kit",
+            "version": "2.3.1",
+            "severity": "medium",
+            "fixedIn": "2.3.4",
+            "note": "Une date piégée peut fausser les calculs. Mise à jour en cours."
+          },
+          {
+            "name": "pg",
+            "version": "8.13.1",
+            "severity": "none",
+            "note": "Aucune faille connue"
+          }
+        ],
+        "auditLog": [
+          {
+            "time": "09:12:04",
+            "event": "appointment.viewed",
+            "actor": "pat_7f3a",
+            "resource": "rdv_88213",
+            "result": "ok"
+          },
+          {
+            "time": "09:12:31",
+            "event": "appointment.cancelled",
+            "actor": "pat_7f3a",
+            "resource": "rdv_88213",
+            "result": "ok"
+          },
+          {
+            "time": "09:12:31",
+            "event": "slot.released",
+            "actor": "système",
+            "resource": "creneau_40517",
+            "result": "ok"
+          },
+          {
+            "time": "09:12:33",
+            "event": "waitinglist.notified",
+            "actor": "système",
+            "resource": "creneau_40517 · 3 patients",
+            "result": "ok"
+          },
+          {
+            "time": "09:14:02",
+            "event": "appointment.cancel",
+            "actor": "pat_c21e",
+            "resource": "rdv_88213",
+            "result": "denied"
+          },
+          {
+            "time": "09:20:47",
+            "event": "appointment.cancelled",
+            "actor": "pat_0b9d",
+            "resource": "rdv_88290",
+            "result": "ok"
+          }
+        ]
+      },
+      "annotations": [
+        {
+          "id": "hds",
+          "zone": "hds",
+          "title": "Des données pas comme les autres",
+          "text": "Un rendez-vous chez un dermatologue ou un psychiatre en dit beaucoup sur la santé d'une personne. Ces données doivent être rangées dans un « coffre-fort » agréé : un hébergeur certifié [[hds|HDS]], chiffré et contrôlé."
+        },
+        {
+          "id": "rgpd",
+          "zone": "rgpd",
+          "title": "Le strict nécessaire",
+          "text": "Le [[rgpd|RGPD]] impose de ne garder que ce qui est utile. Léa a obtenu que le message envoyé à la liste d'attente annonce seulement « un créneau s'est libéré », sans jamais dire qui a annulé ni pourquoi. Deux points sont encore **en cours** : c'est normal, la revue avance avec l'équipe."
+        },
+        {
+          "id": "ownership",
+          "zone": "ownership",
+          "title": "Seul le patient peut annuler son rendez-vous",
+          "text": "Léa vérifie la règle écrite par Awa (poste 8) et l'attaque elle-même : elle essaie d'annuler le rendez-vous d'un autre patient. Résultat : refusé. Le pirate ne peut même pas savoir si ce rendez-vous existe (« introuvable »)."
+        },
+        {
+          "id": "dependencies",
+          "zone": "dependencies",
+          "title": "Les briques venues de l'extérieur",
+          "text": "Le logiciel utilise des [[dependance|dépendances]] écrites par d'autres. Un outil compare leurs versions à une base de failles connues : la bibliothèque de dates a une [[vulnerabilite|vulnérabilité]] moyenne. La correction existe ; elle sera installée **avant** la mise en ligne."
+        },
+        {
+          "id": "audit-log",
+          "zone": "audit-log",
+          "title": "Qui a fait quoi, et quand",
+          "text": "Chaque annulation laisse une trace dans le [[journal-acces|journal d'accès]]. Les patients n'y apparaissent jamais par leur nom, mais par un identifiant neutre : c'est la [[pseudonymisation]]. La ligne « Refusé » de 09:14 ? C'est le test de Léa."
+        }
+      ]
+    }
+  }
+}

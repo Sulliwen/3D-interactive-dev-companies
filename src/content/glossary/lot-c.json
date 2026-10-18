@@ -1,0 +1,50 @@
+[
+  {
+    "id": "backlog",
+    "term": "Backlog",
+    "definition": "La liste de toutes les demandes et idées pour un produit, triée par priorité. L'équipe pioche toujours en haut de la liste.",
+    "analogy": "La pile de dossiers sur le bureau d'un service, que l'on retrie chaque semaine : l'urgent et l'important au-dessus."
+  },
+  {
+    "id": "point-effort",
+    "term": "Point d'effort",
+    "definition": "Unité qu'une équipe utilise pour estimer la taille d'une demande, en la comparant aux autres plutôt qu'en comptant des heures.",
+    "analogy": "Comme des tailles de vêtements (S, M, L) : on sait qu'un L est plus grand qu'un M, sans mesurer au centimètre près."
+  },
+  {
+    "id": "planning-poker",
+    "term": "Planning poker",
+    "definition": "Séance où chaque membre de l'équipe estime une demande en même temps, en retournant une carte. Les écarts sont discutés, puis on revote.",
+    "analogy": "Un jury qui note en même temps, pour que personne ne soit influencé par l'avis du premier qui parle."
+  },
+  {
+    "id": "scrum",
+    "term": "Scrum",
+    "definition": "Méthode de travail en équipe par cycles courts (les sprints), avec des rendez-vous réguliers pour planifier, se coordonner, montrer le résultat et s'améliorer.",
+    "analogy": "Un chantier organisé en étapes de deux semaines, avec un point d'équipe chaque matin et une visite de fin d'étape."
+  },
+  {
+    "id": "daily",
+    "term": "Daily",
+    "definition": "Réunion quotidienne de 15 minutes, souvent debout, où chacun dit ce qu'il a fait la veille, ce qu'il fait aujourd'hui et ce qui le bloque.",
+    "analogy": "Le point du matin d'une équipe de restaurant avant le service."
+  },
+  {
+    "id": "burndown",
+    "term": "Burndown",
+    "definition": "Graphique qui montre, jour après jour, la quantité de travail qui reste à faire dans le sprint, comparée au rythme idéal pour finir à temps.",
+    "analogy": "Le compteur de kilomètres restants d'un GPS, avec l'heure d'arrivée prévue."
+  },
+  {
+    "id": "retrospective",
+    "term": "Rétrospective",
+    "definition": "Réunion de fin de sprint où l'équipe regarde comment elle a travaillé (pas ce qu'elle a produit) et choisit une ou deux choses à améliorer.",
+    "analogy": "Le débrief d'une équipe de sport après le match, centré sur le jeu collectif."
+  },
+  {
+    "id": "sprint-review",
+    "term": "Revue de sprint",
+    "definition": "Réunion de fin de sprint où l'équipe montre ce qu'elle a réellement construit aux personnes concernées, et recueille leurs réactions.",
+    "analogy": "La visite de fin d'étape d'un chantier avec le client, qui voit le résultat de ses propres yeux."
+  }
+]

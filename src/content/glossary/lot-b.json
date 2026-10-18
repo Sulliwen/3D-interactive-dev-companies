@@ -1,0 +1,62 @@
+[
+  {
+    "id": "entretien-utilisateur",
+    "term": "Entretien utilisateur",
+    "definition": "Conversation d'environ une heure avec une personne qui utilise (ou pourrait utiliser) le produit, pour comprendre ses habitudes et ses difficultés.",
+    "analogy": "Une enquête de terrain : on écoute des histoires vécues plutôt que de poser des questions fermées."
+  },
+  {
+    "id": "carte-affinites",
+    "term": "Carte d'affinités",
+    "definition": "Méthode qui regroupe les observations d'une étude (souvent sur des post-it) par thèmes, pour faire apparaître ce qui revient le plus.",
+    "analogy": "Trier un tas de courrier en piles : très vite, on voit quelles piles sont les plus hautes."
+  },
+  {
+    "id": "persona",
+    "term": "Persona",
+    "definition": "Portrait d'un utilisateur type, construit à partir de vraies personnes rencontrées : prénom, situation, besoins, frustrations.",
+    "analogy": "Le « client idéal » qu'un commercial garde en tête, mais fondé sur des entretiens réels."
+  },
+  {
+    "id": "parcours-utilisateur",
+    "term": "Parcours utilisateur",
+    "definition": "Description, étape par étape, de ce que vit une personne pour atteindre un objectif, avec son ressenti et ses points de blocage.",
+    "analogy": "Le trajet d'un client dans un magasin, de l'entrée jusqu'à la caisse, en notant où il hésite."
+  },
+  {
+    "id": "rendez-vous-non-honore",
+    "term": "Rendez-vous non honoré",
+    "definition": "Rendez-vous où le patient ne vient pas, sans avoir prévenu. Le créneau est perdu : personne d'autre ne peut en profiter.",
+    "analogy": "La table réservée au restaurant qui reste vide toute la soirée."
+  },
+  {
+    "id": "indicateur",
+    "term": "Indicateur",
+    "definition": "Chiffre suivi dans le temps pour savoir si une situation s'améliore ou se dégrade (on parle aussi de KPI).",
+    "analogy": "Le compteur de vitesse d'une voiture : un seul chiffre, regardé souvent, qui dit si l'on est sur la bonne voie."
+  },
+  {
+    "id": "tableau-de-bord",
+    "term": "Tableau de bord",
+    "definition": "Écran qui rassemble les principaux indicateurs d'une activité, mis à jour automatiquement à partir des données.",
+    "analogy": "Le tableau de bord d'une voiture : tout ce qu'il faut surveiller, d'un seul coup d'œil."
+  },
+  {
+    "id": "feuille-de-route",
+    "term": "Feuille de route",
+    "definition": "Plan qui montre, mois par mois, les grands chantiers prévus pour un produit et leur ordre (en anglais : roadmap).",
+    "analogy": "Le planning d'un chantier : on sait ce qui vient d'abord, sans encore détailler chaque tâche."
+  },
+  {
+    "id": "okr",
+    "term": "OKR",
+    "definition": "Méthode de fixation d'objectifs : un objectif qualitatif (Objective) accompagné de résultats chiffrés qui prouvent qu'il est atteint (Key Results).",
+    "analogy": "« Être en forme cet été » (objectif), mesuré par « courir 10 km en moins d'une heure » (résultat clé)."
+  },
+  {
+    "id": "matrice-impact-effort",
+    "term": "Matrice impact / effort",
+    "definition": "Tableau à deux axes qui place chaque idée selon le bénéfice attendu et le travail nécessaire, pour décider quoi faire en premier.",
+    "analogy": "Choisir ses travaux à la maison : d'abord ce qui change beaucoup le quotidien sans coûter trop cher."
+  }
+]

@@ -1,0 +1,13 @@
+node_modules
+dist
+*.local
+.DS_Store
+# Blender : fichiers de sauvegarde
+*.blend1
+
+# Passe artistique : sources téléchargées et fichiers intermédiaires (regénérables)
+art/sources/
+art/build/
+# Scène Blender de travail (régénérable : npm run art:build -- --rebuild)
+art/*.blend
+art/*.blend1

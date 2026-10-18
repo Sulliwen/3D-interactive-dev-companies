@@ -1,0 +1,202 @@
+/* « Lumen Roadmap » : objectif, feuille de route, priorisation. */
+
+.rm {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  padding: 8px 10px;
+}
+
+.rm__okr {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: 12px;
+  align-items: center;
+  padding: 8px 40px 8px 12px;
+  border: 1px solid var(--lumen);
+  border-radius: 8px;
+  background: rgb(242 165 65 / 0.08);
+}
+
+.rm__okr-tag {
+  grid-row: span 2;
+  padding: 3px 8px;
+  border-radius: 4px;
+  background: var(--lumen);
+  color: #1a1206;
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.rm__objective {
+  color: #fff;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.rm__krs {
+  display: flex;
+  gap: 18px;
+  margin: 2px 0 0;
+  padding-left: 16px;
+  font-size: 11.5px;
+}
+
+.rm__main {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 8px;
+}
+
+.rm__panel {
+  padding: 7px 10px;
+  border-radius: 8px;
+  background: var(--surface-2);
+}
+
+.rm__heading {
+  margin-bottom: 6px !important;
+  color: var(--ink-muted);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.rm__grid {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.rm__row {
+  display: grid;
+  gap: 4px;
+  align-items: center;
+  min-height: 60px;
+  padding: 4px 0;
+  border-top: 1px solid var(--line);
+}
+
+.rm__row--months {
+  min-height: 0;
+  border-top: 0;
+}
+
+.rm__month {
+  color: var(--ink-muted);
+  font-size: 11px;
+  text-align: center;
+}
+
+.rm__lane-name {
+  grid-column: 1;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #fff;
+  font-size: 11.5px;
+  font-weight: 700;
+}
+
+.rm__lane-name i {
+  width: 8px;
+  height: 8px;
+  flex: none;
+  border-radius: 50%;
+}
+
+.rm__bar {
+  grid-row: 1;
+  padding: 4px 6px;
+  border-left: 3px solid var(--series-1);
+  border-radius: 4px;
+  background: var(--surface-3);
+  color: var(--ink);
+  font-size: 11px;
+  line-height: 1.25;
+}
+
+.rm__bar--highlight {
+  background: rgb(242 165 65 / 0.18);
+  box-shadow: inset 0 0 0 1px var(--lumen);
+  color: #fff;
+  font-weight: 700;
+}
+
+.rm__matrix-body svg {
+  display: block;
+  overflow: visible;
+}
+
+.rm__frame {
+  fill: none;
+  stroke: var(--line);
+}
+
+.rm__quad--best {
+  fill: rgb(242 165 65 / 0.07);
+}
+
+.rm__axis-mid {
+  stroke: var(--line);
+  stroke-dasharray: 3 3;
+}
+
+.rm__quad-label {
+  fill: var(--lumen);
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.rm__axis-label {
+  fill: var(--ink-muted);
+  font-size: 10px;
+}
+
+.rm__point {
+  cursor: pointer;
+  outline: none;
+}
+
+.rm__point-label {
+  fill: var(--ink);
+  font-size: 10.5px;
+}
+
+.rm__point-label--highlight {
+  fill: #fff;
+  font-weight: 700;
+}
+
+.rm__note {
+  min-height: 30px;
+  margin-top: 4px !important;
+  font-size: 11px;
+  line-height: 1.35;
+}
+
+.rm__note strong {
+  color: #fff;
+}
+
+.rm__why {
+  flex: 1;
+}
+
+.rm__why ol {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin: 0;
+  padding-left: 16px;
+  font-size: 11.5px;
+  line-height: 1.4;
+}
+
+.rm__why li::marker {
+  color: var(--lumen);
+  font-weight: 800;
+}

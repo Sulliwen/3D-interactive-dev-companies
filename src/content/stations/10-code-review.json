@@ -1,0 +1,237 @@
+{
+  "id": "code-review",
+  "number": 10,
+  "title": "Revue de code",
+  "featureStep": "Un collègue relit avant que le code soit intégré",
+  "details": {
+    "person": {
+      "firstName": "Marc",
+      "lastName": "Rousseau",
+      "role": "Développeur senior"
+    },
+    "tagline": "Je relis le code de mes collègues avant qu'il rejoigne le logiciel : un deuxième regard pour éviter les erreurs et partager les bonnes idées.",
+    "missions": [
+      "Relire les [[pull-request|pull requests]] de l'équipe : le code est-il clair, juste, testé ?",
+      "Repérer ce qui pourrait poser problème plus tard : un cas oublié, une règle mal appliquée, une faille de sécurité.",
+      "Proposer des améliorations précises et bienveillantes, ligne par ligne.",
+      "Accompagner les développeurs moins expérimentés et garder un code cohérent dans tout le projet.",
+      "Donner le feu vert (l'approbation) qui autorise la [[fusion]] du code dans la version principale."
+    ],
+    "takeaways": [
+      "**Personne n'intègre de code sans relecture**, pas même les plus expérimentés : c'est une règle d'équipe, pas un manque de confiance.",
+      "Une bonne remarque de relecture est précise, explique pourquoi, et propose une solution.",
+      "La relecture partage aussi la connaissance : si Awa est absente, Marc connaît déjà son code."
+    ],
+    "myth": {
+      "myth": "La revue de code sert à juger ou à corriger les mauvais développeurs.",
+      "reality": "Tout le monde est relu, y compris Marc lui-même. La revue sert à attraper les erreurs tôt, quand elles coûtent peu à corriger, et à apprendre les uns des autres. Le ton est celui d'une relecture entre collègues, pas d'un examen."
+    },
+    "receivesFrom": {
+      "stations": [8, 9],
+      "text": "Le code d'Awa (back-end) et de Thomas (application mobile), regroupés dans la [[pull-request|pull request]] n° 318."
+    },
+    "handsOffTo": {
+      "stations": [11],
+      "text": "Un code relu, approuvé et fusionné, prêt à être testé en [[recette]] par Inès (QA)."
+    },
+    "realTools": ["GitHub", "GitLab", "Bitbucket", "Gerrit", "SonarQube"],
+    "screen": {
+      "component": "pull-request",
+      "toolName": "Lumen Git",
+      "props": {
+        "number": 318,
+        "title": "Annulation d'un rendez-vous par le patient",
+        "authors": ["Awa Diallo", "Thomas Petit"],
+        "branch": "feature/annulation-rdv",
+        "base": "main",
+        "commits": 7,
+        "description": "Ajoute l'annulation d'un rendez-vous depuis l'application (user story PS-142) : règle des 24 h, libération du créneau dans une transaction, notification de la liste d'attente et trace dans le journal. Côté mobile : bouton Annuler, confirmation, messages de succès et de refus.",
+        "changedFiles": [
+          {
+            "path": "src/appointments/cancelAppointment.ts",
+            "additions": 54,
+            "deletions": 0
+          },
+          {
+            "path": "src/appointments/cancelAppointment.test.ts",
+            "additions": 31,
+            "deletions": 0
+          },
+          {
+            "path": "src/appointments/appointments.routes.ts",
+            "additions": 5,
+            "deletions": 1
+          },
+          {
+            "path": "app/screens/MyAppointments.tsx",
+            "additions": 64,
+            "deletions": 12
+          }
+        ],
+        "diffs": [
+          {
+            "path": "src/appointments/appointments.routes.ts",
+            "hunk": "nouvelle route",
+            "lines": [
+              {
+                "t": " ",
+                "n": 7,
+                "text": "appointmentsRouter.get('/appointments', requireAuth, listAppointments)"
+              },
+              {
+                "t": "-",
+                "n": 8,
+                "text": "// TODO : annulation en ligne (en attendant, le patient appelle le cabinet)"
+              },
+              {
+                "t": "+",
+                "n": 8,
+                "text": "appointmentsRouter.post('/appointments/:id/cancel', requireAuth, async (req, res) => {"
+              },
+              {
+                "t": "+",
+                "n": 9,
+                "text": "  const result = await cancelAppointment(req.params.id, req.user.id)"
+              },
+              {
+                "t": "+",
+                "n": 10,
+                "text": "  res.status(200).json(result)"
+              },
+              {
+                "t": "+",
+                "n": 11,
+                "text": "})"
+              }
+            ]
+          },
+          {
+            "path": "src/appointments/cancelAppointment.ts",
+            "hunk": "règle des 24 h",
+            "lines": [
+              {
+                "t": "+",
+                "n": 17,
+                "text": "  const hoursLeft = (appointment.startsAt.getTime() - Date.now()) / 3_600_000"
+              },
+              {
+                "t": "+",
+                "n": 18,
+                "text": "  if (hoursLeft < MIN_NOTICE_HOURS) {"
+              },
+              {
+                "t": "+",
+                "n": 19,
+                "text": "    // Ce message est affiché tel quel dans l'application"
+              },
+              {
+                "t": "+",
+                "n": 20,
+                "text": "    throw new HttpError(409, 'Annulation impossible à moins de 24 h : appelez le cabinet.')"
+              },
+              {
+                "t": "+",
+                "n": 21,
+                "text": "  }"
+              }
+            ],
+            "inlineComment": {
+              "after": 3,
+              "resolved": true,
+              "suggestion": {
+                "from": "throw new HttpError(409, 'Annulation impossible à moins de 24 h.')",
+                "to": "throw new HttpError(409, 'Annulation impossible à moins de 24 h : appelez le cabinet.')"
+              },
+              "thread": [
+                {
+                  "author": "Marc Rousseau",
+                  "when": "hier 16:32",
+                  "text": "Le patient est bloqué s'il ne sait pas quoi faire. Je propose de l'inviter à appeler le cabinet, et que l'application affiche le numéro juste en dessous."
+                },
+                {
+                  "author": "Awa Diallo",
+                  "when": "hier 17:10",
+                  "text": "Bien vu ! Suggestion appliquée ; Thomas affiche le numéro du cabinet dans l'application."
+                }
+              ]
+            }
+          }
+        ],
+        "timeline": [
+          {
+            "author": "Marc Rousseau",
+            "when": "hier 16:40",
+            "text": "Merci à vous deux, c'est très lisible. Une demande : peux-tu ajouter un test pour le cas « rendez-vous d'un autre patient » ? C'est une règle de sécurité, je veux être sûr qu'elle ne disparaisse jamais par erreur."
+          },
+          {
+            "author": "Awa Diallo",
+            "when": "hier 17:15",
+            "text": "Ajouté dans le dernier commit ✓"
+          },
+          {
+            "author": "Marc Rousseau",
+            "when": "aujourd'hui 09:05",
+            "text": "✓ A approuvé ces modifications. Bravo pour la transaction, c'est exactement ce qu'il fallait."
+          }
+        ],
+        "checks": [
+          {
+            "label": "Construction",
+            "detail": "Réussie en 1 min 12 s"
+          },
+          {
+            "label": "Tests automatiques",
+            "detail": "412 tests réussis"
+          },
+          {
+            "label": "Analyse de sécurité",
+            "detail": "Aucun problème bloquant"
+          },
+          {
+            "label": "Style du code",
+            "detail": "Conforme aux règles de l'équipe"
+          }
+        ],
+        "reviewers": [
+          {
+            "name": "Marc Rousseau",
+            "state": "approved"
+          }
+        ],
+        "mergedMessage": "✓ Fusionnée dans main. La nouvelle version part en recette, où Inès (QA) va la tester."
+      },
+      "annotations": [
+        {
+          "id": "pr-header",
+          "zone": "pr-header",
+          "title": "Une demande de relecture",
+          "text": "Awa et Thomas ont travaillé sur une [[branche]] à part. Pour intégrer leur travail au logiciel, ils ouvrent une [[pull-request|pull request]] : une demande officielle de relecture. Comme un document envoyé à un collègue avec le suivi des modifications activé."
+        },
+        {
+          "id": "diff",
+          "zone": "diff",
+          "title": "Ce qui change, ligne par ligne",
+          "text": "Marc ne relit pas tout le logiciel, seulement ce qui change. Les lignes marquées **+** sont ajoutées, celles marquées **−** sont supprimées. Ici, l'ancienne note « annulation à faire » disparaît, remplacée par la nouvelle adresse d'annulation écrite par Awa."
+        },
+        {
+          "id": "inline-comment",
+          "zone": "inline-comment",
+          "title": "Un commentaire précis, sur une ligne",
+          "text": "Marc a remarqué qu'un patient refusé ne savait pas quoi faire. Il explique pourquoi et propose directement la nouvelle ligne. Awa l'accepte en un clic : la discussion est « résolue ». C'est le cœur de la [[revue-de-code|revue de code]] : bienveillant, concret, utile."
+        },
+        {
+          "id": "checks",
+          "zone": "checks",
+          "title": "Les robots relisent aussi",
+          "text": "Avant même Marc, le [[pipeline-ci-cd|pipeline]] a construit le logiciel et relancé les 412 [[test-automatise|tests automatisés]]. Marc peut donc se concentrer sur ce qu'un robot ne voit pas : la clarté, la logique, les cas oubliés."
+        },
+        {
+          "id": "approval",
+          "zone": "approval",
+          "title": "Le feu vert",
+          "text": "Règle de l'équipe : au moins une approbation avant de pouvoir **fusionner**. Marc a approuvé, le bouton est disponible. Après la [[fusion]], la nouvelle version part en [[recette]] chez Inès (poste 11)."
+        }
+      ]
+    }
+  }
+}
