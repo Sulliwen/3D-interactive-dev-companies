@@ -1,0 +1,125 @@
+{
+  "role": "engine-tools",
+  "order": 12,
+  "featureStep": "60 images par seconde, sinon rien",
+  "tagline": "Une slice magnifique qui saccade ne convaincra personne. Je mesure chaque image du jeu sur un PC modeste, je trouve ce qui déborde, et je le fais rentrer dans le budget.",
+  "missions": [
+    "Mesurer les performances de la séquence du phare sur la [[configuration-minimale|configuration minimale]] (un PC de 2019).",
+    "Trouver, avec le [[profileur]], quel système dépasse son [[budget-par-image|budget]] : affichage, ombres, brume, son…",
+    "Corriger avec les autres métiers : ici, le [[precalcul|précalcul]] des ombres du phare avec Théo.",
+    "Faire fabriquer chaque nuit un [[build]] testé automatiquement, avec un contrôle des performances.",
+    "Vérifier la jouabilité sur Steam Deck (objectif : 30 images par seconde)."
+  ],
+  "takeaways": [
+    "Pour tenir 60 [[images-par-seconde|images par seconde]], chaque image doit être calculée en **16,6 millisecondes** ou moins. Le profileur montre la durée de chacune, et quel système a pris le temps.",
+    "On mesure sur la **machine la plus modeste** promise aux joueurs, pas sur les PC puissants du studio : c'est là que les problèmes apparaissent.",
+    "La solution vient souvent d'un autre métier : le pic venait des ombres du phare, recalculées à chaque image. Sarah et Théo les ont **précalculées**, et le pic est passé de 24,4 à 14,8 ms."
+  ],
+  "receivesFrom": {
+    "roles": ["technical-art", "sound-design"],
+    "text": "La brume de Théo à 1,8 ms par image, l'ambiance de Romain (38 Mo de sons) et tout le reste de la séquence, réunis dans le build de la nuit."
+  },
+  "handsOffTo": {
+    "roles": ["qa"],
+    "text": "Le [[build]] 0.7.3, fabriqué cette nuit avec la correction des ombres et les derniers changements de chacun, prêt à être testé par Yasmine dès son arrivée."
+  },
+  "screen": {
+    "component": "profiler",
+    "toolName": "Lanterne Editor",
+    "props": {
+      "title": "Profileur · Le Phare de Kerlaz",
+      "target": {
+        "name": "Configuration minimale",
+        "detail": "PC de 2019, carte graphique d'entrée de gamme",
+        "budgetMs": 16.6
+      },
+      "tiles": [
+        {
+          "label": "Pendant le rallumage",
+          "value": "60 i/s",
+          "detail": "41 i/s avant correction",
+          "status": "good"
+        },
+        {
+          "label": "Image la plus lente",
+          "value": "14,8 ms",
+          "detail": "24,4 ms avant",
+          "status": "good"
+        },
+        {
+          "label": "Images hors budget",
+          "value": "0",
+          "detail": "38 sur 120 avant",
+          "status": "good"
+        },
+        {
+          "label": "Steam Deck",
+          "value": "31 i/s",
+          "detail": "objectif 30 : tenu de justesse",
+          "status": "warning"
+        }
+      ],
+      "before": {
+        "label": "Build 0.7.2 (avant)",
+        "average": 12.8,
+        "jitter": 1.4,
+        "spikes": [{ "at": 62, "to": 99, "ms": 24.4, "label": "Rallumage du phare : 24,4 ms" }]
+      },
+      "after": {
+        "label": "Build 0.7.3 (après)",
+        "average": 12.6,
+        "jitter": 1.3,
+        "spikes": [{ "at": 62, "to": 99, "ms": 14.8, "label": "Rallumage : 14,8 ms" }]
+      },
+      "initial": "before",
+      "breakdown": {
+        "title": "Image la plus lente, par système",
+        "items": [
+          { "system": "Ombres", "before": 9.6, "after": 1.9 },
+          { "system": "Décor (affichage)", "before": 6.8, "after": 6.6 },
+          { "system": "Brume (shader)", "before": 2.1, "after": 1.8 },
+          { "system": "Règles du jeu", "before": 1.6, "after": 1.6 },
+          { "system": "Physique", "before": 1.2, "after": 1.2 },
+          { "system": "Son", "before": 0.9, "after": 0.9 },
+          { "system": "Autres", "before": 2.2, "after": 0.8 }
+        ]
+      },
+      "fix": {
+        "title": "Les ombres du phare, précalculées et chargées à l'avance",
+        "detail": "Au rallumage, les huit lampes du phare recalculaient leurs ombres à chaque image. Les ombres du décor immobile sont maintenant précalculées ; seule celle de Maëlle reste calculée en direct, et les ombres du phare se chargent pendant la montée de l'escalier, avant qu'on en ait besoin.",
+        "who": "Sarah Cohen et Théo Gauthier · build 0.7.3, fabriqué cette nuit"
+      },
+      "statusItems": [
+        "Capture : 120 images autour du rallumage",
+        "Comparaison 0.7.2 → 0.7.3",
+        "Contrôle des performances : chaque nuit"
+      ]
+    },
+    "annotations": [
+      {
+        "id": "frames",
+        "zone": "frames",
+        "title": "Chaque barre est une image",
+        "text": "Chaque barre montre le temps passé à calculer une image. Sous la ligne pointillée (16,6 ms), le jeu tient 60 [[images-par-seconde|images par seconde]] ; au-dessus, l'image arrive en retard et le jeu saccade. Passez de « avant » à « après » pour voir l'effet de la correction."
+      },
+      {
+        "id": "breakdown",
+        "zone": "breakdown",
+        "title": "Qui a pris le temps ?",
+        "text": "Le [[profileur]] découpe l'image la plus lente par système. Le coupable saute aux yeux : les ombres, 9,6 ms à elles seules, soit plus de la moitié du [[budget-par-image|budget]]. Sans cet outil, l'équipe aurait pu passer des jours à optimiser la brume ou le son pour rien."
+      },
+      {
+        "id": "fix",
+        "zone": "fix",
+        "title": "Calculer une fois, plutôt qu'à chaque image",
+        "text": "Le phare ne bouge pas : inutile de recalculer ses ombres 60 fois par seconde. Avec le [[precalcul|précalcul]], elles sont calculées une fois, pendant la fabrication du jeu, puis simplement relues. Seule l'ombre de Maëlle, qui bouge, reste calculée en direct."
+      },
+      {
+        "id": "tiles",
+        "zone": "tiles",
+        "title": "Mesurer sur la machine la plus modeste",
+        "text": "Sarah mesure sur la [[configuration-minimale|configuration minimale]] promise aux joueurs, un PC de 2019, pas sur les ordinateurs du studio. Le Steam Deck, une console portable qui fait tourner les jeux PC, vise 30 images par seconde : 31, c'est tenu, mais de justesse."
+      }
+    ]
+  }
+}

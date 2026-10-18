@@ -7,9 +7,15 @@ par les utilisateurs, la préparation d'une v2…). Il se promène ensuite libre
 locaux et suit ce travail d'un poste à l'autre ; l'étage, le parcours, les personnages et
 les écrans s'adaptent au scénario choisi.
 
-Structure disponible : _Atelier Lumen_, une start-up SaaS (application _Pocket Santé_),
-avec quatre scénarios (les débuts de l'entreprise, une fonctionnalité réclamée par les
-utilisateurs, la v2 de l'application, le lancement d'un nouveau produit). Les autres structures sont annoncées « en préparation ».
+Structures disponibles :
+
+- _Atelier Lumen_, une start-up SaaS (application _Pocket Santé_), avec quatre scénarios :
+  les débuts de l'entreprise, une fonctionnalité réclamée par les utilisateurs, la v2 de
+  l'application, le lancement d'un nouveau produit ;
+- _Studio Lanterne_, un studio de jeu vidéo indépendant à Bordeaux (jeu _Brume_, sur PC),
+  avec un scénario : la vertical slice présentée à l'éditeur du jeu.
+
+Les autres structures sont annoncées « en préparation ».
 
 > **État : phase 5 (finitions) — visite complète.** Étage modélisé dans Blender (assets CC0,
 > éclairage précalculé), 14 métiers habités, parcours guidé, ambiance sonore, menu de

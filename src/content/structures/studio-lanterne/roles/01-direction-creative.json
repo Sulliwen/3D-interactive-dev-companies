@@ -1,0 +1,29 @@
+{
+  "id": "direction-creative",
+  "desk": 1,
+  "title": "Direction créative",
+  "person": {
+    "firstName": "Margaux",
+    "lastName": "Lefort",
+    "role": "Directrice créative"
+  },
+  "tagline": "Je garde le cap : tout ce que fait l'équipe doit servir une même expérience, une île qu'on éclaire pas à pas.",
+  "missions": [
+    "Définir la vision du jeu : ce que le joueur doit ressentir, en quelques phrases que toute l'équipe connaît par cœur.",
+    "Arbitrer quand l'histoire, les règles et les images tirent dans des sens différents.",
+    "Valider chaque étape importante : [[concept-art|concepts]], niveaux, scènes d'histoire, avant le passage à la suite.",
+    "Défendre le jeu devant l'[[editeur-jeu|éditeur]] à chaque [[jalon]], avec la producer.",
+    "Regarder chaque [[playtest]] et accepter de couper ce qui ne fonctionne pas, même une idée qu'elle aime."
+  ],
+  "myth": {
+    "myth": "La directrice créative a toutes les idées, et l'équipe les réalise.",
+    "reality": "Les meilleures idées de « Brume » viennent de toute l'équipe : la carte dessinée par Maëlle vient d'Antoine, les voix de la brume de Romain. Le travail de Margaux est de choisir, de relier et de dire non, pour que le jeu reste cohérent."
+  },
+  "realTools": [
+    "Miro",
+    "Notion",
+    "Google Slides",
+    "PureRef",
+    "Steam (pour observer les jeux du marché)"
+  ]
+}

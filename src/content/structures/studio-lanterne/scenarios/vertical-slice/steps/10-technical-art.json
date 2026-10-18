@@ -1,0 +1,245 @@
+{
+  "role": "technical-art",
+  "order": 10,
+  "featureStep": "La brume : un effet qui doit tenir le rythme",
+  "tagline": "La brume est le personnage principal de « Brume ». Je dois la rendre vivante, la percer là où brille la lanterne… et la faire tenir dans 2 millisecondes par image.",
+  "missions": [
+    "Construire le [[shader]] de la brume : mouvement, épaisseur selon la distance, trou de lumière autour de la lanterne.",
+    "Respecter le [[budget-par-image|budget]] fixé avec Sarah : 2 ms par image pour la brume, sur la [[configuration-minimale|configuration minimale]].",
+    "Faire le lien entre l'image et le code : le rayon de lumière vient de Lucas, la densité de brume part vers le son de Romain.",
+    "Suivre le [[color-script|script couleur]] de Mei : brume bleue et froide, puis orangée quand le phare se rallume.",
+    "Préparer avec Sarah le [[precalcul|précalcul]] des ombres du phare."
+  ],
+  "takeaways": [
+    "Un effet visuel de jeu est un petit programme, le [[shader]], calculé pour chaque point de l'écran à chaque image. Le [[graphe-de-shader|graphe de nœuds]] permet de le construire sans écrire de code.",
+    "Chaque nœud a un **coût** : la brume dépassait son budget de 0,1 ms. Théo a retiré un second bruit qui ne se voyait qu'à moins d'un mètre. Bien choisir quoi enlever fait partie du métier.",
+    "Le technical artist parle aux deux mondes : il reçoit des chiffres du code (le rayon de la lanterne) et en renvoie au son (la densité de brume)."
+  ],
+  "receivesFrom": {
+    "roles": ["gameplay-programming", "environment-art"],
+    "text": "Le rayon de lumière calculé par le code de Lucas, et le décor final de Bastien : la falaise et le phare, dans lesquels la brume doit s'enrouler."
+  },
+  "handsOffTo": {
+    "roles": ["sound-design", "engine-tools"],
+    "text": "La densité de brume autour de Maëlle, que le son de Romain suit, et un effet à 1,8 ms par image, que Sarah vérifie dans le [[profileur]] avec tout le reste du jeu."
+  },
+  "screen": {
+    "component": "node-graph",
+    "toolName": "Lanterne Editor",
+    "props": {
+      "title": "Brume_Fog · graphe de shader",
+      "nodes": [
+        {
+          "id": "noise",
+          "title": "Bruit 3D animé",
+          "kind": "texture",
+          "x": 10,
+          "y": 40,
+          "inputs": ["position", "temps"],
+          "outputs": ["densité"],
+          "value": "échelle 0,35",
+          "cost": "0,5 ms",
+          "zone": "noise"
+        },
+        {
+          "id": "depth",
+          "title": "Profondeur",
+          "kind": "input",
+          "x": 10,
+          "y": 180,
+          "outputs": ["distance"]
+        },
+        {
+          "id": "lantern",
+          "title": "_LanternRadius",
+          "kind": "input",
+          "x": 10,
+          "y": 292,
+          "outputs": ["rayon"],
+          "value": "6 m, du code",
+          "zone": "lantern-hole"
+        },
+        {
+          "id": "player",
+          "title": "Position lanterne",
+          "kind": "input",
+          "x": 10,
+          "y": 386,
+          "outputs": ["position"],
+          "zone": "lantern-hole"
+        },
+        {
+          "id": "detail",
+          "title": "Second bruit",
+          "kind": "texture",
+          "x": 168,
+          "y": 12,
+          "inputs": ["position"],
+          "outputs": ["détail"],
+          "cost": "0,3 ms",
+          "removed": true,
+          "zone": "removed"
+        },
+        {
+          "id": "mix",
+          "title": "Mélange",
+          "kind": "math",
+          "x": 168,
+          "y": 120,
+          "inputs": ["densité", "détail"],
+          "outputs": ["brume"]
+        },
+        {
+          "id": "fade",
+          "title": "Voile au loin",
+          "kind": "math",
+          "x": 168,
+          "y": 214,
+          "inputs": ["distance"],
+          "outputs": ["voile"],
+          "cost": "0,2 ms"
+        },
+        {
+          "id": "hole",
+          "title": "Trou de lumière",
+          "kind": "math",
+          "x": 168,
+          "y": 330,
+          "inputs": ["position", "rayon"],
+          "outputs": ["masque"],
+          "value": "bord adouci 1,5 m",
+          "cost": "0,4 ms",
+          "zone": "lantern-hole"
+        },
+        {
+          "id": "combine",
+          "title": "Multiplier",
+          "kind": "math",
+          "x": 326,
+          "y": 196,
+          "inputs": ["brume", "voile", "masque"],
+          "outputs": ["opacité"]
+        },
+        {
+          "id": "output",
+          "title": "Sortie : brume",
+          "kind": "output",
+          "x": 484,
+          "y": 196,
+          "inputs": ["opacité"],
+          "value": "couleur #DFE6EA",
+          "cost": "base 0,7 ms"
+        }
+      ],
+      "links": [
+        {
+          "from": "noise",
+          "to": "mix"
+        },
+        {
+          "from": "detail",
+          "to": "mix",
+          "toPort": 1
+        },
+        {
+          "from": "depth",
+          "to": "fade"
+        },
+        {
+          "from": "player",
+          "to": "hole"
+        },
+        {
+          "from": "lantern",
+          "to": "hole",
+          "toPort": 1
+        },
+        {
+          "from": "mix",
+          "to": "combine"
+        },
+        {
+          "from": "fade",
+          "to": "combine",
+          "toPort": 1
+        },
+        {
+          "from": "hole",
+          "to": "combine",
+          "toPort": 2
+        },
+        {
+          "from": "combine",
+          "to": "output"
+        }
+      ],
+      "preview": {
+        "title": "Aperçu",
+        "caption": "Falaise de Kerlaz, de nuit · lanterne levée, huile à 64 %"
+      },
+      "cost": {
+        "title": "Coût de la brume, par image",
+        "budget": 2,
+        "before": {
+          "label": "Lundi",
+          "ms": 2.1
+        },
+        "after": {
+          "label": "Aujourd'hui",
+          "ms": 1.8
+        },
+        "note": "Mesuré sur la configuration minimale (PC de 2019)."
+      },
+      "parameters": [
+        {
+          "name": "_LanternRadius",
+          "value": "6 → 3,6 m",
+          "note": "Envoyé par le code de Lucas : le trou rétrécit avec l'huile."
+        },
+        {
+          "name": "_FogDensity",
+          "value": "0 à 1",
+          "note": "Lu par le son de Romain : plus la brume est épaisse, plus elle chuchote."
+        },
+        {
+          "name": "_FogTint",
+          "value": "bleu → orange",
+          "note": "Suit le script couleur de Mei."
+        }
+      ],
+      "statusItems": ["Brume_Fog.shadergraph", "Cible : configuration minimale", "Compilé à 10:42"]
+    },
+    "annotations": [
+      {
+        "id": "noise",
+        "zone": "noise",
+        "title": "Une brume qui bouge toute seule",
+        "text": "La brume n'est pas une image fixe : un « bruit » (des valeurs au hasard, mais douces) est déplacé avec le temps, comme poussé par le vent. Chaque boîte de ce [[graphe-de-shader|graphe]] fait une petite opération, et l'ensemble est recalculé pour chaque point de l'écran, à chaque image."
+      },
+      {
+        "id": "lantern-hole",
+        "zone": "lantern-hole",
+        "title": "Là où la lanterne éclaire",
+        "text": "Le rayon `_LanternRadius` arrive du code de Lucas. Ce nœud efface la brume autour de la lanterne, avec un bord adouci de 1,5 m. Le jeu (le code) et l'image (le [[shader]]) racontent ainsi la même chose : la lumière repousse la brume."
+      },
+      {
+        "id": "removed",
+        "zone": "removed",
+        "title": "Ce qu'on enlève pour tenir le budget",
+        "text": "Un second bruit ajoutait des volutes fines… visibles seulement à moins d'un mètre. Il coûtait 0,3 ms par image. Théo l'a retiré : personne ne le remarquera, et la brume repasse sous son budget. Le métier, c'est aussi savoir quoi sacrifier."
+      },
+      {
+        "id": "cost",
+        "zone": "cost",
+        "title": "2 millisecondes, pas une de plus",
+        "text": "Pour tenir 60 [[images-par-seconde|images par seconde]], le jeu a 16,6 ms par image, à partager entre tout ce qu'il fait. Sarah et Théo ont donné 2 ms à la brume. À 2,1 ms, elle débordait ; à 1,8 ms, elle laisse de la marge au reste."
+      },
+      {
+        "id": "parameters",
+        "zone": "parameters",
+        "title": "Un effet relié au reste du jeu",
+        "text": "Le shader reçoit le rayon de la lanterne (du code) et publie la densité de brume, que le son de Romain écoute pour faire chuchoter la brume. Sa couleur suit le [[color-script|script couleur]] de Mei : bleue et froide, puis orangée quand le phare se rallume."
+      }
+    ]
+  }
+}

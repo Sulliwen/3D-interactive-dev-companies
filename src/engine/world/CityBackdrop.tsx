@@ -1,15 +1,31 @@
 import { useMemo } from 'react'
 import { CanvasTexture, MeshStandardMaterial, RepeatWrapping, SRGBColorSpace } from 'three'
 import { Instance, Instances } from '@react-three/drei'
+import { useWorld } from './worlds'
+
+/** Les immeubles vus par les fenêtres de l'étage (nord et est). */
+export interface BackdropSpec {
+  /** Hauteur du sol de la rue sous le plancher de l'étage (-30 : au 9e étage). */
+  groundY: number
+  ground: string
+  /** Distance de la première rangée d'immeubles au centre de l'étage. */
+  near: number
+  rows: number
+  rowGap: number
+  /** Hauteur des immeubles : minimum, et écart aléatoire au-dessus. */
+  height: readonly [min: number, spread: number]
+  tints: readonly string[]
+  /** Façade : allège et vitrage (une travée de 3 m × 3,2 m). */
+  facade: { wall: string; glass: readonly [top: string, bottom: string] }
+}
 
 /**
- * Ville provisoire derrière les baies vitrées (nord et est), en attendant un HDRI
- * ou une image de fond. Une seule instance : un appel de dessin.
+ * Immeubles derrière les fenêtres (nord et est), propres à chaque monde. Une seule
+ * instance : un appel de dessin.
  */
-/** L'étage est au 9e : le sol de la ville est bien plus bas que le plancher. */
-const GROUND_Y = -30
-
 export function CityBackdrop() {
+  const spec = useWorld().backdrop
+  const facadeMaterial = useMemo(() => cityMaterial(spec), [spec])
   const buildings = useMemo(() => {
     const list: Array<{ x: number; z: number; w: number; d: number; h: number; tint: string }> = []
     let seed = 7
@@ -17,7 +33,7 @@ export function CityBackdrop() {
       seed = (seed * 16807) % 2147483647
       return seed / 2147483647
     }
-    const tints = ['#c8ccd2', '#b7bec8', '#d6d2cb', '#a9b3bf', '#e0ddd6']
+    const { tints, near, rows, rowGap, height } = spec
     const place = (x: number, z: number) => {
       const w = 6 + rand() * 10
       const d = 6 + rand() * 10
@@ -26,22 +42,23 @@ export function CityBackdrop() {
         z,
         w,
         d,
-        h: 12 + rand() * 50,
+        h: height[0] + rand() * height[1],
         tint: tints[Math.floor(rand() * tints.length)]!,
       })
     }
-    for (let row = 0; row < 4; row++) {
-      for (let x = -110; x <= 130; x += 18) place(x + rand() * 6, -48 - row * 26 - rand() * 8)
-      for (let z = -90; z <= 70; z += 18) place(48 + row * 26 + rand() * 8, z + rand() * 6)
+    for (let row = 0; row < rows; row++) {
+      for (let x = -110; x <= 130; x += 18) place(x + rand() * 6, -near - row * rowGap - rand() * 8)
+      for (let z = -90; z <= 70; z += 18) place(near + row * rowGap + rand() * 8, z + rand() * 6)
     }
     return list
-  }, [])
+  }, [spec])
+  const groundY = spec.groundY
 
   return (
     <group>
-      <mesh rotation-x={-Math.PI / 2} position={[0, GROUND_Y, 0]}>
+      <mesh rotation-x={-Math.PI / 2} position={[0, groundY, 0]}>
         <planeGeometry args={[600, 600]} />
-        <meshStandardMaterial color="#9aa29a" roughness={1} />
+        <meshStandardMaterial color={spec.ground} roughness={1} />
       </mesh>
       <Instances limit={buildings.length}>
         <boxGeometry />
@@ -49,7 +66,7 @@ export function CityBackdrop() {
         {buildings.map((b, i) => (
           <Instance
             key={i}
-            position={[b.x, GROUND_Y + b.h / 2, b.z]}
+            position={[b.x, groundY + b.h / 2, b.z]}
             scale={[b.w, b.h, b.d]}
             color={b.tint}
           />
@@ -59,21 +76,21 @@ export function CityBackdrop() {
   )
 }
 
-/** Une travée de façade (3 m × 3,2 m) : allège en béton clair, vitrage sombre. */
-function facadeTexture(): CanvasTexture {
+/** Une travée de façade (3 m × 3,2 m) : allège, vitrage. */
+function facadeTexture({ facade }: BackdropSpec): CanvasTexture {
   const canvas = document.createElement('canvas')
   canvas.width = 64
   canvas.height = 64
   const ctx = canvas.getContext('2d')
   if (ctx) {
-    ctx.fillStyle = '#e4e2dd'
+    ctx.fillStyle = facade.wall
     ctx.fillRect(0, 0, 64, 64)
     const glass = ctx.createLinearGradient(0, 8, 0, 52)
-    glass.addColorStop(0, '#7f93a6')
-    glass.addColorStop(1, '#4f6172')
+    glass.addColorStop(0, facade.glass[0])
+    glass.addColorStop(1, facade.glass[1])
     ctx.fillStyle = glass
     ctx.fillRect(6, 10, 52, 40)
-    ctx.fillStyle = '#d8d6d0'
+    ctx.fillStyle = facade.wall
     ctx.fillRect(31, 10, 2, 40)
   }
   const t = new CanvasTexture(canvas)
@@ -88,8 +105,8 @@ function facadeTexture(): CanvasTexture {
  * fenêtre tous les 3 m, un étage tous les 3,2 m), quelle que soit la taille de l'immeuble,
  * pour rester en un seul appel de dessin (instances).
  */
-const facadeMaterial = (() => {
-  const m = new MeshStandardMaterial({ map: facadeTexture(), roughness: 0.55, metalness: 0.15 })
+function cityMaterial(spec: BackdropSpec): MeshStandardMaterial {
+  const m = new MeshStandardMaterial({ map: facadeTexture(spec), roughness: 0.55, metalness: 0.15 })
   m.onBeforeCompile = (shader) => {
     shader.vertexShader = shader.vertexShader
       .replace(
@@ -121,4 +138,4 @@ const facadeMaterial = (() => {
       )
   }
   return m
-})()
+}

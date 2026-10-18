@@ -1,0 +1,23 @@
+{
+  "id": "playtest-research",
+  "desk": 14,
+  "title": "Recherche playtest",
+  "person": {
+    "firstName": "Elsa",
+    "lastName": "Brunet",
+    "role": "Chercheuse playtest (UX)"
+  },
+  "tagline": "Je regarde des inconnus jouer à notre jeu, sans jamais les aider. C'est souvent difficile à regarder, et toujours utile.",
+  "missions": [
+    "Organiser le [[playtest]] de chaque vendredi : recruter des joueurs variés, préparer la version et le déroulé.",
+    "Observer derrière le miroir sans tain et noter où les joueurs hésitent, se perdent, sourient ou décrochent.",
+    "Mener un [[entretien-utilisateur|entretien]] après chaque partie et faire remplir un court questionnaire.",
+    "Produire des [[carte-de-chaleur|cartes de chaleur]] et des chiffres simples : temps passé, abandons, morts par endroit.",
+    "Présenter chaque lundi trois constats et trois recommandations à l'équipe, vidéos à l'appui."
+  ],
+  "myth": {
+    "myth": "Pour savoir si un jeu plaît, il suffit de demander aux joueurs ce qu'ils en pensent.",
+    "reality": "Les joueurs disent souvent « c'était bien » par politesse, ou expliquent mal ce qui les a gênés. Elsa regarde surtout ce qu'ils **font** : quand trois joueurs sur cinq tournent en rond au même endroit, le niveau a un problème, quoi qu'ils en disent."
+  },
+  "realTools": ["Lookback", "PlaytestCloud", "OBS Studio", "Google Forms", "Miro"]
+}

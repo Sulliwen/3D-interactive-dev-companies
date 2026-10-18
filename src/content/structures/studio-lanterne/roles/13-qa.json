@@ -1,0 +1,23 @@
+{
+  "id": "qa",
+  "desk": 13,
+  "title": "Assurance qualité",
+  "person": {
+    "firstName": "Yasmine",
+    "lastName": "Haddou",
+    "role": "Testeuse QA"
+  },
+  "tagline": "Je joue au jeu pour le casser : chaque [[bug]] que je trouve, c'est un joueur qui ne le rencontrera pas.",
+  "missions": [
+    "Tester chaque [[build]] du matin, avec une liste de vérifications et en explorant librement.",
+    "Décrire chaque bug avec ses [[etapes-de-reproduction|étapes de reproduction]], une capture vidéo et sa gravité.",
+    "Vérifier les corrections, et rejouer les anciens bugs pour s'assurer qu'ils ne reviennent pas ([[non-regression]]).",
+    "Tester sur plusieurs PC, cartes graphiques, manettes et résolutions d'écran.",
+    "Signaler aussi ce qui n'est pas un bug mais gêne : texte illisible, caméra qui donne mal au cœur."
+  ],
+  "myth": {
+    "myth": "Testeur de jeux vidéo, c'est être payé pour jouer.",
+    "reality": "Yasmine joue parfois quarante fois de suite le même passage, en sautant contre le même mur, pour vérifier une seule correction. C'est un travail méthodique d'enquêtrice, et la description du bug compte autant que sa découverte."
+  },
+  "realTools": ["Jira", "TestRail", "OBS Studio", "Steam (versions de test)", "Excel"]
+}

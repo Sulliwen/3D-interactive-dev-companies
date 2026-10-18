@@ -7,7 +7,7 @@ import { readMoveInput } from '../player/input'
 import { runtime } from '../runtime'
 import { isExploring, useGameStore } from '../../state/useGameStore'
 import { getVisit } from '../../content/loader'
-import { OVERVIEW_SHOT, computeScreenPose, computeTourShot } from './screenPose'
+import { computeScreenPose, computeTourShot } from './screenPose'
 
 const HEAD_HEIGHT = 1.55
 const SHOULDER_OFFSET = 0.35
@@ -39,7 +39,7 @@ const easeInOutCubic = (t: number) => (t < 0.5 ? 4 * t * t * t : 1 - (-2 * t + 2
  *   parcours dans l'ordre, avant de revenir derrière l'avatar.
  */
 export function CameraRig() {
-  const floorPlan = useWorld().plan
+  const { plan: floorPlan, overview } = useWorld()
   const camera = useThree((s) => s.camera) as PerspectiveCamera
   const domElement = useThree((s) => s.gl.domElement)
   const size = useThree((s) => s.size)
@@ -212,7 +212,7 @@ export function CameraRig() {
     if (store.tour !== null) {
       const station = getVisit(store.visit).pathStations[store.tour]
       const stationAnchor = station && floorPlan.stations.find((s) => s.number === station.desk)
-      const shot = stationAnchor ? computeTourShot(stationAnchor) : OVERVIEW_SHOT
+      const shot = stationAnchor ? computeTourShot(stationAnchor) : overview
       shotKey = stationAnchor ? `poste-${stationAnchor.number}` : 'ensemble'
       tourTarget.set(...shot.target)
       tourPos.set(...shot.position)

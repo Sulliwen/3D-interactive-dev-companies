@@ -1,0 +1,23 @@
+{
+  "id": "sound-design",
+  "desk": 11,
+  "title": "Son",
+  "person": {
+    "firstName": "Romain",
+    "lastName": "Delmas",
+    "role": "Sound designer"
+  },
+  "tagline": "Je fais entendre l'île : le ressac, les pas sur le sable mouillé, et les voix qui murmurent dans la brume.",
+  "missions": [
+    "Créer les bruitages et les ambiances, souvent enregistrés sur le terrain (vagues, vent, bois qui grince).",
+    "Intégrer le son dans le jeu avec des règles : c'est du [[son-interactif|son interactif]], qui change selon ce que fait le joueur.",
+    "Diriger l'enregistrement des voix avec la scénariste.",
+    "Travailler avec la compositrice extérieure pour que la musique accompagne les moments de l'histoire.",
+    "Vérifier que le jeu se comprend aussi par le son, et que l'essentiel reste lisible sans le son ([[accessibilite]], sous-titres)."
+  ],
+  "myth": {
+    "myth": "Le son, on l'ajoute à la fin, quand le jeu est terminé.",
+    "reality": "Le son guide le joueur autant que l'image : dans « Brume », on entend la mer avant de la voir, et les voix de la brume annoncent un danger. Romain travaille dès le [[prototype]], et la [[vertical-slice|vertical slice]] doit sonner comme le jeu final."
+  },
+  "realTools": ["Reaper", "Pro Tools", "FMOD", "Wwise", "iZotope RX"]
+}

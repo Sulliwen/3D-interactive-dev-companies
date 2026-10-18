@@ -1,0 +1,23 @@
+{
+  "id": "gameplay-programming",
+  "desk": 8,
+  "title": "Programmation gameplay",
+  "person": {
+    "firstName": "Lucas",
+    "lastName": "Ferreira",
+    "role": "Programmeur gameplay"
+  },
+  "tagline": "Je code ce que fait le joueur : marcher, éclairer, repousser la brume. Si c'est agréable sous les doigts, c'est en partie grâce à moi.",
+  "missions": [
+    "Programmer les [[mecanique-de-jeu|mécaniques de jeu]] décrites par le game designer : lanterne, huile, brume, carte.",
+    "Programmer la caméra et les commandes (clavier, souris, manette), réglées au centième de seconde.",
+    "Rendre les chiffres du jeu réglables sans recoder, pour que le game designer teste lui-même.",
+    "Écrire des [[test-automatise|tests automatisés]] sur les règles délicates (sauvegarde, huile qui ne descend jamais sous zéro).",
+    "Faire relire son code en [[revue-de-code|revue de code]] et corriger les [[bug|bugs]] remontés par la QA."
+  ],
+  "myth": {
+    "myth": "Programmer un jeu, c'est surtout faire de la 3D et des graphismes compliqués.",
+    "reality": "L'affichage 3D est fourni par le [[moteur-de-jeu|moteur de jeu]]. Le travail de Lucas, ce sont les règles : un « si le joueur lève la lanterne pendant que l'huile est presque vide… » bien codé compte plus que de beaux effets."
+  },
+  "realTools": ["Unity (C#)", "Unreal Engine (C++, Blueprints)", "Godot", "Visual Studio", "Rider"]
+}

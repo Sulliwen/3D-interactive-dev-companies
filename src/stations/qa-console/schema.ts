@@ -5,6 +5,9 @@ export const qaConsolePropsSchema = z.object({
   campaign: z.string(),
   /** Texte de la barre d'état. */
   status: z.string(),
+  /** Titres des deux cartes de gauche (jeu vidéo : « Tests du build », « Plan de test »…). */
+  autoTitle: z.string().default('Tests automatiques'),
+  planTitle: z.string().default('Recette manuelle'),
   /** Tests automatiques, par famille (dans l'ordre des couleurs de série). */
   suites: z.array(z.object({ label: z.string(), passed: z.number(), total: z.number() })).max(3),
   /** Plan de recette manuelle. `edge` : cas limite (regroupés sous une même pastille). */

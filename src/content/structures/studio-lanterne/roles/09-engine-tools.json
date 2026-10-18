@@ -1,0 +1,23 @@
+{
+  "id": "engine-tools",
+  "desk": 9,
+  "title": "Moteur et outils",
+  "person": {
+    "firstName": "Sarah",
+    "lastName": "Cohen",
+    "role": "Programmeuse moteur et outils"
+  },
+  "tagline": "Je fais en sorte que le jeu tourne vite, charge vite, et que toute l'équipe ait les bons outils pour travailler.",
+  "missions": [
+    "Mesurer et améliorer les performances pour tenir 60 [[images-par-seconde|images par seconde]] sur un PC modeste.",
+    "Réduire les temps de chargement et la mémoire utilisée par les décors, les sons et les textures.",
+    "Fabriquer des outils dans l'éditeur du studio : placer la brume au pinceau, vérifier les budgets d'un niveau en un clic.",
+    "Faire tourner la fabrication automatique d'un [[build]] chaque nuit, avec ses tests (la [[pipeline-ci-cd|chaîne d'intégration]] du studio).",
+    "Aider les autres programmeurs sur les problèmes difficiles (plantages, sauvegardes corrompues)."
+  ],
+  "myth": {
+    "myth": "Les outils internes, c'est du travail secondaire : l'important, c'est le jeu lui-même.",
+    "reality": "Un outil qui fait gagner 10 minutes par jour à 30 personnes, c'est une semaine de travail gagnée chaque mois. Le pinceau à brume de Sarah a permis à Antoine de refaire trois fois le village de Kerlaz au lieu d'une."
+  },
+  "realTools": ["Visual Studio", "RenderDoc", "PIX", "Superluminal", "Jenkins", "TeamCity"]
+}

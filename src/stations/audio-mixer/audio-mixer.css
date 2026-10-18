@@ -1,0 +1,296 @@
+/* Outil de son interactif fictif (préfixe am__). */
+
+.am {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  gap: 8px;
+  padding: 8px;
+}
+
+.am__live {
+  color: #7ee07e;
+  font-weight: 700;
+}
+
+.am__panel {
+  padding: 8px 10px;
+  border-radius: 8px;
+  background: var(--surface-2);
+}
+
+.am__panel-title {
+  margin-bottom: 5px !important;
+  padding-right: 26px;
+  color: var(--ink-muted);
+  font-size: 10.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.am__muted {
+  color: var(--ink-muted);
+  font-size: 11px;
+}
+
+.am__left {
+  width: 210px;
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.am__events {
+  flex: 1;
+}
+
+.am__events ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.am__events li {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 4px;
+  padding: 3px 6px;
+  border-radius: 5px;
+  font-size: 10.5px;
+}
+
+.am__events li.is-active {
+  background: rgb(242 165 65 / 0.14);
+}
+
+.am__events code {
+  color: var(--ink);
+  font-size: 10.5px;
+}
+
+.am__events li.is-active code {
+  color: var(--lumen);
+}
+
+.am__events li span {
+  color: var(--ink-muted);
+}
+
+.am__music-title {
+  font-weight: 700;
+}
+
+.am__note {
+  margin-top: 4px !important;
+  font-size: 11px;
+}
+
+.am__center {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.am__param svg {
+  display: block;
+}
+
+.am__axis {
+  stroke: var(--line);
+}
+
+.am__tick {
+  fill: var(--ink-muted);
+  font-size: 10px;
+}
+
+.am__curve {
+  fill: none;
+  stroke-width: 2;
+}
+
+.am__cursor {
+  stroke: var(--ink);
+  stroke-width: 1.5;
+  stroke-dasharray: 4 3;
+}
+
+.am__curve--1,
+.am__wave--1 {
+  stroke: var(--series-1);
+  fill: var(--series-1);
+}
+
+.am__curve--2,
+.am__wave--2 {
+  stroke: var(--series-2);
+  fill: var(--series-2);
+}
+
+.am__curve--3,
+.am__wave--3 {
+  stroke: var(--series-3);
+  fill: var(--series-3);
+}
+
+.am__curve--4,
+.am__wave--4 {
+  stroke: var(--series-4);
+  fill: var(--series-4);
+}
+
+.am__curve {
+  fill: none;
+}
+
+.am__wave {
+  stroke: none;
+}
+
+.am__dot {
+  stroke: #171c28;
+  stroke-width: 2;
+}
+
+.am__dot--1 {
+  fill: var(--series-1);
+}
+
+.am__dot--2 {
+  fill: var(--series-2);
+}
+
+.am__dot--3 {
+  fill: var(--series-3);
+}
+
+.am__dot--4 {
+  fill: var(--series-4);
+}
+
+.am__slider {
+  width: 344px;
+  margin: 2px 8px 4px;
+  accent-color: var(--lumen);
+}
+
+.am__layers {
+  flex: 1;
+}
+
+.am__track {
+  display: grid;
+  grid-template-columns: 1fr auto 62px;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 6px;
+  font-size: 11.5px;
+}
+
+.am__track svg {
+  display: block;
+  border-radius: 4px;
+  background: var(--surface-3);
+}
+
+.am__track-name {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  min-width: 0;
+}
+
+.am__track-name > span {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.am__file {
+  color: var(--ink-muted);
+  font-size: 10px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.am__swatch {
+  width: 10px;
+  height: 10px;
+  flex: none;
+  border-radius: 2px;
+}
+
+.am__swatch--1 {
+  background: var(--series-1);
+}
+
+.am__swatch--2 {
+  background: var(--series-2);
+}
+
+.am__swatch--3 {
+  background: var(--series-3);
+}
+
+.am__swatch--4 {
+  background: var(--series-4);
+}
+
+.am__db {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.am__mixer {
+  width: 196px;
+  flex: none;
+  display: flex;
+  flex-direction: column;
+}
+
+.am__buses {
+  flex: 1;
+  display: flex;
+  gap: 2px;
+}
+
+.am__bus {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  min-width: 0;
+}
+
+.am__meter {
+  position: relative;
+  flex: 1;
+  width: 12px;
+  border-radius: 3px;
+  background: var(--surface-3);
+}
+
+.am__meter span {
+  position: absolute;
+  inset: auto 0 0;
+  border-radius: 3px;
+  background: linear-gradient(to top, var(--status-good) 60%, var(--status-warning));
+}
+
+.am__bus-db {
+  font-size: 10.5px;
+  font-variant-numeric: tabular-nums;
+}
+
+.am__bus-name {
+  color: var(--ink-muted);
+  font-size: 9.5px;
+  text-align: center;
+  line-height: 1.2;
+}

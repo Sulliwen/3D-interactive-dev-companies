@@ -1,0 +1,113 @@
+{
+  "role": "concept-art",
+  "order": 5,
+  "featureStep": "Le phare et la brume, dessinés avant d'être construits",
+  "tagline": "Avant que Bastien modélise une seule pierre, je peins le phare de Kerlaz, la falaise et la brume : trois pistes, un choix, et les couleurs de toute la séquence.",
+  "missions": [
+    "Proposer plusieurs pistes de phare à Margaux et l'aider à en choisir une qui sert les [[piliers-de-jeu|piliers du jeu]].",
+    "Fixer le [[color-script|script couleur]] de la séquence : bleu froid dans la brume, orange chaud quand le phare se rallume.",
+    "Peindre la falaise et la brume telles que le joueur les verra, pour guider l'éclairage et les effets.",
+    "Laisser des notes précises sur la planche pour Bastien (formes, matières) et Aminata (silhouette de Maëlle)."
+  ],
+  "takeaways": [
+    "Le [[concept-art]] sert à décider vite : trois phares peints en une journée coûtent bien moins cher que trois phares modélisés en 3D.",
+    "Le [[color-script|script couleur]] raconte l'histoire du niveau en couleurs : le passage du bleu froid à l'orange chaud, c'est l'émotion du phare rallumé.",
+    "Beaucoup de dessins de Mei ne seront jamais montrés au public : ce sont des outils de travail pour les autres métiers."
+  ],
+  "receivesFrom": {
+    "roles": ["direction-creative", "narrative-design"],
+    "text": "Les trois piliers de Margaux (« La brume est vivante », « La lumière coûte quelque chose », « Chaque lieu garde un souvenir ») et la scène de Chloé : la voix d'Yvon, le gardien disparu, qui hante le phare."
+  },
+  "handsOffTo": {
+    "roles": ["environment-art", "animation"],
+    "text": "La piste de phare retenue et ses vues de détail pour Bastien (art 3D), et la silhouette de Maëlle lanterne levée pour Aminata (animation)."
+  },
+  "screen": {
+    "component": "art-board",
+    "toolName": "Planche",
+    "props": {
+      "file": "Brume · Kerlaz · Phare et brume (v3)",
+      "layers": ["Brume (avant-plan)", "Halo du phare", "Phare", "Falaise", "Ciel et mer"],
+      "canvas": {
+        "kind": "lighthouse",
+        "mood": "warm",
+        "variant": 0,
+        "title": "Le phare rallumé · fin de séquence"
+      },
+      "variants": [
+        {
+          "label": "A · élancé",
+          "kind": "lighthouse",
+          "mood": "cold",
+          "variant": 0,
+          "chosen": true,
+          "note": "Visible de partout, même dans la brume."
+        },
+        {
+          "label": "B · trapu",
+          "kind": "lighthouse",
+          "mood": "cold",
+          "variant": 1,
+          "note": "Rassurant, mais disparaît derrière la falaise."
+        },
+        {
+          "label": "C · en ruine",
+          "kind": "lighthouse",
+          "mood": "cold",
+          "variant": 2,
+          "note": "Beau, mais on ne peut plus le rallumer."
+        }
+      ],
+      "colorScript": [
+        { "label": "Arrivée au village", "sky": "#2b3a4a", "light": "#8fa3ad" },
+        { "label": "Village englouti", "sky": "#26323d", "light": "#6f8790" },
+        { "label": "La falaise", "sky": "#1f2a33", "light": "#56636b" },
+        { "label": "Phare éteint", "sky": "#1c242c", "light": "#9aa8ae" },
+        { "label": "Phare rallumé", "sky": "#2a2f45", "light": "#ffd27a" },
+        { "label": "La voix d'Yvon", "sky": "#3a3048", "light": "#e3a35f" }
+      ],
+      "notes": [
+        {
+          "to": "@Bastien",
+          "text": "Bandes rouges usées, pierre mouillée en bas. Le toit de la lanterne doit se lire de dos, depuis la falaise."
+        },
+        {
+          "to": "@Aminata",
+          "text": "Maëlle lève la lanterne bras tendu, le corps un peu en arrière : elle a peur, mais elle avance."
+        }
+      ]
+    },
+    "annotations": [
+      {
+        "id": "variants",
+        "zone": "variants",
+        "title": "Trois phares, un seul choix",
+        "text": "Mei a peint trois pistes en une journée. Margaux a retenu le phare élancé : il reste visible même quand la brume monte, ce qui aidera le joueur à s'orienter. Le phare en ruine était le plus beau, mais on ne pouvait plus le rallumer : il trahissait l'histoire."
+      },
+      {
+        "id": "color-script",
+        "zone": "color-script",
+        "title": "L'histoire racontée en couleurs",
+        "text": "Le [[color-script|script couleur]] résume la séquence : du bleu de plus en plus froid jusqu'au phare éteint, puis l'orange chaud quand Maëlle le rallume. Bastien et Théo s'en serviront pour les matières, la lumière et la brume."
+      },
+      {
+        "id": "canvas",
+        "zone": "canvas",
+        "title": "Peindre l'émotion avant la 3D",
+        "text": "Ce tableau montre le moment clé de la [[vertical-slice|vertical slice]] : le phare rallumé qui troue la brume. Il sert de référence à toute l'équipe, et Victor le montrera aussi à Ondine pour donner envie avant même de jouer."
+      },
+      {
+        "id": "notes",
+        "zone": "notes",
+        "title": "Des dessins qui servent à d'autres",
+        "text": "Le [[concept-art]] est un outil de travail. Les notes épinglées disent à Bastien ce que la 3D doit garder (les bandes usées, le toit lisible de dos) et à Aminata quelle attitude donner à Maëlle quand elle lève sa lanterne."
+      },
+      {
+        "id": "layers",
+        "zone": "layers",
+        "title": "La brume sur son propre calque",
+        "text": "Mei peint la brume à part, au-dessus du décor. Elle peut ainsi l'épaissir ou l'alléger sans repeindre le phare, et montrer à Théo (technical art) quelle densité l'effet de brume du jeu doit viser."
+      }
+    ]
+  }
+}

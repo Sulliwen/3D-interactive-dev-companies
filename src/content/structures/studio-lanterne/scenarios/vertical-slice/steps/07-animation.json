@@ -1,0 +1,98 @@
+{
+  "role": "animation",
+  "order": 8,
+  "featureStep": "Maëlle lève sa lanterne : l'animation clé",
+  "tagline": "Quand le joueur appuie sur le bouton, Maëlle doit lever sa lanterne avec peur et courage à la fois, en 1,2 seconde, ni plus ni moins.",
+  "missions": [
+    "Animer « lever la lanterne » à partir du [[rig|squelette d'animation]] de Maëlle, d'après la silhouette peinte par Mei.",
+    "Poser les [[image-cle|images clés]] (repos, élan, bras levé, retombée), puis régler les courbes entre elles.",
+    "Garder une durée compatible avec le jeu : 1,2 s, sinon la lanterne s'allumerait trop tard sous les doigts du joueur.",
+    "Raccorder l'animation à la marche dans la brume, sans à-coup."
+  ],
+  "takeaways": [
+    "Une animation part de quelques [[image-cle|images clés]] ; le logiciel calcule les images intermédiaires, l'animatrice règle leur rythme.",
+    "L'anticipation (Maëlle recule le bras avant de le lever) rend le geste lisible et crédible : c'est un principe classique de l'animation.",
+    "Dans un jeu, une animation a aussi une contrainte de gameplay : à 36 images, la lumière part au bon moment sous les doigts du joueur."
+  ],
+  "receivesFrom": {
+    "roles": ["concept-art"],
+    "text": "La silhouette de Maëlle lanterne levée, peinte par Mei, avec sa note : « elle a peur, mais elle avance »."
+  },
+  "handsOffTo": {
+    "roles": ["gameplay-programming"],
+    "text": "L'animation « lever la lanterne » et le repère de l'image 14, où la lumière doit s'allumer : Lucas (gameplay) déclenche la lumière du code à ce moment précis."
+  },
+  "screen": {
+    "component": "animation-timeline",
+    "toolName": "Squelette",
+    "props": {
+      "file": "Maelle_LeverLanterne_v05.anim",
+      "clip": { "name": "Maelle_LeverLanterne", "frames": 36, "fps": 30 },
+      "playhead": 14,
+      "keys": [
+        { "frame": 0, "label": "Repos", "pose": "rest" },
+        { "frame": 6, "label": "Élan", "pose": "anticipation" },
+        { "frame": 14, "label": "Bras levé", "pose": "raise" },
+        { "frame": 20, "label": "Dépassement", "pose": "overshoot" },
+        { "frame": 36, "label": "Tenue", "pose": "settle" }
+      ],
+      "tracks": [
+        { "name": "Bras droit", "frames": [0, 6, 14, 20, 36] },
+        { "name": "Épaule", "frames": [0, 6, 14, 22, 36] },
+        { "name": "Colonne", "frames": [0, 8, 16, 36] },
+        { "name": "Bassin", "frames": [0, 6, 18, 36] },
+        { "name": "Tête", "frames": [0, 10, 18, 30] },
+        { "name": "Lanterne", "frames": [0, 14, 20, 28, 36] }
+      ],
+      "curve": {
+        "label": "rotation du bras droit",
+        "points": [
+          [0, 12],
+          [6, -18],
+          [14, 150],
+          [20, 172],
+          [28, 154],
+          [36, 158]
+        ],
+        "note": "Le bras recule d'abord (élan), monte vite, dépasse un peu puis se stabilise : le geste paraît lourd et décidé."
+      },
+      "transition": {
+        "to": "Maelle_MarcheBrume",
+        "blendFrames": 8,
+        "note": "Le bras reste levé pendant la marche : seule la moitié basse du corps passe à l'animation de marche."
+      }
+    },
+    "annotations": [
+      {
+        "id": "poses",
+        "zone": "poses",
+        "title": "Cinq poses suffisent",
+        "text": "Aminata ne dessine pas les 36 images une à une : elle pose cinq [[image-cle|images clés]] (repos, élan, bras levé, dépassement, tenue). Le logiciel calcule les poses intermédiaires ; elle n'a plus qu'à en régler le rythme."
+      },
+      {
+        "id": "curve",
+        "zone": "curve",
+        "title": "Le geste se règle sur une courbe",
+        "text": "La courbe montre l'angle du bras dans le temps. Elle descend d'abord sous zéro (le bras recule : c'est l'anticipation), monte vite, dépasse puis se pose. Sans ces détails, Maëlle lèverait la lanterne comme un robot."
+      },
+      {
+        "id": "clip",
+        "zone": "clip",
+        "title": "1,2 seconde, imposée par le jeu",
+        "text": "36 images à 30 images par seconde : 1,2 s. Plus long, le joueur aurait l'impression que la lanterne répond mal ; plus court, le geste perdrait son poids. Dans un jeu, une animation est aussi une règle de [[gameplay]]."
+      },
+      {
+        "id": "dopesheet",
+        "zone": "dopesheet",
+        "title": "Chaque articulation a son rythme",
+        "text": "Sur la feuille d'exposition, chaque ligne est une partie du [[rig|squelette]] de Maëlle. Les clés ne tombent pas toutes au même moment : la tête suit le bras avec un léger retard, comme dans un vrai mouvement."
+      },
+      {
+        "id": "transition",
+        "zone": "transition",
+        "title": "Raccorder sans à-coup",
+        "text": "Après le geste, Maëlle repart en marchant, lanterne toujours levée. Un fondu de 8 images mélange les deux animations, et seule la moitié basse du corps passe à la marche : le joueur ne voit aucune coupure."
+      }
+    ]
+  }
+}

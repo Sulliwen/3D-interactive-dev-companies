@@ -1,0 +1,29 @@
+using Brume.Testing;
+
+namespace Brume.Gameplay.Tests
+{
+    public class LanternLightTests : PlayModeTest
+    {
+        // @zone tests
+        // Règles délicates vérifiées à chaque build de nuit (chaîne de Sarah).
+        [Test]
+        public void Oil_never_goes_below_zero()
+        {
+            var lantern = Spawn<LanternLight>(oilSeconds: 1f);
+            lantern.SetRaised(true);
+            Simulate(seconds: 5f);
+            Assert.Equal(0f, lantern.Oil);
+            Assert.False(lantern.IsRaised);
+        }
+
+        [Test]
+        public void Lit_paths_stay_frozen_while_fog_returns()
+        {
+            var path = PathNetwork.Create("cliff_01");
+            Light(path, seconds: 1f);
+            Simulate(seconds: 19f);
+            Assert.True(path.IsFrozen);
+        }
+        // @end
+    }
+}

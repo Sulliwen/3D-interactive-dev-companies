@@ -1,0 +1,29 @@
+{
+  "id": "technical-art",
+  "desk": 10,
+  "title": "Art technique",
+  "person": {
+    "firstName": "Théo",
+    "lastName": "Gauthier",
+    "role": "Technical artist"
+  },
+  "tagline": "Je suis le pont entre les artistes et les programmeurs : je fais en sorte que la brume soit belle et qu'elle tourne vite.",
+  "missions": [
+    "Créer les effets visuels avec des [[shader|shaders]] : la brume qui recule sous la lumière, l'eau, les reflets de la lanterne.",
+    "Régler l'éclairage des niveaux avec l'artiste 3D et la directrice créative.",
+    "Fixer et surveiller les budgets des artistes (polygones, [[texture|textures]], effets) pour tenir les [[images-par-seconde|images par seconde]].",
+    "Automatiser les tâches répétitives des artistes : import des fichiers, vérifications, noms.",
+    "Former l'équipe artistique aux contraintes techniques du [[moteur-de-jeu|moteur de jeu]]."
+  ],
+  "myth": {
+    "myth": "Un technical artist, c'est un artiste qui n'a pas réussi à être artiste, ou un programmeur qui n'a pas réussi à être programmeur.",
+    "reality": "C'est un métier à part entière, très recherché : il faut comprendre à la fois ce qui rend une image belle et ce qui la rend coûteuse. Sans Théo, la brume de « Brume » serait soit magnifique à 15 images par seconde, soit fluide et laide."
+  },
+  "realTools": [
+    "Houdini",
+    "Substance Designer",
+    "Unity Shader Graph",
+    "Unreal Engine (Material Editor)",
+    "Python"
+  ]
+}

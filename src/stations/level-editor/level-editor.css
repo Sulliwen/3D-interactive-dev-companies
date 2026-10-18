@@ -1,0 +1,245 @@
+/* « Lanterne Editor » : éditeur de niveaux (poste Level design). */
+
+.le__play {
+  padding: 1px 8px;
+  border-radius: 3px;
+  background: #199e70;
+  color: #fff;
+  font-weight: 600;
+}
+
+.le__heading {
+  margin-bottom: 5px !important;
+  color: var(--ink-muted);
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.le__hierarchy {
+  width: 170px;
+  flex: none;
+  padding: 8px 0;
+  border-right: 1px solid var(--line);
+  background: #1b2130;
+  overflow: hidden;
+}
+
+.le__hierarchy .le__heading {
+  padding: 0 10px;
+}
+
+.le__hierarchy ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-family: var(--mono);
+  font-size: 11px;
+}
+
+.le__hierarchy li {
+  padding: 2px 6px 2px 10px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.le__hierarchy li.is-selected {
+  background: #2b4a78;
+  color: #fff;
+}
+
+.le__center {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+  min-width: 0;
+  padding: 8px;
+  background: #141922;
+}
+
+.le__viewport {
+  position: relative;
+  align-self: center;
+  width: 470px;
+  height: 330px;
+  border: 1px solid var(--line);
+}
+
+.le__viewport svg {
+  display: block;
+}
+
+.le__view-tag {
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  padding: 1px 6px;
+  border-radius: 3px;
+  background: rgb(10 12 16 / 0.7);
+  font-size: 10.5px;
+}
+
+.le__block {
+  fill: #6c7380;
+  stroke: #8d94a1;
+  stroke-width: 1;
+}
+
+.le__danger {
+  fill: rgb(217 89 38 / 0.22);
+  stroke: #d95926;
+  stroke-dasharray: 5 3;
+}
+
+.le__danger-label {
+  fill: #ec835a;
+  font-size: 10.5px;
+  font-weight: 700;
+}
+
+.le__path {
+  fill: none;
+  stroke: var(--lumen);
+  stroke-width: 3;
+  stroke-dasharray: 8 5;
+  stroke-linecap: round;
+}
+
+.le__lamp-radius {
+  fill: rgb(255 210 122 / 0.12);
+  stroke: rgb(255 210 122 / 0.5);
+}
+
+.le__lamp {
+  fill: #ffd27a;
+}
+
+.le__beat {
+  fill: #121620;
+  stroke: var(--lumen);
+  stroke-width: 2;
+}
+
+.le__beat-n {
+  fill: #fff;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.le__sight {
+  fill: none;
+  stroke: #7fc8f8;
+  stroke-dasharray: 3 3;
+}
+
+.le__tower {
+  fill: #d8d2c4;
+}
+
+.le__label {
+  fill: #d7dce6;
+  font-size: 10px;
+}
+
+.le__label--landmark {
+  fill: #7fc8f8;
+  font-weight: 700;
+}
+
+.le__beats {
+  padding: 5px 8px;
+  border-radius: 6px;
+  background: var(--surface-2);
+}
+
+.le__beats ol {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 14px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 11px;
+}
+
+.le__beats li {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+
+.le__beats i {
+  display: inline-grid;
+  place-content: center;
+  width: 16px;
+  height: 16px;
+  border: 2px solid var(--lumen);
+  border-radius: 50%;
+  font-size: 9px;
+  font-style: normal;
+  font-weight: 700;
+}
+
+.le__side {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 260px;
+  flex: none;
+  padding: 8px;
+  border-left: 1px solid var(--line);
+  background: #1b2130;
+}
+
+.le__panel {
+  padding: 6px 8px;
+  border-radius: 6px;
+  background: var(--surface-2);
+}
+
+.le__object {
+  margin-bottom: 4px !important;
+  color: #fff;
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.le__fields,
+.le__stats {
+  margin: 0;
+  font-size: 11px;
+}
+
+.le__fields div,
+.le__stats div {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 2px 0;
+  border-top: 1px solid var(--line);
+}
+
+.le__fields dt,
+.le__stats dt {
+  color: var(--ink-muted);
+}
+
+.le__fields dd,
+.le__stats dd {
+  margin: 0;
+  font-family: var(--mono);
+  text-align: right;
+}
+
+.le__stats dd {
+  color: #fff;
+  font-weight: 700;
+}
+
+.le__preview svg {
+  display: block;
+}

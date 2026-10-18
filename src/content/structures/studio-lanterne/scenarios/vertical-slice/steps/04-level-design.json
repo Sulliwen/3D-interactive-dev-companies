@@ -1,0 +1,128 @@
+{
+  "role": "level-design",
+  "order": 6,
+  "featureStep": "Le niveau en blocs gris : chemins et rythme",
+  "tagline": "Le phare de Kerlaz existe déjà dans le jeu, mais tout en blocs gris : je règle le chemin, les lampes et la falaise avant que le moindre décor ne soit posé.",
+  "missions": [
+    "Construire la séquence du phare en [[greybox|blocs gris]] et la rejouer chaque jour pour en régler le rythme.",
+    "Tracer le [[chemin-critique|chemin critique]] : village englouti, falaise, phare, et placer les trois lampes où recharger la lanterne.",
+    "Garder le phare visible de presque partout, pour que le joueur sache toujours où aller sans panneau.",
+    "Mesurer la durée du niveau et la caler sur les 15 minutes promises à l'éditeur."
+  ],
+  "takeaways": [
+    "Un niveau se teste d'abord en [[greybox|blocs gris]] : changer un chemin coûte quelques minutes, contre des jours une fois le décor final posé.",
+    "Le phare sert de repère visible de loin : on guide le joueur avec le décor plutôt qu'avec des flèches.",
+    "Antoine place les lampes de recharge selon les chiffres de Karim : 90 secondes d'huile, c'est la distance maximale entre deux lampes."
+  ],
+  "receivesFrom": {
+    "roles": ["game-design", "concept-art"],
+    "text": "Les règles chiffrées de la lanterne de Karim (rayon de 6 m, 90 s d'huile, recharge aux lampes) et la piste de phare élancé retenue sur la planche de Mei."
+  },
+  "handsOffTo": {
+    "roles": ["environment-art"],
+    "text": "Le niveau validé en blocs gris : Bastien (art 3D) va remplacer chaque bloc par le décor final, sans changer le chemin ni la place des lampes."
+  },
+  "screen": {
+    "component": "level-editor",
+    "toolName": "Lanterne Editor",
+    "props": {
+      "scene": "Kerlaz_Phare.scene",
+      "viewMode": "Blocs gris (greybox)",
+      "hierarchy": [
+        { "name": "Kerlaz_Phare", "depth": 0 },
+        { "name": "Depart_Maelle", "depth": 1 },
+        { "name": "Village_englouti", "depth": 1 },
+        { "name": "Maisons_blocs (12)", "depth": 2 },
+        { "name": "Falaise", "depth": 1 },
+        { "name": "Sentier_falaise", "depth": 2 },
+        { "name": "Lampes", "depth": 1 },
+        { "name": "Lampe_01", "depth": 2 },
+        { "name": "Lampe_02", "depth": 2, "selected": true },
+        { "name": "Lampe_03", "depth": 2 },
+        { "name": "Phare_Kerlaz", "depth": 1 },
+        { "name": "Zone_brume", "depth": 1 }
+      ],
+      "map": {
+        "blocks": [
+          [8, 56, 7, 9],
+          [17, 62, 8, 7],
+          [10, 70, 9, 8],
+          [22, 72, 6, 8],
+          [28, 58, 7, 8],
+          [14, 44, 6, 7],
+          [31, 46, 7, 6]
+        ],
+        "path": [
+          [6, 88],
+          [18, 80],
+          [26, 66],
+          [34, 54],
+          [46, 46],
+          [58, 40],
+          [66, 30],
+          [72, 18]
+        ],
+        "beats": [
+          { "at": [6, 88], "label": "Arrivée en barque" },
+          { "at": [26, 66], "label": "Village englouti" },
+          { "at": [52, 43], "label": "La falaise" },
+          { "at": [66, 30], "label": "Pied du phare" },
+          { "at": [72, 18], "label": "Rallumer le phare" }
+        ],
+        "lamps": [
+          { "at": [20, 76], "label": "Lampe 1" },
+          { "at": [40, 50], "label": "Lampe 2" },
+          { "at": [62, 36], "label": "Lampe 3" }
+        ],
+        "danger": { "rect": [42, 36, 20, 16], "label": "Falaise · brume dense" },
+        "landmark": { "at": [74, 14], "label": "Phare (visible de partout)" }
+      },
+      "inspector": {
+        "name": "Lampe_02",
+        "fields": [
+          { "label": "Type", "value": "Lampe de recharge" },
+          { "label": "Huile rendue", "value": "100 %" },
+          { "label": "Écart avec Lampe_01", "value": "82 s de marche" },
+          { "label": "Repousse la brume", "value": "rayon 6 m" }
+        ]
+      },
+      "stats": [
+        { "label": "Durée moyenne (5 essais)", "value": "14 min 30 s" },
+        { "label": "Objectif de la slice", "value": "≈ 15 min" },
+        { "label": "Longueur du chemin", "value": "640 m" }
+      ]
+    },
+    "annotations": [
+      {
+        "id": "map",
+        "zone": "map",
+        "title": "Tout est encore gris",
+        "text": "Le village, la falaise et le phare ne sont que des blocs : c'est un [[greybox|niveau en blocs gris]]. Antoine peut déplacer une maison ou raccourcir la falaise en deux minutes. Une fois le décor final posé, le même changement prendrait des jours."
+      },
+      {
+        "id": "path",
+        "zone": "path",
+        "title": "Le chemin et ses moments forts",
+        "text": "Le [[chemin-critique|chemin critique]] relie l'arrivée en barque au sommet du phare. Antoine y alterne tension (la falaise dans la brume dense) et respiration (le village), pour que les 15 minutes ne s'essoufflent pas."
+      },
+      {
+        "id": "inspector",
+        "zone": "inspector",
+        "title": "Des lampes placées au chronomètre",
+        "text": "Karim a fixé l'huile de la lanterne à 90 secondes. Antoine place donc les lampes de recharge à moins de 90 secondes de marche l'une de l'autre : ici 82 s entre la lampe 1 et la lampe 2. La règle du [[game-design|game design]] dessine le niveau."
+      },
+      {
+        "id": "stats",
+        "zone": "stats",
+        "title": "Quinze minutes, pas plus",
+        "text": "Ondine attend environ 15 minutes de jeu. Antoine chronomètre chaque version : 14 min 30 s en moyenne sur cinq essais. Le vrai test viendra avec des joueurs qui ne connaissent pas le niveau, lors du [[playtest]] d'Elsa."
+      },
+      {
+        "id": "hierarchy",
+        "zone": "hierarchy",
+        "title": "Un niveau rangé comme un dossier",
+        "text": "Chaque élément du niveau a un nom clair et une place dans l'arborescence : Bastien saura exactement quel bloc remplacer par quelle maison, et Lucas quel objet le code doit trouver (les lampes, le phare)."
+      }
+    ]
+  }
+}

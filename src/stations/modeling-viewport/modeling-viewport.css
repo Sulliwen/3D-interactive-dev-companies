@@ -1,0 +1,270 @@
+/* « Atelier 3D » : modélisation (poste Art 3D décors). */
+
+.mv__heading {
+  margin-bottom: 5px !important;
+  color: var(--ink-muted);
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.mv__main {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+  min-width: 0;
+  padding: 8px;
+  background: #141922;
+}
+
+.mv__viewport {
+  position: relative;
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  min-height: 0;
+  border: 1px solid var(--line);
+  background: radial-gradient(circle at 50% 40%, #2a3140, #161b25 70%);
+}
+
+.mv__view-tag {
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  padding: 1px 6px;
+  border-radius: 3px;
+  background: rgb(10 12 16 / 0.7);
+  font-size: 10.5px;
+}
+
+.mv__model {
+  display: block;
+}
+
+.mv__ground {
+  fill: none;
+  stroke: #3a4256;
+  stroke-dasharray: 4 4;
+}
+
+.mv__shade {
+  fill: rgb(216 210 196 / 0.12);
+}
+
+.mv__wire {
+  fill: none;
+  stroke: #9ec3e6;
+  stroke-width: 1;
+}
+
+.mv__model--small .mv__wire {
+  stroke-width: 6;
+}
+
+.mv__glass {
+  fill: rgb(255 210 122 / 0.12);
+}
+
+.mv__pivot {
+  fill: var(--lumen);
+}
+
+.mv__ref {
+  position: absolute;
+  right: 8px;
+  bottom: 8px;
+  width: 200px;
+  padding: 5px 7px;
+  border-left: 3px solid #f7d154;
+  border-radius: 2px;
+  background: rgb(18 22 32 / 0.92);
+  font-size: 11px;
+  line-height: 1.35;
+}
+
+.mv__ref b {
+  color: #f7d154;
+}
+
+.mv__gizmo {
+  position: absolute;
+  left: 10px;
+  bottom: 10px;
+  display: flex;
+  gap: 4px;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.mv__gizmo i {
+  display: inline-grid;
+  place-content: center;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  color: #121620;
+  font-style: normal;
+}
+
+.mv__gizmo .x {
+  background: #ec835a;
+}
+
+.mv__gizmo .y {
+  background: #8fd18a;
+}
+
+.mv__gizmo .z {
+  background: #7fb4f0;
+}
+
+.mv__kit {
+  padding: 5px 8px;
+  border-radius: 6px;
+  background: var(--surface-2);
+}
+
+.mv__kit ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 11px;
+}
+
+.mv__kit li {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+
+.mv__kit b {
+  color: #fff;
+}
+
+.mv__piece {
+  width: 12px;
+  height: 12px;
+  border: 1px solid #9ec3e6;
+  transform: skewY(-15deg);
+}
+
+.mv__side {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 290px;
+  flex: none;
+  padding: 8px;
+  border-left: 1px solid var(--line);
+  background: #1b2130;
+}
+
+.mv__panel {
+  padding: 6px 8px;
+  border-radius: 6px;
+  background: var(--surface-2);
+}
+
+.mv__count {
+  color: #fff;
+  font-family: var(--mono);
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.mv__count span {
+  color: var(--ink-muted);
+  font-size: 13px;
+}
+
+.mv__bar {
+  display: block;
+  height: 8px;
+  margin: 4px 0;
+  border-radius: 4px;
+  background: #121620;
+  overflow: hidden;
+}
+
+.mv__bar span {
+  display: block;
+  height: 100%;
+}
+
+.mv__bar .is-ok {
+  background: var(--status-good);
+}
+
+.mv__bar .is-over {
+  background: var(--status-critical);
+}
+
+.mv__verdict {
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.mv__verdict.is-ok {
+  color: #5fd35f;
+}
+
+.mv__verdict.is-over {
+  color: #ff7b7b;
+}
+
+.mv__lods,
+.mv__textures {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 11px;
+}
+
+.mv__lods li {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.mv__lods svg {
+  flex: none;
+  border-radius: 3px;
+  background: #161b25;
+}
+
+.mv__lods b {
+  display: block;
+  color: #fff;
+}
+
+.mv__lods em {
+  display: block;
+  color: var(--ink-muted);
+  font-style: normal;
+}
+
+.mv__textures li {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.mv__textures b {
+  margin-left: auto;
+  font-family: var(--mono);
+  font-weight: 400;
+}
+
+.mv__tex {
+  width: 18px;
+  height: 18px;
+  border-radius: 3px;
+}

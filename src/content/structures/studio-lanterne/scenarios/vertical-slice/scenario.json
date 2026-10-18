@@ -1,0 +1,29 @@
+{
+  "id": "vertical-slice",
+  "order": 1,
+  "kind": "Jalon de production",
+  "title": "Finir 15 minutes du jeu pour convaincre l'éditeur",
+  "summary": "Dans trois semaines, le studio présente à son éditeur un morceau de « Brume » fini comme le jeu final : la vertical slice. Si elle convainc, la production complète est financée. De la vision à la dernière correction, suivez la séquence du phare d'un poste à l'autre.",
+  "workItem": {
+    "label": "La séquence du phare, ici",
+    "title": "« Le Phare de Kerlaz » : arriver au village englouti, traverser la falaise dans la brume, rallumer le phare et entendre la première voix de la brume. Quinze minutes de jeu, finies comme le jeu final.",
+    "project": "brume"
+  },
+  "intro": "Nous sommes le jeudi 12 novembre 2026. Le vendredi 4 décembre, le Studio Lanterne présente à Paris la vertical slice de « Brume » à Ondine Publishing, l'éditeur qui finance le jeu. Quinze minutes de jeu, mais à la qualité finale : graphismes, animations, son, réglages. De cette présentation dépend la suite du financement, et donc l'avenir du studio.",
+  "finale": {
+    "lead": "Quinze minutes de jeu ont mobilisé tout le studio pendant trois semaines : une vision, des coupes assumées, des règles chiffrées, des dessins, du code, du son, des mesures de performance, des bugs et des joueurs perdus dans la brume. Le 4 décembre, Ondine a joué la séquence du phare jusqu'au bout. La production complète de « Brume » peut commencer.",
+    "outcomesTitle": "Le 4 décembre, chez Ondine",
+    "outcomes": [
+      { "label": "Séquence du phare", "before": "prototype de 4 min", "after": "15 min finies" },
+      { "label": "Joueurs perdus à la falaise", "before": "5 sur 8", "after": "1 sur 8" },
+      { "label": "Images par seconde (config. minimale)", "before": "41", "after": "60" },
+      { "label": "Bugs bloquants", "before": "2", "after": "0" },
+      {
+        "label": "Décision d'Ondine",
+        "before": "en attente",
+        "after": "production lancée (1,8 M€)"
+      }
+    ]
+  },
+  "bystanders": []
+}

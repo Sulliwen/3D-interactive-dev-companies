@@ -23,6 +23,7 @@ export const MATERIALS: Record<MaterialKey, MaterialSpec> = {
   plant: { color: '#4f7d4a', roughness: 0.9 },
   board: { color: '#fbfbf8', roughness: 0.7 },
   postit: { color: '#f7d154', roughness: 0.9, castShadow: false },
+  brick: { color: '#a5654c', roughness: 0.95 },
 }
 
 export const FLOORS: Record<FloorKey, string> = {

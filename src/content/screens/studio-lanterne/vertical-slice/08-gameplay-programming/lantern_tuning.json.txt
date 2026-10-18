@@ -1,0 +1,15 @@
+{
+  // @zone table
+  "lantern": {
+    "LightRadius": 6.0,
+    "OilSeconds": 90,
+    "FogRecoilSpeed": 1.2,
+    "FreezeSeconds": 20,
+    "RefillLampsInKerlaz": 3
+  },
+  // @end
+  "_history": [
+    "10/11 · Karim · OilSeconds 120 → 90 : huile jamais vidée",
+    "03/11 · Karim · FreezeSeconds 10 → 20 : falaise trop dure"
+  ]
+}

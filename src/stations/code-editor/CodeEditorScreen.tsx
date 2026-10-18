@@ -6,7 +6,7 @@ import { useAnnotations } from '../common/annotationContext'
 import { Zone } from '../common/annotations'
 import { Icon } from '../common/icons'
 import { PocketSantePhone } from '../common/PocketSantePhone'
-import { highlightLines, type Token } from './highlight'
+import { highlightLines, languageOf, type CodeLanguage, type Token } from './highlight'
 import { codeEditorPropsSchema } from './schema'
 import type { ScreenComponentProps } from '../types'
 import './code-editor-preview.css'
@@ -137,7 +137,7 @@ export function CodeEditorScreen({ toolName, props: rawProps }: ScreenComponentP
             aria-label={`Code de ${file.name}`}
             tabIndex={live ? 0 : -1}
           >
-            <CodeView code={file.code} />
+            <CodeView code={file.code} language={languageOf(file.name)} />
           </div>
 
           <Terminal
@@ -170,14 +170,18 @@ export function CodeEditorScreen({ toolName, props: rawProps }: ScreenComponentP
           <Icon name="check" size={13} />{' '}
           {props.terminal.lines.filter((l) => l.kind === 'pass').length} tests
         </span>
-        <span className="ce__status-right">TypeScript · UTF-8 · Espaces : 2</span>
+        <span className="ce__status-right">
+          {languageOf(file.name) === 'csharp'
+            ? 'C# · UTF-8 · Espaces : 4'
+            : 'TypeScript · UTF-8 · Espaces : 2'}
+        </span>
       </div>
     </div>
   )
 }
 
-function CodeView({ code }: { code: ParsedCode }) {
-  const tokens = useMemo(() => highlightLines(code.lines), [code])
+function CodeView({ code, language }: { code: ParsedCode; language: CodeLanguage }) {
+  const tokens = useMemo(() => highlightLines(code.lines, language), [code, language])
 
   // Découpe en blocs : lignes libres et zones (pour poser les pastilles).
   const blocks: Array<{ zone: string | null; from: number; to: number }> = []

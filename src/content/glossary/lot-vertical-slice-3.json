@@ -1,0 +1,38 @@
+[
+  {
+    "id": "profileur",
+    "term": "Profileur",
+    "definition": "Un outil qui mesure, image par image, combien de temps le jeu passe dans chaque tâche (affichage, ombres, brume, son, règles du jeu). Il montre où part le temps quand le jeu ralentit, au lieu de deviner.",
+    "analogy": "Comme le relevé détaillé d'un compte en banque : on voit exactement quelle dépense a fait passer dans le rouge."
+  },
+  {
+    "id": "budget-par-image",
+    "term": "Budget par image",
+    "definition": "Le temps dont dispose le jeu pour calculer une image : 16,6 millisecondes pour tenir 60 images par seconde, 33,3 pour 30. Chaque système (affichage, effets, son, règles) en reçoit une part ; si la somme dépasse, l'image arrive en retard et le jeu saccade.",
+    "analogy": "Comme un budget du mois partagé entre loyer, courses et loisirs : si un poste déborde, il faut rogner ailleurs."
+  },
+  {
+    "id": "configuration-minimale",
+    "term": "Configuration minimale",
+    "definition": "L'ordinateur le moins puissant sur lequel le studio promet que le jeu fonctionne correctement. Elle est affichée sur la page du jeu, et c'est sur une machine de ce niveau que l'équipe mesure les performances.",
+    "analogy": "Comme la hauteur minimale d'un manège : le constructeur garantit que tout se passe bien à partir de là."
+  },
+  {
+    "id": "precalcul",
+    "term": "Précalcul (« baking »)",
+    "definition": "Calculer à l'avance, pendant la fabrication du jeu, ce qui ne bouge pas (la lumière et les ombres d'un décor immobile), et ranger le résultat dans des images. En jeu, on relit ce résultat au lieu de le recalculer à chaque image.",
+    "analogy": "Comme préparer les sauces le matin, avant le service, plutôt que de les faire à la commande."
+  },
+  {
+    "id": "graphe-de-shader",
+    "term": "Graphe de shader",
+    "definition": "Une façon de fabriquer un shader sans écrire de code : on relie des boîtes (des nœuds), chacune faisant une petite opération sur l'image (bruit, mélange, profondeur). Le résultat est calculé pour chaque point de l'écran, à chaque image : chaque nœud a donc un coût.",
+    "analogy": "Comme une chaîne de pédales d'effets pour guitare : chaque boîtier transforme le son et le passe au suivant."
+  },
+  {
+    "id": "middleware-audio",
+    "term": "Intergiciel audio (middleware)",
+    "definition": "Un logiciel placé entre les fichiers de son et le jeu. Le sound designer y décrit des règles (quelles couches jouer, à quel volume, selon quel paramètre) ; le jeu se contente d'envoyer des évènements (« Maëlle entre dans la brume ») et des valeurs (la densité de brume).",
+    "analogy": "Comme une table de mixage réglée à l'avance pour un concert : les musiciens jouent, la table applique les réglages prévus."
+  }
+]

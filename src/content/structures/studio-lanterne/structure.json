@@ -1,0 +1,35 @@
+{
+  "id": "studio-lanterne",
+  "order": 2,
+  "name": "Studio Lanterne",
+  "kind": "Studio de jeu vidéo indépendant",
+  "tagline": "Des jeux qui éclairent, pas à pas.",
+  "summary": "Un studio indépendant bordelais installé dans un ancien entrepôt de vin. Game designers, artistes, animatrice, programmeurs, sound designer et testeuses fabriquent ensemble un jeu d'aventure pour PC.",
+  "facts": [
+    "≈ 30 personnes, à Bordeaux",
+    "Jalons de production, sprints de 2 semaines",
+    "Jeu en cours : Brume (aventure narrative, PC / Steam)",
+    "Un playtest avec des joueurs chaque vendredi"
+  ],
+  "world": "studio-lanterne",
+  "projects": [
+    {
+      "id": "brume",
+      "name": "Brume",
+      "description": "Aventure narrative sur PC : une jeune cartographe éclaire à la lanterne une île avalée par la brume.",
+      "featured": true
+    },
+    {
+      "id": "petits-cailloux",
+      "name": "Petits Cailloux",
+      "description": "Jeu de réflexion sorti sur Steam en 2023 (≈ 85 000 exemplaires vendus).",
+      "featured": false
+    },
+    {
+      "id": "maree-basse",
+      "name": "Marée basse",
+      "description": "Prototype de deux semaines né de la game jam interne de juillet 2026.",
+      "featured": false
+    }
+  ]
+}

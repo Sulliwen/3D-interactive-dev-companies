@@ -1,0 +1,123 @@
+{
+  "role": "game-design",
+  "order": 3,
+  "featureStep": "La lanterne : les règles et les chiffres",
+  "tagline": "J'écris les règles de « Brume » et je règle leurs chiffres. Pour la slice, la lanterne doit être comprise en une minute et donner envie de bien dépenser sa lumière.",
+  "missions": [
+    "Décrire chaque [[mecanique-de-jeu|mécanique]] dans le [[game-design-document|document de game design]] : ce que fait le joueur, ce que fait le jeu en réponse.",
+    "Tenir le tableau de réglages ([[equilibrage]]) que le code lit directement : rayon, durées, vitesses.",
+    "Changer ces chiffres après chaque [[playtest]], en écrivant pourquoi.",
+    "Vérifier avec le level designer que le niveau met la règle à l'épreuve : assez de lumière, mais jamais trop."
+  ],
+  "takeaways": [
+    "Une règle de jeu, c'est une phrase **et des chiffres** : « la lumière repousse la brume » ne suffit pas, il faut dire jusqu'où, combien de temps, à quelle vitesse.",
+    "Les chiffres vivent dans un **tableau lu par le jeu** : Karim peut les changer sans demander au programmeur, et l'essayer dans la minute.",
+    "Les réglages changent avec les joueurs : à 120 secondes d'huile, personne ne vidait sa lanterne. À 90 secondes, chaque décision compte."
+  ],
+  "receivesFrom": {
+    "roles": ["direction-creative", "production"],
+    "text": "Le pilier « La lumière coûte quelque chose » (Margaux) et la date : la lanterne doit être réglée avant la fin du premier sprint (Jeanne)."
+  },
+  "handsOffTo": {
+    "roles": ["gameplay-programming", "level-design"],
+    "text": "Une règle écrite et ses chiffres : Lucas les fait vivre dans le code, Antoine place les trois lampes de recharge dans le niveau en fonction de la réserve d'huile."
+  },
+  "screen": {
+    "component": "design-doc",
+    "toolName": "Carnet de jeu",
+    "props": {
+      "document": "La lanterne : règles et réglages",
+      "author": "Karim Belkacem",
+      "updated": "modifié le 12 novembre 2026",
+      "outline": [
+        { "title": "Vision de la vertical slice" },
+        { "title": "Maëlle, la cartographe" },
+        { "title": "La lanterne", "active": true },
+        { "title": "La brume" },
+        { "title": "La carte" },
+        { "title": "Niveau : le Phare de Kerlaz" }
+      ],
+      "lead": "La lanterne est la mécanique centrale de « Brume ». Le joueur doit la comprendre sans texte d'explication, et hésiter à chaque fois qu'il dépense sa lumière.",
+      "sections": [
+        {
+          "heading": "La règle",
+          "bullets": [
+            "La lumière repousse la brume autour de Maëlle et révèle les chemins.",
+            "Un chemin révélé reste figé un moment après le départ de la lumière, puis la brume le reprend.",
+            "La lanterne brûle de l'huile ; on la remplit aux lampes du village."
+          ]
+        }
+      ],
+      "tuning": {
+        "title": "Réglages",
+        "source": "lu par le jeu : reglages/lanterne.json",
+        "rows": [
+          {
+            "param": "Rayon de lumière",
+            "value": "6 m → 3,6 m",
+            "note": "la lumière rétrécit quand l'huile baisse : on sent qu'il faut recharger"
+          },
+          {
+            "param": "Réserve d'huile",
+            "value": "90 s",
+            "before": "120 s",
+            "note": "à 120 s, aucun joueur n'a vidé sa lanterne"
+          },
+          {
+            "param": "Recharge",
+            "value": "3 lampes",
+            "note": "placées par Antoine dans le village"
+          },
+          {
+            "param": "Vitesse de la brume",
+            "value": "1,2 m/s",
+            "note": "un peu plus lente que la marche"
+          },
+          { "param": "Chemin figé", "value": "20 s", "note": "le temps de traverser la falaise" }
+        ]
+      },
+      "comments": [
+        {
+          "author": "Lucas",
+          "text": "Le code lit ce fichier au lancement : change une valeur, relance, c'est en jeu.",
+          "resolved": true
+        },
+        {
+          "author": "Elsa",
+          "text": "Playtest d'octobre : 6 joueurs sur 6 ont fini avec plus de la moitié de l'huile.",
+          "reply": {
+            "author": "Karim",
+            "text": "D'où le passage à 90 s. On vérifie au playtest du 20."
+          }
+        }
+      ],
+      "status": "Spécification · 5 réglages · 1 changement aujourd'hui"
+    },
+    "annotations": [
+      {
+        "id": "regle",
+        "zone": "sections",
+        "title": "La règle en trois phrases",
+        "text": "Une [[mecanique-de-jeu|mécanique]] s'écrit simplement : ce que le joueur fait, ce que le jeu répond, ce que ça coûte. Ces trois phrases sont la référence pour le programmeur, le level designer et la testeuse."
+      },
+      {
+        "id": "reglages",
+        "zone": "tuning",
+        "title": "Des chiffres que le jeu lit directement",
+        "text": "Chaque valeur du tableau est lue par le jeu au lancement. Karim fait l'[[equilibrage]] lui-même : il change 120 en 90, relance, et joue. Pas besoin d'attendre une modification du code."
+      },
+      {
+        "id": "changement",
+        "zone": "comments",
+        "title": "Régler d'après les joueurs",
+        "text": "Le chiffre change parce que les joueurs du [[playtest]] d'octobre ne dépensaient jamais leur lumière : la règle ne posait aucune question. La raison du changement reste écrite à côté de la valeur."
+      },
+      {
+        "id": "carnet",
+        "zone": "outline",
+        "title": "Un carnet partagé",
+        "text": "Le [[game-design-document|document de game design]] est découpé en pages : vision, personnage, mécaniques, niveaux. La vision de Margaux est juste au-dessus : chaque règle doit la servir."
+      }
+    ]
+  }
+}

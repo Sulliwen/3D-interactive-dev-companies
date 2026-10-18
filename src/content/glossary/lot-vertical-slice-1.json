@@ -1,0 +1,26 @@
+[
+  {
+    "id": "piliers-de-jeu",
+    "term": "Piliers du jeu",
+    "definition": "Les trois ou quatre principes qui définissent un jeu et guident toutes les décisions de l'équipe. Une idée qui ne sert aucun pilier est écartée, même si elle est bonne.",
+    "analogy": "Comme la ligne éditoriale d'un journal : elle dit ce qu'on publie, et surtout ce qu'on ne publie pas."
+  },
+  {
+    "id": "gel-du-contenu",
+    "term": "Gel du contenu",
+    "definition": "La date après laquelle on n'ajoute plus rien au jeu (ni niveau, ni décor, ni réplique) : on ne fait plus que corriger et peaufiner ce qui existe. Elle laisse le temps de stabiliser la version avant une échéance.",
+    "analogy": "Comme le bouclage d'un magazine : après, on relit et on corrige, on n'ajoute plus d'article."
+  },
+  {
+    "id": "perimetre",
+    "term": "Périmètre (couper le périmètre)",
+    "definition": "Tout ce qu'on s'engage à livrer pour une date. Quand le temps manque, on réduit le périmètre (on coupe ou on reporte des éléments) plutôt que de faire travailler l'équipe le soir et le week-end.",
+    "analogy": "Comme réduire le menu d'un restaurant un soir de rush, pour que chaque plat servi reste bon."
+  },
+  {
+    "id": "equilibrage",
+    "term": "Équilibrage (réglages)",
+    "definition": "Le réglage des chiffres d'un jeu (durées, distances, vitesses, quantités) pour qu'il soit ni trop facile ni trop dur, et qu'il donne les émotions voulues. Ces chiffres sont rangés dans des tableaux que le jeu lit directement, pour les changer sans toucher au code.",
+    "analogy": "Comme ajuster le sel et la cuisson d'une recette après chaque dégustation."
+  }
+]

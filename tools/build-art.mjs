@@ -29,8 +29,15 @@ const rebuild = args.includes('--rebuild')
 const skipBake = args.includes('--skip-bake')
 const world = args.includes('--world') ? args[args.indexOf('--world') + 1] : 'atelier-lumen'
 
-/** Script Blender qui construit la scène de chaque monde à partir de son plan. */
-const SCENE_SCRIPTS = { 'atelier-lumen': 'tools/blender/build_scene.py' }
+/** Scripts propres à chaque monde : scène Blender (depuis le plan) et visuels de décor. */
+const SCENE_SCRIPTS = {
+  'atelier-lumen': 'tools/blender/build_scene.py',
+  'studio-lanterne': 'tools/blender/scene_studio_lanterne.py',
+}
+const DECOR_SCRIPTS = {
+  'atelier-lumen': 'tools/blender/make_decor.py',
+  'studio-lanterne': 'tools/blender/make_decor_studio.py',
+}
 if (!world || !SCENE_SCRIPTS[world]) {
   console.error(`Monde inconnu : ${world} (${Object.keys(SCENE_SCRIPTS).join(', ')})`)
   process.exit(1)
@@ -61,7 +68,7 @@ if (!exportOnly && !skipBake) {
 }
 if (!skipBake) {
   step('Plan de l’étage → JSON', 'node', ['tools/export-floorplan.mjs', world])
-  step('Visuels de décor', 'python3', ['tools/blender/make_decor.py'])
+  step('Visuels de décor', 'python3', [DECOR_SCRIPTS[world]])
   if (!exportOnly && (rebuild || !existsSync(blend))) {
     step('Scène Blender', blender, [
       '--background',
@@ -203,7 +210,8 @@ writeFileSync(
   creditsFile,
   md.includes('<!-- assets:start -->')
     ? md.replace(/<!-- assets:start -->[\s\S]*<!-- assets:end -->/, block)
-    : md.replace(/\| Asset \|[\s\S]*?\n\n/, `${block}\n\n`),
+    : // Le premier tableau (en-tête aligné par Prettier : espaces variables après « Asset »).
+      md.replace(/\| Asset +\|[\s\S]*?\n\n/, `${block}\n\n`),
 )
 
 console.log(

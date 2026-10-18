@@ -1,0 +1,23 @@
+{
+  "id": "game-design",
+  "desk": 2,
+  "title": "Game design",
+  "person": {
+    "firstName": "Karim",
+    "lastName": "Belkacem",
+    "role": "Game designer"
+  },
+  "tagline": "J'invente les règles : combien de temps dure l'huile de la lanterne, à quelle vitesse revient la brume, et pourquoi c'est amusant.",
+  "missions": [
+    "Concevoir les [[mecanique-de-jeu|mécaniques de jeu]] et les écrire dans le [[game-design-document|document de game design]].",
+    "Régler les chiffres du jeu (durées, vitesses, quantités) dans un tableau que le code lit directement, sans attendre un programmeur.",
+    "Construire avec le programmeur gameplay un [[prototype]] rapide pour tester chaque idée avant de la garder.",
+    "Analyser les [[playtest|playtests]] avec la chercheuse : où les joueurs s'ennuient, où ils trichent, où ils abandonnent.",
+    "Équilibrer la difficulté pour que le jeu reste accessible sans devenir fade."
+  ],
+  "myth": {
+    "myth": "Un game designer, c'est quelqu'un qui joue aux jeux vidéo toute la journée et qui a des idées.",
+    "reality": "Karim joue, mais surtout il mesure, écrit et ajuste. Une règle comme « l'huile dure 90 secondes » a été testée à 60, 90 et 120 secondes en [[playtest]] avant d'être gardée. Le [[game-design]] tient plus de l'expérience scientifique que de l'inspiration."
+  },
+  "realTools": ["Confluence", "Notion", "Google Sheets", "Machinations", "Miro"]
+}

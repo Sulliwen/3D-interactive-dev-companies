@@ -1,14 +1,5 @@
 [
   {
-    "kind": "Studio de jeu vidéo",
-    "summary": "Game designers, artistes, programmeurs et testeurs fabriquent un jeu, de la première maquette jouable à la sortie sur console.",
-    "scenarios": [
-      "Pré-production et vertical slice",
-      "Jalon de sortie et certification console",
-      "Patch et live ops après le lancement"
-    ]
-  },
-  {
     "kind": "ESN / agence",
     "summary": "Une entreprise de services qui développe des logiciels pour ses clients, au forfait ou en régie.",
     "scenarios": [

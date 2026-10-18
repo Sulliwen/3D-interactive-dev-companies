@@ -5,7 +5,7 @@
  *
  *   node tools/export-floorplan.mjs [monde]     (par défaut : atelier-lumen)
  */
-import { mkdirSync, writeFileSync } from 'node:fs'
+import { existsSync, mkdirSync, writeFileSync } from 'node:fs'
 import { join, resolve } from 'node:path'
 import { createServer } from 'vite'
 
@@ -17,9 +17,10 @@ const server = await createServer({
   server: { middlewareMode: true, hmr: false },
 })
 try {
-  const { WORLDS } = await server.ssrLoadModule('/src/engine/world/worlds/index.ts')
-  const floorPlan = WORLDS[world]?.plan
-  if (!floorPlan) throw new Error(`Monde inconnu : ${world} (${Object.keys(WORLDS).join(', ')})`)
+  // Le plan seul (sans le registre des mondes, qui charge aussi tout le contenu).
+  const planFile = `/src/engine/world/worlds/${world}/plan.ts`
+  if (!existsSync(join(root, planFile))) throw new Error(`Monde inconnu : ${world} (${planFile})`)
+  const { plan: floorPlan } = await server.ssrLoadModule(planFile)
   const { standPoint } = await server.ssrLoadModule('/src/engine/stations/standPoint.ts')
   const stations = floorPlan.stations.map((s) => ({ ...s, standPoint: standPoint(s) }))
   const dir = join(root, 'art/build', world)

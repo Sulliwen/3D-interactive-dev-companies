@@ -1,0 +1,112 @@
+{
+  "role": "publishing",
+  "offPath": true,
+  "featureStep": "Hors parcours : ce qu'Ondine attend le 4 décembre",
+  "tagline": "Le 4 décembre, je serai dans la salle avec Margaux et Jeanne. Mon travail : que l'équipe sache exactement ce que l'éditeur va regarder, et ce qui en dépend.",
+  "missions": [
+    "Suivre le contrat avec Ondine : chaque [[jalon]], ses livrables, ses critères et le versement qui en dépend.",
+    "Préparer la présentation du 4 décembre avec la directrice créative et la producer.",
+    "Faire monter la vidéo de 2 minutes que l'éditeur montrera à la presse.",
+    "Prévenir l'éditeur tôt quand une promesse change (une coupe, une date), pour éviter les surprises."
+  ],
+  "takeaways": [
+    "Un éditeur ne paie pas d'un coup : il verse l'argent **jalon par jalon**, quand la version livrée remplit les critères écrits dans le contrat.",
+    "L'argent de l'éditeur est une **avance** : il se rembourse d'abord sur les ventes du jeu. Le studio ne gagne vraiment de l'argent qu'après.",
+    "La vertical slice sert à la fois à décider la suite du financement et à préparer le marketing : la même version deviendra la première démo montrée au public."
+  ],
+  "receivesFrom": {
+    "roles": ["production", "direction-creative"],
+    "text": "Le planning du jalon et la liste des coupes de Jeanne, la vision de Margaux : ce que le studio peut promettre à l'[[editeur-jeu|éditeur]] pour le 4 décembre."
+  },
+  "handsOffTo": {
+    "roles": ["production", "direction-creative", "playtest-research"],
+    "text": "Les critères d'acceptation du contrat, rappelés à toute l'équipe, et une demande d'Ondine : joindre le rapport de [[playtest]] d'Elsa à la présentation."
+  },
+  "screen": {
+    "component": "milestone-contract",
+    "toolName": "Carnet de jeu",
+    "props": {
+      "contract": "Contrat d'édition « Brume » · Ondine Publishing",
+      "status": "Signé en janvier 2026 · 6 versements, un par jalon",
+      "milestone": {
+        "title": "Jalon 3 · Vertical slice",
+        "when": "Vendredi 4 décembre 2026, à Paris",
+        "contact": "Hélène Garnier, productrice chez Ondine"
+      },
+      "payments": [
+        {
+          "label": "Signature du contrat",
+          "date": "janv. 2026",
+          "amount": 300000,
+          "state": "paid"
+        },
+        { "label": "Prototype validé", "date": "mai 2026", "amount": 250000, "state": "paid" },
+        { "label": "Vertical slice", "date": "4 déc. 2026", "amount": 450000, "state": "current" },
+        { "label": "Alpha", "date": "sept. 2027", "amount": 400000, "state": "upcoming" },
+        { "label": "Bêta", "date": "janv. 2028", "amount": 250000, "state": "upcoming" },
+        { "label": "Version finale", "date": "mars 2028", "amount": 150000, "state": "upcoming" }
+      ],
+      "deliverables": [
+        {
+          "label": "Version jouable : la séquence du phare",
+          "owner": "Jeanne, Sarah",
+          "done": false
+        },
+        { "label": "Vidéo de 2 min pour la presse", "owner": "Victor, Mei", "done": false },
+        { "label": "Rapport de playtest", "owner": "Elsa", "done": true },
+        { "label": "Budget de production mis à jour", "owner": "Jeanne", "done": true },
+        { "label": "Planning de production 2027-2028", "owner": "Jeanne", "done": false }
+      ],
+      "criteria": [
+        "15 minutes jouables du début à la fin, sans bug bloquant",
+        "60 images par seconde sur la configuration minimale",
+        "Graphismes, animations et son au niveau du jeu final",
+        "Retours d'au moins un playtest avec des joueurs extérieurs"
+      ],
+      "recoup": {
+        "text": "Les 1,8 M€ sont une avance : Ondine se rembourse sur les ventes avant le partage habituel. À 24,99 €, il faut environ 160 000 exemplaires vendus pour rembourser l'avance.",
+        "shares": [
+          { "label": "Jusqu'au remboursement", "studio": 20 },
+          { "label": "Ensuite", "studio": 50 }
+        ]
+      },
+      "next": {
+        "title": "Démo presse au salon Lumière Play",
+        "when": "printemps 2027",
+        "text": "La séquence du phare, retouchée, deviendra la première démo publique. La page Steam ouvrira juste avant, pour récolter des listes de souhaits."
+      }
+    },
+    "annotations": [
+      {
+        "id": "milestone-payments",
+        "zone": "payments",
+        "title": "Un jalon, un versement",
+        "text": "Ondine ne verse pas 1,8 M€ d'un coup : chaque [[jalon]] validé déclenche un versement. Le 4 décembre, **450 000 €** sont en jeu, de quoi payer l'équipe jusqu'à l'été. C'est pourquoi la [[vertical-slice]] compte tant."
+      },
+      {
+        "id": "deliverables-list",
+        "zone": "deliverables",
+        "title": "Ce qu'on livre, et qui s'en charge",
+        "text": "La version jouable n'est pas le seul livrable : l'éditeur veut aussi une vidéo, un budget et un planning pour la suite. Chaque ligne a sa responsable ; Victor coche au fur et à mesure."
+      },
+      {
+        "id": "acceptance",
+        "zone": "criteria",
+        "title": "Des critères écrits d'avance",
+        "text": "Les [[critere-acceptation|critères d'acceptation]] sont dans le contrat : pas de [[bug-bloquant]], 60 [[images-par-seconde]]… Ils évitent les débats vagues le jour J, et ils expliquent les priorités de Yasmine, Sarah et Elsa."
+      },
+      {
+        "id": "recoupment",
+        "zone": "recoup",
+        "title": "Une avance, pas un cadeau",
+        "text": "L'argent de l'éditeur est une [[avance-remboursable]] : tant qu'elle n'est pas remboursée par les ventes, le studio ne touche que 20 % des recettes. Un jeu peut donc bien se vendre… et rapporter peu au studio."
+      },
+      {
+        "id": "public-demo",
+        "zone": "next",
+        "title": "Penser déjà au public",
+        "text": "La même séquence servira au marketing : démo au salon, page Steam et [[liste-de-souhaits|listes de souhaits]]. Plus il y en a avant la sortie, plus Steam met le jeu en avant."
+      }
+    ]
+  }
+}

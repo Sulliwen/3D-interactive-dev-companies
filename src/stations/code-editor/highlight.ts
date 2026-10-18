@@ -1,7 +1,13 @@
 /**
- * Coloration syntaxique minimale pour TypeScript : assez pour que le code
+ * Coloration syntaxique minimale pour TypeScript et C# : assez pour que le code
  * ressemble à un vrai éditeur, sans embarquer une bibliothèque complète.
  */
+
+export type CodeLanguage = 'typescript' | 'csharp'
+
+/** Langage d'un fichier, d'après son extension (TypeScript par défaut). */
+export const languageOf = (fileName: string): CodeLanguage =>
+  fileName.endsWith('.cs') ? 'csharp' : 'typescript'
 
 export type TokenKind = 'plain' | 'keyword' | 'string' | 'comment' | 'number' | 'function' | 'type'
 
@@ -42,11 +48,52 @@ const KEYWORDS = new Set([
   'while',
 ])
 
+const CSHARP_KEYWORDS = new Set([
+  'base',
+  'bool',
+  'break',
+  'class',
+  'const',
+  'else',
+  'enum',
+  'false',
+  'float',
+  'for',
+  'foreach',
+  'if',
+  'in',
+  'int',
+  'internal',
+  'namespace',
+  'new',
+  'null',
+  'out',
+  'override',
+  'private',
+  'protected',
+  'public',
+  'readonly',
+  'return',
+  'sealed',
+  'static',
+  'string',
+  'this',
+  'true',
+  'using',
+  'var',
+  'void',
+  'while',
+])
+
 // Ordre important : commentaires, chaînes, nombres, identifiants, reste.
 const TOKEN =
-  /(\/\/.*$)|('(?:[^'\\]|\\.)*'?|"(?:[^"\\]|\\.)*"?)|(`)|(\b\d[\d_]*(?:\.\d+)?\b)|([A-Za-z_$][\w$]*)|(\s+|.)/gy
+  /(\/\/.*$)|('(?:[^'\\]|\\.)*'?|"(?:[^"\\]|\\.)*"?)|(`)|(\b\d[\d_]*(?:\.\d+)?[fFdDmM]?\b)|([A-Za-z_$][\w$]*)|(\s+|.)/gy
 
-export function highlightLines(lines: readonly string[]): Token[][] {
+export function highlightLines(
+  lines: readonly string[],
+  language: CodeLanguage = 'typescript',
+): Token[][] {
+  const keywords = language === 'csharp' ? CSHARP_KEYWORDS : KEYWORDS
   let inTemplate = false
   return lines.map((line) => {
     const tokens: Token[] = []
@@ -76,13 +123,14 @@ export function highlightLines(lines: readonly string[]): Token[][] {
       const [text, comment, str, backtick, num, ident] = m
       if (comment) push('comment', text)
       else if (str) push('string', text)
+      else if (backtick && language === 'csharp') push('plain', text)
       else if (backtick) {
         push('string', text)
         inTemplate = true
       } else if (num) push('number', text)
       else if (ident) {
         const rest = line.slice(i + text.length)
-        if (KEYWORDS.has(ident)) push('keyword', text)
+        if (keywords.has(ident)) push('keyword', text)
         else if (/^\s*\(/.test(rest)) push('function', text)
         else if (/^[A-Z]/.test(ident)) push('type', text)
         else push('plain', text)

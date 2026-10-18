@@ -1,0 +1,12 @@
+{
+  "lightmaps": {
+    "lm_architecture": {
+      "file": "lightmap_architecture.ktx2",
+      "scale": 1.57164
+    },
+    "lm_mobilier": {
+      "file": "lightmap_mobilier.ktx2",
+      "scale": 1.95476
+    }
+  }
+}

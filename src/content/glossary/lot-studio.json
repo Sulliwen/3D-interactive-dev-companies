@@ -1,0 +1,164 @@
+[
+  {
+    "id": "jeu-video-independant",
+    "term": "Studio indépendant",
+    "definition": "Un studio de jeu vidéo qui n'appartient pas à un grand groupe. Il choisit ses jeux lui-même et vit de leurs ventes, souvent avec l'aide d'un éditeur qui avance l'argent de la production.",
+    "analogy": "Comme une maison d'édition de quartier face aux grands groupes : moins de moyens, plus de liberté."
+  },
+  {
+    "id": "editeur-jeu",
+    "term": "Éditeur (de jeu vidéo)",
+    "definition": "L'entreprise qui finance la fabrication d'un jeu, puis s'occupe de le faire connaître et de le vendre : marketing, salons, traductions, relations avec les boutiques en ligne. En échange, elle touche une part des ventes. À ne pas confondre avec l'éditeur de niveaux, qui est un logiciel.",
+    "analogy": "Comme un producteur de cinéma : il paie le tournage et s'occupe de la sortie en salles, le réalisateur fait le film."
+  },
+  {
+    "id": "jalon",
+    "term": "Jalon",
+    "definition": "Une étape datée de la fabrication du jeu, avec ce qui doit être livré ce jour-là : prototype, vertical slice, alpha, bêta, version de sortie. Chez beaucoup d'éditeurs, l'argent est versé jalon par jalon, une fois le jalon validé.",
+    "analogy": "Comme les étapes d'un chantier (fondations, murs, toit) où l'on paie l'artisan à chaque étape terminée."
+  },
+  {
+    "id": "game-design",
+    "term": "Game design",
+    "definition": "La conception des règles d'un jeu : ce que le joueur peut faire, ce qui l'en empêche, ce qu'il gagne ou perd, et pourquoi c'est intéressant. C'est le cœur du plaisir de jeu, avant les images et le son.",
+    "analogy": "Comme inventer les règles d'un jeu de société avant d'en dessiner la boîte et les cartes."
+  },
+  {
+    "id": "game-design-document",
+    "term": "Document de game design",
+    "definition": "Le document de référence qui décrit le jeu : son intention, ses règles, ses mécaniques, ses chiffres, ses niveaux. Il est vivant : on le met à jour à chaque décision, surtout après les playtests.",
+    "analogy": "Comme le cahier des charges d'une maison, que l'on corrige quand on découvre que la cuisine est trop petite."
+  },
+  {
+    "id": "mecanique-de-jeu",
+    "term": "Mécanique de jeu",
+    "definition": "Une action que le joueur répète et les règles qui l'encadrent : sauter, viser, ou ici éclairer la brume avec la lanterne. La mécanique centrale est celle autour de laquelle tout le jeu est construit.",
+    "analogy": "Comme le dribble au basket : une seule action, mais tout le jeu s'organise autour."
+  },
+  {
+    "id": "gameplay",
+    "term": "Gameplay",
+    "definition": "Ce que l'on ressent en jouant : la façon dont les mécaniques, la caméra, les commandes et le rythme se combinent sous les doigts du joueur. On dit d'un jeu que son gameplay est « nerveux », « contemplatif »…",
+    "analogy": "Comme la conduite d'une voiture : la fiche technique ne dit pas tout, il faut prendre le volant."
+  },
+  {
+    "id": "level-design",
+    "term": "Level design",
+    "definition": "La conception des niveaux : le chemin du joueur, les obstacles, les secrets, les moments de calme et de tension, ce qu'il voit au loin pour avoir envie d'y aller. Le level designer guide sans que le joueur s'en rende compte.",
+    "analogy": "Comme l'architecte d'un musée qui place les œuvres et les couloirs pour que les visiteurs suivent le parcours sans panneau."
+  },
+  {
+    "id": "greybox",
+    "term": "Niveau en blocs gris",
+    "definition": "Une première version d'un niveau faite de simples formes grises, sans décor ni texture. On y teste le parcours et le rythme vite, avant de payer des semaines de travail artistique. On dit aussi « greybox » ou « blocking ».",
+    "analogy": "Comme répéter une pièce de théâtre avec des chaises à la place du décor."
+  },
+  {
+    "id": "vertical-slice",
+    "term": "Vertical slice",
+    "definition": "Un petit morceau du jeu (souvent un niveau, environ 15 minutes) terminé comme s'il allait sortir : images, animations, son, histoire et gameplay définitifs. Il prouve à l'éditeur, ou à la direction, que l'équipe sait faire le jeu entier à ce niveau de qualité.",
+    "analogy": "Comme une part de gâteau coupée de haut en bas : on y voit toutes les couches, finies, au lieu d'un gâteau entier encore cru."
+  },
+  {
+    "id": "playtest",
+    "term": "Playtest",
+    "definition": "Une séance où des joueurs extérieurs à l'équipe jouent à une version du jeu pendant qu'on les observe, sans les aider. On y découvre où ils se perdent, s'ennuient ou s'amusent : des choses que l'équipe, qui connaît le jeu par cœur, ne voit plus.",
+    "analogy": "Comme faire goûter un plat à des inconnus plutôt qu'à sa famille, qui dira toujours que c'est bon."
+  },
+  {
+    "id": "carte-de-chaleur",
+    "term": "Carte de chaleur",
+    "definition": "Une image du niveau vu de dessus, colorée selon l'endroit où les joueurs passent le plus de temps, meurent ou abandonnent. Les zones rouges montrent d'un coup d'œil où quelque chose coince.",
+    "analogy": "Comme les traces d'usure sur un parquet, qui montrent les endroits où tout le monde passe."
+  },
+  {
+    "id": "build",
+    "term": "Build (version jouable)",
+    "definition": "Une version du jeu assemblée et lançable, produite à partir du code et de tous les fichiers (images, sons, niveaux) d'un moment donné. Le studio en fabrique automatiquement chaque nuit pour que les testeurs jouent à la dernière.",
+    "analogy": "Comme une épreuve imprimée d'un livre en cours d'écriture : on peut la lire en entier, même si le texte changera."
+  },
+  {
+    "id": "moteur-de-jeu",
+    "term": "Moteur de jeu",
+    "definition": "Le logiciel de base sur lequel on construit un jeu : il affiche la 3D, gère la physique, le son, les commandes, et fournit un éditeur pour assembler les niveaux. Les studios en utilisent un du marché ou fabriquent le leur.",
+    "analogy": "Comme le châssis et le moteur d'une voiture, sur lesquels chaque constructeur pose sa propre carrosserie."
+  },
+  {
+    "id": "images-par-seconde",
+    "term": "Images par seconde",
+    "definition": "Le nombre d'images que le jeu calcule et affiche chaque seconde. En dessous de 30, le mouvement saccade ; 60 est l'objectif courant sur PC. Chaque effet, chaque objet du décor coûte un peu de ce budget.",
+    "analogy": "Comme un folioscope : plus on tourne de pages par seconde, plus le dessin bouge de façon fluide."
+  },
+  {
+    "id": "shader",
+    "term": "Shader",
+    "definition": "Un petit programme exécuté par la carte graphique, qui calcule la couleur de chaque point affiché : reflets, transparence, brume, eau. Les effets visuels d'un jeu sont en grande partie des shaders.",
+    "analogy": "Comme une recette appliquée à chaque pixel, des millions de fois par seconde."
+  },
+  {
+    "id": "concept-art",
+    "term": "Concept art",
+    "definition": "Les dessins et peintures qui inventent l'apparence du jeu avant sa fabrication : lieux, personnages, objets, ambiances et couleurs. Ils servent de référence à toute l'équipe artistique.",
+    "analogy": "Comme les croquis d'un costumier avant que l'atelier ne coupe le tissu."
+  },
+  {
+    "id": "modelisation-3d",
+    "term": "Modélisation 3D",
+    "definition": "La fabrication des objets du jeu en volume, sur ordinateur : une forme faite de milliers de petites facettes (les polygones), sur laquelle on applique ensuite des textures. Moins il y a de polygones, plus le jeu tourne vite.",
+    "analogy": "Comme sculpter dans de l'argile, mais avec une souris et des facettes plates."
+  },
+  {
+    "id": "texture",
+    "term": "Texture",
+    "definition": "L'image « collée » sur un objet 3D pour lui donner sa couleur et sa matière : pierre, bois rongé par le sel, rouille. D'autres images invisibles indiquent les reliefs et la brillance.",
+    "analogy": "Comme le papier peint et la peinture posés sur des murs bruts."
+  },
+  {
+    "id": "rig",
+    "term": "Rig (squelette d'animation)",
+    "definition": "Le squelette invisible placé à l'intérieur d'un personnage 3D, avec ses articulations et ses poignées de contrôle. L'animatrice bouge ce squelette, et le corps suit.",
+    "analogy": "Comme l'armature en fil de fer d'une marionnette, que l'on plie pour lui donner une pose."
+  },
+  {
+    "id": "capture-de-mouvement",
+    "term": "Capture de mouvement",
+    "definition": "Enregistrer les gestes d'un acteur équipé de capteurs pour les appliquer à un personnage 3D. Coûteuse, elle est souvent louée à un studio spécialisé ; les petits studios animent beaucoup à la main.",
+    "analogy": "Comme décalquer une danse réelle plutôt que de la dessiner de mémoire."
+  },
+  {
+    "id": "dialogue-embranchements",
+    "term": "Dialogue à embranchements",
+    "definition": "Un dialogue où les choix du joueur mènent à des répliques différentes. On l'écrit comme un arbre de possibilités, dans un outil qui vérifie qu'aucune branche ne mène à une impasse.",
+    "analogy": "Comme un livre dont vous êtes le héros : « si vous ouvrez la porte, allez au paragraphe 42 »."
+  },
+  {
+    "id": "son-interactif",
+    "term": "Son interactif",
+    "definition": "Dans un jeu, le son n'est pas une bande fixe comme au cinéma : il réagit à ce que fait le joueur (pas sur le sable ou la pierre, vent qui forcit, musique qui monte quand le danger approche). Il est intégré avec des règles, pas seulement monté.",
+    "analogy": "Comme un musicien de jazz qui accompagne un danseur en improvisant selon ses mouvements."
+  },
+  {
+    "id": "etapes-de-reproduction",
+    "term": "Étapes de reproduction",
+    "definition": "La liste précise des actions qui font apparaître un bug à coup sûr (« sauvegarder près du phare, quitter, recharger : la lanterne est vide »). Sans elles, un programmeur ne peut pas corriger ce qu'il ne voit pas.",
+    "analogy": "Comme décrire au garagiste exactement quand la voiture fait son bruit : à froid, en tournant à gauche, au-dessus de 50 km/h."
+  },
+  {
+    "id": "crunch",
+    "term": "Crunch",
+    "definition": "Une période d'heures supplémentaires massives avant une échéance, longtemps banalisée dans le jeu vidéo. Elle épuise les équipes et produit plus de bugs. Beaucoup de studios, dont le Studio Lanterne, l'interdisent et ajustent plutôt le contenu ou le calendrier.",
+    "analogy": "Comme réviser toutes les nuits avant un examen : on arrive épuisé, et on se trompe davantage."
+  },
+  {
+    "id": "localisation",
+    "term": "Localisation",
+    "definition": "L'adaptation d'un jeu à d'autres langues et cultures : traduction des textes et des voix, mais aussi des jeux de mots, des dates, parfois des couleurs ou des symboles. Elle se prépare dès le début, en ne gravant aucun texte dans les images.",
+    "analogy": "Comme adapter une pièce de théâtre pour un autre pays, plutôt que de la traduire mot à mot."
+  },
+  {
+    "id": "liste-de-souhaits",
+    "term": "Liste de souhaits",
+    "definition": "Sur les boutiques de jeux en ligne comme Steam, les joueurs ajoutent un jeu à venir à leur liste de souhaits pour être prévenus de sa sortie. Leur nombre est un des meilleurs indicateurs du succès probable d'un jeu.",
+    "analogy": "Comme les précommandes d'un livre : elles annoncent combien de lecteurs l'attendent."
+  }
+]

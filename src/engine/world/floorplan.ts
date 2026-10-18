@@ -26,6 +26,7 @@ export type MaterialKey =
   | 'plant'
   | 'board'
   | 'postit'
+  | 'brick'
 
 export type FloorKey = 'concrete' | 'carpet' | 'carpetTeam' | 'woodFloor' | 'rug'
 
@@ -207,4 +208,64 @@ export function deskIsland(
   })
 
   return { boxes, stations }
+}
+
+/**
+ * Bureau isolé (cabine, salle) : bureau, écran, chaise et ancre du poste. `center` est le
+ * centre du bureau ; pour une rotation nulle, on s'assoit au sud (+Z), face à l'écran.
+ */
+export function singleDesk(
+  name: string,
+  center: Vec2,
+  rotation: number,
+  station: number | null,
+): { boxes: BoxElement[]; stations: StationAnchor[] } {
+  const toWorld = (local: Vec2): Vec2 => {
+    const [x, z] = rotateY(local, rotation)
+    return [center[0] + x, center[1] + z]
+  }
+  const screenSize = [0.62, 0.36] as const
+  const screenY = DESK_H + 0.12 + screenSize[1] / 2
+  const [mx, mz] = toWorld([0, -0.18])
+  const [cx, cz] = toWorld([jitter(center[0], 0.1), DESK_D / 2 + 0.35])
+  const [sx, sz] = toWorld([0, -0.18 + 0.016])
+  return {
+    boxes: [
+      {
+        name: `${name}_desk`,
+        material: 'wood',
+        position: [center[0], DESK_H / 2, center[1]],
+        size: [DESK_W - 0.04, DESK_H, DESK_D],
+        rotationY: rotation,
+        collider: true,
+      },
+      {
+        name: `${name}_monitor`,
+        material: 'screen',
+        position: [mx, screenY, mz],
+        size: [screenSize[0], screenSize[1], 0.03],
+        rotationY: rotation,
+        collider: false,
+      },
+      {
+        name: `${name}_chair`,
+        material: 'darkMetal',
+        position: [cx, 0.45, cz],
+        size: [0.5, 0.9, 0.5],
+        rotationY: rotation + jitter(center[1], 0.3),
+        collider: true,
+      },
+    ],
+    stations:
+      station === null
+        ? []
+        : [
+            {
+              number: station,
+              screenPosition: [sx, screenY, sz],
+              screenRotationY: rotation,
+              screenSize,
+            },
+          ],
+  }
 }

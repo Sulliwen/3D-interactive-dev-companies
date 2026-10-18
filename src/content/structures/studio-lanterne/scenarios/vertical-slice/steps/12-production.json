@@ -1,0 +1,145 @@
+{
+  "role": "production",
+  "order": 2,
+  "featureStep": "Trois semaines, et ce qu'on coupe pour tenir",
+  "tagline": "Je transforme la vision en planning. Trois semaines, c'est court : je décide avec Margaux ce qui entre dans la slice, ce qu'on coupe, et je veille à ce que personne ne travaille la nuit.",
+  "missions": [
+    "Découper le [[jalon]] en semaines, avec des dates clés que tout le monde connaît : playtests, enregistrement des voix, [[gel-du-contenu|gel du contenu]], démo.",
+    "Comparer ce qu'il y a à faire au temps réellement disponible, discipline par discipline.",
+    "Proposer les coupes quand ça ne tient pas, et les faire valider par la directrice créative.",
+    "Faire respecter la règle du studio : pas de [[crunch]]. Si le travail dépasse le temps, on réduit le [[perimetre|périmètre]], pas les nuits."
+  ],
+  "takeaways": [
+    "Un planning de jeu vidéo se construit **à rebours** depuis la date : ici, le [[gel-du-contenu|gel du contenu]] tombe une semaine avant la démo, pour avoir le temps de corriger.",
+    "Quand le temps manque, la productrice **coupe** plutôt que de demander des heures en plus : la deuxième voix de la brume, la pluie et le bateau partent en production.",
+    "Couper n'est pas jeter : chaque élément coupé a une destination (un jalon plus tard), et une raison écrite."
+  ],
+  "receivesFrom": {
+    "roles": ["direction-creative", "publishing"],
+    "text": "La vision de la slice (Margaux) et la liste des livrables attendus par Ondine pour le 4 décembre (Victor)."
+  },
+  "handsOffTo": {
+    "roles": ["game-design", "level-design", "playtest-research"],
+    "text": "Un planning et des priorités : Karim et Antoine savent ce qui doit être jouable et quand ; Elsa réserve les joueurs pour les playtests du 20 et du 26 novembre."
+  },
+  "screen": {
+    "component": "milestone-plan",
+    "toolName": "Tableau des tâches",
+    "props": {
+      "view": "Jalon · Vertical slice",
+      "milestone": {
+        "name": "Vertical slice de « Brume » chez Ondine Publishing",
+        "date": "ven. 4 décembre 2026",
+        "countdown": "J-22",
+        "goal": "Le Phare de Kerlaz : 15 minutes jouables, finies comme le jeu final."
+      },
+      "weeks": [
+        {
+          "label": "Cette semaine",
+          "dates": "9–13 nov.",
+          "focus": "Cadrage : périmètre et coupes",
+          "current": true,
+          "events": [{ "day": "jeu. 12", "label": "Coupes validées avec Margaux", "kind": "other" }]
+        },
+        {
+          "label": "Sprint 1",
+          "dates": "16–20 nov.",
+          "focus": "Tout le niveau jouable",
+          "events": [
+            { "day": "ven. 20", "label": "Voix du gardien enregistrées", "kind": "recording" },
+            { "day": "ven. 20", "label": "2e playtest, 8 joueurs", "kind": "playtest" }
+          ]
+        },
+        {
+          "label": "Sprint 2",
+          "dates": "23–27 nov.",
+          "focus": "Finitions et corrections",
+          "events": [
+            { "day": "jeu. 26", "label": "3e playtest, le dernier", "kind": "playtest" },
+            { "day": "ven. 27", "label": "Gel du contenu", "kind": "freeze" }
+          ]
+        },
+        {
+          "label": "Sprint 3",
+          "dates": "30 nov.–4 déc.",
+          "focus": "Stabiliser, répéter la démo",
+          "events": [
+            { "day": "mer. 2", "label": "Version finale de la démo", "kind": "other" },
+            { "day": "ven. 4", "label": "Démo chez Ondine, Paris", "kind": "demo" }
+          ]
+        }
+      ],
+      "scope": [
+        { "title": "Lanterne : règles et code", "owner": "Karim, Lucas", "status": "done" },
+        { "title": "Animation « lever la lanterne »", "owner": "Aminata", "status": "done" },
+        { "title": "Niveau jouable de bout en bout", "owner": "Antoine", "status": "doing" },
+        { "title": "Décor du phare et du village", "owner": "Bastien", "status": "doing" },
+        { "title": "Brume et lumière", "owner": "Théo", "status": "doing" },
+        { "title": "Voix du gardien et ambiances", "owner": "Chloé, Romain", "status": "doing" },
+        { "title": "60 images/s sur la config. minimale", "owner": "Sarah", "status": "todo" },
+        { "title": "Vidéo de 2 min pour Ondine", "owner": "Victor", "status": "todo" }
+      ],
+      "cuts": [
+        {
+          "title": "Deuxième voix de la brume",
+          "reason": "Écriture et enregistrement : 9 jours de trop.",
+          "to": "Production (jalon alpha)"
+        },
+        {
+          "title": "Pluie dynamique",
+          "reason": "Coûteuse à faire tourner, ne sert aucun pilier.",
+          "to": "Production, si le budget le permet"
+        },
+        {
+          "title": "Bateau jouable à l'arrivée",
+          "reason": "Remplacé par une courte scène non jouable.",
+          "to": "Production"
+        }
+      ],
+      "capacity": {
+        "rule": "Pas de crunch : ni soirs, ni week-ends. Si ça ne tient pas, on coupe.",
+        "rows": [
+          { "team": "Design", "planned": 31, "available": 36 },
+          { "team": "Art", "planned": 57, "available": 60 },
+          { "team": "Animation", "planned": 14, "available": 15 },
+          { "team": "Code", "planned": 41, "available": 45 },
+          { "team": "Son", "planned": 14, "available": 15 },
+          { "team": "QA", "planned": 15, "available": 15 }
+        ]
+      },
+      "status": "Planning validé le 12 novembre · revu chaque lundi matin"
+    },
+    "annotations": [
+      {
+        "id": "date",
+        "zone": "milestone",
+        "title": "Une date qui ne bouge pas",
+        "text": "La démo chez Ondine est fixée par le contrat de [[jalon]]. Le studio ne peut pas la repousser : c'est donc tout le reste (le contenu, l'ordre des tâches) qui s'adapte à elle."
+      },
+      {
+        "id": "calendrier",
+        "zone": "calendar",
+        "title": "À rebours depuis la démo",
+        "text": "Jeanne place d'abord les dates fixes : enregistrement des voix, deux [[playtest|playtests]], [[gel-du-contenu|gel du contenu]] le 27 novembre. La dernière semaine ne sert qu'à stabiliser et répéter : on n'ajoute plus rien."
+      },
+      {
+        "id": "coupes",
+        "zone": "cuts",
+        "title": "Couper pour tenir",
+        "text": "Trois éléments sortent de la slice. Chacun a une raison écrite et une destination : ils reviendront en production. Réduire le [[perimetre|périmètre]] est une décision normale, prise tôt, et validée par la directrice créative."
+      },
+      {
+        "id": "charge",
+        "zone": "capacity",
+        "title": "Pas de crunch",
+        "text": "Le [[crunch]] (semaines de travail sans fin avant une échéance) est fréquent dans le jeu vidéo. Ici, c'est interdit. Jeanne compare le travail prévu aux jours vraiment disponibles : la QA est à 100 %, il ne faut plus rien lui ajouter."
+      },
+      {
+        "id": "livrables",
+        "zone": "scope",
+        "title": "Ce qui doit être prêt",
+        "text": "Huit livrables, chacun avec une personne responsable. Deux sont finis, quatre en cours, deux pas commencés. Le tableau est revu chaque lundi : un retard se voit tout de suite."
+      }
+    ]
+  }
+}

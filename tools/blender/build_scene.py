@@ -936,4 +936,7 @@ def main():
     print(f"✓ scène construite : {len(bpy.data.objects)} objets, ~{n} faces → {BLEND.relative_to(ROOT)}")
 
 
-main()
+# Importable sans effet (les scènes des autres mondes réutilisent ses briques) ;
+# Blender exécute un script --python sous le nom « __main__ ».
+if __name__ == "__main__":
+    main()

@@ -1,0 +1,14 @@
+[
+  {
+    "id": "bug-bloquant",
+    "term": "Bug bloquant",
+    "definition": "Le niveau de gravité le plus élevé : le bug empêche de continuer à jouer (personnage coincé, plantage, sauvegarde perdue). Aucune version ne sort, ni chez un éditeur ni chez les joueurs, tant qu'il en reste un. Les autres bugs sont classés en majeurs, mineurs ou cosmétiques.",
+    "analogy": "Comme une panne qui immobilise une voiture, face à une rayure sur la portière : les deux sont des défauts, mais un seul empêche de rouler."
+  },
+  {
+    "id": "avance-remboursable",
+    "term": "Avance remboursable (sur recettes)",
+    "definition": "L'argent qu'un éditeur verse au studio pour fabriquer le jeu, par jalons. Ce n'est pas un cadeau : l'éditeur se rembourse d'abord sur les ventes du jeu, en gardant la plus grande part des recettes, puis studio et éditeur se partagent les ventes suivantes. Si le jeu se vend mal, le studio ne rend pas l'argent, mais ne touche presque rien.",
+    "analogy": "Comme un ami qui finance votre food truck et se rembourse sur les premiers repas vendus, avant que vous partagiez les bénéfices."
+  }
+]

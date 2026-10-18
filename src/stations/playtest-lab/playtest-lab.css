@@ -1,0 +1,276 @@
+/* « Labo de jeu » : résultats d'un playtest. */
+
+.pl {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+  padding: 10px;
+}
+
+.pl__panel {
+  padding: 8px 10px;
+  border-radius: 8px;
+  background: var(--surface-2);
+}
+
+.pl__heading {
+  margin-bottom: 6px !important;
+  color: var(--ink-muted);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.pl__map {
+  display: flex;
+  flex-direction: column;
+  width: 520px;
+  flex: none;
+}
+
+.pl__svg {
+  display: block;
+  width: 100%;
+  border-radius: 6px;
+}
+
+.pl__path {
+  fill: none;
+  stroke: #5d6b85;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 2.4 1.6;
+}
+
+.pl__place {
+  fill: #fff;
+}
+
+.pl__place-label {
+  fill: #c4cbd8;
+  font-size: 2.6px;
+  font-weight: 600;
+}
+
+.pl__focus {
+  fill: none;
+  stroke: var(--lumen);
+  stroke-width: 0.5;
+  stroke-dasharray: 1.5 1;
+}
+
+.pl__focus-label {
+  fill: var(--lumen);
+  font-size: 2.6px;
+  font-weight: 700;
+}
+
+.pl__marker {
+  stroke: #141a26;
+  stroke-width: 0.4;
+}
+
+.pl__marker--lost {
+  fill: var(--status-critical);
+}
+
+.pl__marker--death {
+  fill: #8c94a6;
+}
+
+.pl__marker--stop {
+  fill: var(--series-1);
+}
+
+.pl__marker-text {
+  fill: #fff;
+  font-size: 2.6px;
+  font-weight: 800;
+}
+
+.pl__legend {
+  display: flex;
+  gap: 14px;
+  margin-top: 6px !important;
+  color: var(--ink-muted);
+  font-size: 11px;
+}
+
+.pl__swatch {
+  display: inline-block;
+  width: 22px;
+  height: 8px;
+  border-radius: 4px;
+  background: linear-gradient(90deg, #d03b3b33, #ec835a, #ffd34d);
+  vertical-align: middle;
+}
+
+.pl__mk {
+  display: inline-grid;
+  place-content: center;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  color: #fff;
+  font-size: 9px;
+}
+
+.pl__mk--lost {
+  background: var(--status-critical);
+}
+
+.pl__mk--death {
+  background: #8c94a6;
+}
+
+.pl__mk--stop {
+  background: var(--series-1);
+}
+
+.pl__right {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  flex: 1;
+  min-width: 0;
+}
+
+.pl__stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.pl__stats .stat {
+  min-width: 0;
+  padding: 5px 8px;
+  overflow: hidden;
+}
+
+.pl__stats .stat__label {
+  font-size: 10px;
+  white-space: nowrap;
+}
+
+.pl__stats .stat__value {
+  font-size: 19px;
+}
+
+.pl__stats .stat__detail {
+  overflow: hidden;
+  font-size: 10.5px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.pl__steps {
+  display: grid;
+  gap: 4px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 11px;
+}
+
+.pl__steps li {
+  display: grid;
+  grid-template-columns: 112px minmax(0, 1fr) 30px;
+  align-items: center;
+  gap: 6px;
+}
+
+.pl__step-label {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.pl__bar {
+  height: 8px;
+  border-radius: 4px;
+  background: var(--surface-3);
+}
+
+.pl__bar span {
+  display: block;
+  height: 100%;
+  border-radius: 4px;
+  background: var(--series-1);
+}
+
+.pl__steps li.is-drop .pl__bar span {
+  background: var(--status-serious);
+}
+
+.pl__steps li.is-drop .pl__step-label {
+  color: #fff;
+  font-weight: 700;
+}
+
+.pl__count {
+  color: var(--ink-muted);
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+
+.pl__quote {
+  margin-bottom: 3px !important;
+  color: #fff;
+  font-size: 11px;
+  font-style: italic;
+  line-height: 1.35;
+}
+
+.pl__quote span {
+  color: var(--ink-muted);
+  font-style: normal;
+}
+
+.pl__fix {
+  border: 1px solid var(--lumen);
+  background: rgb(242 165 65 / 0.08);
+}
+
+.pl__fix-title {
+  color: #fff;
+  font-size: 12.5px;
+  font-weight: 700;
+}
+
+.pl__fix-text {
+  margin-top: 2px !important;
+  font-size: 11.5px;
+  line-height: 1.35;
+}
+
+.pl__measure {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  margin-top: 6px !important;
+  font-size: 11px;
+}
+
+.pl__tabs {
+  display: inline-flex;
+  gap: 4px;
+}
+
+.pl__tabs button {
+  padding: 0 8px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: none;
+  color: var(--ink-muted);
+  font: inherit;
+  font-size: 11px;
+  cursor: pointer;
+}
+
+.pl__tabs button[aria-pressed='true'] {
+  border-color: var(--lumen);
+  color: #fff;
+}

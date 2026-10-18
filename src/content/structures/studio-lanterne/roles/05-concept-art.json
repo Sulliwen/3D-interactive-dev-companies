@@ -1,0 +1,23 @@
+{
+  "id": "concept-art",
+  "desk": 5,
+  "title": "Concept art",
+  "person": {
+    "firstName": "Mei",
+    "lastName": "Laurent",
+    "role": "Concept artist"
+  },
+  "tagline": "Je dessine l'île avant qu'elle existe : à quoi ressemble une maison avalée par la brume, de quelle couleur est la lumière de la lanterne.",
+  "missions": [
+    "Explorer en dessin les lieux, les personnages et les objets du jeu, en proposant plusieurs pistes à la directrice créative.",
+    "Fixer l'ambiance : couleurs, lumières, matières, sur des planches de référence partagées.",
+    "Produire des dessins précis (vues de face, de profil, détails) pour l'artiste 3D et l'animatrice.",
+    "Peindre par-dessus des captures du niveau en [[greybox|blocs gris]] pour montrer ce qu'il deviendra.",
+    "Dessiner les images de communication pour l'éditeur et la page du jeu."
+  ],
+  "myth": {
+    "myth": "Le [[concept-art]], ce sont de jolies illustrations faites pour le plaisir, qui finissent dans un livre d'art.",
+    "reality": "La plupart des dessins de Mei servent d'outil de décision : trois versions d'un phare pour en choisir une, une vue de dos pour que Bastien sache modéliser le toit. Beaucoup ne seront jamais montrés au public."
+  },
+  "realTools": ["Photoshop", "Procreate", "Krita", "Clip Studio Paint", "PureRef"]
+}

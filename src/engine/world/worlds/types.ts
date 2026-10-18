@@ -1,3 +1,5 @@
+import type { TourShot } from '../../camera/screenPose'
+import type { BackdropSpec } from '../CityBackdrop'
 import type { FloorPlan } from '../floorplan'
 import type { NpcPlacement } from '../npcs'
 import type { Staging } from '../staging'
@@ -16,4 +18,8 @@ export interface WorldDef {
   figurants: NpcPlacement[]
   /** Mise en scène propre à chaque scénario (clé : structure/scénario). */
   staging: Record<string, Staging>
+  /** Ouverture de la présentation : vue d'ensemble de l'étage. */
+  overview: TourShot
+  /** Ce qu'on voit par les fenêtres. */
+  backdrop: BackdropSpec
 }

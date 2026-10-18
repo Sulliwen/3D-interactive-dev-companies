@@ -1,0 +1,23 @@
+{
+  "id": "production",
+  "desk": 12,
+  "title": "Production",
+  "person": {
+    "firstName": "Jeanne",
+    "lastName": "Perrin",
+    "role": "Producer"
+  },
+  "tagline": "Je fais en sorte que le jeu sorte : planning, budget, priorités, et une équipe qui ne s'épuise pas en route.",
+  "missions": [
+    "Construire et tenir le planning par [[jalon|jalons]], découpés en [[sprint|sprints]] de deux semaines.",
+    "Suivre le budget et prévenir dès qu'un jalon est menacé, plutôt que de le découvrir la veille.",
+    "Aider l'équipe à choisir ce qu'on coupe ou ce qu'on reporte quand tout ne tient pas.",
+    "Organiser les réunions utiles (revues de jalon, points d'équipe) et supprimer les autres.",
+    "Faire respecter la règle du studio : pas de [[crunch]], on ajuste le contenu plutôt que les nuits de l'équipe."
+  ],
+  "myth": {
+    "myth": "La producer est là pour mettre la pression et faire respecter les délais.",
+    "reality": "Le travail de Jeanne, c'est surtout de rendre les choix visibles : « on peut avoir le phare animé ou la deuxième énigme pour le 4 décembre, pas les deux ». Elle protège l'équipe autant qu'elle la fait avancer."
+  },
+  "realTools": ["Jira", "HacknPlan", "Shotgrid", "Google Sheets", "Notion"]
+}

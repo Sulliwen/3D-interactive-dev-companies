@@ -1,0 +1,135 @@
+{
+  "role": "sound-design",
+  "order": 11,
+  "featureStep": "La brume qui chuchote : un son qui réagit au jeu",
+  "tagline": "Dans la brume, on voit mal : c'est le son qui guide. J'ai construit une ambiance qui change avec l'épaisseur de la brume, pour qu'on l'entende se refermer avant de la voir.",
+  "missions": [
+    "Enregistrer et monter les sons de Kerlaz : vent sur la falaise, ressac sur les galets, cloche du phare.",
+    "Construire l'ambiance en [[son-interactif|son interactif]] : des couches dont le volume suit la densité de brume.",
+    "Préparer l'enregistrement de la voix du gardien (40 répliques de Chloé, le 20 novembre) et l'intégrer.",
+    "Recevoir la musique de la compositrice extérieure et la caler sur les moments du niveau.",
+    "Tenir le budget du son avec Sarah : mémoire et temps de calcul par image."
+  ],
+  "takeaways": [
+    "Au cinéma, le son est monté une fois pour toutes. Dans un jeu, il est fait de **règles** : le jeu envoie des évènements et des valeurs, et le son se recompose en direct.",
+    "Ici, une seule valeur, la **densité de brume**, mélange quatre couches : plus la brume s'épaissit, plus la mer s'éloigne et plus les chuchotements montent. Le joueur entend le danger avant de le voir.",
+    "Le son guide autant que l'image, mais l'essentiel doit rester compréhensible **sans** le son : les répliques sont sous-titrées, et la brume se voit aussi."
+  ],
+  "receivesFrom": {
+    "roles": ["narrative-design", "technical-art"],
+    "text": "Les 40 répliques de la voix du gardien, écrites par Chloé, et la densité de brume publiée par le shader de Théo, qui pilote tout le mélange."
+  },
+  "handsOffTo": {
+    "roles": ["engine-tools"],
+    "text": "Une ambiance complète pour la séquence du phare, et ses chiffres : 38 Mo de sons pour le niveau et 0,9 ms par image au moment du rallumage, que Sarah mesure avec tout le reste."
+  },
+  "screen": {
+    "component": "audio-mixer",
+    "toolName": "Console son",
+    "props": {
+      "title": "AMB_Kerlaz_Falaise · ambiance interactive",
+      "events": [
+        { "name": "amb/kerlaz/falaise", "note": "Ambiance de la falaise", "active": true },
+        { "name": "amb/kerlaz/village", "note": "Village englouti, cloches sous l'eau" },
+        { "name": "vox/brume/gardien", "note": "Voix du gardien (enregistrement le 20/11)" },
+        { "name": "sfx/lanterne/lever", "note": "Lanterne levée, calé sur l'animation" },
+        { "name": "sfx/maelle/pas", "note": "Pas : sable, pierre, bois du phare" },
+        { "name": "mus/phare/rallumage", "note": "Musique de Lou Ferrand" }
+      ],
+      "parameter": {
+        "name": "Densité de brume",
+        "value": 0.72,
+        "minLabel": "dégagé",
+        "maxLabel": "brume épaisse",
+        "source": "Envoyée par le jeu dix fois par seconde : la brume autour de Maëlle, calculée par le shader de Théo."
+      },
+      "layers": [
+        {
+          "name": "Vent",
+          "file": "vent_falaise_rafales_03.wav",
+          "curve": [
+            [0, 0.9],
+            [0.6, 0.7],
+            [1, 0.4]
+          ]
+        },
+        {
+          "name": "Mer",
+          "file": "ressac_galets_kerlaz.wav",
+          "curve": [
+            [0, 1],
+            [0.5, 0.6],
+            [1, 0.15]
+          ]
+        },
+        {
+          "name": "Chuchotements",
+          "file": "brume_chuchotements_boucle.wav",
+          "curve": [
+            [0, 0],
+            [0.35, 0],
+            [0.7, 0.6],
+            [1, 1]
+          ]
+        },
+        {
+          "name": "Cloche du phare",
+          "file": "cloche_phare_lointaine.wav",
+          "curve": [
+            [0, 0.6],
+            [0.5, 0.4],
+            [1, 0.2]
+          ]
+        }
+      ],
+      "buses": [
+        { "name": "Voix", "db": -3 },
+        { "name": "Effets", "db": -6 },
+        { "name": "Ambiance", "db": -10 },
+        { "name": "Musique", "db": -14 }
+      ],
+      "music": {
+        "title": "« Le phare de Kerlaz »",
+        "composer": "Lou Ferrand, compositrice (extérieure au studio)",
+        "note": "Maquette reçue lundi ; version finale attendue le 25 novembre, avant le gel du contenu."
+      },
+      "statusItems": [
+        "Connecté au jeu : build 0.7.3",
+        "Sons du niveau : 38 Mo sur 48",
+        "Sous-titres : activés"
+      ]
+    },
+    "annotations": [
+      {
+        "id": "parameter",
+        "zone": "parameter",
+        "title": "Une seule valeur pilote tout",
+        "text": "Le jeu envoie la densité de brume autour de Maëlle. Chaque courbe dit le volume d'une couche selon cette valeur. Faites glisser le curseur : quand la brume s'épaissit, la mer s'éloigne et les chuchotements montent. C'est le principe du [[son-interactif|son interactif]]."
+      },
+      {
+        "id": "layers",
+        "zone": "layers",
+        "title": "Une ambiance en quatre couches",
+        "text": "Vent, mer, chuchotements, cloche du phare : quatre enregistrements qui tournent en boucle et se mélangent en direct. Le vent et la mer ont été enregistrés par Romain sur une vraie falaise du Finistère ; les chuchotements, ce sont des voix de l'équipe, déformées."
+      },
+      {
+        "id": "events",
+        "zone": "events",
+        "title": "Le jeu déclenche, le son décide",
+        "text": "Le code ne joue pas de fichier son : il envoie des évènements (« lanterne levée », « entrée dans la falaise »). L'[[middleware-audio|intergiciel audio]] applique les règles de Romain. Il peut donc retoucher un son sans toucher au code de Lucas."
+      },
+      {
+        "id": "music",
+        "zone": "music",
+        "title": "Une musique commandée à l'extérieur",
+        "text": "Le studio n'a pas de compositeur salarié : Lou Ferrand, indépendante, écrit la musique de « Brume ». Romain lui envoie des captures vidéo du niveau et cale ses morceaux dans le jeu. La version finale doit arriver avant le [[gel-du-contenu|gel du contenu]]."
+      },
+      {
+        "id": "mixer",
+        "zone": "mixer",
+        "title": "Les voix passent toujours devant",
+        "text": "Les sons sont rangés en groupes (voix, effets, ambiances, musique) réglés les uns par rapport aux autres. Les voix restent au-dessus pour qu'on comprenne le gardien, et chaque réplique est sous-titrée : un joueur sourd ou malentendant doit pouvoir suivre l'histoire ([[accessibilite]])."
+      }
+    ]
+  }
+}

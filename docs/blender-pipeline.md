@@ -13,7 +13,7 @@ src/engine/world/worlds/<monde>/plan.ts   ← plan de l'étage (cotes, postes, c
         │  npm run art:build -- --world <monde>      (par défaut : atelier-lumen)
         ▼
 art/build/<monde>/floorplan.json          ← le même plan, lisible par Blender
-        │  tools/blender/build_scene.py    (script de scène du monde)
+        │  script de scène du monde (voir ci-dessous)
         ▼
 art/<monde>.blend                         ← la scène : architecture, mobilier, assets, lumières
         │  tools/blender/bake_and_export.py   (précalcul de l'éclairage + export glTF)
@@ -28,6 +28,20 @@ Chaque monde a son dossier de modèles, téléchargé **seulement quand on chois
 structure** dans le menu. Le jeu continue de lire les **collisions** et l'emplacement des
 **postes** dans `plan.ts`. Le modèle Blender, généré à partir du même plan, s'y superpose exactement.
 Tant que le modèle n'existe pas, le jeu affiche l'étage en boîtes (blockout).
+
+Chaque monde a ses deux scripts, déclarés dans `tools/build-art.mjs` (`SCENE_SCRIPTS`,
+`DECOR_SCRIPTS`) :
+
+| Monde             | Scène Blender                            | Visuels de décor (affiches, écrans…) |
+| ----------------- | ---------------------------------------- | ------------------------------------ |
+| `atelier-lumen`   | `tools/blender/build_scene.py`           | `tools/blender/make_decor.py`        |
+| `studio-lanterne` | `tools/blender/scene_studio_lanterne.py` | `tools/blender/make_decor_studio.py` |
+
+`scene_studio_lanterne.py` réutilise les briques génériques de `build_scene.py` (Builder,
+matériaux, bureaux, écrans, chaises, assets, repères) et n'écrit que ce qui est propre au
+studio : briques et verrières d'atelier, poutres, colonnes en fonte, salle de playtest,
+cabine son, war room, mur de concept art, cuisine et borne d'arcade. Un nouveau monde suit
+le même modèle.
 
 ## 2. Prérequis (une seule fois)
 
@@ -88,7 +102,7 @@ Repères utiles pour débuter :
 ## 5. Modifier l'étage
 
 **Règle d'or** : tout ce qui bloque le passage (murs, îlots, meubles) se décide dans
-`src/engine/world/floorplan.ts`, puis `npm run art:build -- --rebuild`. Sinon, on pourrait
+`src/engine/world/worlds/<monde>/plan.ts`, puis `npm run art:build -- --world <monde> --rebuild`. Sinon, on pourrait
 marcher à travers un meuble déplacé seulement dans Blender.
 
 Ce qui se retouche librement dans Blender (puis `npm run art:export`) :
@@ -111,7 +125,7 @@ enregistrer.
 2. L'ajouter dans `tools/blender/assets.json` (rubrique `models` ou `textures`).
 3. `python3 tools/blender/fetch_assets.py` le télécharge dans `art/sources/` ; les crédits
    sont ajoutés automatiquement à `CREDITS.md` au prochain `art:build`.
-4. Le placer : soit dans `build_scene.py` (fonction `assets()`, sur le modèle de
+4. Le placer : soit dans le script de scène du monde (`build_scene.py`, fonction `assets()`, sur le modèle de
    `place("potted_plant_02", …)`), soit à la main dans Blender (**Fichier → Importer →
    glTF 2.0**, puis le déplacer dans la collection `decor`).
 

@@ -1,0 +1,196 @@
+/* « Squelette » : animation des personnages (poste Animation). */
+
+.at {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+  padding: 8px;
+}
+
+.at__heading {
+  margin-bottom: 4px !important;
+  color: var(--ink-muted);
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.at__top {
+  display: flex;
+  gap: 6px;
+}
+
+.at__poses {
+  position: relative;
+  display: flex;
+  flex: 1;
+  gap: 4px;
+  justify-content: center;
+  align-items: flex-end;
+  height: 212px;
+  padding: 24px 8px 6px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: radial-gradient(circle at 50% 30%, #2a3140, #151a23 75%);
+}
+
+.at__view-tag {
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  padding: 1px 6px;
+  border-radius: 3px;
+  background: rgb(10 12 16 / 0.7);
+  font-size: 10.5px;
+}
+
+.at__poses figure {
+  margin: 0;
+  opacity: 0.45;
+  text-align: center;
+}
+
+.at__poses figure.is-current {
+  opacity: 1;
+}
+
+.at__poses figcaption {
+  font-size: 10.5px;
+  line-height: 1.25;
+}
+
+.at__poses figcaption b {
+  color: var(--lumen);
+  font-family: var(--mono);
+}
+
+.at__body line {
+  stroke: #c9d1de;
+  stroke-width: 6;
+  stroke-linecap: round;
+}
+
+.at__body .at__spine {
+  stroke-width: 9;
+}
+
+.at__head {
+  fill: #c9d1de;
+}
+
+.at__joint {
+  fill: var(--lumen);
+}
+
+.at__side {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 250px;
+  flex: none;
+}
+
+.at__panel {
+  padding: 6px 8px;
+  border-radius: 6px;
+  background: var(--surface-2);
+}
+
+.at__clip {
+  color: #fff;
+  font-family: var(--mono);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.at__meta {
+  color: var(--ink-muted);
+  font-size: 11px;
+}
+
+.at__blend {
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.at__blend span {
+  display: block;
+  color: var(--ink-muted);
+  font-size: 11px;
+  font-weight: 400;
+}
+
+.at__note {
+  margin-top: 4px !important;
+  font-size: 11px;
+  line-height: 1.35;
+}
+
+.at__bottom {
+  display: flex;
+  gap: 6px;
+  flex: 1;
+  min-height: 0;
+}
+
+.at__dopesheet {
+  flex: 1;
+}
+
+.at__dopesheet svg,
+.at__curve svg {
+  display: block;
+}
+
+.at__curve {
+  width: 316px;
+  flex: none;
+}
+
+.at__tick {
+  stroke: #2c3447;
+}
+
+.at__tick-label {
+  fill: var(--ink-muted);
+  font-size: 9px;
+}
+
+.at__track {
+  fill: #d7dce6;
+  font-size: 10.5px;
+}
+
+.at__lane {
+  stroke: #262d3f;
+}
+
+.at__key {
+  fill: var(--lumen);
+  stroke: #121620;
+}
+
+.at__playhead {
+  stroke: #ec835a;
+  stroke-width: 1.5;
+}
+
+.at__curve-bg {
+  fill: #151a23;
+}
+
+.at__curve-line {
+  fill: none;
+  stroke: #7fb4f0;
+  stroke-width: 2;
+}
+
+.at__curve-key {
+  fill: #121620;
+  stroke: #7fb4f0;
+  stroke-width: 1.5;
+}

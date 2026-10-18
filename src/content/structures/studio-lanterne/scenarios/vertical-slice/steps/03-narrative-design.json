@@ -1,0 +1,177 @@
+{
+  "role": "narrative-design",
+  "order": 4,
+  "featureStep": "La voix du gardien : un dialogue à embranchements",
+  "tagline": "J'écris l'histoire de « Brume » et je la découpe pour qu'elle se joue. Dans la slice, la voix du gardien Yvon est la première rencontre avec un souvenir de l'île.",
+  "missions": [
+    "Écrire les répliques des personnages et les choix du joueur, dans un [[dialogue-embranchements|dialogue à embranchements]].",
+    "Relier l'histoire au jeu : une réplique peut dépendre de ce que le joueur a trouvé, et débloquer un souvenir.",
+    "Préparer l'enregistrement des voix : chaque réplique a un fichier, une durée et une indication de jeu pour les comédiens.",
+    "Vérifier avec la directrice créative que le ton sert le pilier « Chaque lieu garde un souvenir »."
+  ],
+  "takeaways": [
+    "Dans un jeu, l'histoire se **joue** : le joueur choisit ses réponses, et le dialogue change selon ce qu'il a fait avant.",
+    "Une condition (« a trouvé le carnet du gardien ») récompense l'exploration : le joueur curieux entend une autre réplique.",
+    "Chaque réplique devient un fichier son : 40 répliques à enregistrer le 20 novembre. Après cette date, réécrire coûte une nouvelle séance."
+  ],
+  "receivesFrom": {
+    "roles": ["direction-creative", "game-design"],
+    "text": "Le ton et le pilier « Chaque lieu garde un souvenir » (Margaux), et la règle des voix de la brume, qui débloquent des souvenirs quand on les écoute (Karim)."
+  },
+  "handsOffTo": {
+    "roles": ["sound-design", "level-design"],
+    "text": "Une scène écrite et ses fichiers de voix : Romain prépare l'enregistrement et l'intègre au son du jeu ; Antoine place dans le niveau l'endroit qui déclenche la voix."
+  },
+  "screen": {
+    "component": "dialogue-graph",
+    "toolName": "Fil d'histoire",
+    "props": {
+      "scene": "Kerlaz · Scène 3 : la voix du gardien",
+      "nodes": [
+        {
+          "id": "debut",
+          "kind": "event",
+          "text": "Maëlle rallume la lampe du phare",
+          "x": 0,
+          "y": 196
+        },
+        {
+          "id": "yvon-1",
+          "kind": "line",
+          "speaker": "Yvon",
+          "text": "Encore une lumière… Ça faisait longtemps.",
+          "x": 172,
+          "y": 196,
+          "voice": {
+            "id": "VO_KERLAZ_YVON_001",
+            "direction": "chuchoté, las, presque amusé",
+            "duration": "3,4 s"
+          }
+        },
+        {
+          "id": "carnet",
+          "kind": "condition",
+          "text": "a_trouve_carnet = vrai",
+          "x": 345,
+          "y": 30,
+          "zone": "condition"
+        },
+        {
+          "id": "choix-1",
+          "kind": "choice",
+          "speaker": "Maëlle",
+          "text": "« Vous êtes le gardien ? »",
+          "x": 345,
+          "y": 146,
+          "zone": "choice"
+        },
+        {
+          "id": "choix-2",
+          "kind": "choice",
+          "speaker": "Maëlle",
+          "text": "« Qui êtes-vous ? »",
+          "x": 345,
+          "y": 246
+        },
+        {
+          "id": "choix-3",
+          "kind": "choice",
+          "speaker": "Maëlle",
+          "text": "Se taire et écouter",
+          "x": 345,
+          "y": 346
+        },
+        {
+          "id": "yvon-carnet",
+          "kind": "line",
+          "speaker": "Yvon",
+          "text": "Tu as lu mon carnet. Alors tu sais, pour la nuit du naufrage.",
+          "x": 520,
+          "y": 30,
+          "voice": {
+            "id": "VO_KERLAZ_YVON_004",
+            "direction": "surpris, puis grave",
+            "duration": "4,1 s"
+          }
+        },
+        {
+          "id": "souvenir",
+          "kind": "event",
+          "text": "Souvenir débloqué : la nuit du naufrage",
+          "x": 520,
+          "y": 130
+        },
+        {
+          "id": "yvon-2",
+          "kind": "line",
+          "speaker": "Yvon",
+          "text": "Je suis ce qui reste quand la brume prend tout.",
+          "x": 520,
+          "y": 276,
+          "voice": {
+            "id": "VO_KERLAZ_YVON_002",
+            "direction": "lent, sans colère",
+            "duration": "3,0 s"
+          }
+        }
+      ],
+      "edges": [
+        { "from": "debut", "to": "yvon-1" },
+        { "from": "yvon-1", "to": "carnet", "label": "si" },
+        { "from": "yvon-1", "to": "choix-1" },
+        { "from": "yvon-1", "to": "choix-2" },
+        { "from": "yvon-1", "to": "choix-3" },
+        { "from": "carnet", "to": "yvon-carnet" },
+        { "from": "yvon-carnet", "to": "souvenir" },
+        { "from": "choix-1", "to": "yvon-2" },
+        { "from": "choix-2", "to": "yvon-2" },
+        { "from": "choix-3", "to": "yvon-2" }
+      ],
+      "selected": "yvon-1",
+      "variables": [
+        { "name": "a_trouve_carnet", "value": "vrai / faux" },
+        { "name": "souvenirs", "value": "2 → 3" },
+        { "name": "confiance_yvon", "value": "0 à 3" }
+      ],
+      "recording": {
+        "lines": 40,
+        "written": 34,
+        "date": "ven. 20 novembre",
+        "actor": "comédienne et comédien (Maëlle, Yvon)"
+      },
+      "status": "Scène 3 sur 7 du niveau · liée à la Console son de Romain"
+    },
+    "annotations": [
+      {
+        "id": "graphe",
+        "zone": "graph",
+        "title": "Un dialogue en forme de graphe",
+        "text": "Chaque boîte est une réplique, un choix ou un événement ; les flèches disent ce qui vient après. C'est un [[dialogue-embranchements|dialogue à embranchements]] : selon ses choix, le joueur n'entend pas la même scène."
+      },
+      {
+        "id": "choix",
+        "zone": "choice",
+        "title": "Le joueur choisit sa réponse",
+        "text": "Maëlle peut questionner, demander, ou se taire. Les trois mènent à la même réplique d'Yvon : écrire une branche complète pour chaque choix multiplierait le travail. Le choix change surtout la relation, mesurée par `confiance_yvon`."
+      },
+      {
+        "id": "condition",
+        "zone": "condition",
+        "title": "Récompenser l'exploration",
+        "text": "Cette branche n'existe que si le joueur a trouvé le carnet du gardien, caché dans le village. Le joueur curieux entend une autre réplique et débloque un souvenir : c'est le pilier « Chaque lieu garde un souvenir »."
+      },
+      {
+        "id": "voix",
+        "zone": "inspector",
+        "title": "Une réplique, un fichier son",
+        "text": "Chaque réplique a un nom de fichier, une durée et une indication de jeu pour les comédiens (« chuchoté, las, presque amusé »). Romain s'en sert pour préparer l'enregistrement et placer la voix dans le [[son-interactif|son du jeu]]."
+      },
+      {
+        "id": "enregistrement",
+        "zone": "recording",
+        "title": "Une date qui ne pardonne pas",
+        "text": "L'enregistrement a lieu le **20 novembre**. Il reste 6 répliques à écrire. Après, toute réécriture demande une nouvelle séance en studio : c'est pourquoi le texte doit être validé avant."
+      }
+    ]
+  }
+}

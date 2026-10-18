@@ -1,0 +1,23 @@
+{
+  "id": "environment-art",
+  "desk": 6,
+  "title": "Art 3D des décors",
+  "person": {
+    "firstName": "Bastien",
+    "lastName": "Morel",
+    "role": "Artiste 3D décors"
+  },
+  "tagline": "Je fabrique l'île en 3D : rochers, maisons, phare, à partir des dessins de Mei et des niveaux d'Antoine.",
+  "missions": [
+    "Faire la [[modelisation-3d|modélisation 3D]] des éléments du décor, en respectant un budget de polygones.",
+    "Créer les [[texture|textures]] : pierre mouillée, bois rongé par le sel, rouille des barques.",
+    "Remplacer les [[greybox|blocs gris]] du level designer par le décor final, sans changer le parcours.",
+    "Fabriquer des éléments réutilisables (un rocher, dix variantes) pour construire vite et garder le jeu léger.",
+    "Vérifier avec le technical artist que le décor tient le budget d'[[images-par-seconde|images par seconde]]."
+  ],
+  "myth": {
+    "myth": "Un artiste 3D crée chaque objet du jeu de A à Z, à la main, en partant de zéro.",
+    "reality": "Bastien réutilise énormément : des bibliothèques de matières, des morceaux de rochers combinés autrement, parfois des objets achetés. Le temps gagné va aux éléments uniques que le joueur regardera de près, comme le phare de Kerlaz."
+  },
+  "realTools": ["Blender", "Maya", "3ds Max", "Substance Painter", "ZBrush"]
+}

@@ -87,6 +87,44 @@
           "contrast": 0.35
         }
       }
+    },
+    {
+      "id": "red_brick_03",
+      "use": "Murs de briques du Studio Lanterne",
+      "variants": {
+        "brick": {
+          "saturation": 0.85,
+          "brightness": 1.05,
+          "tint": [1.0, 0.95, 0.9]
+        }
+      }
+    },
+    {
+      "id": "worn_planks",
+      "use": "Plancher ancien des îlots et de l'accueil (Studio Lanterne)",
+      "variants": {
+        "planks": {
+          "saturation": 0.8,
+          "brightness": 1.1,
+          "tint": [1.0, 0.96, 0.9]
+        }
+      }
+    },
+    {
+      "id": "rough_wood",
+      "use": "Poutres et plafond en bois (Studio Lanterne)",
+      "variants": {
+        "beam": {
+          "saturation": 0.85,
+          "brightness": 0.9,
+          "tint": [1.0, 0.93, 0.85]
+        },
+        "ceiling_wood": {
+          "saturation": 0.6,
+          "brightness": 1.25,
+          "tint": [1.0, 0.96, 0.9]
+        }
+      }
     }
   ],
   "models": [
@@ -121,6 +159,18 @@
     {
       "id": "wheelchair_01",
       "use": "Fauteuil roulant de Julien (poste Data)"
+    },
+    {
+      "id": "sofa_02",
+      "use": "Canapés (salle de playtest, détente, ludothèque du Studio Lanterne)"
+    },
+    {
+      "id": "hanging_industrial_lamp",
+      "use": "Suspensions industrielles (Studio Lanterne)"
+    },
+    {
+      "id": "Camera_01",
+      "use": "Caméra de la salle de playtest (Studio Lanterne)"
     }
   ],
   "hdri": {

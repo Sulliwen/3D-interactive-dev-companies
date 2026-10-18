@@ -1,0 +1,163 @@
+{
+  "role": "qa",
+  "order": 13,
+  "featureStep": "Un bug bloquant dans l'escalier du phare",
+  "tagline": "Trois semaines avant Ondine, je rejoue la séquence du phare chaque matin. Mon travail : que personne chez l'éditeur ne reste coincé dans la brume.",
+  "missions": [
+    "Tester le [[build]] 0.7.3 du matin : la séquence entière, puis chaque passage délicat, encore et encore.",
+    "Décrire chaque [[bug]] avec ses [[etapes-de-reproduction|étapes de reproduction]], sa fréquence et une vidéo.",
+    "Classer les bugs par gravité avec la producer : un [[bug-bloquant]] passe avant tout le reste.",
+    "Revérifier chaque correction, puis rejouer les anciens bugs ([[non-regression]])."
+  ],
+  "takeaways": [
+    "Dans un jeu, un bug n'arrive souvent que dans une **combinaison** de circonstances : ici, la brume qui revient pendant que Maëlle monte l'escalier. Il faut la chercher, et la décrire précisément.",
+    "« 3 fois sur 10 » est une information précieuse : un bug qui n'arrive pas à chaque fois est plus difficile à corriger, et il faut savoir combien d'essais faire pour vérifier la correction.",
+    "Avant une présentation, on ne corrige pas tout : on trie. Les **bugs bloquants** passent en premier, les petits défauts visuels attendront la production."
+  ],
+  "receivesFrom": {
+    "roles": ["engine-tools", "gameplay-programming"],
+    "text": "Le [[build]] 0.7.3, fabriqué automatiquement pendant la nuit avec toutes les modifications de la veille : le code de la lanterne de Lucas et les corrections de performance de Sarah."
+  },
+  "handsOffTo": {
+    "roles": ["gameplay-programming", "playtest-research"],
+    "text": "Le bug BRM-412 renvoyé à Lucas pour correction, puis une version sans [[bug-bloquant]] pour le [[playtest]] d'Elsa."
+  },
+  "screen": {
+    "component": "qa-console",
+    "toolName": "Tableau des tâches",
+    "props": {
+      "campaign": "Vertical slice · Le Phare de Kerlaz · vue bugs",
+      "status": "Build 0.7.3 · jeudi 12 nov. · Yasmine H. · 23 bugs ouverts sur la slice, dont 2 bloquants",
+      "autoTitle": "Vérifications automatiques du build",
+      "planTitle": "Plan de test de la séquence",
+      "suites": [
+        {
+          "label": "Démarrage et chargements",
+          "passed": 14,
+          "total": 14
+        },
+        {
+          "label": "Sauvegardes",
+          "passed": 22,
+          "total": 22
+        },
+        {
+          "label": "Parcours du robot testeur",
+          "passed": 9,
+          "total": 9
+        }
+      ],
+      "cases": [
+        {
+          "label": "Arriver au village englouti",
+          "device": "PC min.",
+          "result": "pass"
+        },
+        {
+          "label": "Recharger la lanterne aux 3 lampes",
+          "device": "Manette",
+          "result": "pass"
+        },
+        {
+          "label": "Traverser la falaise lanterne allumée",
+          "device": "PC min.",
+          "result": "pass"
+        },
+        {
+          "label": "Écouter la voix du gardien jusqu'au bout",
+          "device": "Clavier",
+          "result": "pass"
+        },
+        {
+          "label": "Huile à 0 au pied de la falaise",
+          "device": "Manette",
+          "result": "pass",
+          "edge": true
+        },
+        {
+          "label": "Brume qui revient pendant la montée de l'escalier",
+          "device": "PC min.",
+          "result": "fail",
+          "edge": true,
+          "bug": "BRM-412"
+        },
+        {
+          "label": "Pause du jeu pendant le rallumage du phare",
+          "device": "Clavier",
+          "result": "pass",
+          "edge": true
+        },
+        {
+          "label": "Sous-titres lisibles à 1 m de l'écran",
+          "device": "Écran 4K",
+          "result": "pass"
+        },
+        {
+          "label": "Charger une sauvegarde dans le phare",
+          "device": "PC min.",
+          "result": "pass"
+        }
+      ],
+      "bug": {
+        "id": "BRM-412",
+        "title": "Maëlle reste bloquée dans l'escalier si la brume revient pendant la montée",
+        "severity": "Bloquant",
+        "device": "PC min. · build 0.7.3 · fréquence 3/10",
+        "steps": [
+          "Arriver au pied du phare avec moins de 10 s d'huile.",
+          "Monter l'escalier en colimaçon.",
+          "Laisser la lanterne s'éteindre à mi-hauteur : la brume revient."
+        ],
+        "expected": "Maëlle continue de monter ; seules les marches non éclairées redeviennent instables.",
+        "actual": "Les marches disparaissent sous ses pieds : elle reste coincée dans le mur, impossible de bouger.",
+        "cause": {
+          "text": "Quand la brume revient, le code retire le sol de toutes les marches qu'elle recouvre, y compris celle où Maëlle se tient.",
+          "before": "if (fog.Covers(step))",
+          "after": "if (fog.Covers(step) && !step.IsOccupied)"
+        },
+        "assignee": "Lucas F.",
+        "statusBefore": "Corrigé · à retester",
+        "statusAfter": "Retesté 10/10 · clos",
+        "retestLabel": "Retester 10 fois"
+      }
+    },
+    "annotations": [
+      {
+        "id": "auto-checks",
+        "zone": "auto-tests",
+        "title": "Un robot joue aussi",
+        "text": "Chaque nuit, le [[build]] est vérifié automatiquement : le jeu démarre, les sauvegardes se chargent, et un petit robot parcourt le niveau en suivant le chemin. Ces [[test-automatise|tests automatiques]] trouvent les pannes grossières ; les bugs subtils restent le travail de Yasmine."
+      },
+      {
+        "id": "test-plan",
+        "zone": "manual-plan",
+        "title": "Rejouer chaque passage",
+        "text": "Le plan de test reprend les moments de la séquence du phare, sur la configuration minimale, à la manette et au clavier. Yasmine les rejoue chaque matin : une correction peut casser autre chose ([[non-regression]])."
+      },
+      {
+        "id": "combinations",
+        "zone": "edge-cases",
+        "title": "Chercher les combinaisons",
+        "text": "Huile vide au mauvais moment, pause pendant une animation, brume qui revient en pleine montée : les bugs d'un jeu se cachent dans ces **rencontres** entre règles. C'est là que Yasmine passe le plus de temps."
+      },
+      {
+        "id": "brm-412",
+        "zone": "bug-report",
+        "title": "Bloquant, 3 fois sur 10",
+        "text": "Le joueur est coincé : c'est un [[bug-bloquant]], le niveau le plus grave. La fiche donne les [[etapes-de-reproduction|étapes pour le reproduire]] et la fréquence : il n'arrive pas à chaque essai, ce qui le rend traître."
+      },
+      {
+        "id": "fix",
+        "zone": "bug-cause",
+        "title": "Une seule condition oubliée",
+        "text": "Lucas (poste 8) a trouvé la cause : le code de la brume ne vérifiait pas si quelqu'un se tenait sur la marche. La correction tient en une ligne ; la trouver a pris une matinée."
+      },
+      {
+        "id": "retest-10",
+        "zone": "retest",
+        "title": "Retester… dix fois",
+        "text": "Un bug qui n'arrive que 3 fois sur 10 ne se vérifie pas en un essai. Yasmine rejoue le passage dix fois de suite avant de clore la fiche : cliquez sur « Retester 10 fois »."
+      }
+    ]
+  }
+}

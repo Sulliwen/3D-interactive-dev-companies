@@ -54,9 +54,6 @@ export interface TourShot {
   target: Vec3
 }
 
-/** Ouverture de la présentation : vue d'ensemble du plateau depuis l'accueil. */
-export const OVERVIEW_SHOT: TourShot = { position: [9.6, 2.5, 8.6], target: [-3, 0.6, -3] }
-
 /**
  * Plan d'un poste pendant la présentation : en hauteur, de trois quarts derrière la
  * personne assise, pour voir à la fois la personne et son écran.

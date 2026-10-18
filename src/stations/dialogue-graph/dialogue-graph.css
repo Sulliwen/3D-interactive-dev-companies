@@ -1,0 +1,223 @@
+/* « Fil d'histoire » : graphe de dialogue à embranchements. */
+
+.dg {
+  display: grid;
+  grid-template-columns: 1fr 262px;
+  width: 100%;
+  min-height: 0;
+}
+
+.dg__canvas {
+  position: relative;
+  overflow: hidden;
+  background-color: #141925;
+  background-image: radial-gradient(circle, #2a3245 1px, transparent 1px);
+  background-size: 18px 18px;
+}
+
+.dg__edges {
+  position: absolute;
+  top: 18px;
+  left: 14px;
+}
+
+.dg__edge {
+  fill: none;
+  stroke: #5d6884;
+  stroke-width: 1.6;
+}
+
+.dg__edge-label {
+  fill: var(--lumen);
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.dg__slot {
+  position: absolute;
+  margin: 18px 0 0 14px;
+}
+
+.dg__zone {
+  height: 100%;
+  border-radius: 7px;
+}
+
+.dg__node {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  height: 100%;
+  padding: 5px 8px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--series-1);
+  border-radius: 7px;
+  background: var(--surface-2);
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgb(0 0 0 / 0.3);
+}
+
+.dg__node--zoned {
+  padding-right: 30px;
+}
+
+.dg__node.is-active {
+  border-color: #fff;
+  border-left-color: inherit;
+}
+
+.dg__node--choice {
+  border-left-color: var(--lumen);
+}
+
+.dg__node--condition {
+  border-left-color: var(--series-4);
+  border-style: dashed;
+}
+
+.dg__node--event {
+  border-left-color: var(--series-3);
+  background: #1c2a2a;
+}
+
+.dg__kind {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--ink-muted);
+  font-size: 9.5px;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.dg__node--choice .dg__kind {
+  color: var(--lumen);
+}
+
+.dg__node--condition .dg__kind {
+  color: var(--series-4);
+}
+
+.dg__node--event .dg__kind {
+  color: #4fd1a5;
+}
+
+.dg__mic {
+  width: 7px;
+  height: 7px;
+  margin-left: auto;
+  border-radius: 50%;
+  background: var(--status-critical);
+}
+
+.dg__text {
+  display: -webkit-box;
+  overflow: hidden;
+  color: var(--ink);
+  font-size: 11px;
+  line-height: 1.3;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.dg__side {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 8px;
+  border-left: 1px solid var(--line);
+  overflow: hidden;
+}
+
+.dg__panel {
+  padding: 8px 10px;
+  border-radius: 8px;
+  background: var(--surface-2);
+  font-size: 11.5px;
+}
+
+.dg__inspector {
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.dg__heading {
+  margin-bottom: 6px !important;
+  color: var(--ink-muted);
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.dg__heading--small {
+  margin-top: 8px !important;
+}
+
+.dg__speaker {
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.dg__full {
+  margin: 3px 0 7px !important;
+  font-size: 12px;
+  font-style: italic;
+}
+
+.dg__voice {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 2px 8px;
+  margin: 0;
+}
+
+.dg__voice dt {
+  color: var(--ink-muted);
+}
+
+.dg__voice dd {
+  margin: 0;
+}
+
+.dg__mono {
+  font-family: var(--mono);
+  font-size: 10.5px;
+}
+
+.dg__muted {
+  color: var(--ink-muted);
+}
+
+.dg__vars {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.dg__vars li {
+  display: flex;
+  justify-content: space-between;
+  gap: 6px;
+  padding: 2px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.dg__bar {
+  display: block;
+  height: 6px;
+  margin: 5px 0 !important;
+  border-radius: 3px;
+  background: var(--surface-3);
+}
+
+.dg__bar i {
+  display: block;
+  height: 100%;
+  border-radius: 3px;
+  background: var(--lumen);
+}

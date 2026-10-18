@@ -1,0 +1,23 @@
+{
+  "id": "narrative-design",
+  "desk": 3,
+  "title": "Écriture et narration",
+  "person": {
+    "firstName": "Chloé",
+    "lastName": "Vasseur",
+    "role": "Scénariste (narrative designer)"
+  },
+  "tagline": "J'écris l'histoire de Maëlle, mais surtout la façon dont le joueur la découvre en jouant, pas en regardant.",
+  "missions": [
+    "Écrire l'histoire, les personnages et les dialogues, en accord avec la vision de la directrice créative.",
+    "Construire les [[dialogue-embranchements|dialogues à embranchements]] et vérifier qu'aucun choix ne mène à une impasse.",
+    "Raconter par le décor : objets, lettres, voix de la brume, placés avec le level designer.",
+    "Préparer les textes pour l'enregistrement des voix et pour la [[localisation]] en plusieurs langues.",
+    "Réécrire après chaque [[playtest]] les passages que les joueurs n'ont pas compris ou ont sautés."
+  ],
+  "myth": {
+    "myth": "Le scénariste écrit l'histoire au début, puis le reste de l'équipe fabrique le jeu autour.",
+    "reality": "Dans un jeu, l'histoire s'écrit pendant toute la production : un niveau raccourci, une mécanique changée, et des scènes entières sont à réécrire. Chloé travaille chaque semaine avec Antoine et Karim, pas seule dans son coin."
+  },
+  "realTools": ["articy:draft", "Ink", "Twine", "Yarn Spinner", "Final Draft"]
+}

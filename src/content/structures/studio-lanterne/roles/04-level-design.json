@@ -1,0 +1,23 @@
+{
+  "id": "level-design",
+  "desk": 4,
+  "title": "Level design",
+  "person": {
+    "firstName": "Antoine",
+    "lastName": "Roux",
+    "role": "Level designer"
+  },
+  "tagline": "Je dessine les chemins de l'île : où le joueur se perd, où il respire, et ce qu'il aperçoit au loin pour avoir envie d'y aller.",
+  "missions": [
+    "Concevoir les niveaux sur papier, puis en [[greybox|blocs gris]] dans l'éditeur, pour tester le parcours très tôt.",
+    "Placer les énigmes, les dangers et les moments de calme pour que le rythme ne s'essouffle pas.",
+    "Guider le joueur sans panneau : lumière, sons, formes du décor ([[level-design]]).",
+    "Passer le niveau à l'artiste 3D décors une fois le parcours validé en [[playtest]], puis vérifier que le décor final ne casse rien.",
+    "Corriger les endroits où les joueurs restent coincés, repérés sur la [[carte-de-chaleur|carte de chaleur]]."
+  ],
+  "myth": {
+    "myth": "Le level designer dessine de beaux décors.",
+    "reality": "Antoine ne dessine presque jamais de beaux décors : ses niveaux sont gris pendant des semaines. Son métier, c'est le parcours et le rythme. Le décor vient ensuite, posé par l'artiste 3D sur un chemin déjà testé."
+  },
+  "realTools": ["Unity", "Unreal Engine", "Godot", "Blender", "Miro"]
+}

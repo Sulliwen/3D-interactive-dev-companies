@@ -1,0 +1,84 @@
+{
+  "role": "environment-art",
+  "order": 7,
+  "featureStep": "Du bloc gris au décor final, dans le budget",
+  "tagline": "Je remplace les blocs gris d'Antoine par le vrai phare de Kerlaz et les maisons du village, en restant sous le budget de triangles fixé avec Théo.",
+  "missions": [
+    "Modéliser le phare d'après la planche de Mei, en restant sous le [[budget-triangles|budget de 25 000 triangles]].",
+    "Préparer trois [[niveau-de-detail|niveaux de détail]] du phare, pour qu'il reste léger quand on le voit de loin.",
+    "Construire le village englouti avec un [[kit-modulaire|kit modulaire]] de murs, toits et fenêtres.",
+    "Poser le décor sur le niveau d'Antoine sans déplacer le chemin ni les lampes."
+  ],
+  "takeaways": [
+    "Chaque objet 3D a un [[budget-triangles|budget]] : 23 800 triangles pour le phare, sous la limite de 25 000 fixée avec Théo.",
+    "Les [[niveau-de-detail|niveaux de détail]] évitent de calculer des détails invisibles : de loin, le phare n'a plus que 2 400 triangles.",
+    "Un [[kit-modulaire|kit modulaire]] de quelques pièces suffit à construire tout un village, vite et sans alourdir le jeu."
+  ],
+  "receivesFrom": {
+    "roles": ["level-design", "concept-art"],
+    "text": "Le niveau en blocs gris validé par Antoine (chemin, lampes, falaise) et la piste de phare élancé peinte par Mei, avec ses notes sur les bandes usées et le toit."
+  },
+  "handsOffTo": {
+    "roles": ["technical-art"],
+    "text": "Le phare et le village modélisés, avec leurs textures et leurs niveaux de détail : Théo (technical art) y ajoute la lumière et la brume, et vérifie que tout tient le rythme."
+  },
+  "screen": {
+    "component": "modeling-viewport",
+    "toolName": "Atelier 3D",
+    "props": {
+      "file": "Kerlaz_Phare_v07.a3d",
+      "object": "Phare_Kerlaz (LOD0)",
+      "triangles": { "current": 23800, "budget": 25000 },
+      "lods": [
+        { "name": "LOD0 · de près", "triangles": 23800, "distance": "jusqu'à 15 m" },
+        { "name": "LOD1", "triangles": 9500, "distance": "de 15 à 40 m" },
+        { "name": "LOD2 · de loin", "triangles": 2400, "distance": "au-delà de 40 m" }
+      ],
+      "textures": [
+        { "slot": "Couleur (pierre, bandes)", "size": "2048 px", "color": "#b8a48e" },
+        { "slot": "Rugosité (sel, mousse)", "size": "2048 px", "color": "#6a6a6a" },
+        { "slot": "Relief (normales)", "size": "2048 px", "color": "#8a8ad6" }
+      ],
+      "kit": [
+        { "name": "Mur de granit", "uses": 46 },
+        { "name": "Toit d'ardoise", "uses": 14 },
+        { "name": "Fenêtre", "uses": 38 },
+        { "name": "Porte", "uses": 12 },
+        { "name": "Cheminée", "uses": 9 }
+      ],
+      "reference": "bandes rouges usées, pierre mouillée en bas, toit de la lanterne lisible de dos."
+    },
+    "annotations": [
+      {
+        "id": "viewport",
+        "zone": "viewport",
+        "title": "Le phare de la planche, en 3D",
+        "text": "Bastien a modélisé la piste retenue par Margaux, le phare élancé, en gardant la note de Mei épinglée dans la vue. La [[modelisation-3d|modélisation 3D]] ne réinvente pas le dessin : elle le traduit en formes que le moteur peut afficher."
+      },
+      {
+        "id": "budget",
+        "zone": "budget",
+        "title": "Un budget, comme pour l'argent",
+        "text": "Plus un objet a de triangles, plus l'ordinateur travaille pour l'afficher. Théo a fixé un [[budget-triangles|budget]] de 25 000 triangles pour le phare. Bastien est à 23 800 : il garde un peu de marge pour la lanterne vitrée."
+      },
+      {
+        "id": "lods",
+        "zone": "lods",
+        "title": "Moins de détails, de loin",
+        "text": "Le phare existe en trois versions : complète de près, allégée à mi-distance, très simple au-delà de 40 m. Ce sont les [[niveau-de-detail|niveaux de détail]] : le jeu choisit tout seul la bonne version, et personne ne voit la différence."
+      },
+      {
+        "id": "kit",
+        "zone": "kit",
+        "title": "Un village en pièces détachées",
+        "text": "Les maisons du village englouti ne sont pas modélisées une par une : Bastien assemble cinq pièces d'un [[kit-modulaire|kit modulaire]] (murs, toits, fenêtres…). Quarante-six murs, mais un seul mur à modéliser et à texturer."
+      },
+      {
+        "id": "textures",
+        "zone": "textures",
+        "title": "La matière vient des textures",
+        "text": "La pierre mouillée, le sel et la mousse ne sont pas modélisés : ce sont des [[texture|textures]] posées sur la forme. Trois images de 2048 px décrivent la couleur, la rugosité et le relief de la surface."
+      }
+    ]
+  }
+}

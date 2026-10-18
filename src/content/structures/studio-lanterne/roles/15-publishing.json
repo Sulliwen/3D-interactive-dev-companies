@@ -1,0 +1,23 @@
+{
+  "id": "publishing",
+  "desk": 15,
+  "title": "Relation éditeur",
+  "person": {
+    "firstName": "Victor",
+    "lastName": "Lambert",
+    "role": "Responsable relation éditeur"
+  },
+  "tagline": "Je fais le lien entre le studio et Ondine Publishing, notre [[editeur-jeu|éditeur]] : ce qu'on a promis, ce qu'on livre, et comment on fera connaître le jeu.",
+  "missions": [
+    "Suivre le contrat avec l'éditeur : chaque [[jalon]], ce qu'il doit contenir et l'argent qui en dépend.",
+    "Préparer les présentations de jalon avec la directrice créative et la producer.",
+    "Coordonner le marketing avec l'éditeur : bandes-annonces, salons, réseaux sociaux, presse.",
+    "Préparer la future page Steam pour récolter des [[liste-de-souhaits|listes de souhaits]] bien avant la sortie.",
+    "Organiser la [[localisation]] avec les traducteurs choisis par l'éditeur."
+  ],
+  "myth": {
+    "myth": "L'éditeur décide de tout et le studio exécute.",
+    "reality": "Le studio garde la main sur son jeu ; l'éditeur finance, conseille et vend. Les désaccords existent (la date de sortie, le prix) et se négocient. Le travail de Victor est d'éviter les surprises des deux côtés."
+  },
+  "realTools": ["Steamworks", "Notion", "Google Slides", "Discord", "HubSpot"]
+}

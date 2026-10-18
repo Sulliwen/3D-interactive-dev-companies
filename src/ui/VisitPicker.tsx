@@ -34,27 +34,29 @@ export function VisitPicker({
           et le rythme changent.
         </p>
         <Carousel label="Structures">
-          {structures.map(({ structure, scenarios }) => (
-            <button
-              key={structure.id}
-              type="button"
-              className={`picker__card ${current?.structure === structure.id ? 'is-current' : ''}`}
-              onClick={() => setStructureId(structure.id)}
-              data-autofocus={current?.structure === structure.id || undefined}
-            >
-              <p className="picker__kind">{structure.kind}</p>
-              <p className="picker__title">{structure.name}</p>
-              <p className="picker__summary">{structure.summary}</p>
-              <ul className="picker__facts">
-                {structure.facts.map((f) => (
-                  <li key={f}>{f}</li>
-                ))}
-              </ul>
-              <span className="picker__meta">
-                {scenarios.length} type{scenarios.length > 1 ? 's' : ''} de développement →
-              </span>
-            </button>
-          ))}
+          {structures
+            .filter((b) => b.scenarios.length > 0)
+            .map(({ structure, scenarios }) => (
+              <button
+                key={structure.id}
+                type="button"
+                className={`picker__card ${current?.structure === structure.id ? 'is-current' : ''}`}
+                onClick={() => setStructureId(structure.id)}
+                data-autofocus={current?.structure === structure.id || undefined}
+              >
+                <p className="picker__kind">{structure.kind}</p>
+                <p className="picker__title">{structure.name}</p>
+                <p className="picker__summary">{structure.summary}</p>
+                <ul className="picker__facts">
+                  {structure.facts.map((f) => (
+                    <li key={f}>{f}</li>
+                  ))}
+                </ul>
+                <span className="picker__meta">
+                  {scenarios.length} type{scenarios.length > 1 ? 's' : ''} de développement →
+                </span>
+              </button>
+            ))}
           {upcomingStructures.map((u) => (
             <button key={u.kind} type="button" className="picker__card" disabled>
               <p className="picker__kind">{u.kind}</p>

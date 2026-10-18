@@ -1,0 +1,127 @@
+{
+  "role": "direction-creative",
+  "order": 1,
+  "featureStep": "La vision : ce que la slice doit prouver",
+  "tagline": "Je garde le cap de « Brume ». Pour la vertical slice, je fixe ce que ces quinze minutes doivent prouver, et je dis non à tout ce qui nous en éloigne.",
+  "missions": [
+    "Formuler les [[piliers-de-jeu|piliers du jeu]] et les faire vivre : chaque décision de l'équipe doit servir au moins l'un d'eux.",
+    "Définir ce que la [[vertical-slice|vertical slice]] doit prouver à l'[[editeur-jeu|éditeur]], en une phrase que tout le studio peut répéter.",
+    "Arbitrer quand l'histoire, les règles et le décor tirent dans des sens opposés.",
+    "Rassembler les références (peintures, films, jeux) qui donnent le ton aux artistes, au son et à l'écriture."
+  ],
+  "takeaways": [
+    "Une vertical slice ne montre pas « un peu de tout » : elle **prouve** une promesse. Ici, que les trois piliers de « Brume » tiennent ensemble en 15 minutes.",
+    "Les [[piliers-de-jeu|piliers]] servent surtout à **dire non** : le combat contre la brume était une bonne idée, mais hors piliers.",
+    "La vision est écrite et partagée dans le [[game-design-document|document de game design]] : chacun peut s'y référer sans attendre la directrice créative."
+  ],
+  "receivesFrom": {
+    "roles": ["publishing"],
+    "text": "Le contrat de [[jalon]] signé avec Ondine Publishing en janvier, et une date : le **vendredi 4 décembre 2026**, à Paris (Victor, relation éditeur)."
+  },
+  "handsOffTo": {
+    "roles": ["production", "game-design", "narrative-design", "concept-art"],
+    "text": "Une vision écrite : Jeanne en tire le planning et les coupes, Karim les règles de la lanterne, Chloé le ton de la voix du gardien, et Mei les premiers dessins du phare."
+  },
+  "screen": {
+    "component": "design-doc",
+    "toolName": "Carnet de jeu",
+    "props": {
+      "document": "Vision de la vertical slice",
+      "author": "Margaux Lefort",
+      "updated": "modifié le 12 novembre 2026",
+      "outline": [
+        { "title": "Vision de la vertical slice", "active": true },
+        { "title": "Maëlle, la cartographe" },
+        { "title": "La lanterne" },
+        { "title": "La brume" },
+        { "title": "La carte" },
+        { "title": "Niveau : le Phare de Kerlaz" },
+        { "title": "Références" }
+      ],
+      "lead": "Le 4 décembre, Ondine joue quinze minutes de « Brume » : arriver à Kerlaz, traverser la falaise dans la brume, rallumer le phare, entendre la voix du gardien. Tout doit être fini comme dans le jeu final.",
+      "pillars": [
+        {
+          "title": "La brume est vivante",
+          "text": "Elle avance, recule, efface les chemins quand on ne la regarde pas. On ne la combat pas : on la comprend."
+        },
+        {
+          "title": "La lumière coûte quelque chose",
+          "text": "L'huile de la lanterne est rare. Chaque niveau pose la même question : où dépenser sa lumière ?"
+        },
+        {
+          "title": "Chaque lieu garde un souvenir",
+          "text": "Les voix de la brume racontent les habitants disparus. Explorer, c'est écouter."
+        }
+      ],
+      "sections": [
+        {
+          "heading": "Ce que la slice doit prouver à Ondine",
+          "bullets": [
+            "Que les trois piliers tiennent ensemble, en 15 minutes de jeu.",
+            "Qu'un joueur qui ne connaît pas le jeu comprend la lanterne sans texte d'explication.",
+            "Que l'équipe sait produire un niveau à la qualité finale en trois semaines, sans crunch."
+          ]
+        }
+      ],
+      "references": [
+        {
+          "title": "William Turner",
+          "kind": "Peinture",
+          "note": "Les marines dans la brume : la lumière qui perce, les formes qui se dissolvent."
+        },
+        {
+          "title": "Mathurin Méheut",
+          "kind": "Illustration",
+          "note": "La Bretagne des gens de mer : les visages, les gestes, les villages."
+        },
+        {
+          "title": "Firewatch (2016)",
+          "kind": "Jeu",
+          "note": "Une histoire portée par une voix, sans combat."
+        }
+      ],
+      "comments": [
+        {
+          "author": "Karim",
+          "text": "Et si la brume cachait des créatures à combattre ? Les éditeurs aiment l'action.",
+          "reply": {
+            "author": "Margaux",
+            "text": "Hors piliers : la brume ne se combat pas, elle se contourne et se comprend. C'est ce qui nous distingue."
+          },
+          "resolved": true
+        },
+        {
+          "author": "Jeanne",
+          "text": "Je pars de cette page pour la liste des coupes. Tout ce qui ne sert pas un pilier part en production."
+        }
+      ],
+      "status": "Page partagée avec tout le studio · lue par 27 personnes"
+    },
+    "annotations": [
+      {
+        "id": "piliers",
+        "zone": "pillars",
+        "title": "Trois piliers, pas un de plus",
+        "text": "Les [[piliers-de-jeu|piliers du jeu]] résument ce que « Brume » veut faire ressentir. Ils sont courts pour que chacun s'en souvienne : un artiste, un programmeur ou une testeuse peut vérifier seul si son travail sert le jeu."
+      },
+      {
+        "id": "preuve",
+        "zone": "sections",
+        "title": "Une promesse à prouver",
+        "text": "Une [[vertical-slice|vertical slice]] n'est pas une démo de tout le jeu. Margaux écrit en trois lignes ce qu'Ondine doit constater le 4 décembre. Tout le reste du travail de l'équipe découle de ces trois lignes."
+      },
+      {
+        "id": "references",
+        "zone": "references",
+        "title": "Des références pour donner le ton",
+        "text": "Avant de dessiner ou d'écrire, l'équipe partage des œuvres existantes : peintures, illustrations, jeux. Elles parlent plus vite qu'un long texte. On ne copie pas, on s'en inspire pour l'ambiance."
+      },
+      {
+        "id": "non",
+        "zone": "comments",
+        "title": "Savoir dire non",
+        "text": "Karim propose des combats. L'idée n'est pas mauvaise, mais elle ne sert aucun pilier, et elle coûterait des semaines. La directrice créative tranche par écrit, dans le document : la décision reste visible pour tout le studio."
+      }
+    ]
+  }
+}

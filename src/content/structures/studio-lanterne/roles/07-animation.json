@@ -1,0 +1,23 @@
+{
+  "id": "animation",
+  "desk": 7,
+  "title": "Animation",
+  "person": {
+    "firstName": "Aminata",
+    "lastName": "Koné",
+    "role": "Animatrice"
+  },
+  "tagline": "Je donne vie à Maëlle : sa marche hésitante dans la brume, sa façon de lever la lanterne quand elle a peur.",
+  "missions": [
+    "Animer le personnage principal et les créatures de la brume à partir de leur [[rig|squelette d'animation]].",
+    "Créer des mouvements qui s'enchaînent sans à-coup selon ce que fait le joueur (marcher, courir, s'arrêter, grimper).",
+    "Régler avec le programmeur gameplay le moment exact où une action « part » sous les doigts du joueur.",
+    "Animer les scènes d'histoire écrites par la scénariste.",
+    "Tester chaque animation dans le jeu, pas seulement dans son logiciel : la caméra et le décor changent tout."
+  ],
+  "myth": {
+    "myth": "Dans les jeux, tous les mouvements viennent de la [[capture-de-mouvement|capture de mouvement]] : un acteur bouge, l'ordinateur fait le reste.",
+    "reality": "La capture coûte cher et reste à nettoyer image par image. Au Studio Lanterne, Aminata anime presque tout à la main, en filmant parfois ses propres gestes comme référence. Une marche réussie peut demander deux jours."
+  },
+  "realTools": ["Maya", "Blender", "MotionBuilder", "Cascadeur"]
+}

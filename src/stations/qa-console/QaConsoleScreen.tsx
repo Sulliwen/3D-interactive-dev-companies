@@ -25,12 +25,12 @@ export function QaConsoleScreen({ toolName, props: rawProps }: ScreenComponentPr
   return (
     <AppWindow toolName={toolName} title={props.campaign} status={<span>{props.status}</span>}>
       <div className="qa__left">
-        <AutoTests suites={props.suites} />
+        <AutoTests title={props.autoTitle} suites={props.suites} />
 
         <Zone id="manual-plan" className="qa__card qa__plan">
           <div className="qa__card-head">
             <p className="qa__card-title">
-              Recette manuelle · {props.cases.length - failures} / {props.cases.length}
+              {props.planTitle} · {props.cases.length - failures} / {props.cases.length}
             </p>
             {live && (
               <div className="qa__filters" role="group" aria-label="Filtrer les cas">
@@ -53,7 +53,7 @@ export function QaConsoleScreen({ toolName, props: rawProps }: ScreenComponentPr
               </div>
             )}
           </div>
-          <div className="qa__rows" role="table" aria-label="Plan de recette">
+          <div className="qa__rows" role="table" aria-label={props.planTitle}>
             {cases.map((c, i) => {
               if (c.edge && i !== firstEdge) return null
               const rows = c.edge ? cases.slice(i, i + edgeCount) : [c]
@@ -156,7 +156,7 @@ export function QaConsoleScreen({ toolName, props: rawProps }: ScreenComponentPr
 }
 
 /** Barre empilée des tests automatiques (une couleur par famille, ordre fixe). */
-function AutoTests({ suites }: { suites: QaConsoleProps['suites'] }) {
+function AutoTests({ title, suites }: { title: string; suites: QaConsoleProps['suites'] }) {
   const { live } = useAnnotations()
   const reducedMotion = useGameStore((s) => s.settings.reducedMotion)
   const animate = live && !reducedMotion
@@ -182,7 +182,7 @@ function AutoTests({ suites }: { suites: QaConsoleProps['suites'] }) {
   return (
     <Zone id="auto-tests" className="qa__card qa__auto">
       <div className="qa__card-head">
-        <p className="qa__card-title">Tests automatiques</p>
+        <p className="qa__card-title">{title}</p>
         {shown >= 1 ? (
           <StatusBadge status="good">
             {passed} / {total} réussis

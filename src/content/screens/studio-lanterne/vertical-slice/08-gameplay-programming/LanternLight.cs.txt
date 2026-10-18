@@ -1,0 +1,62 @@
+using Brume.Core;
+using Brume.Fog;
+
+namespace Brume.Gameplay;
+
+// La lanterne de Maëlle : sa lumière repousse la brume et fige les chemins.
+// Règles : Carnet de jeu › « La lanterne » (Karim). Vertical slice, nov. 2026.
+public sealed class LanternLight : GameBehaviour
+{
+    // @zone tuning
+    // Aucun chiffre écrit dans le code : ils viennent du tableau de réglages de
+    // Karim (lantern_tuning.json), qu'il change sans attendre un programmeur.
+    private LanternTuning tuning => Tuning.Get<LanternTuning>("lantern");
+    // @end
+
+    private float oil;
+    private bool raised;
+
+    protected override void OnLevelStart()
+    {
+        oil = tuning.OilSeconds; // 90 s depuis le 10 novembre (avant : 120 s)
+    }
+
+    public void SetRaised(bool value)
+    {
+        // Levée seulement s'il reste de l'huile ; l'animation d'Aminata suit.
+        raised = value && oil > 0f;
+        Animator.SetBool("LanternRaised", raised);
+    }
+
+    protected override void Tick(float deltaTime)
+    {
+        if (!raised) return;
+
+        // @zone oil
+        // L'huile se consomme lumière levée, et ne descend jamais sous zéro
+        // (bug BRM-388, septembre : une huile négative rallumait la lanterne).
+        oil = Math.Max(0f, oil - deltaTime);
+        if (oil == 0f) SetRaised(false);
+        // @end
+
+        // @zone fog-push
+        // La brume recule autour de la lanterne (6 m, moins quand l'huile baisse).
+        // Le « trou » visible dans la brume est dessiné par le shader de Théo,
+        // qui lit ce rayon à chaque image.
+        float level = oil / tuning.OilSeconds;
+        float radius = tuning.LightRadius * (0.6f + 0.4f * level);
+        FogField.Push(Position, radius, tuning.FogRecoilSpeed);
+        Shader.SetGlobal("_LanternRadius", radius);
+        // @end
+
+        // @zone freeze
+        // Les chemins éclairés restent figés 20 s : sans cette règle, la brume
+        // réécrivait le chemin derrière Maëlle, et la falaise était injouable.
+        foreach (var path in PathNetwork.Near(Position, radius))
+            path.Freeze(tuning.FreezeSeconds);
+        // @end
+    }
+
+    // Recharge aux lampes du village : 3 lampes dans « Le Phare de Kerlaz ».
+    public void Refill() => oil = tuning.OilSeconds;
+}

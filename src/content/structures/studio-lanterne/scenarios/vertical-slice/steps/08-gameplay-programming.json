@@ -1,0 +1,98 @@
+{
+  "role": "gameplay-programming",
+  "order": 9,
+  "featureStep": "La lumière repousse la brume, en code",
+  "tagline": "Je transforme la règle de Karim en comportement du jeu : quand Maëlle lève sa lanterne, la brume doit reculer, les chemins se figer, et l'huile se vider. Il faut que ce soit juste… et agréable sous les doigts.",
+  "missions": [
+    "Programmer la lanterne : huile, rayon de lumière, brume repoussée, chemins figés.",
+    "Lire les chiffres dans le tableau de Karim ([[equilibrage]]) au lieu de les écrire dans le code.",
+    "Déclencher l'animation d'Aminata au bon moment et transmettre le rayon de lumière au shader de Théo.",
+    "Écrire des [[test-automatise|tests automatisés]] sur les règles qui ont déjà causé des [[bug|bugs]].",
+    "Corriger les bugs remontés par Yasmine avant le [[gel-du-contenu|gel du contenu]] du 27 novembre."
+  ],
+  "takeaways": [
+    "Le code d'un jeu, ce sont surtout des **règles** : « si la lanterne est levée et qu'il reste de l'huile, la brume recule de 6 m ». Le moteur s'occupe d'afficher le résultat.",
+    "Les chiffres ne sont **pas écrits dans le code** : ils viennent du tableau de réglages de Karim. Il peut les changer et rejouer dans la minute, sans attendre Lucas.",
+    "Chaque bug corrigé devient un **test automatique** : l'huile négative de septembre ne reviendra pas sans qu'on le sache."
+  ],
+  "receivesFrom": {
+    "roles": ["game-design", "animation"],
+    "text": "La règle de la lanterne et son tableau de réglages (Karim), et l'animation « lever la lanterne » d'Aminata, prête à être déclenchée par le code."
+  },
+  "handsOffTo": {
+    "roles": ["technical-art", "qa"],
+    "text": "Le rayon de lumière, envoyé à chaque image au shader de brume de Théo, et une lanterne qui fonctionne dans le [[build]] de la nuit, que Yasmine teste dès le matin."
+  },
+  "screen": {
+    "component": "code-editor",
+    "toolName": "Lanterne Editor · Code",
+    "props": {
+      "project": "brume",
+      "branch": "slice/lanterne-brume",
+      "folder": "Gameplay/Lantern",
+      "explorer": ["Core/", "Fog/", "Map/", "Player/", "Tests/", "brume.sln", "README.md"],
+      "files": [
+        {
+          "name": "LanternLight.cs",
+          "source": "studio-lanterne/vertical-slice/08-gameplay-programming/LanternLight.cs.txt"
+        },
+        {
+          "name": "lantern_tuning.json",
+          "source": "studio-lanterne/vertical-slice/08-gameplay-programming/lantern_tuning.json.txt"
+        },
+        {
+          "name": "LanternLightTests.cs",
+          "source": "studio-lanterne/vertical-slice/08-gameplay-programming/LanternLightTests.cs.txt"
+        }
+      ],
+      "initialFile": 0,
+      "terminal": {
+        "command": "lanterne test --suite Gameplay/Lantern",
+        "lines": [
+          {
+            "kind": "info",
+            "text": "Réglages chargés : lantern_tuning.json (modifié par Karim le 10/11)"
+          },
+          { "kind": "pass", "text": "Oil_never_goes_below_zero · 0,4 s" },
+          { "kind": "pass", "text": "Lit_paths_stay_frozen_while_fog_returns · 1,1 s" },
+          {
+            "kind": "summary",
+            "text": "2 tests réussis · la branche partira dans le build de cette nuit"
+          }
+        ]
+      }
+    },
+    "annotations": [
+      {
+        "id": "tuning",
+        "zone": "tuning",
+        "title": "Les chiffres viennent de Karim",
+        "text": "Le code ne contient aucun « 90 secondes » ni « 6 mètres » : il lit le tableau de réglages de Karim (onglet `lantern_tuning.json`). C'est voulu : le game designer fait l'[[equilibrage]] lui-même, essaie, rejoue, sans demander une modification du code."
+      },
+      {
+        "id": "oil",
+        "zone": "oil",
+        "title": "Une règle simple, un bug passé",
+        "text": "« L'huile ne descend jamais sous zéro » semble évident. En septembre, une huile négative rallumait pourtant la lanterne (bug BRM-388). Lucas a corrigé la règle et ajouté un test : c'est ainsi qu'un jeu devient solide, bug après bug."
+      },
+      {
+        "id": "fog-push",
+        "zone": "fog-push",
+        "title": "Le code et l'image se partagent le travail",
+        "text": "Lucas calcule le rayon de lumière (plus petit quand l'huile s'épuise) et repousse la brume du jeu. Mais le « trou » qu'on voit dans la brume, c'est le [[shader]] de Théo qui le dessine : il lit `_LanternRadius`, envoyé ici à chaque image."
+      },
+      {
+        "id": "freeze",
+        "zone": "freeze",
+        "title": "Une règle née d'un playtest",
+        "text": "Sans elle, la brume réécrivait le chemin juste derrière Maëlle, et la falaise devenait injouable. Les chemins éclairés restent figés 20 secondes (10 au départ, porté à 20 par Karim le 3 novembre). Une [[mecanique-de-jeu|mécanique]] se règle autant qu'elle se programme."
+      },
+      {
+        "id": "tests",
+        "zone": "tests",
+        "title": "Tester une règle de jeu",
+        "text": "Un test lance un petit morceau de jeu sans écran, simule cinq secondes et vérifie le résultat. Ces [[test-automatise|tests]] tournent chaque nuit avec la fabrication du [[build]] : si quelqu'un casse la lanterne, l'équipe le sait le lendemain matin."
+      }
+    ]
+  }
+}

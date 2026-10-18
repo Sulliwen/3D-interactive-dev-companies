@@ -1,0 +1,238 @@
+{
+  "role": "playtest-research",
+  "order": 14,
+  "featureStep": "8 joueurs, et 5 se perdent à la falaise",
+  "tagline": "Vendredi dernier, huit inconnus ont joué la séquence du phare devant moi. Personne ne les a aidés : c'est la seule façon de voir ce que verra Ondine.",
+  "missions": [
+    "Recruter 8 joueurs extérieurs au studio, de 19 à 54 ans, qui n'ont jamais vu « Brume ».",
+    "Les observer derrière le miroir sans tain, sans jamais intervenir, et noter chaque hésitation.",
+    "Transformer les parties enregistrées en une [[carte-de-chaleur|carte de chaleur]] et en chiffres simples.",
+    "Présenter trois constats à l'équipe, et décider d'un correctif avec le level designer et le game designer."
+  ],
+  "takeaways": [
+    "Les joueurs n'ont pas tort : quand cinq sur huit se perdent au même endroit, c'est le **niveau** qui doit changer, pas les joueurs.",
+    "On observe ce que les joueurs **font** (où ils tournent en rond, où ils s'arrêtent) plus que ce qu'ils disent après coup.",
+    "Un bon correctif guide sans casser l'expérience : une cloche qu'on entend dans la brume plutôt qu'une flèche affichée à l'écran."
+  ],
+  "receivesFrom": {
+    "roles": ["qa", "level-design"],
+    "text": "Une version de la séquence sans [[bug-bloquant]] connu, vérifiée par Yasmine, et les questions d'Antoine sur le passage de la falaise."
+  },
+  "handsOffTo": {
+    "roles": ["level-design", "game-design", "sound-design"],
+    "text": "Trois constats et un correctif : Antoine place des zones autour du chemin, Karim règle quand la cloche du phare sonne, Romain l'enregistre. Le prochain [[playtest]], le 20 novembre, vérifiera que ça marche."
+  },
+  "screen": {
+    "component": "playtest-lab",
+    "toolName": "Labo de jeu",
+    "props": {
+      "study": "Playtest n° 1 · vertical slice « Le Phare de Kerlaz »",
+      "status": "Observé derrière le miroir sans tain · aucune aide aux joueurs",
+      "map": {
+        "path": [
+          [6, 52],
+          [16, 47],
+          [26, 42],
+          [34, 34],
+          [42, 26],
+          [52, 19],
+          [62, 22],
+          [72, 28],
+          [82, 22],
+          [92, 12]
+        ],
+        "places": [
+          {
+            "label": "Plage",
+            "at": [6, 52]
+          },
+          {
+            "label": "Village englouti",
+            "at": [26, 42]
+          },
+          {
+            "label": "Lampe 3",
+            "at": [42, 26]
+          },
+          {
+            "label": "Escalier",
+            "at": [82, 22]
+          },
+          {
+            "label": "Phare de Kerlaz",
+            "at": [92, 12]
+          }
+        ],
+        "focus": {
+          "label": "La falaise : phare caché par la brume",
+          "at": [60, 26],
+          "r": 11
+        }
+      },
+      "sessions": [
+        {
+          "label": "Playtest n° 1",
+          "detail": "vendredi 6 nov. · 8 joueurs de 19 à 54 ans",
+          "heat": [
+            {
+              "at": [10, 50],
+              "r": 6,
+              "v": 0.3
+            },
+            {
+              "at": [25, 43],
+              "r": 9,
+              "v": 0.6
+            },
+            {
+              "at": [42, 27],
+              "r": 6,
+              "v": 0.4
+            },
+            {
+              "at": [57, 24],
+              "r": 10,
+              "v": 1
+            },
+            {
+              "at": [60, 36],
+              "r": 9,
+              "v": 0.85
+            },
+            {
+              "at": [48, 34],
+              "r": 7,
+              "v": 0.7
+            },
+            {
+              "at": [70, 30],
+              "r": 6,
+              "v": 0.45
+            },
+            {
+              "at": [86, 18],
+              "r": 5,
+              "v": 0.3
+            }
+          ],
+          "markers": [
+            {
+              "at": [60, 38],
+              "kind": "lost",
+              "count": 3
+            },
+            {
+              "at": [47, 33],
+              "kind": "lost",
+              "count": 2
+            },
+            {
+              "at": [77, 31],
+              "kind": "death",
+              "count": 2
+            },
+            {
+              "at": [25, 47],
+              "kind": "stop",
+              "count": 6
+            }
+          ],
+          "stats": [
+            {
+              "label": "Durée moyenne",
+              "value": "17 min",
+              "detail": "objectif : 15 min",
+              "status": "warning"
+            },
+            {
+              "label": "Perdus à la falaise",
+              "value": "5 / 8",
+              "detail": "> 2 min égarés",
+              "status": "critical"
+            },
+            {
+              "label": "Séquence finie",
+              "value": "8 / 8",
+              "detail": "5 après errance",
+              "status": "warning"
+            }
+          ],
+          "funnel": [
+            {
+              "label": "Arrivée au village",
+              "count": 8
+            },
+            {
+              "label": "Lanterne rechargée",
+              "count": 8
+            },
+            {
+              "label": "Falaise traversée",
+              "count": 3
+            },
+            {
+              "label": "Phare rallumé",
+              "count": 3
+            }
+          ]
+        }
+      ],
+      "quotes": [
+        {
+          "who": "Joueuse 3, 24 ans",
+          "text": "Je savais qu'il fallait aller au phare, mais je ne le voyais plus."
+        },
+        {
+          "who": "Joueur 6, 41 ans",
+          "text": "J'ai tourné en rond. La brume me piégeait exprès ?"
+        },
+        {
+          "who": "Joueuse 1, 19 ans",
+          "text": "Quand la lumière fige le chemin derrière moi, c'est magique."
+        }
+      ],
+      "fix": {
+        "title": "La cloche du phare sonne quand on s'éloigne du chemin",
+        "text": "Un repère sonore plutôt qu'une flèche à l'écran : il guide sans casser l'ambiance.",
+        "by": "Elsa, Antoine et Karim",
+        "measure": {
+          "label": "Perdus à la falaise",
+          "before": "5 sur 8 (6 nov.)",
+          "after": "objectif ≤ 1 sur 8 (20 nov.)"
+        }
+      }
+    },
+    "annotations": [
+      {
+        "id": "heat",
+        "zone": "heatmap",
+        "title": "Là où les joueurs restent",
+        "text": "Plus une zone est chaude, plus les joueurs y ont passé de temps. La tache la plus vive n'est pas sur le chemin : elle est **à côté de la falaise**, là où cinq joueurs ont tourné en rond. C'est une [[carte-de-chaleur]], tirée des parties enregistrées."
+      },
+      {
+        "id": "numbers",
+        "zone": "stats",
+        "title": "Trois chiffres, pas plus",
+        "text": "17 minutes au lieu de 15, 5 joueurs perdus sur 8 : quelques chiffres simples suffisent à convaincre l'équipe. Huit joueurs, c'est peu pour une statistique, mais assez pour voir un problème qui revient."
+      },
+      {
+        "id": "drop",
+        "zone": "funnel",
+        "title": "L'endroit exact où ça casse",
+        "text": "Tout le monde arrive au village et recharge sa lanterne ; seuls 3 joueurs sur 8 traversent la falaise **sans aide**. Le problème n'est pas toute la séquence : c'est un seul passage du [[level-design|niveau]]."
+      },
+      {
+        "id": "verbatim",
+        "zone": "quotes",
+        "title": "Ce qu'ils disent… et ce qu'ils font",
+        "text": "Les citations expliquent le pourquoi : le phare, seul repère du niveau, disparaît dans la brume. Elsa ne les aide jamais pendant la partie ; elle leur pose ses questions à la fin, en [[entretien-utilisateur|entretien]]."
+      },
+      {
+        "id": "bell",
+        "zone": "fix",
+        "title": "Guider sans montrer",
+        "text": "Une flèche à l'écran aurait trahi le pilier « la brume est vivante ». L'équipe choisit un son : la cloche du phare, qu'on entend quand on s'égare. Le prochain [[playtest]], le 20 novembre, dira si ça suffit."
+      }
+    ]
+  }
+}

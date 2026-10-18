@@ -1,0 +1,38 @@
+[
+  {
+    "id": "color-script",
+    "term": "Script couleur",
+    "definition": "Une bande d'images qui résume, moment par moment, les couleurs et la lumière dominantes d'un niveau ou d'un film. Elle montre en un coup d'œil comment l'ambiance évolue, et sert de guide aux artistes 3D et à l'éclairage.",
+    "analogy": "Comme la partition d'un morceau, mais pour les couleurs : on voit où ça monte et où ça se calme."
+  },
+  {
+    "id": "chemin-critique",
+    "term": "Chemin critique (d'un niveau)",
+    "definition": "Le trajet minimal qu'un joueur doit suivre pour finir un niveau, du départ à l'arrivée. Le level designer le dessine en premier, puis place autour les détours facultatifs et les moments forts.",
+    "analogy": "Comme le sentier balisé d'une randonnée : on peut s'en écarter, mais il mène toujours au sommet."
+  },
+  {
+    "id": "niveau-de-detail",
+    "term": "Niveau de détail (LOD)",
+    "definition": "Plusieurs versions du même objet 3D, de plus en plus simples. Le jeu affiche la version détaillée de près et une version allégée de loin, où personne ne voit la différence, pour économiser le travail de l'ordinateur.",
+    "analogy": "Comme un peintre qui soigne les visages au premier plan et esquisse la foule au fond du tableau."
+  },
+  {
+    "id": "budget-triangles",
+    "term": "Budget de triangles",
+    "definition": "Le nombre maximal de triangles (les petites facettes qui forment un objet 3D) qu'un objet a le droit d'utiliser. Il est fixé avec le technical artist pour que le jeu reste fluide sur les ordinateurs visés.",
+    "analogy": "Comme un budget de courses : on peut acheter ce qu'on veut, tant que le total ne dépasse pas l'enveloppe."
+  },
+  {
+    "id": "kit-modulaire",
+    "term": "Kit modulaire",
+    "definition": "Une collection de pièces 3D conçues pour s'assembler entre elles (murs, toits, fenêtres, escaliers). En les combinant, on construit des dizaines de bâtiments différents sans tout modéliser à chaque fois.",
+    "analogy": "Comme une boîte de briques de construction : peu de pièces différentes, beaucoup de maisons possibles."
+  },
+  {
+    "id": "image-cle",
+    "term": "Image clé (animation)",
+    "definition": "Une pose fixée par l'animatrice à un instant précis du mouvement. Le logiciel calcule les images entre deux clés ; l'animatrice règle ensuite les courbes pour donner du poids, de l'élan, une hésitation.",
+    "analogy": "Comme les photos d'un saut prises au départ, au sommet et à la réception : le reste du mouvement se devine entre elles."
+  }
+]
