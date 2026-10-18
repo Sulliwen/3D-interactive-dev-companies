@@ -1,5 +1,5 @@
 import type { ThreeEvent } from '@react-three/fiber'
-import { floorPlan } from './floorplan'
+import { useWorld } from './worlds'
 import { useGameStore } from '../../state/useGameStore'
 
 /**
@@ -7,6 +7,7 @@ import { useGameStore } from '../../state/useGameStore'
  * lui, n'a pas de gestionnaire de clic : on ne veut pas viser un meuble).
  */
 export function ClickFloor() {
+  const floorPlan = useWorld().plan
   const setMoveTarget = useGameStore((s) => s.setMoveTarget)
   const clickToMove = useGameStore((s) => s.settings.clickToMove)
 

@@ -1,9 +1,11 @@
 import { nextStation } from '../../state/progress'
 import { useProgress, useVisit } from '../../state/visit'
-import { floorPlan, type StationAnchor } from '../world/floorplan'
+import type { StationAnchor } from '../world/floorplan'
+import { useWorld } from '../world/worlds'
 
 /** Prochain poste du parcours (non encore vu), avec son ancre dans la scène. */
 export function useNextStation(): { number: number; anchor: StationAnchor } | null {
+  const floorPlan = useWorld().plan
   const visit = useVisit()
   const progress = useProgress()
   const id = nextStation(

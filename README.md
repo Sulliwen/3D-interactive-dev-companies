@@ -82,15 +82,15 @@ npm run build
 npm run preview    # vérification locale du build
 ```
 
-Poids téléchargé : environ 40 Mo (budget : 50 Mo), chargé progressivement (l'étage
-d'abord, puis les personnages et les sons).
+Poids téléchargé : environ 40 Mo par étage, chargé progressivement (l'étage d'abord, puis
+les personnages et les sons). L'étage d'une structure n'est téléchargé qu'une fois choisie.
 
 ## Organisation du code
 
 ```
 src/
 ├─ engine/        moteur 3D générique (aucun contenu métier)
-│  ├─ world/      plan de l'étage, blockout, collisions, décor
+│  ├─ world/      blockout, collisions, décor ; worlds/<monde>/ : plan, habitants, mises en scène
 │  ├─ player/     avatar, contrôleur de personnage, clavier
 │  ├─ camera/     caméra 3e personne
 │  └─ stations/   ancres des postes, détection de proximité
@@ -102,9 +102,11 @@ src/
 └─ state/         état global (Zustand), progression, stockage local
 ```
 
-Le plan de l'étage (`src/engine/world/floorplan.ts`) est la source unique du blockout,
-des collisions et de l'emplacement des postes. Il sera remplacé en phase 3 par le modèle
-exporté de Blender, qui reprendra les mêmes repères (`spawn_*`, `anchor_station_NN`, `col_*`).
+Chaque structure a son étage (un **monde**, `src/engine/world/worlds/<monde>/`) : son plan
+(`plan.ts`, source unique du blockout, des collisions, de l'emplacement des postes et de la
+scène Blender), ses habitants (`people.ts`) et la mise en scène de chaque scénario
+(`staging.ts`). Ses modèles 3D (`public/models/<monde>/`) ne sont téléchargés qu'une fois la
+structure choisie.
 
 Tout le contenu pédagogique est aussi accessible **sans la 3D** : menu « Tous les postes ».
 

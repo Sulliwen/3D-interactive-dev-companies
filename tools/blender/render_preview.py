@@ -1,5 +1,5 @@
 """
-Rendus d'aperçu de la scène (caméras « preview_* ») : art/build/preview_*.png.
+Rendus d'aperçu de la scène (caméras « preview_* ») : art/build/<monde>/preview_*.png.
 
     ~/apps/blender/blender --background art/atelier-lumen.blend --python tools/blender/render_preview.py -- [samples]
 """
@@ -26,7 +26,7 @@ scene.view_settings.exposure = 0.0
 
 for cam in [o for o in bpy.data.objects if o.type == "CAMERA" and o.name.startswith("preview_")]:
     scene.camera = cam
-    out = ROOT / "art" / "build" / f"{cam.name}.png"
+    out = ROOT / "art" / "build" / Path(bpy.data.filepath).stem / f"{cam.name}.png"
     scene.render.filepath = str(out)
     bpy.ops.render.render(write_still=True)
     print("✓", out.name)

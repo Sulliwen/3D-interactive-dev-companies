@@ -2,7 +2,8 @@ import { Suspense, useEffect, useMemo, useState } from 'react'
 import { Html, useTexture } from '@react-three/drei'
 import type { ThreeEvent } from '@react-three/fiber'
 import { CanvasTexture, SRGBColorSpace, type Texture } from 'three'
-import { floorPlan, type StationAnchor } from '../world/floorplan'
+import type { StationAnchor } from '../world/floorplan'
+import { useWorld } from '../world/worlds'
 import { INTERACTION_RADIUS, findNearbyStation } from './proximity'
 import { runtime } from '../runtime'
 import { standPoint } from './standPoint'
@@ -38,6 +39,7 @@ function captureFor(visit: Visit, desk: number): string | undefined {
  * véritable interface React, projetée sur le moniteur.
  */
 export function StationScreens() {
+  const floorPlan = useWorld().plan
   const nearby = useGameStore((s) => s.nearbyStation)
   const active = useGameStore((s) => s.activeStation)
   const visit = useVisit()

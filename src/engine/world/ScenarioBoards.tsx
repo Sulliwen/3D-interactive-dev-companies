@@ -1,7 +1,7 @@
 import { useEffect, useMemo } from 'react'
 import { CanvasTexture, SRGBColorSpace } from 'three'
 import { useVisit } from '../../state/visit'
-import { floorPlan } from './floorplan'
+import { useWorld } from './worlds'
 import { stagingFor, type BoardProp } from './staging'
 
 /** Résolution des panneaux : pixels par mètre. */
@@ -128,6 +128,7 @@ const CARTONS: Array<{ size: [number, number, number]; offset: [number, number];
 
 /** Les bureaux des personnes pas encore arrivées (scénario des débuts) : quelques cartons. */
 export function EmptyDesks() {
+  const floorPlan = useWorld().plan
   const visit = useVisit()
   const desks = visit.stations.filter((s) => s.absent).map((s) => s.desk)
   return (

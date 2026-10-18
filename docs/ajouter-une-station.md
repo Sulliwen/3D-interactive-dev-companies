@@ -151,8 +151,8 @@ outils sont interdits à l'écran : nom fictif, identité visuelle propre.
 
 ## 6. Mise en scène du scénario
 
-Quand on change de scénario, l'étage change aussi : `src/engine/world/staging.ts` décrit,
-pour chaque visite (`structure/scénario`), où se tiennent les figurants et quels panneaux
+Quand on change de scénario, l'étage change aussi : `src/engine/world/worlds/<monde>/staging.ts`
+décrit, pour chaque visite (`structure/scénario`), où se tiennent les figurants et quels panneaux
 apparaissent (tableau d'atelier, plan de version…). Les titulaires des postes restent à
 leur bureau.
 

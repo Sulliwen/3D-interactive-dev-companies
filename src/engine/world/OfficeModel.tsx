@@ -3,28 +3,26 @@ import { useGLTF } from '@react-three/drei'
 import { useThree } from '@react-three/fiber'
 import { suspend } from 'suspend-react'
 import { Mesh, MeshStandardMaterial, SRGBColorSpace, type Material, type Texture } from 'three'
-import type { OfficeMeta } from './officeMeta'
+import { worldModels, type OfficeMeta } from './officeMeta'
 import { getKtx2, withKtx2 } from '../ktx2'
 
 /**
- * L'étage modélisé dans Blender (passe artistique) : public/models/office.glb, produit par
- * `npm run art:build`. L'éclairage y est précalculé dans des lightmaps (second jeu d'UV) :
+ * L'étage modélisé dans Blender (passe artistique) : public/models/<monde>/office.glb,
+ * produit par `npm run art:build`. L'éclairage y est précalculé dans des lightmaps (second jeu d'UV) :
  * rendu final = couleur du matériau × lumière précalculée, sans calcul coûteux par image.
  */
-
-const BASE = import.meta.env.BASE_URL
-const MODEL_URL = `${BASE}models/office.glb`
 
 /** Part de l'éclairage d'environnement gardée sur les surfaces précalculées (reflets). */
 const STATIC_ENV_INTENSITY = 0.25
 
-export function OfficeModel({ meta }: { meta: OfficeMeta }) {
+export function OfficeModel({ world, meta }: { world: string; meta: OfficeMeta }) {
   const gl = useThree((s) => s.gl)
-  const { scene } = useGLTF(MODEL_URL, false, true, withKtx2(gl))
+  const dir = worldModels(world)
+  const { scene } = useGLTF(`${dir}office.glb`, false, true, withKtx2(gl))
   const entries = useMemo(() => Object.entries(meta.lightmaps), [meta])
   const lightmaps = suspend(
-    () => Promise.all(entries.map(([, lm]) => getKtx2(gl).loadAsync(`${BASE}models/${lm.file}`))),
-    ['office-lightmaps', ...entries.map(([, lm]) => lm.file)],
+    () => Promise.all(entries.map(([, lm]) => getKtx2(gl).loadAsync(`${dir}${lm.file}`))),
+    ['office-lightmaps', dir, ...entries.map(([, lm]) => lm.file)],
   ) as Texture[]
 
   useLayoutEffect(() => {

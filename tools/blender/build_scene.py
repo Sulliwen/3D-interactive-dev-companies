@@ -1,5 +1,5 @@
 """
-Construit la scène Blender de l'étage à partir du plan du jeu (art/build/floorplan.json) :
+Construit la scène Blender de l'étage à partir du plan du jeu (art/build/<monde>/floorplan.json) :
 architecture, mobilier modélisé sur mesure, assets Poly Haven, matériaux PBR, éclairage.
 Écrit art/atelier-lumen.blend.
 
@@ -16,6 +16,7 @@ Conventions (lues par le code du jeu ou par l'export) :
 """
 import json
 import math
+import os
 import sys
 import zlib
 from pathlib import Path
@@ -26,8 +27,10 @@ from mathutils import Matrix, Vector
 
 ROOT = Path(__file__).resolve().parents[2]
 SRC = ROOT / "art" / "sources"
-BUILD = ROOT / "art" / "build"
-BLEND = ROOT / "art" / "atelier-lumen.blend"
+# Monde construit (dossier art/build/<monde>/) ; ce script décrit l'étage d'Atelier Lumen.
+WORLD = os.environ.get("ART_WORLD", "atelier-lumen")
+BUILD = ROOT / "art" / "build" / WORLD
+BLEND = ROOT / "art" / f"{WORLD}.blend"
 ARGS = sys.argv[sys.argv.index("--") + 1 :] if "--" in sys.argv else []
 
 PLAN = json.loads((BUILD / "floorplan.json").read_text())

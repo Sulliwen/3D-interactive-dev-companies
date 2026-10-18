@@ -1,7 +1,8 @@
 import { useMemo } from 'react'
 import { Instance, Instances } from '@react-three/drei'
 import type { ThreeEvent } from '@react-three/fiber'
-import { floorPlan, type BoxElement, type MaterialKey } from './floorplan'
+import type { BoxElement, MaterialKey } from './floorplan'
+import { useWorld } from './worlds'
 import { FLOORS, MATERIALS } from './materials'
 import { useGameStore } from '../../state/useGameStore'
 
@@ -10,6 +11,7 @@ import { useGameStore } from '../../state/useGameStore'
  * en une seule instance (un appel de dessin par matériau).
  */
 export function Blockout({ shadows }: { shadows: boolean }) {
+  const floorPlan = useWorld().plan
   const groups = useMemo(() => {
     const map = new Map<MaterialKey, BoxElement[]>()
     for (const box of floorPlan.boxes) {
@@ -18,7 +20,7 @@ export function Blockout({ shadows }: { shadows: boolean }) {
       map.set(box.material, list)
     }
     return [...map.entries()]
-  }, [])
+  }, [floorPlan])
 
   return (
     <group>
@@ -65,6 +67,7 @@ export function Blockout({ shadows }: { shadows: boolean }) {
 
 /** Sols : béton ciré partout, moquettes et parquet par zones. Cliquables pour se déplacer. */
 function Floors() {
+  const floorPlan = useWorld().plan
   const setMoveTarget = useGameStore((s) => s.setMoveTarget)
   const clickToMove = useGameStore((s) => s.settings.clickToMove)
 

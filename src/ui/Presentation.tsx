@@ -19,6 +19,8 @@ export function Presentation() {
   const showToast = useGameStore((s) => s.showToast)
   const { structure, scenario, pathStations } = useVisit()
   const active = tour !== null
+  // Le survol attend que l'étage soit chargé (après un changement de structure).
+  const ready = useGameStore((s) => s.worldReady === structure.world)
   const last = pathStations.length - 1
   const [paused, setPaused] = useState(false)
   // Temps déjà passé sur le plan affiché, pour reprendre là où la pause l'a arrêté.
@@ -40,7 +42,7 @@ export function Presentation() {
 
   // Avance automatique, suspendue pendant la pause.
   useEffect(() => {
-    if (tour === null || paused) return
+    if (tour === null || paused || !ready) return
     const started = performance.now() - elapsed.current
     const id = window.setTimeout(
       () => (tour >= last ? end() : setTour(tour + 1)),
@@ -52,7 +54,7 @@ export function Presentation() {
     }
     // `end` ne change qu'avec la visite, déjà suivie via `last`.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [tour, last, setTour, paused, duration])
+  }, [tour, last, setTour, paused, duration, ready])
 
   useEffect(() => {
     if (tour === null) return
@@ -108,7 +110,7 @@ export function Presentation() {
         className="tour__timer"
         style={{
           animationDuration: `${duration}ms`,
-          animationPlayState: paused ? 'paused' : 'running',
+          animationPlayState: paused || !ready ? 'paused' : 'running',
         }}
         aria-hidden="true"
       />

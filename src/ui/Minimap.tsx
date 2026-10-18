@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef } from 'react'
 import { stationAtDesk, stationLabel } from '../content/loader'
-import { floorPlan, type StationAnchor } from '../engine/world/floorplan'
+import type { StationAnchor } from '../engine/world/floorplan'
+import { useWorld } from '../engine/world/worlds'
 import { FLOORS } from '../engine/world/materials'
 import { runtime } from '../engine/runtime'
 import { standPoint } from '../engine/stations/standPoint'
@@ -17,6 +18,7 @@ const PAD = 0.6
  * postes vus / prochain / à voir, tracé du parcours guidé. Un clic sur un poste y emmène.
  */
 export function Minimap() {
+  const floorPlan = useWorld().plan
   const size = useGameStore((s) => s.settings.minimap)
   const setSetting = useGameStore((s) => s.setSetting)
   const visit = useVisit()
@@ -155,6 +157,7 @@ export function Minimap() {
 
 /** Fond de carte : sols par zone, murs et mobilier (statique). */
 function MapBackground() {
+  const floorPlan = useWorld().plan
   return (
     <g>
       <rect

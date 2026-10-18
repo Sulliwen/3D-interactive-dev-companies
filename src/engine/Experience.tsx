@@ -1,4 +1,4 @@
-import { lazy, Suspense } from 'react'
+import { lazy, Suspense, useEffect } from 'react'
 import { Canvas } from '@react-three/fiber'
 import { Physics } from '@react-three/rapier'
 import { Sky } from '@react-three/drei'
@@ -23,6 +23,8 @@ import { useCharactersAvailable } from './characters/assets'
 import { ClickFloor } from './world/ClickFloor'
 import { QUALITY } from './quality'
 import { useGameStore } from '../state/useGameStore'
+import { useVisit } from '../state/visit'
+import { useWorld } from './world/worlds'
 
 // Outil de mesure des performances, exclu du build de production.
 const Perf = import.meta.env.DEV
@@ -36,6 +38,10 @@ export function Experience() {
   const debugPhysics = useGameStore((s) => s.debugPhysics)
   const showPerf = useGameStore((s) => s.showPerf)
   const profile = QUALITY[quality]
+  const { structure } = useVisit()
+  // Changer de structure change d'étage : tout ce qui en dépend est reconstruit (et les
+  // modèles du nouvel étage téléchargés à ce moment-là).
+  const world = useWorld().id
 
   return (
     <Canvas
@@ -51,9 +57,9 @@ export function Experience() {
         toneMapping: profile.postprocessing ? NoToneMapping : AgXToneMapping,
       }}
       camera={{ fov: 55, near: 0.05, far: 400, position: [0, 3, 13] }}
-      aria-label="Vue 3D de l'étage d'Atelier Lumen"
+      aria-label={`Vue 3D de l'étage · ${structure.name}`}
     >
-      <Suspense fallback={null}>
+      <Suspense key={world} fallback={null}>
         <Physics timeStep="vary" debug={debugPhysics}>
           <Colliders />
           <Player />
@@ -66,6 +72,7 @@ export function Experience() {
         <MoveMarker />
         <GuideLine />
         <CityBackdrop />
+        <WorldReady world={world} />
       </Suspense>
 
       {profile.postprocessing && (
@@ -90,7 +97,8 @@ export function Experience() {
  * (`npm run art:build`), sinon le blockout en boîtes éclairé en temps réel.
  */
 function World({ shadows, shadowMapSize }: { shadows: boolean; shadowMapSize: number }) {
-  const meta = useOfficeMeta()
+  const world = useWorld().id
+  const meta = useOfficeMeta(world)
   const forceBlockout = useGameStore((s) => s.forceBlockout)
 
   if (meta && !forceBlockout) {
@@ -100,7 +108,7 @@ function World({ shadows, shadowMapSize }: { shadows: boolean; shadowMapSize: nu
         <SkyEnvironment intensity={0.9} />
         {/* Pas de lumière en temps réel : elle s'ajouterait à l'éclairage précalculé et
             l'écraserait. Les objets mobiles (avatar) sont éclairés par le ciel. */}
-        <OfficeModel meta={meta} />
+        <OfficeModel world={world} meta={meta} />
         <ClickFloor />
         <OptionalCharacters />
         <Ambience />
@@ -132,6 +140,16 @@ function World({ shadows, shadowMapSize }: { shadows: boolean; shadowMapSize: nu
       <Blockout shadows={shadows} />
     </>
   )
+}
+
+/** Signale que l'étage est prêt : rendu seulement quand tout ce qui précède est chargé. */
+function WorldReady({ world }: { world: string }) {
+  const setWorldReady = useGameStore((s) => s.setWorldReady)
+  useEffect(() => {
+    setWorldReady(world)
+    return () => setWorldReady(null)
+  }, [world, setWorldReady])
+  return null
 }
 
 /** Les personnages, s'ils ont été produits (`npm run art:characters`). */

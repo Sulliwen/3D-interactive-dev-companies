@@ -7,15 +7,18 @@ export interface OfficeMeta {
   lightmaps: Record<string, { file: string; scale: number }>
 }
 
-/** Description du modèle, ou `null` s'il n'a pas encore été produit (étage en boîtes). */
-export function useOfficeMeta(): OfficeMeta | null {
+/** Dossier des modèles d'un monde (public/models/<monde>/). */
+export const worldModels = (world: string) => `${BASE}models/${world}/`
+
+/** Description du modèle d'un monde, ou `null` s'il n'a pas encore été produit (étage en boîtes). */
+export function useOfficeMeta(world: string): OfficeMeta | null {
   return suspend(async () => {
     try {
-      const res = await fetch(`${BASE}models/office.json`)
+      const res = await fetch(`${worldModels(world)}office.json`)
       if (!res.ok || !res.headers.get('content-type')?.includes('json')) return null
       return (await res.json()) as OfficeMeta
     } catch {
       return null
     }
-  }, ['office-meta'])
+  }, ['office-meta', world])
 }

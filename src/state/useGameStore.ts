@@ -57,6 +57,8 @@ interface GameState {
    * l'indice de l'étape survolée dans le parcours ; `null` hors présentation.
    */
   tour: number | null
+  /** Monde (étage) entièrement chargé et affiché, ou `null` pendant un chargement. */
+  worldReady: string | null
   /** Numéro du poste à portée du visiteur (≈ 2 m), ou `null`. */
   nearbyStation: number | null
   /** Destination choisie d'un clic au sol. */
@@ -86,6 +88,7 @@ interface GameState {
   /** Ferme le menu sur la visite choisie et lance sa présentation. */
   launchVisit: (ref: VisitRef) => void
   setTour: (index: number | null) => void
+  setWorldReady: (world: string | null) => void
   visitStation: (stationId: string) => void
   resetProgress: () => void
   setNearbyStation: (n: number | null) => void
@@ -132,6 +135,7 @@ export const useGameStore = create<GameState>()(
       finalesShown: [],
       menu: 'home',
       tour: null,
+      worldReady: null,
       nearbyStation: null,
       moveTarget: null,
       activeStation: null,
@@ -164,6 +168,7 @@ export const useGameStore = create<GameState>()(
         set({ menu: null, tour: -1 })
       },
       setTour: (index) => set({ tour: index }),
+      setWorldReady: (world) => set({ worldReady: world }),
       visitStation: (id) =>
         set((s) => {
           const key = getVisit(s.visit).key

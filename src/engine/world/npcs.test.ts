@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import { getVisit } from '../../content/loader'
-import { floorPlan } from './floorplan'
+import { worldOf } from './worlds'
 import { npcObstaclesFor, npcsFor, stagedVisits } from './staging'
 import { buildNavGrid, findPath, isFree, toCell } from '../nav/navGrid'
 import { standPoint } from '../stations/standPoint'
@@ -8,10 +8,11 @@ import { standPoint } from '../stations/standPoint'
 for (const key of ['atelier-lumen/retours-utilisateurs', ...stagedVisits()]) {
   const npcs = npcsFor(key)
   const npcObstacles = npcObstaclesFor(key)
+  const [structure = '', scenario = ''] = key.split('/')
+  const floorPlan = worldOf(structure).plan
 
   describe(`personnages · ${key}`, () => {
     it('chaque poste occupé a son titulaire, les bureaux vides n’en ont pas', () => {
-      const [structure = '', scenario = ''] = key.split('/')
       const stations = new Set(npcs.map((n) => n.station).filter(Boolean))
       for (const s of getVisit({ structure, scenario }).stations) {
         expect(stations.has(s.desk), `poste ${s.desk}`).toBe(!s.absent)

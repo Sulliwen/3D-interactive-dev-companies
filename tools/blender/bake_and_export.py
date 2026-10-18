@@ -4,7 +4,7 @@ Précalcul de l'éclairage (lightmaps) et export glTF de l'étage.
     ~/apps/blender/blender --background art/atelier-lumen.blend --python tools/blender/bake_and_export.py -- [--samples 96] [--size 2048] [--no-bake]
 
 Travaille sur une copie en mémoire : art/atelier-lumen.blend n'est jamais modifié.
-Produit dans art/build/ :
+Produit dans art/build/<monde>/ :
   - office.glb : géométrie, matériaux, repères (spawn_*, anchor_station_*, screen_station_*) ;
   - lightmap_<groupe>.png : éclairage précalculé (8 bits sRGB, divisé par `scale`) ;
   - office.json : description des lightmaps (fichier, échelle) lue par le jeu.
@@ -23,7 +23,8 @@ import bpy
 import numpy as np
 
 ROOT = Path(bpy.data.filepath).resolve().parent.parent
-BUILD = ROOT / "art" / "build"
+# art/<monde>.blend → art/build/<monde>/
+BUILD = ROOT / "art" / "build" / Path(bpy.data.filepath).stem
 ARGS = sys.argv[sys.argv.index("--") + 1 :] if "--" in sys.argv else []
 
 

@@ -10,7 +10,7 @@ import {
   stationGlossaryIds,
   structures,
 } from './loader'
-import { floorPlan } from '../engine/world/floorplan'
+import { worldOf } from '../engine/world/worlds'
 import { screens } from '../stations/registry'
 
 const S = './structures/s'
@@ -135,7 +135,7 @@ const captures = new Set(
 for (const b of structures) {
   describe(`structure ${b.structure.id}`, () => {
     it('chaque métier a son poste dans le plan de l’étage', () => {
-      const anchors = new Set(floorPlan.stations.map((a) => a.number))
+      const anchors = new Set(worldOf(b.structure.id).plan.stations.map((a) => a.number))
       for (const r of b.roles) expect(anchors.has(r.desk), `poste ${r.desk}`).toBe(true)
     })
 

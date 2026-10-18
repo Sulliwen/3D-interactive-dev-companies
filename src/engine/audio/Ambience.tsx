@@ -2,8 +2,9 @@ import { useEffect, useMemo } from 'react'
 import { useLoader, useThree } from '@react-three/fiber'
 import { suspend } from 'suspend-react'
 import { Audio, AudioListener, AudioLoader, PositionalAudio, type Object3D } from 'three'
-import { floorPlan } from '../world/floorplan'
-import { stationNpcs } from '../world/npcs'
+import { npcsFor } from '../world/staging'
+import { useWorld } from '../world/worlds'
+import { useVisit } from '../../state/visit'
 import { useGameStore } from '../../state/useGameStore'
 
 const BASE = `${import.meta.env.BASE_URL}audio/`
@@ -36,6 +37,8 @@ export function Ambience() {
  * Le son démarre au premier geste du visiteur (règle des navigateurs).
  */
 function AmbienceSources() {
+  const floorPlan = useWorld().plan
+  const visitKey = useVisit().key
   const camera = useThree((s) => s.camera)
   const scene = useThree((s) => s.scene)
   const buffers = useLoader(
@@ -90,7 +93,7 @@ function AmbienceSources() {
       return a
     }
     // Un clavier par personne qui tape, décalé dans le fichier pour éviter l'écho.
-    const typists = stationNpcs.filter((n) => n.clip === 'type' || n.clip === 'stand_type')
+    const typists = npcsFor(visitKey).filter((n) => n.clip === 'type' || n.clip === 'stand_type')
     typists.forEach((n) => at(n.position[0], 0.8, n.position[1], keyboard, 0.5, true))
     const machine = floorPlan.boxes.find((b) => b.name === 'coffee_machine')
     const coffeeSound = machine
@@ -128,7 +131,7 @@ function AmbienceSources() {
       anchors.forEach((a) => scene.remove(a))
       camera.remove(listener)
     }
-  }, [camera, scene, listener, room, chatter, keyboard, coffee])
+  }, [camera, scene, listener, room, chatter, keyboard, coffee, visitKey, floorPlan])
 
   useEffect(() => {
     listener.setMasterVolume(muted ? 0 : volume)

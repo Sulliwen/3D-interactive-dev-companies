@@ -3,13 +3,15 @@
  *
  *   npm run art:build              tout : assets, scène, précalcul, export, optimisation
  *   npm run art:build -- --quick   précalcul rapide (lightmaps 512 px) pour vérifier
- *   npm run art:export             garde art/atelier-lumen.blend (vos retouches) et refait
+ *   npm run art:export             garde art/<monde>.blend (vos retouches) et refait
  *                                  seulement précalcul + export + optimisation
- *   … -- --skip-bake               réutilise l'export précédent (art/build) : optimisation seule
+ *   … -- --skip-bake               réutilise l'export précédent (art/build/<monde>) :
+ *                                  optimisation seule
+ *   … -- --world <monde>           l'étage à produire (par défaut : atelier-lumen)
  *
  * Étapes : assets Poly Haven (fetch_assets.py) → plan du jeu en JSON → visuels de décor
  * → scène Blender (build_scene.py) → lightmaps + glTF (bake_and_export.py)
- * → optimisation (gltf-transform : meshopt, textures KTX2) → public/models/.
+ * → optimisation (gltf-transform : meshopt, textures KTX2) → public/models/<monde>/.
  *
  * Prérequis : Blender 4.x (BLENDER=… sinon ~/apps/blender/blender ou `blender`),
  * Python 3 + Pillow, KTX-Software (KTX_HOME=… sinon ~/apps/ktx).
@@ -25,6 +27,14 @@ const quick = args.includes('--quick')
 const exportOnly = args.includes('--export-only')
 const rebuild = args.includes('--rebuild')
 const skipBake = args.includes('--skip-bake')
+const world = args.includes('--world') ? args[args.indexOf('--world') + 1] : 'atelier-lumen'
+
+/** Script Blender qui construit la scène de chaque monde à partir de son plan. */
+const SCENE_SCRIPTS = { 'atelier-lumen': 'tools/blender/build_scene.py' }
+if (!world || !SCENE_SCRIPTS[world]) {
+  console.error(`Monde inconnu : ${world} (${Object.keys(SCENE_SCRIPTS).join(', ')})`)
+  process.exit(1)
+}
 
 const blender = [process.env.BLENDER, join(homedir(), 'apps/blender/blender'), 'blender'].find(
   (p) => p && (p === 'blender' || existsSync(p)),
@@ -32,13 +42,14 @@ const blender = [process.env.BLENDER, join(homedir(), 'apps/blender/blender'), '
 const ktxHome = process.env.KTX_HOME ?? join(homedir(), 'apps/ktx')
 const env = {
   ...process.env,
+  ART_WORLD: world,
   PATH: `${join(ktxHome, 'bin')}:${process.env.PATH}`,
   LD_LIBRARY_PATH: `${join(ktxHome, 'lib')}:${process.env.LD_LIBRARY_PATH ?? ''}`,
 }
 
-const build = join(root, 'art/build')
-const models = join(root, 'public/models')
-const blend = join(root, 'art/atelier-lumen.blend')
+const build = join(root, 'art/build', world)
+const models = join(root, 'public/models', world)
+const blend = join(root, `art/${world}.blend`)
 
 function step(title, cmd, cmdArgs) {
   console.log(`\n▶ ${title}`)
@@ -49,20 +60,18 @@ if (!exportOnly && !skipBake) {
   step('Assets Poly Haven', 'python3', ['tools/blender/fetch_assets.py'])
 }
 if (!skipBake) {
-  step('Plan de l’étage → JSON', 'node', ['tools/export-floorplan.mjs'])
+  step('Plan de l’étage → JSON', 'node', ['tools/export-floorplan.mjs', world])
   step('Visuels de décor', 'python3', ['tools/blender/make_decor.py'])
   if (!exportOnly && (rebuild || !existsSync(blend))) {
     step('Scène Blender', blender, [
       '--background',
       '--python',
-      'tools/blender/build_scene.py',
+      SCENE_SCRIPTS[world],
       '--',
       '--force',
     ])
   } else {
-    console.log(
-      '\n▶ Scène Blender : art/atelier-lumen.blend conservé (--rebuild pour le régénérer)',
-    )
+    console.log(`\n▶ Scène Blender : art/${world}.blend conservé (--rebuild pour le régénérer)`)
   }
   step('Précalcul de l’éclairage et export glTF', blender, [
     '--background',
@@ -197,4 +206,6 @@ writeFileSync(
     : md.replace(/\| Asset \|[\s\S]*?\n\n/, `${block}\n\n`),
 )
 
-console.log('\n✓ Passe artistique terminée : public/models/office.glb, lightmaps, ciel, crédits.')
+console.log(
+  `\n✓ Passe artistique terminée : public/models/${world}/office.glb, lightmaps, ciel, crédits.`,
+)

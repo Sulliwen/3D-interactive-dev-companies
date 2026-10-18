@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useProgress } from '@react-three/drei'
 import { useVisit } from '../state/visit'
+import { useGameStore } from '../state/useGameStore'
 
 const TIPS = [
   'Une dizaine de métiers font avancer un même travail.',
@@ -10,21 +11,24 @@ const TIPS = [
 
 /**
  * Écran de chargement : progression réelle des modèles 3D (l'étage d'abord, puis les
- * personnages), puis fondu vers la visite.
+ * personnages), puis fondu vers la visite. Il revient quand on change de structure, le
+ * temps de télécharger le nouvel étage.
  */
 export function LoadingScreen() {
   const { progress, active } = useProgress()
   const { structure } = useVisit()
-  const [gone, setGone] = useState(false)
-  const done = !active && progress >= 100
+  const ready = useGameStore((s) => s.worldReady === structure.world)
+  // Monde pour lequel l'écran a fini de s'effacer.
+  const [goneFor, setGoneFor] = useState<string | null>(null)
+  const done = ready && !active && progress >= 100
 
   useEffect(() => {
     if (!done) return
-    const id = window.setTimeout(() => setGone(true), 600)
+    const id = window.setTimeout(() => setGoneFor(structure.world), 600)
     return () => window.clearTimeout(id)
-  }, [done])
+  }, [done, structure.world])
 
-  if (gone) return null
+  if (done && goneFor === structure.world) return null
   return (
     <div className={`loading ${done ? 'loading--done' : ''}`} role="status" aria-live="polite">
       <div className="loading__sun" aria-hidden="true" />

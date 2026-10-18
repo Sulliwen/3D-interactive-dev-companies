@@ -1,16 +1,18 @@
 """
 Visuels de décor générés (aucun asset tiers) : affiches de l'entreprise, écran
-d'accueil, plan d'évacuation, calendrier du sprint. Écrit art/build/decor/*.png.
+d'accueil, plan d'évacuation, calendrier du sprint. Écrit art/build/<monde>/decor/*.png.
 
     python3 tools/blender/make_decor.py
 """
 import json
+import os
 from pathlib import Path
 
 from PIL import Image, ImageDraw, ImageFont
 
 ROOT = Path(__file__).resolve().parents[2]
-OUT = ROOT / "art" / "build" / "decor"
+BUILD = ROOT / "art" / "build" / os.environ.get("ART_WORLD", "atelier-lumen")
+OUT = BUILD / "decor"
 FONT = "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf"
 BOLD = "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"
 
@@ -134,7 +136,7 @@ def sprint_calendar():
 
 def main():
     OUT.mkdir(parents=True, exist_ok=True)
-    plan = json.loads((ROOT / "art/build/floorplan.json").read_text())
+    plan = json.loads((BUILD / "floorplan.json").read_text())
     welcome()
     poster("poster_pocket_sante", "Pocket Santé", "Le bon soin, au bon moment.", TEAL, "phone")
     poster("poster_facturo", "Facturo", "La facture en 2 minutes chrono.", (217, 89, 38), "invoice")

@@ -1,10 +1,11 @@
 import { CuboidCollider, RigidBody } from '@react-three/rapier'
-import { floorPlan } from './floorplan'
+import { useWorld } from './worlds'
 import { npcObstaclesFor } from './staging'
 import { useVisit } from '../../state/visit'
 
 /** Collisions générées depuis le plan : un seul corps fixe, une boîte par obstacle. */
 export function Colliders() {
+  const floorPlan = useWorld().plan
   // Les personnages debout bloquent le passage ; ils changent de place selon le scénario.
   const npcObstacles = npcObstaclesFor(useVisit().key)
   return (

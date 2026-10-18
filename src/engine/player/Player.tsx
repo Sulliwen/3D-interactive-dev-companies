@@ -10,7 +10,8 @@ import {
   type RapierRigidBody,
 } from '@react-three/rapier'
 import { CanvasTexture, MathUtils, type Group } from 'three'
-import { floorPlan, type Vec2, type Vec3 } from '../world/floorplan'
+import type { Vec2, Vec3 } from '../world/floorplan'
+import { useWorld } from '../world/worlds'
 import { getNavGrid } from '../nav'
 import { findPath } from '../nav/navGrid'
 import { findNearbyStation } from '../stations/proximity'
@@ -31,6 +32,7 @@ const ARRIVAL_DISTANCE = 0.25
 const WAYPOINT_REACHED = 0.35
 
 export function Player() {
+  const floorPlan = useWorld().plan
   const body = useRef<RapierRigidBody>(null)
   const collider = useRef<RapierCollider>(null)
   const visual = useRef<Group>(null)

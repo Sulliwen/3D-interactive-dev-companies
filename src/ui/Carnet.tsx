@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { floorPlan } from '../engine/world/floorplan'
+import { useWorld } from '../engine/world/worlds'
 import { standPoint } from '../engine/stations/standPoint'
 import { useNextStation } from '../engine/stations/useNextStation'
 import { visitedCount } from '../state/progress'
@@ -9,6 +9,7 @@ import { useEscape } from './escapeStack'
 
 /** Carnet de visite : étape en cours, chaîne complète des postes, accès direct à chacun. */
 export function Carnet() {
+  const floorPlan = useWorld().plan
   const [open, setOpen] = useState(false)
   const visit = useVisit()
   const progress = useProgress()

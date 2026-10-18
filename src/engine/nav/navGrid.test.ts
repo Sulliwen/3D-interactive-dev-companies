@@ -1,11 +1,11 @@
 import { describe, expect, it } from 'vitest'
-import { floorPlan } from '../world/floorplan'
+import { plan as floorPlan } from '../world/worlds/atelier-lumen/plan'
 import { standPoint } from '../stations/standPoint'
 import { buildNavGrid, findPath, isFree, lineOfSight, pathLength, toCell } from './navGrid'
 
 const grid = buildNavGrid(floorPlan)
 
-describe('grille de navigation', () => {
+describe('grille de navigation · Atelier Lumen', () => {
   it('le point de départ de la visite est libre', () => {
     const [x, , z] = floorPlan.spawn.position
     expect(isFree(grid, ...toCell(grid, [x, z]))).toBe(true)

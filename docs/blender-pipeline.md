@@ -1,6 +1,7 @@
 # Pipeline Blender → navigateur
 
-Ce guide explique comment l'étage 3D d'Atelier Lumen passe de Blender au navigateur, et
+Ce guide explique comment l'étage 3D d'une structure (un **monde** : Atelier Lumen…) passe
+de Blender au navigateur, et
 comment le retoucher **sans être expert de Blender**. L'essentiel est automatisé : une
 commande reconstruit tout ; vous intervenez dans Blender seulement là où votre œil compte
 (choix des objets, matériaux, lumières).
@@ -8,23 +9,24 @@ commande reconstruit tout ; vous intervenez dans Blender seulement là où votre
 ## 1. Vue d'ensemble
 
 ```
-src/engine/world/floorplan.ts   ← plan de l'étage (cotes, postes, collisions) : source unique
-        │  npm run art:build
+src/engine/world/worlds/<monde>/plan.ts   ← plan de l'étage (cotes, postes, collisions)
+        │  npm run art:build -- --world <monde>      (par défaut : atelier-lumen)
         ▼
-art/build/floorplan.json        ← le même plan, lisible par Blender
-        │  tools/blender/build_scene.py
+art/build/<monde>/floorplan.json          ← le même plan, lisible par Blender
+        │  tools/blender/build_scene.py    (script de scène du monde)
         ▼
-art/atelier-lumen.blend         ← la scène : architecture, mobilier, assets, matériaux, lumières
+art/<monde>.blend                         ← la scène : architecture, mobilier, assets, lumières
         │  tools/blender/bake_and_export.py   (précalcul de l'éclairage + export glTF)
         ▼
-art/build/office.glb + lightmaps
+art/build/<monde>/office.glb + lightmaps
         │  gltf-transform (meshopt, textures KTX2)
         ▼
-public/models/office.glb, lightmap_*.ktx2, office.json   ← chargés par le jeu
+public/models/<monde>/office.glb, lightmap_*.ktx2, office.json   ← chargés par le jeu
 ```
 
-Le jeu continue de lire les **collisions** et l'emplacement des **postes** dans
-`floorplan.ts`. Le modèle Blender, généré à partir du même plan, s'y superpose exactement.
+Chaque monde a son dossier de modèles, téléchargé **seulement quand on choisit sa
+structure** dans le menu. Le jeu continue de lire les **collisions** et l'emplacement des
+**postes** dans `plan.ts`. Le modèle Blender, généré à partir du même plan, s'y superpose exactement.
 Tant que le modèle n'existe pas, le jeu affiche l'étage en boîtes (blockout).
 
 ## 2. Prérequis (une seule fois)
@@ -156,12 +158,12 @@ est), les **lampes de surface** sous chaque réglette LED, les **suspensions**.
 L'optimisation (`gltf-transform optimize`) compresse la géométrie (**meshopt**) et les
 textures (**KTX2/Basis**, 1024 px max ; lightmaps en UASTC 2048 px). Budgets visés :
 
-|                        | Budget                                       | Vérification                              |
-| ---------------------- | -------------------------------------------- | ----------------------------------------- |
-| Téléchargement initial | < 50 Mo (relevé de 30 à 50 Mo le 17/10/2026) | taille de `public/models` + `dist/assets` |
-| Appels de dessin       | < 150                                        | touche **F2** en mode dev (r3f-perf)      |
-| Triangles visibles     | < 500 000                                    | idem                                      |
-| Images                 | 60 i/s en 1080p sur puce graphique intégrée  | F2                                        |
+|                          | Budget                                       | Vérification                                                    |
+| ------------------------ | -------------------------------------------- | --------------------------------------------------------------- |
+| Téléchargement par étage | < 50 Mo (relevé de 30 à 50 Mo le 17/10/2026) | taille de `public/models/<monde>` + personnages + `dist/assets` |
+| Appels de dessin         | < 150                                        | touche **F2** en mode dev (r3f-perf)                            |
+| Triangles visibles       | < 500 000                                    | idem                                                            |
+| Images                   | 60 i/s en 1080p sur puce graphique intégrée  | F2                                                              |
 
 ## 10. Vérifier dans le jeu
 
@@ -170,14 +172,14 @@ pour comparer), **F3** (collisions en fil de fer : elles doivent épouser le mob
 
 ## 11. Dépannage
 
-| Symptôme                           | Cause probable                     | Remède                                        |
-| ---------------------------------- | ---------------------------------- | --------------------------------------------- |
-| Le jeu affiche toujours les boîtes | `public/models/office.json` absent | `npm run art:build`                           |
-| Taches ou bruit dans l'éclairage   | trop peu d'échantillons            | `npm run art:export` (128 par défaut)         |
-| Coutures sombres sur les arêtes    | marge d'UV trop faible             | augmenter `margin` dans `lightmap_uv()`       |
-| Scène trop sombre / trop claire    | puissance des lampes ou du ciel    | collection `lumieres`, World → Strength       |
-| « Blender introuvable »            | Blender ailleurs                   | `BLENDER=/chemin/blender npm run art:build`   |
-| « ktx: command not found »         | KTX-Software absent                | l'installer dans `~/apps/ktx` ou `KTX_HOME=…` |
+| Symptôme                           | Cause probable                             | Remède                                        |
+| ---------------------------------- | ------------------------------------------ | --------------------------------------------- |
+| Le jeu affiche toujours les boîtes | `public/models/<monde>/office.json` absent | `npm run art:build -- --world <monde>`        |
+| Taches ou bruit dans l'éclairage   | trop peu d'échantillons                    | `npm run art:export` (128 par défaut)         |
+| Coutures sombres sur les arêtes    | marge d'UV trop faible                     | augmenter `margin` dans `lightmap_uv()`       |
+| Scène trop sombre / trop claire    | puissance des lampes ou du ciel            | collection `lumieres`, World → Strength       |
+| « Blender introuvable »            | Blender ailleurs                           | `BLENDER=/chemin/blender npm run art:build`   |
+| « ktx: command not found »         | KTX-Software absent                        | l'installer dans `~/apps/ktx` ou `KTX_HOME=…` |
 
 ## 12. Les personnages
 
@@ -204,7 +206,7 @@ Ce que font les scripts :
 
 Pour modifier un personnage (tenue, couleur, accessoire) : éditer `characters.json`, puis
 `npm run art:characters -- awa` (seulement Awa). Où est assis chacun, et ce qu'il fait :
-`src/engine/world/npcs.ts`.
+`src/engine/world/worlds/<monde>/people.ts`.
 
 Dans le jeu : les personnages hors du champ de vision ne sont ni dessinés ni animés ; au-delà
 de 9 m ils passent en version allégée, au-delà de 12 m leur animation ralentit (10 i/s) ;

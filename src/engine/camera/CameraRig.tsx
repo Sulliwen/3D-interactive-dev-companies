@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef } from 'react'
 import { useThree } from '@react-three/fiber'
 import { useAfterPhysicsStep, useRapier } from '@react-three/rapier'
 import { MathUtils, Matrix4, Quaternion, Vector3, type PerspectiveCamera } from 'three'
-import { floorPlan } from '../world/floorplan'
+import { useWorld } from '../world/worlds'
 import { readMoveInput } from '../player/input'
 import { runtime } from '../runtime'
 import { isExploring, useGameStore } from '../../state/useGameStore'
@@ -39,6 +39,7 @@ const easeInOutCubic = (t: number) => (t < 0.5 ? 4 * t * t * t : 1 - (-2 * t + 2
  *   parcours dans l'ordre, avant de revenir derrière l'avatar.
  */
 export function CameraRig() {
+  const floorPlan = useWorld().plan
   const camera = useThree((s) => s.camera) as PerspectiveCamera
   const domElement = useThree((s) => s.gl.domElement)
   const size = useThree((s) => s.size)
