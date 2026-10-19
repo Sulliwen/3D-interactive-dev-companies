@@ -1,0 +1,132 @@
+{
+  "role": "concept-art",
+  "order": 3,
+  "featureStep": "L'image du jeu, déclinée pour la boutique",
+  "tagline": "Sur Steam, on choisit souvent un jeu sur une image de quelques centimètres. Mon illustration de « Brume » doit donner envie en grand comme en tout petit.",
+  "missions": [
+    "Peindre avec Margaux l'illustration principale du jeu, le [[key-art]] : ce que le jeu promet, en une seule image.",
+    "La décliner aux [[capsule-boutique|formats imposés par la boutique]] : page du jeu, en-tête, petite vignette, bibliothèque du joueur.",
+    "Vérifier que le titre reste lisible dans la plus petite vignette, affichée jusqu'à 184 × 69 pixels.",
+    "Fournir à Victor les images de la presse et de la bande-annonce, dans les mêmes couleurs."
+  ],
+  "takeaways": [
+    "Le [[key-art]] est la porte d'entrée du jeu : on le voit sur la boutique, dans la presse et sur les réseaux, souvent avant la moindre capture d'écran.",
+    "La boutique impose ses formats : la même image est recadrée en paysage, en bandeau et en portrait. Mei recompose chaque format au lieu de simplement réduire l'image.",
+    "En tout petit, les détails disparaissent : pour la petite vignette, Mei agrandit le titre et retire tout ce qui ne se lit plus."
+  ],
+  "receivesFrom": {
+    "roles": ["direction-creative", "publishing"],
+    "text": "La promesse du jeu en une phrase (Margaux : « une lumière contre la brume ») et la liste des formats exigés par la boutique et par Ondine (Victor)."
+  },
+  "handsOffTo": {
+    "roles": ["publishing", "narrative-design"],
+    "text": "Les quatre images aux bons formats pour la page de Victor, et une question pour Chloé : le titre « Brume » reste-t-il en français dans les huit langues ? (Oui : seul le sous-titre est traduit.)"
+  },
+  "screen": {
+    "component": "art-board",
+    "toolName": "Planche",
+    "props": {
+      "file": "Brume_KeyArt_v12",
+      "brush": "Pinceau · Lumière chaude · 60 %",
+      "variantsTitle": "Formats imposés par la boutique",
+      "scriptTitle": "Palette de l'illustration",
+      "layers": [
+        "Titre « Brume »",
+        "Lueur de la lanterne",
+        "Maëlle",
+        "Brume",
+        "Phare et rocher",
+        "Ciel"
+      ],
+      "canvas": {
+        "kind": "keyart",
+        "mood": "warm",
+        "logo": "normal",
+        "title": "Key art · Maëlle face au phare de Kerlaz"
+      },
+      "variants": [
+        {
+          "label": "Capsule principale",
+          "kind": "keyart",
+          "mood": "warm",
+          "logo": "normal",
+          "format": { "w": 1232, "h": 706 },
+          "note": "Page du jeu et mises en avant."
+        },
+        {
+          "label": "En-tête",
+          "kind": "keyart",
+          "mood": "warm",
+          "logo": "normal",
+          "format": { "w": 920, "h": 430 },
+          "note": "Haut de la page du jeu."
+        },
+        {
+          "label": "Petite capsule",
+          "kind": "keyart",
+          "mood": "warm",
+          "variant": 1,
+          "logo": "large",
+          "format": { "w": 462, "h": 174 },
+          "note": "Listes et recherches : titre agrandi, détails retirés."
+        },
+        {
+          "label": "Bibliothèque",
+          "kind": "keyart",
+          "mood": "warm",
+          "logo": "normal",
+          "format": { "w": 600, "h": 900 },
+          "note": "En portrait, dans la bibliothèque du joueur."
+        }
+      ],
+      "colorScript": [
+        { "label": "Nuit", "sky": "#2a2f45", "light": "#3a4a5a" },
+        { "label": "Brume", "sky": "#8fa3ad", "light": "#e6c7a2" },
+        { "label": "Lanterne", "sky": "#e3a35f", "light": "#ffd27a" },
+        { "label": "Titre", "sky": "#1b1f2a", "light": "#f1e6d0" }
+      ],
+      "notes": [
+        {
+          "to": "@Victor",
+          "text": "Les 4 formats sont sur Comptoir Steam ; la petite capsule passe le test à 184 × 69 px."
+        },
+        {
+          "to": "@Chloé",
+          "text": "Le titre « Brume » reste en français dans les 8 langues ; seul le sous-titre change."
+        }
+      ]
+    },
+    "annotations": [
+      {
+        "id": "key-art",
+        "zone": "canvas",
+        "title": "Tout le jeu en une image",
+        "text": "Maëlle de dos, sa lanterne levée, face au phare de l'autre côté de la baie : le [[key-art]] montre la mécanique (la lumière) et l'émotion (le phare rallumé) sans un mot. Il reprend le moment clé peint pour la vertical slice, dix-sept mois plus tôt."
+      },
+      {
+        "id": "formats",
+        "zone": "variants",
+        "title": "Une image, quatre formats",
+        "text": "La boutique exige chaque [[capsule-boutique|capsule]] à une taille précise : paysage, bandeau, petite vignette, portrait. Mei recompose chaque format : en portrait, Maëlle et le phare doivent tous deux rester dans le cadre."
+      },
+      {
+        "id": "petite-capsule",
+        "zone": "notes",
+        "title": "Lisible en tout petit",
+        "text": "Dans les listes de la boutique, la petite capsule s'affiche à 184 × 69 pixels, à peine plus qu'un timbre. Mei y agrandit le titre et retire les détails (sacoche, faisceau du phare) : on doit reconnaître le jeu d'un coup d'œil."
+      },
+      {
+        "id": "palette",
+        "zone": "color-script",
+        "title": "Les couleurs de toute la communication",
+        "text": "La même palette sert pour la boutique, la bande-annonce et les images de presse : le bleu nuit de la brume et l'orange de la lanterne. Partout, on reconnaît « Brume » à ses couleurs."
+      },
+      {
+        "id": "calques",
+        "zone": "layers",
+        "title": "Le titre sur son propre calque",
+        "text": "Le titre est posé à part, au-dessus de l'illustration. Mei peut ainsi l'agrandir ou le déplacer pour chaque format sans repeindre l'image, et livrer à la presse une version sans titre."
+      }
+    ]
+  }
+}

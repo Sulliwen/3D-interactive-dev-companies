@@ -1,0 +1,31 @@
+[
+  {
+    "id": "correctif",
+    "term": "Correctif (patch)",
+    "definition": "Petite mise à jour publiée pour réparer un problème précis, sans ajouter de nouveautés. Le « correctif du premier jour » est publié le jour même de la sortie, quand un problème apparaît chez les premiers joueurs.",
+    "analogy": "Comme un garagiste qui change la seule pièce défectueuse, sans démonter tout le moteur."
+  },
+  {
+    "id": "rapport-de-plantage",
+    "term": "Rapport de plantage",
+    "definition": "Petit fichier envoyé automatiquement (avec l'accord du joueur) quand le jeu plante : à quel endroit du code il s'est arrêté, sur quelle machine, avec quelle carte graphique. On les regroupe par « signature » pour retrouver les causes communes.",
+    "analogy": "Comme la boîte noire d'un avion : elle raconte ce qui s'est passé au moment de l'incident."
+  },
+  {
+    "id": "pilote-graphique",
+    "term": "Pilote graphique",
+    "definition": "Programme fourni par le fabricant de la carte graphique, qui traduit les demandes du jeu en instructions pour la carte. Un pilote ancien peut ne pas comprendre un effet récent, et faire planter le jeu.",
+    "analogy": "Comme un interprète entre le jeu et la carte graphique : s'il ne connaît pas un mot, la conversation s'arrête."
+  },
+  {
+    "id": "telemetrie",
+    "term": "Télémétrie",
+    "definition": "Événements anonymes envoyés par le jeu pendant qu'on joue (« chapitre commencé », « phare rallumé », « fin de session »), avec l'accord des joueurs. Additionnés sur des milliers de parties, ils montrent où les joueurs avancent, bloquent ou abandonnent.",
+    "analogy": "Comme les compteurs de passage à l'entrée des salles d'un musée : on ne sait pas qui est passé, mais on voit où les visiteurs s'arrêtent."
+  },
+  {
+    "id": "avis-des-joueurs",
+    "term": "Avis des joueurs",
+    "definition": "Sur une boutique comme Steam, chaque acheteur peut dire s'il recommande le jeu ou non, avec un commentaire. La part d'avis positifs donne une appréciation visible de tous (« Très positives »…), qui influence beaucoup les ventes."
+  }
+]

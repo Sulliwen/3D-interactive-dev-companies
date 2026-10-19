@@ -1,0 +1,56 @@
+using Brume.Core;
+using Brume.Platform;
+
+namespace Brume.Saves;
+
+// Les sauvegardes de Brume : sur le disque d'abord, puis dans le cloud Steam.
+// Leçon de « Petits Cailloux » (mars 2023) : une sauvegarde écrite à moitié
+// effaçait la progression. Ici, on n'écrase jamais l'ancienne avant d'avoir la nouvelle.
+public sealed class SaveService
+{
+    private const string Slot = "slot_1.sav";
+    private const string Backup = "slot_1.backup.sav"; // copie gardée à chaque chapitre
+
+    private readonly ISaveStorage local;   // dossier de sauvegardes du joueur
+    private readonly ICloudStorage cloud;  // cloud Steam
+
+    public async Task SaveAsync(SaveData data)
+    {
+        byte[] bytes = SaveFormat.Write(data); // ajoute une somme de contrôle
+
+        // @zone local-first
+        // 1. D'abord sur le disque, dans un fichier temporaire qu'on renomme
+        //    ensuite : si le PC s'éteint pendant l'écriture, l'ancienne reste intacte.
+        await local.WriteAtomicAsync(Slot, bytes);
+        if (data.ChapterJustStarted) await local.WriteAtomicAsync(Backup, bytes);
+        // @end
+
+        // @zone cloud
+        // 2. Puis vers le cloud, sans jamais bloquer le jeu. Pas de réseau (Steam
+        //    Deck dans le train) ? L'envoi repartira au prochain lancement.
+        cloud.UploadLater(Slot, bytes, data.Header);
+        // @end
+    }
+
+    public SaveData LoadBest()
+    {
+        // @zone backup
+        // Une sauvegarde abîmée (somme de contrôle fausse) n'est jamais chargée :
+        // on reprend la copie de secours du début du chapitre.
+        SaveData? onDisk = SaveFormat.TryRead(local.Read(Slot))
+                        ?? SaveFormat.TryRead(local.Read(Backup));
+        // @end
+        SaveData? inCloud = SaveFormat.TryRead(cloud.Read(Slot));
+
+        if (onDisk is null) return inCloud ?? SaveData.NewGame();
+        if (inCloud is null || inCloud.Header.Equals(onDisk.Header)) return onDisk;
+
+        // @zone conflict
+        // Deux versions différentes (deux PC, ou le Deck joué hors ligne) :
+        // on ne choisit pas à la place du joueur, on lui montre les deux.
+        return ConflictDialog.Ask(
+            onDisk,   // « Cet appareil : chapitre 4, il y a 2 h »
+            inCloud); // « Cloud Steam : chapitre 5, hier soir »
+        // @end
+    }
+}

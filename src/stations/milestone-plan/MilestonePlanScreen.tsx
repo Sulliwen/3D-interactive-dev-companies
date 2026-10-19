@@ -14,6 +14,8 @@ const EVENT_LABEL = {
   playtest: 'Playtest',
   recording: 'Voix',
   demo: 'Démo',
+  launch: 'Sortie',
+  press: 'Presse',
   other: 'Repère',
 } as const
 
@@ -38,7 +40,7 @@ export function MilestonePlanScreen({ toolName, props: raw }: ScreenComponentPro
         <>
           <span>{p.status}</span>
           <span style={{ marginLeft: 'auto' }}>
-            {done} sur {p.scope.length} livrables prêts
+            {done} sur {p.scope.length} {p.scopeCount}
           </span>
         </>
       }
@@ -76,7 +78,7 @@ export function MilestonePlanScreen({ toolName, props: raw }: ScreenComponentPro
 
         <div className="mp__bottom">
           <Zone id="scope" className="mp__panel">
-            <p className="mp__heading">Dans la vertical slice</p>
+            <p className="mp__heading">{p.scopeTitle}</p>
             <ul className="mp__scope">
               {p.scope.map((s) => (
                 <li key={s.title} className={`is-${s.status}`}>
@@ -92,7 +94,7 @@ export function MilestonePlanScreen({ toolName, props: raw }: ScreenComponentPro
           </Zone>
 
           <Zone id="cuts" className="mp__panel mp__cuts">
-            <p className="mp__heading">Coupé pour tenir la date</p>
+            <p className="mp__heading">{p.cutsTitle}</p>
             <ul>
               {p.cuts.map((c) => (
                 <li key={c.title}>
@@ -105,7 +107,7 @@ export function MilestonePlanScreen({ toolName, props: raw }: ScreenComponentPro
           </Zone>
 
           <Zone id="capacity" className="mp__panel mp__capacity">
-            <p className="mp__heading">Charge de l'équipe</p>
+            <p className="mp__heading">{p.capacityTitle}</p>
             <p className="mp__rule">{p.capacity.rule}</p>
             <ul>
               {p.capacity.rows.map((r) => {

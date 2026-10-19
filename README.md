@@ -13,7 +13,8 @@ Structures disponibles :
   les débuts de l'entreprise, une fonctionnalité réclamée par les utilisateurs, la v2 de
   l'application, le lancement d'un nouveau produit ;
 - _Studio Lanterne_, un studio de jeu vidéo indépendant à Bordeaux (jeu _Brume_, sur PC),
-  avec un scénario : la vertical slice présentée à l'éditeur du jeu.
+  avec deux scénarios : la vertical slice présentée à l'éditeur du jeu, puis la sortie
+  du jeu sur Steam.
 
 Les autres structures sont annoncées « en préparation ».
 

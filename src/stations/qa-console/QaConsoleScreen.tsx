@@ -108,21 +108,21 @@ export function QaConsoleScreen({ toolName, props: rawProps }: ScreenComponentPr
             />
           )}
           <div className="qa__bug-details">
-            <p className="qa__label">Étapes pour reproduire</p>
+            <p className="qa__label">{props.bug.labels.steps}</p>
             <ol>
               {props.bug.steps.map((s) => (
                 <li key={s}>{s}</li>
               ))}
             </ol>
-            <p className="qa__label">Attendu</p>
+            <p className="qa__label">{props.bug.labels.expected}</p>
             <p>{props.bug.expected}</p>
-            <p className="qa__label">Obtenu</p>
+            <p className="qa__label">{props.bug.labels.actual}</p>
             <p className="qa__actual">{props.bug.actual}</p>
           </div>
         </div>
 
         <Zone id="bug-cause" className="qa__cause">
-          <p className="qa__label">Cause</p>
+          <p className="qa__label">{props.bug.labels.cause}</p>
           <p>{props.bug.cause.text}</p>
           <p className="qa__diff">
             <code className="qa__del">− {props.bug.cause.before}</code>
@@ -132,7 +132,7 @@ export function QaConsoleScreen({ toolName, props: rawProps }: ScreenComponentPr
 
         <Zone id="retest" className="qa__retest">
           <span>
-            Assigné à <strong>{props.bug.assignee}</strong>
+            {props.bug.labels.assignee} <strong>{props.bug.assignee}</strong>
           </span>
           {retested ? (
             <StatusBadge status="good">{props.bug.statusAfter}</StatusBadge>

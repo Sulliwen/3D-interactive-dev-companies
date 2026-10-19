@@ -150,6 +150,22 @@
   border-radius: 2px;
 }
 
+.ab__thumb {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 88px;
+  height: 50px;
+}
+
+.ab__format {
+  display: block;
+  color: var(--ink-muted);
+  font-family: var(--mono);
+  font-size: 9.5px;
+  font-style: normal;
+}
+
 .ab__variants li.is-chosen {
   border-color: var(--lumen);
   background: rgb(242 165 65 / 0.08);

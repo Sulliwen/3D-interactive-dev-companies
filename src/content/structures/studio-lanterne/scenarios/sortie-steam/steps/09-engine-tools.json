@@ -1,0 +1,137 @@
+{
+  "role": "engine-tools",
+  "order": 5,
+  "featureStep": "La version finale, envoyée et vérifiée",
+  "tagline": "Ce soir, des milliers de joueurs vont télécharger le jeu en même temps. Mon travail : que ce soit exactement la bonne version, qu'elle tourne sur toutes les machines prévues, et qu'on puisse revenir en arrière en une minute.",
+  "missions": [
+    "Fabriquer la [[version-gold|version finale]] 1.0.0 avec la chaîne automatique : compilation, [[test-automatise|tests]], empaquetage.",
+    "L'envoyer sur les serveurs de Steam, sur une [[branche]] privée jusqu'à l'heure de sortie.",
+    "Faire classer le jeu « Vérifié » sur [[steam-deck|Steam Deck]] : 30 images par seconde, textes lisibles, tout à la manette.",
+    "Garder sous la main la version précédente, pour un [[retour-arriere|retour arrière]] si la sortie tourne mal."
+  ],
+  "takeaways": [
+    "Une sortie ne se joue pas sur une machine : la **même** version, fabriquée automatiquement, part chez Valve, chez la presse et chez tous les joueurs. Personne ne compile « à la main » le jour J.",
+    "Sur Steam, le jeu est en ligne **avant** sa sortie : la version 1.0.0 attend sur une branche privée depuis des semaines. À 19 h, Steam ouvre simplement l'accès à tout le monde.",
+    "Revenir en arrière se prépare : Sarah sait remettre la version précédente en ligne en une minute, sans que les joueurs aient à réinstaller quoi que ce soit."
+  ],
+  "receivesFrom": {
+    "roles": ["production", "narrative-design"],
+    "text": "La date du gel de la [[version-gold|version finale]], fixée par Jeanne au 16 mars, et les textes du jeu dans les 8 langues, livrés par Chloé avec les traductions vérifiées."
+  },
+  "handsOffTo": {
+    "roles": ["qa"],
+    "text": "La version 1.0.0 en ligne sur la branche privée : Yasmine la soumet à la revue de Valve et la teste sur ses 12 PC."
+  },
+  "screen": {
+    "component": "pipeline",
+    "toolName": "Lanterne Editor · Builds",
+    "props": {
+      "run": {
+        "id": 2814,
+        "title": "Brume 1.0.0 · version finale (« gold »)",
+        "trigger": "Lancée par Sarah Cohen le jeudi 16 mars 2028 à 9 h 12 · étiquette v1.0.0",
+        "branch": "release/1.0",
+        "commit": "a41f2c9",
+        "target": "Brume · Steam · branche default (privée jusqu'au 13 avril, 19 h)"
+      },
+      "stages": [
+        {
+          "label": "Compilation",
+          "detail": "Windows 64 bits · 8 langues · réglages de sortie",
+          "duration": "41 min"
+        },
+        {
+          "label": "Tests automatiques",
+          "detail": "1 240 tests · le robot joue les 9 chapitres",
+          "duration": "1 h 52",
+          "zone": "auto-tests"
+        },
+        {
+          "label": "Empaquetage",
+          "detail": "11,4 Go · fichiers découpés pour des mises à jour légères",
+          "duration": "18 min",
+          "zone": "package"
+        },
+        {
+          "label": "Envoi sur Steam",
+          "detail": "PC et Steam Deck · branche default, privée",
+          "duration": "26 min"
+        },
+        {
+          "label": "Steam Deck",
+          "detail": "Testé par Valve : « Vérifié » le 29 mars",
+          "duration": "Vérifié",
+          "zone": "steam-deck"
+        }
+      ],
+      "rollout": {
+        "title": "Qui peut jouer à la 1.0.0",
+        "audience": "des joueurs peuvent lancer Brume 1.0.0",
+        "audienceLabel": "Part des joueurs qui ont accès au jeu",
+        "flagTitle": "Version en ligne",
+        "flagStatus": "Branche default :",
+        "onLabel": "En ligne",
+        "offLabel": "Remplacée",
+        "rollbackLabel": "↺ Remettre la version précédente",
+        "flag": "build 14 882 117 (1.0.0)",
+        "steps": [
+          {
+            "percent": 5,
+            "label": "Presse et créateurs de vidéos : 320 clés",
+            "check": "embargo jusqu'au 13 avril, 15 h"
+          },
+          {
+            "percent": 100,
+            "label": "Tout le monde, à 19 h 00",
+            "check": "ouverture automatique par Steam"
+          }
+        ],
+        "rollbackMessage": "La branche default pointe de nouveau sur la 1.0.0-rc4. Steam la distribue au prochain lancement du jeu : personne n'a à réinstaller."
+      },
+      "log": [
+        "$ lanterne build --config sortie --langues 8",
+        "Compilation : 4 812 fichiers · 0 erreur · 0 avertissement",
+        "$ lanterne test --tout --robot chapitres:1-9",
+        "✓ 1 240 tests réussis · robot : 9 chapitres en 6 h 40",
+        "$ lanterne paquet --decoupe 1Mo",
+        "Paquet : 11,4 Go · 11 682 morceaux",
+        "$ comptoir envoyer --branche default",
+        "Envoi : 11,4 Go · mises à jour : morceaux modifiés seuls",
+        "✓ Build 14 882 117 en ligne · branche default (privée)",
+        "Ouverture programmée : jeudi 13 avril, 19:00 (Paris)"
+      ]
+    },
+    "annotations": [
+      {
+        "id": "gold",
+        "zone": "pipeline-header",
+        "title": "Une version, une seule",
+        "text": "La [[version-gold|version finale]] (« gold ») est fabriquée par la chaîne automatique, à partir d'une étiquette précise dans l'historique du code. C'est **exactement** ce fichier que Valve, la presse et les joueurs recevront : aucune retouche « à la main » de dernière minute."
+      },
+      {
+        "id": "robot",
+        "zone": "auto-tests",
+        "title": "Un robot joue les 9 chapitres",
+        "text": "Avant de partir, la version passe 1 240 [[test-automatise|tests automatiques]], et un petit robot traverse tout le jeu, du village au dernier chapitre. S'il reste coincé quelque part, la version est refusée, avant même d'arriver chez Yasmine."
+      },
+      {
+        "id": "pieces",
+        "zone": "package",
+        "title": "Découper pour mettre à jour léger",
+        "text": "Le jeu pèse 11,4 Go. Il est découpé en milliers de petits morceaux : quand un correctif sort, Steam ne renvoie que les morceaux modifiés. Le correctif du soir pèsera ainsi quelques dizaines de Mo, pas 11 Go."
+      },
+      {
+        "id": "deck",
+        "zone": "steam-deck",
+        "title": "« Vérifié » sur Steam Deck",
+        "text": "Valve teste elle-même le jeu sur sa console portable : tout doit se jouer à la manette, les textes doivent rester lisibles sur le petit écran, et le jeu tenir sa cadence (30 [[images-par-seconde|images par seconde]] visées). Le badge « Vérifié » rassure les acheteurs sur la page du jeu."
+      },
+      {
+        "id": "branch",
+        "zone": "feature-flag",
+        "title": "En ligne, mais fermé",
+        "text": "Le jeu est sur les serveurs de Steam depuis le 16 mars, sur une [[branche]] privée : la presse y a accès avec ses clés. À 19 h, Steam ouvre l'accès à tous. Et si tout casse, Sarah remet la version précédente en ligne : essayez « Remettre la version précédente »."
+      }
+    ]
+  }
+}

@@ -294,3 +294,132 @@
   text-align: center;
   line-height: 1.2;
 }
+
+/* Colonne de droite : mixage, et accessibilité du son quand l'écran la montre. */
+.am.has-access .am__track svg {
+  width: 200px;
+}
+
+.am__right {
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.am__right.has-access {
+  width: 250px;
+}
+
+.am__right > .am__mixer {
+  flex: 1;
+  min-height: 0;
+}
+
+.am__right.has-access .am__mixer {
+  width: auto;
+}
+
+.am__scene {
+  position: relative;
+  height: 112px;
+  overflow: hidden;
+  border-radius: 6px;
+  background:
+    radial-gradient(ellipse at 30% 35%, rgb(255 214 150 / 0.35), transparent 45%),
+    linear-gradient(180deg, #31404c 0%, #56656f 55%, #2b3138 100%);
+}
+
+.am__scene-label {
+  position: absolute;
+  top: 5px;
+  right: 56px;
+  left: 7px;
+  color: rgb(255 255 255 / 0.75);
+  font-size: 9.5px;
+}
+
+.am__compass {
+  position: absolute;
+  top: 4px;
+  right: 5px;
+}
+
+.am__compass-ring {
+  fill: rgb(0 0 0 / 0.35);
+  stroke: rgb(255 255 255 / 0.5);
+  stroke-width: 1.5;
+}
+
+.am__compass-me {
+  fill: #fff;
+}
+
+.am__compass-dot {
+  fill: var(--lumen);
+}
+
+.am__compass-around {
+  fill: none;
+  stroke: var(--lumen);
+  stroke-width: 1.5;
+  stroke-dasharray: 3 3;
+}
+
+.am__subs {
+  position: absolute;
+  right: 6px;
+  bottom: 6px;
+  left: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.am__sub {
+  align-self: center;
+  padding: 2px 6px;
+  border-radius: 3px;
+  background: rgb(0 0 0 / 0.72);
+  color: #fff;
+  font-size: 10.5px;
+  text-align: center;
+}
+
+.am__sub--left {
+  align-self: flex-start;
+}
+
+.am__sub--right {
+  align-self: flex-end;
+}
+
+.am__options ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.am__options li {
+  display: flex;
+  justify-content: space-between;
+  gap: 6px;
+  padding: 2px 0;
+  font-size: 10.5px;
+}
+
+.am__opt {
+  flex: none;
+  color: var(--ink-muted);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.am__opt.is-on {
+  color: #7ee07e;
+}
+
+.am__opt.is-off {
+  color: var(--ink-muted);
+  font-weight: 400;
+}

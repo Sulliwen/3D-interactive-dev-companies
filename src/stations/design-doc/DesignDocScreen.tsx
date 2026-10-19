@@ -86,9 +86,9 @@ export function DesignDocScreen({ toolName, props: raw }: ScreenComponentProps) 
               <table>
                 <thead>
                   <tr>
-                    <th>Réglage</th>
-                    <th>Valeur</th>
-                    <th>Pourquoi</th>
+                    {p.tuning.columns.map((c) => (
+                      <th key={c}>{c}</th>
+                    ))}
                   </tr>
                 </thead>
                 <tbody>

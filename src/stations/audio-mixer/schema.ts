@@ -39,11 +39,37 @@ export const audioMixerPropsSchema = z.object({
     .max(5),
   music: z.object({ title: z.string(), composer: z.string(), note: z.string() }),
   statusItems: z.array(z.string()).default([]),
+  /**
+   * Accessibilité du son (facultatif) : aperçu en jeu des sous-titres des sons, avec la
+   * direction d'où vient chaque son, et les réglages proposés au joueur.
+   */
+  accessibility: z
+    .object({
+      /** Ce que montre l'aperçu (ex. « Falaise de Kerlaz, de nuit »). */
+      scene: z.string(),
+      captions: z
+        .array(
+          z.object({
+            text: z.string(),
+            direction: z.enum(['left', 'right', 'front', 'back', 'around']),
+          }),
+        )
+        .min(1)
+        .max(3),
+      options: z
+        .array(z.object({ label: z.string(), value: z.string(), on: z.boolean().optional() }))
+        .min(2)
+        .max(6),
+    })
+    .optional(),
 })
 
 export type AudioMixerProps = z.infer<typeof audioMixerPropsSchema>
 
 export const AUDIO_MIXER_ZONES = ['events', 'parameter', 'layers', 'mixer', 'music'] as const
+
+/** Zones ajoutées quand l'écran montre l'accessibilité du son. */
+export const AUDIO_MIXER_ACCESSIBILITY_ZONES = ['captions', 'audio-options'] as const
 
 /** Volume d'une couche pour une valeur du paramètre (interpolation linéaire de la courbe). */
 export function volumeAt(curve: ReadonlyArray<readonly [number, number]>, x: number): number {

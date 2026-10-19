@@ -1,0 +1,194 @@
+{
+  "role": "technical-art",
+  "order": 10,
+  "featureStep": "19 h 40 : des plantages sur certaines cartes graphiques",
+  "tagline": "À 19 h 40, les rapports de plantage s'emballent : 87 % viennent d'une même famille de cartes graphiques, au moment où la brume se compile. C'est mon effet : c'est à moi de le réparer, ce soir.",
+  "missions": [
+    "Surveiller les [[rapport-de-plantage|rapports de plantage]] pendant la soirée de lancement, avec Sarah.",
+    "Regrouper les plantages par signature pour trouver la cause commune : quel code, quelles machines, quel moment du jeu.",
+    "Écrire un [[correctif]] ciblé : une version simplifiée de l'effet de brume pour les cartes concernées, sans toucher aux autres.",
+    "Faire valider le correctif par Yasmine sur les PC de test avant de le publier."
+  ],
+  "takeaways": [
+    "On ne peut pas tester tous les PC du monde : malgré 12 machines de test, une famille de cartes graphiques avec un ancien [[pilote-graphique|pilote]] plante. Les **rapports de plantage**, envoyés avec l'accord des joueurs, la révèlent en quelques minutes.",
+    "Le regroupement par **signature** transforme 214 rapports en un seul problème à résoudre : 87 % ont la même pile d'appels.",
+    "Le correctif est volontairement **étroit** : une variante simplifiée du [[shader]], seulement pour ces cartes. Publié à 22 h 05, il fait passer le taux de plantage de 3,1 % à 0,2 %."
+  ],
+  "receivesFrom": {
+    "roles": ["direction-creative", "qa"],
+    "text": "Le feu vert de Margaux pour une version 1.0.1 ce soir, et le plantage reproduit par Yasmine à 19 h 55 sur le PC de test n° 7, équipé d'une vieille carte graphique."
+  },
+  "handsOffTo": {
+    "roles": ["engine-tools", "game-design"],
+    "text": "Un correctif validé sur les 12 PC, que Sarah construit et envoie sur Steam à 22 h 05. Les plantages ayant coupé des parties, Karim les écarte de ses chiffres de progression."
+  },
+  "screen": {
+    "component": "crash-reports",
+    "toolName": "Vigie",
+    "props": {
+      "title": "Brume · plantages depuis la sortie",
+      "scope": "Steam · jeudi 13 avril 2028, 19 h 00 → 23 h 00",
+      "tiles": [
+        {
+          "label": "Plantages à 19 h 40",
+          "value": "214",
+          "detail": "en 40 minutes",
+          "status": "critical"
+        },
+        {
+          "label": "Groupe principal",
+          "value": "87 %",
+          "detail": "une seule signature",
+          "status": "serious"
+        },
+        {
+          "label": "Correctif 1.0.1",
+          "value": "22 h 05",
+          "detail": "publié sur Steam",
+          "status": "good"
+        },
+        {
+          "label": "Taux de plantage",
+          "value": "0,2 %",
+          "detail": "3,1 % avant la 1.0.1",
+          "status": "good"
+        }
+      ],
+      "timeline": {
+        "title": "Plantages reçus, par tranche de 10 minutes",
+        "buckets": [
+          { "label": "19:00", "value": 6 },
+          { "label": "19:10", "value": 28 },
+          { "label": "19:20", "value": 61 },
+          { "label": "19:30", "value": 119 },
+          { "label": "19:40", "value": 132 },
+          { "label": "19:50", "value": 140 },
+          { "label": "20:00", "value": 146 },
+          { "label": "20:10", "value": 151 },
+          { "label": "20:20", "value": 149 },
+          { "label": "20:30", "value": 152 },
+          { "label": "20:40", "value": 150 },
+          { "label": "20:50", "value": 153 },
+          { "label": "21:00", "value": 155 },
+          { "label": "21:10", "value": 151 },
+          { "label": "21:20", "value": 148 },
+          { "label": "21:30", "value": 146 },
+          { "label": "21:40", "value": 144 },
+          { "label": "21:50", "value": 142 },
+          { "label": "22:00", "value": 131 },
+          { "label": "22:10", "value": 64 },
+          { "label": "22:20", "value": 22 },
+          { "label": "22:30", "value": 11 },
+          { "label": "22:40", "value": 8 },
+          { "label": "22:50", "value": 7 }
+        ],
+        "markers": [
+          { "at": 4, "label": "19 h 40 · alerte" },
+          { "at": 18, "label": "22 h 05 · version 1.0.1" }
+        ]
+      },
+      "groups": [
+        {
+          "id": "fog",
+          "signature": "ShaderCache::Compile · FogVolume",
+          "count": 187,
+          "share": "87 %",
+          "where": "cartes GX-1000 (2017), pilote de 2021 ou plus ancien",
+          "status": "critical"
+        },
+        {
+          "id": "save",
+          "signature": "SaveSystem::Flush · accès refusé",
+          "count": 14,
+          "share": "7 %",
+          "where": "Windows 10 + un antivirus tiers · sauvegarde de secours OK",
+          "status": "warning"
+        },
+        {
+          "id": "audio",
+          "signature": "AudioDevice::Open · périphérique absent",
+          "count": 8,
+          "share": "4 %",
+          "where": "casque débranché pendant la partie",
+          "status": "warning"
+        },
+        {
+          "id": "other",
+          "signature": "Autres (5 signatures)",
+          "count": 5,
+          "share": "2 %",
+          "where": "un seul rapport chacune",
+          "status": "good"
+        }
+      ],
+      "open": {
+        "group": "fog",
+        "frames": [
+          "gx_driver.dll  CompileProgram+0x3f2",
+          "Render  ShaderCache::Compile(FogVolume, HOLE)",
+          "Render  FogVolume::EnsureVariant(High)",
+          "Gameplay  LanternLight::OnLit()",
+          "Gameplay  Lamp::Interact(player)"
+        ],
+        "context": [
+          { "label": "Carte graphique", "value": "GX-1000 (2017)" },
+          { "label": "Pilote", "value": "21.4 (2021) ou plus ancien" },
+          { "label": "Moment du jeu", "value": "1re lampe rallumée, ≈ 12 min" },
+          { "label": "Machines touchées", "value": "≈ 4 % des joueurs" }
+        ]
+      },
+      "fix": {
+        "title": "Correctif de la soirée",
+        "steps": [
+          { "time": "19:40", "text": "Alerte : 119 plantages en 10 min." },
+          { "time": "19:55", "text": "Reproduit par Yasmine (PC n° 7)." },
+          {
+            "time": "20:35",
+            "text": "Cause : le pilote ne compile pas le « trou de lumière »."
+          },
+          { "time": "21:20", "text": "Variante simplifiée, validée sur 12 PC." },
+          { "time": "22:05", "text": "1.0.1 publiée sur Steam (Sarah)." }
+        ],
+        "before": "3,1 %",
+        "after": "0,2 %"
+      },
+      "statusItems": [
+        "Version en ligne : 1.0.1 (22 h 05)",
+        "Rapports envoyés avec l'accord des joueurs",
+        "Astreinte : Théo, Sarah, Yasmine jusqu'à 23 h"
+      ]
+    },
+    "annotations": [
+      {
+        "id": "rapports",
+        "zone": "tiles",
+        "title": "Un plantage, un rapport",
+        "text": "Quand le jeu plante chez un joueur, il propose d'envoyer un [[rapport-de-plantage|rapport de plantage]] : où le programme s'est arrêté, sur quelle machine. Personne au studio n'a la carte graphique du joueur ; le rapport, lui, la décrit."
+      },
+      {
+        "id": "courbe",
+        "zone": "timeline",
+        "title": "Une courbe qui s'emballe",
+        "text": "Quelques plantages, c'est normal. Mais 119 en dix minutes, pour un jeu sorti à 19 h, c'est une alerte. La courbe montre aussi la fin de l'histoire : après 22 h 05, les joueurs reçoivent la version 1.0.1 et les plantages s'effondrent."
+      },
+      {
+        "id": "signature",
+        "zone": "groups",
+        "title": "214 rapports, un seul problème",
+        "text": "Les rapports sont regroupés par **signature** : le même endroit du code au moment du plantage. 187 rapports sur 214 ont la même, et ils viennent tous de la même famille de cartes graphiques. Au lieu de 214 enquêtes, il n'y en a qu'une."
+      },
+      {
+        "id": "pile",
+        "zone": "stack",
+        "title": "La pile d'appels raconte le plantage",
+        "text": "On la lit de bas en haut : le joueur rallume une lampe, la lanterne s'allume, le jeu demande la variante « trou de lumière » du [[shader]] de brume… et le [[pilote-graphique|pilote]] de la carte graphique, trop ancien, échoue à la compiler."
+      },
+      {
+        "id": "correctif",
+        "zone": "fix",
+        "title": "Un correctif étroit, testé, publié",
+        "text": "Théo ne réécrit pas la brume : il ajoute une variante simplifiée, utilisée seulement sur ces cartes. Yasmine la teste sur les 12 PC, Sarah publie le [[correctif]]. Deux heures et demie après l'alerte, l'équipe rentre chez elle, sans nuit blanche."
+      }
+    ]
+  }
+}

@@ -1,0 +1,140 @@
+{
+  "role": "game-design",
+  "order": 11,
+  "featureStep": "Les premières heures, vues par la télémétrie",
+  "tagline": "Pendant des mois, j'ai réglé « Brume » avec huit joueurs de playtest. Ce soir, ils sont 9 800 en même temps. La télémétrie me dit où ils avancent, où ils bloquent, et où ils abandonnent.",
+  "missions": [
+    "Suivre la [[telemetrie]] des premières heures : combien de joueurs, jusqu'où ils vont, combien de temps ils jouent.",
+    "Repérer les endroits où les joueurs abandonnent, et les comparer à ce que disaient les playtests.",
+    "Préparer les changements de réglages ([[equilibrage]]) de la version 1.0.2, chiffres à l'appui.",
+    "Écarter des calculs les parties coupées par le plantage de 19 h 40, pour ne pas fausser les chiffres."
+  ],
+  "takeaways": [
+    "La [[telemetrie]] envoie des événements anonymes (« phare rallumé », « fin de session ») : avec des milliers de joueurs, elle montre ce qu'aucun playtest à huit ne pouvait voir.",
+    "Un chiffre ne dit pas **pourquoi** : 41 % des joueurs arrivés au marais s'y arrêtent, mais seuls les avis et les playtests diront si c'est la difficulté, l'heure tardive ou l'ennui.",
+    "Karim prépare un réglage pour la 1.0.2, mais n'y touche pas ce soir : il attend 48 heures de données, comme l'a décidé Margaux."
+  ],
+  "receivesFrom": {
+    "roles": ["gameplay-programming", "technical-art"],
+    "text": "Les événements anonymes que le code de Lucas envoie à chaque étape du jeu, et la liste des parties coupées par le plantage, que Théo lui transmet pour les écarter."
+  },
+  "handsOffTo": {
+    "roles": ["playtest-research", "direction-creative"],
+    "text": "Les chiffres du marais, qu'Elsa croise avec les avis des joueurs pour comprendre pourquoi ils abandonnent, et une proposition de réglage pour la 1.0.2, à valider samedi avec Margaux."
+  },
+  "screen": {
+    "component": "analytics-dashboard",
+    "toolName": "Labo de jeu · Télémétrie",
+    "props": {
+      "dashboard": "Brume · soirée de lancement",
+      "period": "jeudi 13 avril 2028, 19 h 00 → minuit",
+      "tiles": [
+        {
+          "label": "Joueurs simultanés (pic)",
+          "value": "9 800",
+          "detail": "à 21 h 00",
+          "status": "good"
+        },
+        {
+          "label": "Phare de Kerlaz rallumé",
+          "value": "73 %",
+          "detail": "des joueurs qui ont lancé le jeu",
+          "status": "good"
+        },
+        {
+          "label": "Première session",
+          "value": "1 h 52",
+          "detail": "en moyenne"
+        },
+        {
+          "label": "Arrêts au marais",
+          "value": "41 %",
+          "detail": "des joueurs arrivés au chapitre 3",
+          "status": "warning"
+        }
+      ],
+      "trend": {
+        "title": "Joueurs en même temps dans le jeu",
+        "seriesLabel": "Joueurs simultanés",
+        "labels": [
+          "19 h",
+          "19 h 30",
+          "20 h",
+          "20 h 30",
+          "21 h",
+          "21 h 30",
+          "22 h",
+          "22 h 30",
+          "23 h",
+          "23 h 30",
+          "0 h"
+        ],
+        "values": [2100, 5400, 7600, 8900, 9800, 9500, 8700, 8200, 7100, 5600, 4300],
+        "yMax": 12000
+      },
+      "breakdown": {
+        "title": "Jusqu'où vont les joueurs (% par chapitre)",
+        "valueLabel": "% des joueurs",
+        "bars": [
+          { "label": "Prologue", "value": 98 },
+          { "label": "Kerlaz", "value": 73 },
+          { "label": "Landes", "value": 39 },
+          { "label": "Marais", "value": 14, "highlight": true },
+          { "label": "Marais fini", "value": 8 }
+        ]
+      },
+      "query": {
+        "title": "Où s'arrêtent les joueurs du marais ?",
+        "lines": [
+          "-- Fins de session au chapitre 3, hors parties coupées par un plantage",
+          "SELECT zone, COUNT(*) AS fins_de_session",
+          "FROM sessions",
+          "WHERE chapitre = 3",
+          "  AND fin_normale = TRUE",
+          "GROUP BY zone",
+          "ORDER BY fins_de_session DESC;"
+        ],
+        "result": "passerelles du marais, 41 % des arrivants s'y arrêtent"
+      },
+      "hypothesis": {
+        "title": "Et si la brume du marais ralentissait ?",
+        "value": "1,6 → 1,3 m/s",
+        "text": "Proposition pour la 1.0.2 : la brume y avance plus vite que partout ailleurs (1,2 m/s au phare). À valider samedi avec Margaux, après 48 h de données."
+      },
+      "freshness": "Télémétrie en direct · mise à jour il y a 2 min",
+      "privacy": "Événements anonymes, envoyés avec l'accord des joueurs"
+    },
+    "annotations": [
+      {
+        "id": "tuiles",
+        "zone": "tiles",
+        "title": "Quatre chiffres pour la soirée",
+        "text": "Combien de joueurs en même temps, combien vont jusqu'au phare, combien de temps dure une première partie, et où ça coince. Ces chiffres viennent de la [[telemetrie]] : des événements anonymes envoyés par le jeu."
+      },
+      {
+        "id": "courbe",
+        "zone": "trend",
+        "title": "Le pic de 21 h",
+        "text": "Le jeu sort à 19 h ; le nombre de joueurs simultanés grimpe jusqu'à 9 800 à 21 h, puis redescend vers minuit. Pour un studio de 30 personnes, c'est plus de mille fois les huit joueurs d'un playtest."
+      },
+      {
+        "id": "progression",
+        "zone": "breakdown",
+        "title": "Jusqu'où vont les joueurs ?",
+        "text": "Chaque barre est la part des joueurs qui a atteint ce chapitre. Le soir de la sortie, peu ont eu le temps d'aller loin ; mais parmi ceux qui atteignent le marais, beaucoup s'arrêtent. C'est ce que Karim veut comprendre."
+      },
+      {
+        "id": "requete",
+        "zone": "query",
+        "title": "Des chiffres propres",
+        "text": "La requête écarte les parties coupées par le plantage de 19 h 40 : sinon, on croirait que des joueurs abandonnent, alors que le jeu les a fait sortir. Un chiffre faux mène à un mauvais [[equilibrage|réglage]]."
+      },
+      {
+        "id": "hypothese",
+        "zone": "hypothesis",
+        "title": "Une proposition, pas une décision",
+        "text": "Karim a une idée : la brume du marais avance plus vite qu'ailleurs. Mais il ne change rien ce soir. Il attend 48 heures de données, et les avis lus par Elsa, avant de proposer le réglage à Margaux."
+      }
+    ]
+  }
+}

@@ -1,0 +1,38 @@
+[
+  {
+    "id": "embargo-presse",
+    "term": "Embargo (presse)",
+    "definition": "L'accord passé avec les journalistes et les créateurs de vidéos qui reçoivent un jeu avant sa sortie : ils peuvent jouer, mais ne publient leur avis qu'à une date et une heure fixées, toutes en même temps.",
+    "analogy": "Comme un livre envoyé aux critiques avant sa parution, avec la consigne de ne rien publier avant le jour de la mise en librairie."
+  },
+  {
+    "id": "key-art",
+    "term": "Key art (illustration principale)",
+    "definition": "L'image qui représente le jeu partout : page de la boutique, presse, réseaux sociaux, affiches. Elle doit dire en un coup d'œil de quoi parle le jeu et quelle émotion il promet.",
+    "analogy": "Comme l'affiche d'un film, reprise sur tous les supports de sa sortie."
+  },
+  {
+    "id": "capsule-boutique",
+    "term": "Capsule (image de boutique)",
+    "definition": "Les images qu'une boutique de jeux en ligne exige, chacune à un format précis : grande image de la page, bandeau d'en-tête, petite vignette des listes, vignette en portrait de la bibliothèque du joueur. La même illustration y est recadrée, et parfois simplifiée.",
+    "analogy": "Comme la couverture d'un livre, déclinée pour la vitrine, le catalogue et la petite vignette du site de la librairie."
+  },
+  {
+    "id": "go-no-go",
+    "term": "Go / no-go",
+    "definition": "La réunion où l'on décide, juste avant une échéance, si l'on y va ou non. Chaque métier dit si sa partie est prête, en s'appuyant sur des critères écrits à l'avance : bugs bloquants, performances, page de la boutique…",
+    "analogy": "Comme le tour de table avant le décollage d'une fusée : chaque poste répond « prêt » ou « pas prêt »."
+  },
+  {
+    "id": "astreinte",
+    "term": "Astreinte",
+    "definition": "Une petite équipe désignée pour surveiller un logiciel et intervenir en cas de problème, en dehors des heures habituelles : le soir d'une sortie, la nuit, le week-end. Elle tourne pour que personne ne la porte seul.",
+    "analogy": "Comme la pharmacie de garde : une seule est ouverte le dimanche, et ce n'est jamais la même."
+  },
+  {
+    "id": "test-de-localisation",
+    "term": "Test de localisation",
+    "definition": "Faire jouer un jeu traduit par des personnes dont c'est la langue maternelle, pour repérer ce qu'un traducteur seul ne voit pas : texte coupé ou trop long à l'écran, ton maladroit, contresens dus au contexte, caractères mal affichés.",
+    "analogy": "Comme faire relire un discours par quelqu'un du pays avant de le prononcer là-bas."
+  }
+]

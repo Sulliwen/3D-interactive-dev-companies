@@ -35,6 +35,16 @@ export const qaConsolePropsSchema = z.object({
     statusBefore: z.string(),
     statusAfter: z.string(),
     retestLabel: z.string(),
+    /** Libellés de la fiche (une revue de boutique n'est pas un bug : « Motifs du refus »…). */
+    labels: z
+      .object({
+        steps: z.string().default('Étapes pour reproduire'),
+        expected: z.string().default('Attendu'),
+        actual: z.string().default('Obtenu'),
+        cause: z.string().default('Cause'),
+        assignee: z.string().default('Assigné à'),
+      })
+      .prefault({}),
     /** Date affichée sur la capture du téléphone Pocket Santé (sans elle : pas de capture). */
     when: z.string().optional(),
     caption: z.string().optional(),

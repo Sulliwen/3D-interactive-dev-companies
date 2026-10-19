@@ -1,0 +1,38 @@
+using Brume.Testing;
+
+namespace Brume.Saves.Tests
+{
+    public class SaveServiceTests : SaveTest
+    {
+        // @zone tests
+        // Les pannes qui ont coûté cher à « Petits Cailloux », rejouées à chaque build.
+        [Test]
+        public async Task Power_cut_during_write_keeps_previous_save()
+        {
+            await SaveChapter(3);
+            Disk.CutPowerAfterBytes(4096);   // coupure en pleine écriture
+            await SaveChapter(4);
+            Assert.Equal(3, Service.LoadBest().Chapter);
+        }
+
+        [Test]
+        public async Task Offline_progress_is_uploaded_later()
+        {
+            Network.Offline = true;
+            await SaveChapter(5);
+            Network.Offline = false;
+            Restart();
+            Assert.Equal(5, Cloud.Read("slot_1.sav").Chapter);
+        }
+
+        [Test]
+        public void Different_saves_ask_the_player()
+        {
+            Disk.Put(chapter: 4);
+            Cloud.Put(chapter: 5);
+            Service.LoadBest();
+            Assert.True(ConflictDialog.WasShown);
+        }
+        // @end
+    }
+}

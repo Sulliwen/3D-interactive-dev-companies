@@ -1,0 +1,95 @@
+{
+  "role": "gameplay-programming",
+  "order": 7,
+  "featureStep": "Les sauvegardes dans le nuage",
+  "tagline": "En 2023, le soir de la sortie de « Petits Cailloux », un bug de sauvegarde faisait perdre leur partie à des joueurs ; on l'a corrigé en catastrophe pendant la nuit. Cette fois, j'ai réécrit les sauvegardes pour qu'aucune panne ne puisse faire perdre une partie.",
+  "missions": [
+    "Écrire chaque sauvegarde d'abord sur le disque, sans jamais écraser l'ancienne avant d'avoir la nouvelle.",
+    "L'envoyer ensuite dans la [[sauvegarde-cloud|sauvegarde dans le cloud]] de Steam, même après une partie jouée [[hors-connexion|hors connexion]].",
+    "Gérer les [[conflit-de-sauvegarde|conflits]] quand deux appareils n'ont pas la même partie : c'est le joueur qui choisit.",
+    "Rendre les menus entièrement jouables à la manette, après le refus de Valve.",
+    "Transformer chaque panne déjà vécue en [[test-automatise|test automatique]]."
+  ],
+  "takeaways": [
+    "Perdre sa partie est la pire expérience pour un joueur : des heures de jeu effacées. Les sauvegardes passent donc avant tout le reste, même si personne ne les voit quand elles marchent.",
+    "La règle d'or : **ne jamais écraser l'ancienne version avant d'avoir écrit la nouvelle**. Une coupure de courant au mauvais moment ne coûte alors rien.",
+    "Avec le cloud, un joueur peut commencer sur son PC et continuer sur son Steam Deck dans le train. Quand les deux versions diffèrent, le jeu ne devine pas : il **demande**."
+  ],
+  "receivesFrom": {
+    "roles": ["qa", "production"],
+    "text": "Les scénarios de panne rejoués par Yasmine (Steam Deck hors ligne, deux PC, coupure de courant) et le menu à corriger après la revue de Valve ; et la priorité fixée par Jeanne : « les sauvegardes, c'est non négociable »."
+  },
+  "handsOffTo": {
+    "roles": ["qa", "direction-creative"],
+    "text": "Des sauvegardes testées automatiquement à chaque version, que Yasmine revérifie ; et la liste des derniers petits défauts restants, que Margaux trie entre le correctif du soir et la mise à jour 1.1."
+  },
+  "screen": {
+    "component": "code-editor",
+    "toolName": "Lanterne Editor · Code",
+    "props": {
+      "project": "brume",
+      "branch": "release/1.0",
+      "folder": "Saves",
+      "explorer": ["Core/", "Fog/", "Gameplay/", "Platform/", "Tests/", "brume.sln", "README.md"],
+      "files": [
+        {
+          "name": "SaveService.cs",
+          "source": "studio-lanterne/sortie-steam/08-gameplay-programming/SaveService.cs.txt"
+        },
+        {
+          "name": "SaveServiceTests.cs",
+          "source": "studio-lanterne/sortie-steam/08-gameplay-programming/SaveServiceTests.cs.txt"
+        }
+      ],
+      "initialFile": 0,
+      "terminal": {
+        "command": "lanterne test --suite Saves",
+        "lines": [
+          {
+            "kind": "info",
+            "text": "Pannes simulées : coupure de courant, réseau absent, deux appareils"
+          },
+          { "kind": "pass", "text": "Power_cut_during_write_keeps_previous_save · 0,3 s" },
+          { "kind": "pass", "text": "Offline_progress_is_uploaded_later · 0,6 s" },
+          { "kind": "pass", "text": "Different_saves_ask_the_player · 0,2 s" },
+          {
+            "kind": "summary",
+            "text": "3 tests réussis · inclus dans la version finale 1.0.0"
+          }
+        ]
+      }
+    },
+    "annotations": [
+      {
+        "id": "local-first",
+        "zone": "local-first",
+        "title": "Ne jamais écraser avant d'avoir écrit",
+        "text": "Le jeu écrit la nouvelle sauvegarde dans un fichier temporaire, puis l'échange d'un coup avec l'ancienne. Si le PC s'éteint en plein milieu, l'ancienne est intacte. C'est exactement ce qui manquait à « Petits Cailloux » en 2023."
+      },
+      {
+        "id": "cloud",
+        "zone": "cloud",
+        "title": "Le cloud, sans bloquer le jeu",
+        "text": "Une fois sur le disque, la sauvegarde part vers le cloud de Steam ([[sauvegarde-cloud]]), en arrière-plan. Sans réseau, rien ne casse : l'envoi reprendra au prochain lancement. Le joueur peut ainsi passer de son PC à son Steam Deck."
+      },
+      {
+        "id": "backup",
+        "zone": "backup",
+        "title": "Une copie de secours par chapitre",
+        "text": "Chaque sauvegarde porte une somme de contrôle, une sorte d'empreinte. Si le fichier est abîmé, le jeu ne le charge pas : il reprend la copie gardée au début du chapitre. Au pire, le joueur perd quelques minutes, jamais sa partie."
+      },
+      {
+        "id": "conflict",
+        "zone": "conflict",
+        "title": "Le joueur choisit",
+        "text": "Le disque dit « chapitre 4 », le cloud dit « chapitre 5 » : c'est un [[conflit-de-sauvegarde|conflit]]. Plutôt que de deviner et risquer d'effacer la bonne partie, le jeu montre les deux, avec la date et le chapitre, et le joueur décide."
+      },
+      {
+        "id": "tests",
+        "zone": "tests",
+        "title": "Chaque panne vécue devient un test",
+        "text": "Coupure de courant, réseau absent, deux appareils : chaque situation qui a déjà coûté cher est rejouée automatiquement à chaque version ([[test-automatise|tests automatiques]]). Si quelqu'un casse les sauvegardes, l'équipe le saura le lendemain matin, pas un soir de sortie."
+      }
+    ]
+  }
+}

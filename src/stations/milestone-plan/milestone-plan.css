@@ -125,9 +125,15 @@
   color: #d7c2fa;
 }
 
-.mp__event--demo .mp__event-kind {
+.mp__event--demo .mp__event-kind,
+.mp__event--launch .mp__event-kind {
   background: var(--lumen);
   color: #1a1206;
+}
+
+.mp__event--press .mp__event-kind {
+  background: rgb(57 135 229 / 0.3);
+  color: #a9cdf7;
 }
 
 .mp__event-day {

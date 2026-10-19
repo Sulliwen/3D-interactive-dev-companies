@@ -1,0 +1,159 @@
+{
+  "role": "narrative-design",
+  "order": 4,
+  "featureStep": "Le jeu en 8 langues : quand le texte déborde",
+  "tagline": "J'ai écrit « Brume » en français. Pour qu'un joueur japonais ou allemand vive la même histoire, il ne suffit pas de traduire : il faut que le texte tienne à l'écran, et que l'humour d'Yvon fasse encore sourire.",
+  "missions": [
+    "Préparer le texte pour la [[localisation]] : chaque réplique a un identifiant, un contexte et une longueur maximale.",
+    "Répondre aux questions des traducteurs : qui parle, à qui, et sur quel ton.",
+    "Faire jouer le jeu traduit par des joueurs natifs ([[test-de-localisation|tests de localisation]]), surtout dans les langues que personne ne parle au studio.",
+    "Raccourcir avec les traducteurs les textes trop longs, sans trahir le sens."
+  ],
+  "takeaways": [
+    "Traduire un jeu, c'est la [[localisation]] : les textes, mais aussi leur longueur à l'écran, les polices, l'humour et les références. « Brume » compte 42 000 mots, en 8 langues.",
+    "Une traduction peut être juste et pourtant **déborder** : l'allemand est souvent bien plus long que le français. Ici, une réplique d'Yvon dépasse sa bulle de 38 %.",
+    "Une blague ne se traduit pas mot à mot : on l'**adapte** pour qu'elle produise le même effet dans l'autre langue."
+  ],
+  "receivesFrom": {
+    "roles": ["concept-art", "production"],
+    "text": "La question de Mei sur le titre dans les huit langues, et la date de la [[version-gold|version finale]] fixée par Jeanne : après elle, chaque correction de texte attend un correctif."
+  },
+  "handsOffTo": {
+    "roles": ["direction-creative", "qa"],
+    "text": "La réplique allemande raccourcie : Margaux décide qu'elle part dans le correctif 1.0.1 de ce soir, et Yasmine vérifie à l'écran qu'elle tient dans sa bulle."
+  },
+  "screen": {
+    "component": "localization",
+    "toolName": "Fil d'histoire · Traductions",
+    "props": {
+      "file": "Brume · toutes les langues",
+      "totals": { "words": 42000, "strings": 6180 },
+      "languages": [
+        {
+          "code": "FR",
+          "name": "Français",
+          "progress": 100,
+          "review": "Texte original",
+          "source": true
+        },
+        { "code": "EN", "name": "Anglais", "progress": 100, "review": "Agence, relu au studio" },
+        {
+          "code": "DE",
+          "name": "Allemand",
+          "progress": 100,
+          "review": "Agence, relu au studio",
+          "issues": 1
+        },
+        { "code": "ES", "name": "Espagnol", "progress": 100, "review": "Agence, relu au studio" },
+        { "code": "IT", "name": "Italien", "progress": 100, "review": "Agence, relu au studio" },
+        {
+          "code": "PT",
+          "name": "Portugais (Brésil)",
+          "progress": 100,
+          "review": "Agence, relu au studio"
+        },
+        { "code": "JA", "name": "Japonais", "progress": 100, "review": "Agence, joueurs natifs" },
+        {
+          "code": "ZH",
+          "name": "Chinois simplifié",
+          "progress": 100,
+          "review": "Agence, joueurs natifs"
+        }
+      ],
+      "table": {
+        "target": "Allemand",
+        "rows": [
+          {
+            "id": "KERLAZ_YVON_012",
+            "source": "Tu as rallumé ma lanterne, petite. Le phare t'attendait.",
+            "target": "Du hast meine Laterne wieder angezündet, Kleine. Der Leuchtturm hat schon so lange auf dich gewartet.",
+            "limit": 73
+          },
+          {
+            "id": "KERLAZ_YVON_013",
+            "source": "Ici, il fait beau plusieurs fois par jour.",
+            "target": "Hier ist das Wetter mehrmals am Tag schön.",
+            "limit": 73
+          },
+          {
+            "id": "KERLAZ_CARTE_007",
+            "source": "La falaise : ne pas s'éloigner du sentier.",
+            "target": "Die Klippe: nicht vom Pfad abweichen.",
+            "limit": 60
+          },
+          { "id": "UI_HUD_HUILE", "source": "Huile", "target": "Lampenöl", "limit": 12 },
+          {
+            "id": "UI_MENU_REPRENDRE",
+            "source": "Reprendre la partie",
+            "target": "Spiel fortsetzen",
+            "limit": 24
+          },
+          {
+            "id": "SUCCES_PHARE",
+            "source": "Rallumer le phare de Kerlaz",
+            "target": "Den Leuchtturm von Kerlaz wieder entzünden",
+            "limit": 48
+          }
+        ]
+      },
+      "bubble": {
+        "rowId": "KERLAZ_YVON_012",
+        "speaker": "Yvon, voix de la brume",
+        "fix": "Meine Laterne brennt wieder, Kleine. Der Leuchtturm wartete auf dich.",
+        "fixNote": "proposée par la traductrice · part dans le correctif 1.0.1 de ce soir"
+      },
+      "review": [
+        {
+          "lang": "Japonais",
+          "who": "2 joueurs natifs, à Tokyo",
+          "result": "63 corrections · fini le 31 mars"
+        },
+        {
+          "lang": "Chinois simplifié",
+          "who": "2 joueurs natifs, à Shanghai",
+          "result": "41 corrections · fini le 5 avril"
+        }
+      ],
+      "humour": {
+        "lang": "Anglais",
+        "source": "Ici, il fait beau plusieurs fois par jour.",
+        "literal": "Here, the weather is nice several times a day.",
+        "adapted": "If you don't like the weather here, wait five minutes.",
+        "note": "Le dicton breton devient un dicton anglais : même clin d'œil, même sourire."
+      },
+      "footer": "6 180 textes · 8 langues · 1 problème ouvert (allemand) → correctif 1.0.1 de ce soir"
+    },
+    "annotations": [
+      {
+        "id": "langues",
+        "zone": "languages",
+        "title": "Huit langues, un seul texte source",
+        "text": "Chloé écrit en français ; une agence traduit dans les sept autres langues, puis le studio relit. Pour le japonais et le chinois, que personne ne parle au studio, des joueurs natifs ont joué tout le jeu. C'est la [[localisation]]."
+      },
+      {
+        "id": "table",
+        "zone": "strings",
+        "title": "Chaque texte a sa place limitée",
+        "text": "Chaque réplique a un identifiant et une longueur maximale : la taille de la bulle, du bouton ou du menu où elle s'affiche. L'outil compare chaque traduction à cette limite. Une seule ligne dépasse, en rouge."
+      },
+      {
+        "id": "bulle",
+        "zone": "bubble",
+        "title": "Juste, mais trop longue",
+        "text": "La traduction allemande est fidèle, mais elle dépasse la bulle de **38 %** : la fin de la phrase sort du cadre. Un journaliste allemand l'a remarqué pendant l'embargo. La traductrice propose une version plus courte, qui part dans le correctif de ce soir."
+      },
+      {
+        "id": "natifs",
+        "zone": "review",
+        "title": "Jouer, pas seulement relire",
+        "text": "Lors des [[test-de-localisation|tests de localisation]], des joueurs natifs jouent le jeu traduit : ils voient ce qu'une relecture du texte seul ne montre pas, comme une phrase coupée, un caractère mal affiché ou un ton qui sonne faux en contexte."
+      },
+      {
+        "id": "humour",
+        "zone": "humour",
+        "title": "Adapter l'humour",
+        "text": "Mot à mot, la blague d'Yvon sur la météo bretonne ne fait rire personne en anglais. La traductrice la remplace par un dicton anglais qui dit la même chose. La [[localisation]] cherche le même effet, pas les mêmes mots."
+      }
+    ]
+  }
+}

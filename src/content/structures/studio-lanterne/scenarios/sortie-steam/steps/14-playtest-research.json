@@ -1,0 +1,158 @@
+{
+  "role": "playtest-research",
+  "order": 12,
+  "featureStep": "92 % d'avis positifs : écouter les joueurs",
+  "tagline": "Pendant deux ans, j'ai observé huit joueurs à la fois derrière une vitre. Depuis 19 h, des milliers de joueurs écrivent ce qu'ils pensent de « Brume ». Je lis, je classe, et je dis à l'équipe ce qui revient.",
+  "missions": [
+    "Lire les [[avis-des-joueurs|avis des joueurs]] et les tests de la presse dès leur publication, en plusieurs langues.",
+    "Classer ce qui revient par thèmes, et séparer les problèmes réels des goûts personnels.",
+    "Croiser les avis avec la [[telemetrie]] de Karim : les chiffres disent où, les avis disent pourquoi.",
+    "Préparer, avec l'équipe, des réponses publiques courtes et honnêtes aux joueurs mécontents.",
+    "Proposer ce qui doit entrer dans la [[feuille-de-route|feuille de route]] des prochaines versions."
+  ],
+  "takeaways": [
+    "Sur Steam, chaque joueur dit simplement s'il **recommande** le jeu ou non : 92 % de 1 260 avis, c'est l'appréciation « Très positives », qui aide les ventes des semaines suivantes.",
+    "Un avis négatif n'est pas une attaque : celui sur le plantage reçoit une réponse publique (« corrigé en 1.0.1 »), et beaucoup de joueurs changent ensuite leur avis.",
+    "Les avis confirment les chiffres de Karim : le marais est trop dur ce soir. La réponse va dans la 1.0.2 ; la durée du jeu, elle, ne changera pas, « pas de remplissage »."
+  ],
+  "receivesFrom": {
+    "roles": ["game-design", "publishing"],
+    "text": "Les chiffres de Karim (41 % d'arrêts au marais) et, de Victor, les tests de la presse publiés à la levée de l'embargo, à 15 h."
+  },
+  "handsOffTo": {
+    "roles": ["direction-creative", "production"],
+    "text": "Une synthèse pour la réunion de samedi : Margaux arbitre ce qui entre dans la 1.0.2 et la 1.1, Jeanne en fait le planning de mai."
+  },
+  "screen": {
+    "component": "player-reviews",
+    "toolName": "Labo de jeu · Avis",
+    "props": {
+      "title": "Brume · premiers avis",
+      "period": "vendredi 14 avril 2028, 0 h 00 · 5 h après la sortie",
+      "summary": {
+        "percent": 92,
+        "label": "Très positives",
+        "positive": 1159,
+        "negative": 101,
+        "detail": "1 260 avis en 5 heures, dans 8 langues."
+      },
+      "press": {
+        "score": 84,
+        "count": 46,
+        "source": "Score critique",
+        "quotes": [
+          {
+            "outlet": "Pixel Hebdo",
+            "score": "9/10",
+            "text": "Une lanterne, une île, et l'un des plus beaux brouillards du jeu vidéo."
+          },
+          {
+            "outlet": "Manette & Café",
+            "score": "8/10",
+            "text": "Court mais marquant ; le marais met la patience à rude épreuve."
+          }
+        ]
+      },
+      "themes": [
+        { "label": "L'ambiance et la brume", "mentions": 412, "positive": 0.97 },
+        { "label": "La lanterne et l'huile", "mentions": 318, "positive": 0.94 },
+        { "label": "Les voix de la brume", "mentions": 236, "positive": 0.95 },
+        {
+          "label": "La durée (« trop court ? »)",
+          "mentions": 121,
+          "positive": 0.46,
+          "note": "8 h annoncées, les plus rapides finissent en 6 h"
+        },
+        {
+          "label": "Le marais (chapitre 3)",
+          "mentions": 87,
+          "positive": 0.21,
+          "note": "brume trop rapide : réglage prévu en 1.0.2"
+        },
+        {
+          "label": "Plantage au lancement",
+          "mentions": 64,
+          "positive": 0.08,
+          "note": "corrigé dans la 1.0.1, à 22 h 05"
+        }
+      ],
+      "reviews": [
+        {
+          "author": "Kaito_R",
+          "hours": "0,4 h jouée",
+          "recommended": false,
+          "text": "Plantage à chaque lampe rallumée. Ma carte graphique n'est pas si vieille !",
+          "reply": {
+            "author": "Studio Lanterne (Théo)",
+            "text": "Désolés ! C'est corrigé dans la 1.0.1, publiée à 22 h 05 : redémarrez Steam pour la recevoir."
+          }
+        },
+        {
+          "author": "brumeux_29",
+          "hours": "3,1 h jouées",
+          "recommended": true,
+          "text": "Je n'ai jamais eu aussi peur de manquer d'huile. Et la cloche du phare au loin, quand on se perd : génial."
+        },
+        {
+          "author": "MarieLoue",
+          "hours": "2,6 h jouées",
+          "recommended": true,
+          "text": "Magnifique, mais le marais m'a fait abandonner ce soir : la brume y avance trop vite.",
+          "reply": {
+            "author": "Studio Lanterne (Elsa)",
+            "text": "Merci, vous n'êtes pas la seule : la version 1.0.2 ralentira la brume du marais."
+          }
+        }
+      ],
+      "roadmap": {
+        "title": "Pour la réunion de samedi",
+        "items": [
+          { "when": "1.0.2", "text": "Ralentir la brume du marais (proposition de Karim)." },
+          { "when": "1.1 · mai", "text": "Mode photo et deuxième voix de la brume, déjà prévus." },
+          {
+            "when": "Non",
+            "text": "Rallonger le jeu : « pas de remplissage », les avis louent le rythme."
+          },
+          { "when": "À suivre", "text": "Avis changés après la 1.0.1 (plantage)." }
+        ]
+      },
+      "statusItems": [
+        "Avis lus : 1 260 sur 1 260",
+        "Langues : 8",
+        "Réponses publiques : 23, relues par Victor"
+      ]
+    },
+    "annotations": [
+      {
+        "id": "note",
+        "zone": "summary",
+        "title": "Recommandé, ou pas",
+        "text": "Sur Steam, un avis de joueur est d'abord un oui ou un non : « je recommande ce jeu ». La part de oui donne une appréciation visible de tous, ici « Très positives ». Elle pèse beaucoup sur les ventes des semaines suivantes."
+      },
+      {
+        "id": "presse",
+        "zone": "press",
+        "title": "La presse, à la levée de l'embargo",
+        "text": "Les journalistes ont reçu le jeu en avance, avec interdiction de publier avant le 13 avril à 15 h. Leurs tests, notés sur 100 en moyenne, rassurent les acheteurs le jour même de la sortie."
+      },
+      {
+        "id": "themes",
+        "zone": "themes",
+        "title": "Ce qui revient",
+        "text": "Elsa classe les [[avis-des-joueurs|avis]] par sujet. Un sujet très cité et très négatif, comme le marais, est un vrai problème. Un sujet partagé, comme la durée, relève plutôt des goûts : on l'écoute, sans forcément changer le jeu."
+      },
+      {
+        "id": "reponses",
+        "zone": "reviews",
+        "title": "Répondre, en public",
+        "text": "L'équipe répond aux avis négatifs qui signalent un vrai problème : brièvement, honnêtement, avec la solution. Le joueur qui a subi le plantage peut changer son avis une fois la version 1.0.1 installée."
+      },
+      {
+        "id": "suite",
+        "zone": "roadmap",
+        "title": "Des avis à la feuille de route",
+        "text": "La lecture d'Elsa ne s'arrête pas à un chiffre : elle propose ce qui entre dans les prochaines versions, et ce qui n'y entrera pas. La décision reviendra à Margaux, le planning à Jeanne : la boucle continue après la sortie."
+      }
+    ]
+  }
+}

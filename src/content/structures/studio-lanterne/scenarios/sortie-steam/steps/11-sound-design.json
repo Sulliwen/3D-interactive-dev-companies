@@ -1,0 +1,151 @@
+{
+  "role": "sound-design",
+  "order": 8,
+  "featureStep": "Entendre la brume, même sans le son",
+  "tagline": "Dans « Brume », le son guide le joueur : la cloche du phare indique le chemin, les chuchotements annoncent la brume. Un joueur sourd ou malentendant doit pouvoir recevoir les mêmes indices, autrement.",
+  "missions": [
+    "Décrire en texte les sons utiles pour jouer : les [[sous-titres-des-sons|sous-titres des sons]], en 8 langues avec Chloé.",
+    "Ajouter un indicateur visuel qui montre d'où vient chaque son important.",
+    "Proposer un son mono et des volumes séparés pour les voix, la musique et les effets.",
+    "Tester ces options avec des joueurs sourds et malentendants, lors des sessions d'Elsa.",
+    "Finir le mixage de la version finale : les voix toujours devant."
+  ],
+  "takeaways": [
+    "L'[[accessibilite|accessibilité]] d'un jeu ne se limite pas aux sous-titres des dialogues : quand un **son** donne une information (d'où vient le danger, où est le chemin), il faut la donner aussi **à l'écran**.",
+    "La direction compte autant que le son lui-même : « la cloche, au loin, à gauche » dit au joueur où aller. D'où la petite boussole qui montre d'où viennent les sons.",
+    "Ces options profitent à beaucoup plus de monde que prévu : joueurs qui jouent sans le son le soir, ou avec un seul écouteur. Sur la démo de février, 38 % des joueurs ont activé les sous-titres des sons."
+  ],
+  "receivesFrom": {
+    "roles": ["playtest-research", "narrative-design"],
+    "text": "Les retours des joueurs sourds et malentendants invités par Elsa à la session d'accessibilité de février, et les descriptions des sons traduites dans les 8 langues par l'équipe de Chloé."
+  },
+  "handsOffTo": {
+    "roles": ["direction-creative"],
+    "text": "Des options d'accessibilité terminées dans la 1.0.0, et une demande des joueurs à trier par Margaux : pouvoir agrandir les sous-titres des sons, prévue pour la mise à jour 1.1."
+  },
+  "screen": {
+    "component": "audio-mixer",
+    "toolName": "Console son",
+    "props": {
+      "title": "AMB_Kerlaz_Cloche · guidage et accessibilité",
+      "events": [
+        {
+          "name": "amb/kerlaz/cloche",
+          "note": "Cloche du phare : guide hors du chemin",
+          "active": true
+        },
+        { "name": "amb/kerlaz/falaise", "note": "Vent et ressac de la falaise" },
+        { "name": "amb/brume/chuchotements", "note": "La brume se referme" },
+        { "name": "vox/brume/gardien", "note": "Voix du gardien (sous-titrée)" },
+        { "name": "sfx/lanterne/huile_basse", "note": "Huile presque vide : alerte" },
+        { "name": "acc/sous-titres-sons", "note": "312 sons décrits · 8 langues" }
+      ],
+      "parameter": {
+        "name": "Écart au chemin",
+        "value": 0.64,
+        "minLabel": "sur le chemin",
+        "maxLabel": "égaré dans la brume",
+        "source": "Envoyé par le jeu dix fois par seconde : la distance entre Maëlle et le chemin le plus proche. Plus elle s'égare, plus la cloche sonne fort."
+      },
+      "layers": [
+        {
+          "name": "Cloche du phare",
+          "file": "cloche_phare_guidage.wav",
+          "curve": [
+            [0, 0],
+            [0.3, 0.15],
+            [0.7, 0.75],
+            [1, 1]
+          ]
+        },
+        {
+          "name": "Vent",
+          "file": "vent_falaise_rafales_03.wav",
+          "curve": [
+            [0, 0.7],
+            [1, 0.6]
+          ]
+        },
+        {
+          "name": "Chuchotements",
+          "file": "brume_chuchotements_boucle.wav",
+          "curve": [
+            [0, 0.1],
+            [0.5, 0.45],
+            [1, 0.85]
+          ]
+        },
+        {
+          "name": "Mer",
+          "file": "ressac_galets_kerlaz.wav",
+          "curve": [
+            [0, 0.8],
+            [1, 0.35]
+          ]
+        }
+      ],
+      "buses": [
+        { "name": "Voix", "db": -3 },
+        { "name": "Effets", "db": -6 },
+        { "name": "Ambiance", "db": -10 },
+        { "name": "Musique", "db": -14 }
+      ],
+      "music": {
+        "title": "Bande originale de « Brume »",
+        "composer": "Lou Ferrand, compositrice (extérieure au studio)",
+        "note": "Mixage final terminé le 9 mars ; la bande originale sort le même jour que le jeu."
+      },
+      "statusItems": [
+        "Connecté au jeu : version 1.0.0",
+        "Sous-titres des sons : 312 descriptions",
+        "Session d'accessibilité : 6 joueurs, février"
+      ],
+      "accessibility": {
+        "scene": "Falaise de Kerlaz, de nuit · Maëlle s'éloigne du chemin",
+        "captions": [
+          { "text": "[La cloche du phare, au loin]", "direction": "left" },
+          { "text": "[Chuchotements, tout autour]", "direction": "around" }
+        ],
+        "options": [
+          { "label": "Sous-titres des dialogues", "value": "Activés", "on": true },
+          { "label": "Sous-titres des sons", "value": "Activés", "on": true },
+          { "label": "Indicateur de direction", "value": "Activé", "on": true },
+          { "label": "Son mono", "value": "Désactivé", "on": false },
+          { "label": "Voix · musique · effets", "value": "100 · 70 · 85 %" }
+        ]
+      }
+    },
+    "annotations": [
+      {
+        "id": "captions",
+        "zone": "captions",
+        "title": "Le son, écrit à l'écran",
+        "text": "Les [[sous-titres-des-sons|sous-titres des sons]] décrivent ce qu'on entend quand c'est utile pour jouer : « [La cloche du phare, au loin] ». La petite boussole montre d'où il vient. Un joueur sourd reçoit ainsi le même indice que les autres : le chemin est à gauche."
+      },
+      {
+        "id": "options",
+        "zone": "audio-options",
+        "title": "Chacun règle son écoute",
+        "text": "Son mono pour qui n'entend que d'une oreille, volumes séparés pour garder les voix bien au-dessus de la musique, sous-titres des sons : ces réglages d'[[accessibilite|accessibilité]] ont été testés en février avec six joueurs sourds et malentendants, invités par Elsa."
+      },
+      {
+        "id": "bell",
+        "zone": "parameter",
+        "title": "La cloche qui guide",
+        "text": "Née du premier playtest de la vertical slice, en 2026 : les joueurs se perdaient à la falaise. Plus Maëlle s'écarte du chemin, plus la cloche sonne fort. Faites glisser le curseur : c'est le principe du [[son-interactif|son interactif]], piloté par une valeur envoyée par le jeu."
+      },
+      {
+        "id": "events",
+        "zone": "events",
+        "title": "312 sons décrits",
+        "text": "Chaque son important a son évènement, et chaque évènement sa description, traduite dans les 8 langues du jeu avec l'équipe de [[localisation]] de Chloé. Un travail long et discret, que les joueurs ne remarquent que lorsqu'il manque."
+      },
+      {
+        "id": "mixer",
+        "zone": "mixer",
+        "title": "Les voix devant, toujours",
+        "text": "Le mixage final range les sons en groupes réglés les uns par rapport aux autres. Les voix restent au-dessus, pour qu'on comprenne le gardien même dans la tempête. Le joueur peut ensuite tout ajuster dans les options."
+      }
+    ]
+  }
+}

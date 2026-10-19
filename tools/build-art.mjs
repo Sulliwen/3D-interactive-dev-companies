@@ -186,13 +186,13 @@ step('Ciel (arrière-plan et reflets)', 'python3', [
   `from PIL import Image; Image.MAX_IMAGE_PIXELS=None; im=Image.open('art/sources/hdri/sky_tonemapped.jpg').convert('RGB'); im.resize((4096,2048), Image.LANCZOS).save('public/textures/sky.jpg', quality=84)`,
 ])
 
-// Décodeur Basis (KTX2) servi avec l'application.
+// Décodeur Basis (KTX2) servi avec l'application, s'il n'y est pas déjà (la copie suivie
+// par git est mise en forme : la recopier à chaque passe créerait un faux changement).
 mkdirSync(join(root, 'public/basis'), { recursive: true })
 for (const f of ['basis_transcoder.js', 'basis_transcoder.wasm']) {
-  copyFileSync(
-    join(root, 'node_modules/three/examples/jsm/libs/basis', f),
-    join(root, 'public/basis', f),
-  )
+  const out = join(root, 'public/basis', f)
+  if (!existsSync(out))
+    copyFileSync(join(root, 'node_modules/three/examples/jsm/libs/basis', f), out)
 }
 
 // Crédits des assets tiers, tenus à jour dans CREDITS.md.
@@ -213,6 +213,9 @@ writeFileSync(
     : // Le premier tableau (en-tête aligné par Prettier : espaces variables après « Asset »).
       md.replace(/\| Asset +\|[\s\S]*?\n\n/, `${block}\n\n`),
 )
+
+// Fichiers écrits par la passe, remis en forme comme le reste du dépôt.
+step('Mise en forme', 'npx', ['prettier', '--write', 'CREDITS.md', join(models, 'office.json')])
 
 console.log(
   `\n✓ Passe artistique terminée : public/models/${world}/office.glb, lightmaps, ciel, crédits.`,

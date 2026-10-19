@@ -1,0 +1,124 @@
+{
+  "role": "publishing",
+  "order": 1,
+  "featureStep": "La page Steam : 118 400 listes de souhaits",
+  "tagline": "Depuis un an, je prépare ce soir : la page de « Brume » sur Steam, la presse, les créateurs de vidéos. À 19 h, le bouton « Acheter » apparaît, et tout ce travail se mesure enfin.",
+  "missions": [
+    "Tenir la page du jeu sur la boutique : textes, captures, bande-annonce, configuration requise, dans les 8 langues.",
+    "Faire grandir les [[liste-de-souhaits|listes de souhaits]] à chaque temps fort : annonce, salon, festival de démos, bande-annonce.",
+    "Fixer avec Ondine le prix et la remise de lancement, et organiser l'[[embargo-presse|embargo]] : qui reçoit le jeu, et à partir de quand on peut en parler.",
+    "Envoyer les clés du jeu aux journalistes et aux créateurs de vidéos, puis suivre ce qu'ils publient."
+  ],
+  "takeaways": [
+    "Sur Steam, les **listes de souhaits** comptent avant la sortie : chaque personne qui a ajouté le jeu est prévenue le jour J, et la boutique met en avant les jeux les plus attendus.",
+    "Les listes de souhaits montent par **pics** : chaque temps fort (annonce, salon, démo, bande-annonce) en apporte des milliers, puis la courbe se calme. D'où un calendrier de communication préparé des mois à l'avance.",
+    "La presse reçoit le jeu avant tout le monde, sous [[embargo-presse|embargo]] : elle a le temps de jouer, et tous les tests paraissent à la même heure, ici 15 h, quatre heures avant la sortie."
+  ],
+  "receivesFrom": {
+    "roles": ["direction-creative", "concept-art"],
+    "text": "La bande-annonce de lancement validée par Margaux, et l'illustration principale du jeu peinte par Mei, déclinée aux formats de la boutique."
+  },
+  "handsOffTo": {
+    "roles": ["production", "playtest-research"],
+    "text": "L'heure de sortie, l'embargo et la liste des 320 clés envoyées : Jeanne cale le programme de la journée, et Elsa sait quand les premiers tests et avis vont arriver."
+  },
+  "screen": {
+    "component": "steam-backoffice",
+    "toolName": "Comptoir Steam",
+    "props": {
+      "page": "Brume · page de la boutique",
+      "countdown": {
+        "label": "Sortie de « Brume »",
+        "at": "jeu. 13 avril 2028 · 19 h 00 à Paris, 10 h 00 à Seattle",
+        "remaining": "dans 2 h 51"
+      },
+      "wishlists": {
+        "months": [
+          "mars",
+          "avr.",
+          "mai",
+          "juin",
+          "juil.",
+          "août",
+          "sept.",
+          "oct.",
+          "nov.",
+          "déc.",
+          "janv.",
+          "févr.",
+          "mars",
+          "avr."
+        ],
+        "added": [
+          9800, 3100, 14600, 4200, 3000, 2600, 3400, 3900, 4400, 5100, 6000, 24800, 9600, 23900
+        ],
+        "goal": 100000,
+        "goalLabel": "Objectif d'Ondine",
+        "peaks": [
+          { "index": 0, "label": "Annonce, mars 2027" },
+          { "index": 2, "label": "Salon Lumière Play" },
+          { "index": 11, "label": "Festival de démos" },
+          { "index": 13, "label": "Bande-annonce de lancement" }
+        ]
+      },
+      "status": {
+        "label": "Page prête",
+        "checks": [
+          { "label": "Captures et images validées par Valve", "done": true },
+          { "label": "Description et configuration en 8 langues", "done": true },
+          { "label": "Prix et remise de lancement réglés", "done": true },
+          { "label": "Steam Deck : « Vérifié »", "done": true },
+          { "label": "Bouton « Acheter » à 19 h 00", "done": false }
+        ]
+      },
+      "price": {
+        "base": "24,99 €",
+        "discount": 10,
+        "launch": "22,49 €",
+        "until": "Remise de lancement jusqu'au jeudi 20 avril, 19 h"
+      },
+      "press": {
+        "embargo": "Embargo levé à 15 h",
+        "lifted": true,
+        "keys": [
+          { "label": "Journalistes", "count": 140 },
+          { "label": "Créateurs de vidéos", "count": 180 }
+        ],
+        "note": "28 tests en ligne à 16 h. Les vidéos en direct commencent à 19 h."
+      },
+      "footer": "Comptoir Steam · Brume · dernière modification : Victor, 15 h 02"
+    },
+    "annotations": [
+      {
+        "id": "wishlists",
+        "zone": "wishlists",
+        "title": "Une courbe faite de pics",
+        "text": "Chaque point orange est un temps fort : l'annonce, le salon, le festival de démos de février (sur le vrai Steam, le « Steam Next Fest »), la bande-annonce de lancement. Entre deux, la courbe se calme. Avec **118 400** [[liste-de-souhaits|listes de souhaits]], « Brume » dépasse l'objectif fixé par Ondine."
+      },
+      {
+        "id": "countdown",
+        "zone": "countdown",
+        "title": "Une heure choisie pour le monde entier",
+        "text": "19 h à Paris, c'est 10 h à Seattle, où est installée la boutique, et le matin sur tout le continent américain. L'Europe joue le soir même, l'Amérique dans la journée : la sortie touche les deux en même temps."
+      },
+      {
+        "id": "status",
+        "zone": "status",
+        "title": "Une page vérifiée avant la sortie",
+        "text": "La boutique relit la page et teste le jeu avant d'autoriser la sortie (Yasmine en a vécu le premier refus). Tout est coché, sauf le bouton « Acheter », qui apparaîtra automatiquement à 19 h."
+      },
+      {
+        "id": "price",
+        "zone": "price",
+        "title": "Le prix, décidé avec l'éditeur",
+        "text": "24,99 €, avec 10 % de remise la première semaine pour récompenser les joueurs qui attendaient le jeu. Le prix se décide avec Ondine, qui se rembourse d'abord sur les ventes : chaque euro compte."
+      },
+      {
+        "id": "press",
+        "zone": "press",
+        "title": "L'embargo est levé",
+        "text": "320 clés envoyées depuis le 3 avril. Grâce à l'[[embargo-presse|embargo]], les journalistes ont eu dix jours pour finir le jeu, et tous les tests sont parus à 15 h. Un mauvais test publié trop tôt aurait pesé seul sur les premiers acheteurs."
+      }
+    ]
+  }
+}

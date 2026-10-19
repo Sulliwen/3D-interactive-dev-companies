@@ -1,0 +1,154 @@
+{
+  "role": "production",
+  "order": 2,
+  "featureStep": "Le plan du lancement, heure par heure",
+  "tagline": "Une sortie se prépare comme un jalon : à rebours depuis la date. Aujourd'hui, mon travail est que chacun sache quoi faire à chaque heure, et que personne ne passe la nuit ici.",
+  "missions": [
+    "Planifier les dernières semaines à rebours depuis la sortie : [[version-gold|version finale]], revue de la boutique, presse, jour J.",
+    "Animer la réunion [[go-no-go|« on sort ou pas ? »]] la veille : chaque métier répond avec des critères écrits.",
+    "Écrire le programme du jour J heure par heure, et organiser l'[[astreinte]] du soir et du week-end.",
+    "Tenir la règle du studio, même un soir de sortie : pas de [[crunch]], pas de nuit blanche."
+  ],
+  "takeaways": [
+    "La version vendue le jour J est figée **près d'un mois avant** : la [[version-gold|version gold]] du 16 mars laisse le temps à la revue de Valve, à la presse et aux derniers tests.",
+    "La veille, la réunion [[go-no-go|go / no-go]] décide si l'on sort : chaque métier répond avec des critères écrits. Repousser une sortie coûte cher, mais moins qu'une sortie ratée.",
+    "Le soir de la sortie, une petite équipe d'[[astreinte]] surveille et peut corriger. Elle s'arrête à 23 h et tourne le week-end : la leçon de « Petits Cailloux »."
+  ],
+  "receivesFrom": {
+    "roles": ["publishing", "engine-tools"],
+    "text": "L'heure de sortie et la fin de l'embargo presse (Victor), et la version finale 1.0.0 avec son calendrier d'envoi sur la boutique (Sarah)."
+  },
+  "handsOffTo": {
+    "roles": ["qa", "technical-art", "playtest-research"],
+    "text": "Le programme du soir et l'astreinte : Yasmine, Théo et Elsa savent qui surveille quoi, de 19 h à 23 h, avec Sarah."
+  },
+  "screen": {
+    "component": "milestone-plan",
+    "toolName": "Tableau des tâches",
+    "props": {
+      "view": "Lancement · Brume 1.0",
+      "milestone": {
+        "name": "Sortie de « Brume » sur Steam",
+        "date": "jeu. 13 avril 2028 · 19 h",
+        "countdown": "Ce soir",
+        "goal": "La version 1.0.0 en vente dans 8 langues, et une équipe prête à réagir jusqu'à 23 h."
+      },
+      "weeks": [
+        {
+          "label": "Version finale",
+          "dates": "13–17 mars",
+          "focus": "Figer la 1.0.0",
+          "events": [{ "day": "jeu. 16", "label": "Version gold 1.0.0", "kind": "freeze" }]
+        },
+        {
+          "label": "Revue de Valve",
+          "dates": "20–24 mars",
+          "focus": "Un refus, deux corrections",
+          "events": [
+            { "day": "lun. 20", "label": "Refus de Valve (2 points)", "kind": "other" },
+            { "day": "ven. 24", "label": "Accord de Valve", "kind": "other" }
+          ]
+        },
+        {
+          "label": "Presse",
+          "dates": "27 mars–7 avril",
+          "focus": "Steam Deck, clés, interviews",
+          "events": [
+            { "day": "mer. 29", "label": "Steam Deck « Vérifié »", "kind": "other" },
+            { "day": "lun. 3", "label": "Clés envoyées à la presse", "kind": "press" }
+          ]
+        },
+        {
+          "label": "Semaine de sortie",
+          "dates": "10–14 avril",
+          "focus": "Tenir le jour J",
+          "current": true,
+          "events": [
+            { "day": "mer. 12", "label": "Go / no-go : GO", "kind": "other" },
+            { "day": "jeu. 13", "label": "15 h : fin de l'embargo", "kind": "press" },
+            { "day": "jeu. 13", "label": "19 h : sortie sur Steam", "kind": "launch" }
+          ]
+        }
+      ],
+      "scopeTitle": "Le 13 avril, heure par heure",
+      "scopeCount": "étapes passées",
+      "scope": [
+        { "title": "Mer. 17 h · Go / no-go : GO", "owner": "Toute l'équipe", "status": "done" },
+        { "title": "15 h · Fin de l'embargo presse", "owner": "Victor", "status": "done" },
+        {
+          "title": "16 h · Vérification de la 1.0.0 en ligne",
+          "owner": "Sarah, Yasmine",
+          "status": "doing"
+        },
+        { "title": "18 h 30 · Toute l'équipe en war room", "owner": "Jeanne", "status": "todo" },
+        { "title": "19 h · Sortie : bouton « Acheter »", "owner": "Victor", "status": "todo" },
+        { "title": "19 h–23 h · Astreinte du soir", "owner": "4 personnes", "status": "todo" },
+        { "title": "23 h · Fin de l'astreinte, point rapide", "owner": "Jeanne", "status": "todo" },
+        { "title": "Week-end · Astreinte à deux", "owner": "Lucas, Yasmine", "status": "todo" }
+      ],
+      "cutsTitle": "Reporté après la sortie",
+      "cuts": [
+        {
+          "title": "Mode photo",
+          "reason": "Demandé pendant la démo de février ; 3 semaines de travail.",
+          "to": "Mise à jour gratuite 1.1 (mai)"
+        },
+        {
+          "title": "Traduction en coréen",
+          "reason": "Pas de testeurs natifs disponibles avant la sortie.",
+          "to": "Été 2028"
+        },
+        {
+          "title": "Version Mac",
+          "reason": "Trop peu de tests sur le matériel Apple.",
+          "to": "À décider après la sortie"
+        }
+      ],
+      "capacityTitle": "Charge de la semaine de sortie",
+      "capacity": {
+        "rule": "Pas de nuit blanche : l'astreinte s'arrête à 23 h, puis tourne à deux le week-end.",
+        "rows": [
+          { "team": "Code", "planned": 9, "available": 10 },
+          { "team": "QA", "planned": 10, "available": 10 },
+          { "team": "Art", "planned": 5, "available": 12 },
+          { "team": "Design", "planned": 6, "available": 10 },
+          { "team": "Son", "planned": 3, "available": 5 },
+          { "team": "Édition", "planned": 5, "available": 5 }
+        ]
+      },
+      "status": "Programme validé au go / no-go du 12 avril · astreinte : Sarah, Théo, Yasmine, Elsa"
+    },
+    "annotations": [
+      {
+        "id": "jour-j",
+        "zone": "milestone",
+        "title": "Une date annoncée au monde",
+        "text": "La date de sortie est publique depuis le festival de démos de février : 118 400 personnes l'attendent. Jeanne ne peut plus la déplacer sans prévenir tout le monde. Tout le planning est donc construit à rebours depuis ce soir, 19 h."
+      },
+      {
+        "id": "gold",
+        "zone": "calendar",
+        "title": "Figée un mois avant",
+        "text": "La [[version-gold|version gold]] est la version vendue le jour J. Elle a été figée le 16 mars pour laisser le temps à la revue de Valve, à la presse et au Steam Deck. Depuis, on ne corrige plus que l'essentiel, dans un correctif du premier jour."
+      },
+      {
+        "id": "heure-par-heure",
+        "zone": "scope",
+        "title": "Le jour J, heure par heure",
+        "text": "Le programme est écrit à l'avance : qui fait quoi, et à quelle heure. La veille, la réunion [[go-no-go|go / no-go]] a dit « GO » : chaque métier a répondu à ses critères (zéro bug bloquant, 60 images par seconde, page validée)."
+      },
+      {
+        "id": "reports",
+        "zone": "cuts",
+        "title": "Ce qui n'est pas dans la 1.0",
+        "text": "Le mode photo, le coréen et la version Mac ne sortiront pas ce soir. Rien n'est abandonné : chaque élément a une destination, comme pendant la vertical slice. Un jeu continue de vivre après sa sortie."
+      },
+      {
+        "id": "astreinte",
+        "zone": "capacity",
+        "title": "Pas de nuit blanche",
+        "text": "Pour « Petits Cailloux », l'équipe avait passé la nuit à corriger un bug de sauvegarde. Cette fois, l'[[astreinte]] est organisée : quatre personnes de 19 h à 23 h, puis deux le week-end, à tour de rôle. La QA est à 100 % cette semaine : on ne lui ajoute plus rien."
+      }
+    ]
+  }
+}

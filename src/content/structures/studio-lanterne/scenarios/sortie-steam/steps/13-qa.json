@@ -1,0 +1,183 @@
+{
+  "role": "qa",
+  "order": 6,
+  "featureStep": "Valve a dit non, puis oui",
+  "tagline": "Avant d'ouvrir les ventes, Valve vérifie le jeu et sa page. Le 20 mars, la réponse était « non ». Mon rôle : comprendre pourquoi, faire corriger, et prouver que tout tourne sur les PC des joueurs, pas seulement sur les nôtres.",
+  "missions": [
+    "Soumettre la version finale et la page du jeu à la [[revue-valve|revue de Valve]], puis traiter chaque motif de refus.",
+    "Tester la 1.0.0 sur une [[matrice-de-compatibilite|matrice de 12 PC]] : cartes graphiques, processeurs, Windows 10 et 11, Steam Deck.",
+    "Rejouer les passages qui ont déjà cassé ([[non-regression]]), surtout les sauvegardes.",
+    "Le soir de la sortie : rester d'astreinte pour vérifier le correctif, s'il en faut un."
+  ],
+  "takeaways": [
+    "Sur PC, il n'y a pas la longue certification des consoles, mais Valve **vérifie** quand même chaque jeu avant sa sortie : la page de la boutique doit dire vrai, et le jeu doit se lancer et se jouer comme annoncé.",
+    "Un refus n'est pas un drame s'il arrive **trois semaines avant** : c'est pour cela que le studio a soumis tôt. Corrigé en quatre jours, le jeu est accepté le 24 mars.",
+    "Douze PC, c'est beaucoup… et peu à la fois : les joueurs ont des milliers de combinaisons de matériel et de pilotes. La matrice couvre les plus courantes ; le reste se découvrira peut-être le soir même."
+  ],
+  "receivesFrom": {
+    "roles": ["engine-tools", "publishing"],
+    "text": "La version 1.0.0 en ligne sur la branche privée (Sarah), et la page du jeu complète, avec ses captures et ses textes, préparée par Victor pour la revue."
+  },
+  "handsOffTo": {
+    "roles": ["gameplay-programming", "concept-art"],
+    "text": "Les deux motifs du refus : les menus à rendre entièrement jouables à la manette (Lucas), et une capture de la boutique au texte illisible, à refaire (Mei)."
+  },
+  "screen": {
+    "component": "qa-console",
+    "toolName": "Tableau des tâches",
+    "props": {
+      "campaign": "Brume 1.0.0 · revue de Valve et compatibilité",
+      "status": "Version 1.0.0 · jeudi 13 avril, 15 h · Yasmine H. · 0 bug bloquant ouvert",
+      "autoTitle": "Revue de Valve · points vérifiés",
+      "planTitle": "Matrice de compatibilité · 12 machines",
+      "suites": [
+        {
+          "label": "Page de la boutique",
+          "passed": 14,
+          "total": 14
+        },
+        {
+          "label": "Version du jeu",
+          "passed": 9,
+          "total": 9
+        },
+        {
+          "label": "Steam Deck",
+          "passed": 22,
+          "total": 22
+        }
+      ],
+      "cases": [
+        {
+          "label": "PC 1 · RTX 4070 · Ryzen 7 · Windows 11",
+          "device": "Ultra · 1440p",
+          "result": "pass"
+        },
+        {
+          "label": "PC 2 · RTX 3060 · Core i5 · Windows 11",
+          "device": "Élevé · 1080p",
+          "result": "pass"
+        },
+        {
+          "label": "PC 3 · RX 6600 · Ryzen 5 · Windows 10",
+          "device": "Élevé · 1080p",
+          "result": "pass"
+        },
+        {
+          "label": "PC 4 · RTX 2060 · Core i7 · Windows 10",
+          "device": "Moyen · 1080p",
+          "result": "pass"
+        },
+        {
+          "label": "PC 5 · Arc A750 · Core i5 · Windows 11",
+          "device": "Moyen · 1080p",
+          "result": "pass"
+        },
+        {
+          "label": "PC 6 · portable · RTX 4060 · Windows 11",
+          "device": "Élevé · 1080p",
+          "result": "pass"
+        },
+        {
+          "label": "PC 7 · portable · Radeon 780M intégrée",
+          "device": "Bas · 1080p",
+          "result": "pass"
+        },
+        {
+          "label": "PC 8 · portable · RTX 3050 · Windows 10",
+          "device": "Moyen · 1080p",
+          "result": "pass"
+        },
+        {
+          "label": "PC 9 · Radeon intégrée · 16 Go",
+          "device": "Bas · 900p",
+          "result": "pass"
+        },
+        {
+          "label": "PC 10 · config. minimale (GTX 1060)",
+          "device": "Bas · 60 i/s",
+          "result": "pass",
+          "edge": true
+        },
+        {
+          "label": "PC 11 · écran ultra-large 21:9",
+          "device": "Élevé · 3440 px",
+          "result": "pass",
+          "edge": true
+        },
+        {
+          "label": "Machine 12 · Steam Deck hors ligne",
+          "device": "Deck · 30 i/s",
+          "result": "pass",
+          "edge": true
+        }
+      ],
+      "bug": {
+        "id": "Revue 1",
+        "title": "Refusée : capture de la boutique illisible, menus incomplets à la manette",
+        "severity": "Refusée",
+        "device": "Soumise le 16 mars · réponse le 20",
+        "labels": {
+          "steps": "Motifs du refus",
+          "expected": "Ce que Valve demande",
+          "actual": "Ce que le testeur de Valve a vu",
+          "cause": "Notre correction",
+          "assignee": "Suivi par"
+        },
+        "steps": [
+          "Capture n° 4 : le texte du menu est illisible à la taille de la boutique.",
+          "Compatibilité manette annoncée « complète », mais le menu Options exige la souris."
+        ],
+        "expected": "Des captures qui montrent le jeu tel qu'il est, lisibles ; une manette suffisante pour tout le jeu, menus compris.",
+        "actual": "Dans Options › Commandes, impossible de changer une touche à la manette : le curseur de la souris réapparaît.",
+        "cause": {
+          "text": "Le menu Commandes n'acceptait que la souris. Lucas l'a rendu navigable à la manette ; Mei a remplacé la capture n° 4.",
+          "before": "\"menu.commandes\": [\"souris\"]",
+          "after": "\"menu.commandes\": [\"souris\", \"manette\"]"
+        },
+        "assignee": "Yasmine H., avec Lucas F. et Mei L.",
+        "statusBefore": "Refusée · 20 mars",
+        "statusAfter": "Acceptée · 24 mars",
+        "retestLabel": "Soumettre à nouveau"
+      }
+    },
+    "annotations": [
+      {
+        "id": "valve-review",
+        "zone": "auto-tests",
+        "title": "Valve relit avant de vendre",
+        "text": "Avant d'ouvrir les ventes, Valve vérifie la page du jeu (captures fidèles, âge conseillé, langues annoncées) et le jeu lui-même (il se lance, se quitte, tient ses promesses). C'est la [[revue-valve|revue de Valve]] : quelques jours, bien plus légère qu'une certification sur console."
+      },
+      {
+        "id": "matrix",
+        "zone": "manual-plan",
+        "title": "Douze machines de joueurs",
+        "text": "Le studio ne sait pas sur quel PC chaque joueur lancera « Brume ». Yasmine teste donc une [[matrice-de-compatibilite|matrice]] de 12 machines représentatives : grandes marques de cartes graphiques, vieux et récents processeurs, Windows 10 et 11, portables. Chacune joue le premier chapitre en entier."
+      },
+      {
+        "id": "edges",
+        "zone": "edge-cases",
+        "title": "Les cas qu'on oublie",
+        "text": "La [[configuration-minimale|configuration minimale]] promise sur la page doit tenir ses 60 images par seconde ; un écran très large ne doit pas couper l'interface ; un Steam Deck joué hors ligne doit retrouver sa partie une fois reconnecté. Ces cas limites sont rejoués à chaque nouvelle version."
+      },
+      {
+        "id": "refusal",
+        "zone": "bug-report",
+        "title": "Un refus, deux motifs",
+        "text": "Le 20 mars, Valve refuse : une capture au texte illisible, et une compatibilité manette annoncée « complète » alors qu'un menu exige la souris. Rien de grave, mais rien ne sort tant que ce n'est pas corrigé. D'où l'intérêt de soumettre **trois semaines** avant la sortie."
+      },
+      {
+        "id": "fix",
+        "zone": "bug-cause",
+        "title": "Promettre ce qui est vrai",
+        "text": "Deux solutions : retirer « manette complète » de la page, ou rendre vrai ce qui est écrit. L'équipe choisit la seconde, plus juste pour les joueurs sur Steam Deck. Lucas adapte le menu, Mei refait la capture, et Yasmine vérifie tout avant la nouvelle soumission."
+      },
+      {
+        "id": "accepted",
+        "zone": "retest",
+        "title": "Accepté le 24 mars",
+        "text": "Quatre jours plus tard, la nouvelle soumission passe : la page peut afficher la date de sortie, et le jeu attend son heure. Cliquez sur « Soumettre à nouveau » pour voir la réponse de Valve."
+      }
+    ]
+  }
+}

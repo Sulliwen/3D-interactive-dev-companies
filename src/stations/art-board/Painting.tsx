@@ -1,5 +1,5 @@
 import { useId } from 'react'
-import type { PaintingKind, PaintingMood } from './schema'
+import type { PaintingKind, PaintingLogo, PaintingMood } from './schema'
 
 /** Couleurs des deux ambiances du niveau : la brume froide, le phare rallumé. */
 const MOODS = {
@@ -29,12 +29,15 @@ export function Painting({
   kind,
   mood,
   variant = 0,
+  logo = 'none',
   width,
   height,
 }: {
   kind: PaintingKind
   mood: PaintingMood
   variant?: number
+  /** Logo du jeu posé sur l'image (illustrations de la boutique). */
+  logo?: PaintingLogo
   width: number
   height: number
 }) {
@@ -69,12 +72,14 @@ export function Painting({
       {kind === 'cliff' && <Cliff c={c} uid={uid} />}
       {kind === 'village' && <Village c={c} uid={uid} />}
       {kind === 'maelle' && <Maelle c={c} uid={uid} />}
+      {kind === 'keyart' && <KeyArt c={c} uid={uid} simple={variant === 1} />}
       {/* Brume : bandes floues devant le décor. */}
       <g filter={`url(#blur-${uid})`} opacity={mood === 'cold' ? 0.75 : 0.45}>
         <ellipse cx="30" cy="74" rx="46" ry="7" fill={c.fog} />
         <ellipse cx="118" cy="80" rx="54" ry="8" fill={c.fog} />
         <ellipse cx="70" cy="90" rx="70" ry="7" fill={c.fog} />
       </g>
+      {logo !== 'none' && <Logo large={logo === 'large'} />}
     </svg>
   )
 }
@@ -208,5 +213,57 @@ function Maelle({ c, uid }: { c: Palette; uid: string }) {
       </g>
       <circle cx="98" cy="40" r="3" fill={c.glow} />
     </g>
+  )
+}
+
+/**
+ * L'illustration principale du jeu (« key art ») : Maëlle de dos, lanterne levée, face au
+ * phare rallumé de l'autre côté de la baie. `simple` retire les détails (petits formats).
+ */
+function KeyArt({ c, uid, simple }: { c: Palette; uid: string; simple: boolean }) {
+  return (
+    <g>
+      {/* Le phare, au loin, sur son rocher. */}
+      <path d="M92 66 L104 58 L124 57 L134 66 Z" fill={c.land} opacity="0.9" />
+      <path d="M109 58 L111.5 30 L116.5 30 L119 58 Z" fill="#d8d2c4" />
+      <rect x="110" y="40" width="8" height="3" fill="#9a3b32" opacity="0.85" />
+      <rect x="109.6" y="49" width="9" height="3" fill="#9a3b32" opacity="0.85" />
+      <rect x="110.5" y="24" width="7" height="6" fill="#2a2a30" />
+      <path d="M110 24 L114 19 L118 24 Z" fill="#2a2a30" />
+      <circle cx="114" cy="27" r="26" fill={`url(#glow-${uid})`} />
+      {!simple && <path d="M114 27 L160 14 L160 34 Z" fill={c.glow} opacity="0.18" />}
+      {/* Premier plan : la lande, Maëlle et sa lanterne. */}
+      <path d="M0 100 L0 72 C 30 66, 60 70, 92 82 L92 100 Z" fill="#14161b" />
+      <circle cx="65" cy="49" r={simple ? 16 : 22} fill={`url(#glow-${uid})`} opacity="0.8" />
+      <g fill="#0e1014">
+        {/* Maëlle de dos : capuche, cape, bras levé tenant la lanterne. */}
+        <circle cx="54" cy="57.5" r="3.1" />
+        <path d="M50.6 60.5 Q54 58.6 57.4 60.5 L61 84 L47 84 Z" />
+        <path d="M56.6 61.6 L63.4 52.4 L65 53.6 L58.8 63.4 Z" />
+        {!simple && <rect x="46.4" y="67" width="3.6" height="5.5" rx="0.8" />}
+      </g>
+      <path d="M64.4 52.8 L64.4 49.6" stroke="#0e1014" strokeWidth="0.8" />
+      <rect x="62.8" y="45.8" width="3.4" height="4.2" rx="0.9" fill={c.glow} />
+    </g>
+  )
+}
+
+/** Logo « BRUME » en capitales espacées, en haut au centre. */
+function Logo({ large }: { large: boolean }) {
+  return (
+    <text
+      x="80"
+      y={large ? 50 : 17}
+      textAnchor="middle"
+      fill="#f1e6d0"
+      fontSize={large ? 20 : 12}
+      fontWeight="700"
+      letterSpacing={large ? 5 : 4}
+      fontFamily="Georgia, 'Times New Roman', serif"
+      stroke="#1b1f2a"
+      strokeWidth="0.4"
+    >
+      BRUME
+    </text>
   )
 }

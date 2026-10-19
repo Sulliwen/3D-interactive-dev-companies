@@ -42,6 +42,10 @@ export const designDocPropsSchema = z.object({
       title: z.string(),
       /** D'où le jeu lit ces valeurs (fichier, outil). */
       source: z.string(),
+      /** En-têtes des trois colonnes (un tableau de tri, par exemple). */
+      columns: z
+        .tuple([z.string(), z.string(), z.string()])
+        .default(['Réglage', 'Valeur', 'Pourquoi']),
       rows: z
         .array(
           z.object({

@@ -49,7 +49,10 @@ const KEYWORDS = new Set([
 ])
 
 const CSHARP_KEYWORDS = new Set([
+  'async',
+  'await',
   'base',
+  'byte',
   'bool',
   'break',
   'class',
@@ -64,6 +67,7 @@ const CSHARP_KEYWORDS = new Set([
   'in',
   'int',
   'internal',
+  'is',
   'namespace',
   'new',
   'null',

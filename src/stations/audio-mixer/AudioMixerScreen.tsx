@@ -3,7 +3,7 @@ import { AppWindow } from '../common/AppWindow'
 import { useAnnotations } from '../common/annotationContext'
 import { Zone } from '../common/annotations'
 import type { ScreenComponentProps } from '../types'
-import { audioMixerPropsSchema, toDb, volumeAt } from './schema'
+import { audioMixerPropsSchema, toDb, volumeAt, type AudioMixerProps } from './schema'
 import './audio-mixer.css'
 
 const CURVE_W = 360
@@ -66,7 +66,7 @@ export function AudioMixerScreen({ toolName, props: rawProps }: ScreenComponentP
         ) : undefined
       }
     >
-      <div className="am">
+      <div className={`am ${props.accessibility ? 'has-access' : ''}`}>
         <div className="am__left">
           <Zone id="events" className="am__panel am__events">
             <p className="am__panel-title">Évènements sonores</p>
@@ -150,7 +150,13 @@ export function AudioMixerScreen({ toolName, props: rawProps }: ScreenComponentP
                       <span className="am__file">{l.file}</span>
                     </span>
                   </div>
-                  <svg width={WAVE_W} height={WAVE_H} aria-hidden="true">
+                  <svg
+                    width={WAVE_W}
+                    height={WAVE_H}
+                    viewBox={`0 0 ${WAVE_W} ${WAVE_H}`}
+                    preserveAspectRatio="none"
+                    aria-hidden="true"
+                  >
                     {waves[i]!.map((a, k) => {
                       const h = Math.max(1, a * v * (WAVE_H - 2))
                       return (
@@ -172,27 +178,109 @@ export function AudioMixerScreen({ toolName, props: rawProps }: ScreenComponentP
           </Zone>
         </div>
 
-        <Zone id="mixer" className="am__panel am__mixer">
-          <p className="am__panel-title">Mixage</p>
-          <div className="am__buses">
-            {props.buses.map((b) => {
-              const level = Math.max(0, Math.min(1, (b.db + 48) / 54))
-              return (
-                <div key={b.name} className="am__bus">
-                  <span className="am__meter">
-                    <span style={{ height: `${level * 100}%` }} />
-                  </span>
-                  <span className="am__bus-db">
-                    {b.db > 0 ? '+' : ''}
-                    {b.db.toLocaleString('fr-FR').replace('-', '−')}
-                  </span>
-                  <span className="am__bus-name">{b.name}</span>
-                </div>
-              )
-            })}
-          </div>
-        </Zone>
+        <div className={`am__right ${props.accessibility ? 'has-access' : ''}`}>
+          {props.accessibility && <Accessibility spec={props.accessibility} />}
+          <Zone id="mixer" className="am__panel am__mixer">
+            <p className="am__panel-title">Mixage</p>
+            <div className="am__buses">
+              {props.buses.map((b) => {
+                const level = Math.max(0, Math.min(1, (b.db + 48) / 54))
+                return (
+                  <div key={b.name} className="am__bus">
+                    <span className="am__meter">
+                      <span style={{ height: `${level * 100}%` }} />
+                    </span>
+                    <span className="am__bus-db">
+                      {b.db > 0 ? '+' : ''}
+                      {b.db.toLocaleString('fr-FR').replace('-', '−')}
+                    </span>
+                    <span className="am__bus-name">{b.name}</span>
+                  </div>
+                )
+              })}
+            </div>
+          </Zone>
+        </div>
       </div>
     </AppWindow>
+  )
+}
+
+const ARROWS: Record<
+  NonNullable<AudioMixerProps['accessibility']>['captions'][number]['direction'],
+  string
+> = {
+  left: '◀',
+  right: '▶',
+  front: '▲',
+  back: '▼',
+  around: '◎',
+}
+
+/** Angle (degrés, 0 = devant, sens horaire) de chaque direction, pour la boussole. */
+const ANGLES = { left: 270, right: 90, front: 0, back: 180 } as const
+
+/** Aperçu des sous-titres des sons en jeu, boussole des directions, réglages du joueur. */
+function Accessibility({ spec }: { spec: NonNullable<AudioMixerProps['accessibility']> }) {
+  return (
+    <>
+      <Zone id="captions" className="am__panel am__captions">
+        <p className="am__panel-title">Sous-titres des sons</p>
+        <div className="am__scene">
+          <span className="am__scene-label">{spec.scene}</span>
+          <svg
+            className="am__compass"
+            width={46}
+            height={46}
+            viewBox="-23 -23 46 46"
+            aria-hidden="true"
+          >
+            <circle r={18} className="am__compass-ring" />
+            <circle r={3} className="am__compass-me" />
+            {spec.captions.map((c, i) =>
+              c.direction === 'around' ? (
+                <circle key={i} r={13} className="am__compass-around" />
+              ) : (
+                <circle
+                  key={i}
+                  r={4}
+                  className="am__compass-dot"
+                  cx={18 * Math.sin((ANGLES[c.direction] * Math.PI) / 180)}
+                  cy={-18 * Math.cos((ANGLES[c.direction] * Math.PI) / 180)}
+                />
+              ),
+            )}
+          </svg>
+          <div className="am__subs">
+            {spec.captions.map((c) => (
+              <p key={c.text} className={`am__sub am__sub--${c.direction}`}>
+                {c.direction === 'left' || c.direction === 'around' ? (
+                  <span aria-hidden="true">{ARROWS[c.direction]} </span>
+                ) : null}
+                {c.text}
+                {c.direction !== 'left' && c.direction !== 'around' ? (
+                  <span aria-hidden="true"> {ARROWS[c.direction]}</span>
+                ) : null}
+              </p>
+            ))}
+          </div>
+        </div>
+      </Zone>
+      <Zone id="audio-options" className="am__panel am__options">
+        <p className="am__panel-title">Options du joueur</p>
+        <ul>
+          {spec.options.map((o) => (
+            <li key={o.label}>
+              <span>{o.label}</span>
+              <span
+                className={`am__opt ${o.on === true ? 'is-on' : o.on === false ? 'is-off' : ''}`}
+              >
+                {o.value}
+              </span>
+            </li>
+          ))}
+        </ul>
+      </Zone>
+    </>
   )
 }

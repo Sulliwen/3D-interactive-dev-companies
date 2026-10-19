@@ -24,6 +24,17 @@ export const pipelinePropsSchema = z.object({
     )
     .min(2),
   rollout: z.object({
+    /** Titres et libellés (jeu vidéo : mise en ligne sur la boutique plutôt que déploiement). */
+    title: z.string().default('Déploiement progressif'),
+    /** Suit le pourcentage : « 25 % des patients ont la fonctionnalité ». */
+    audience: z.string().default('des patients ont la fonctionnalité'),
+    audienceLabel: z.string().default('Part des patients qui ont la nouvelle version'),
+    flagTitle: z.string().default('Interrupteur de fonctionnalité'),
+    /** Barre d'état : « Interrupteur <flag> : activé ». */
+    flagStatus: z.string().default('Interrupteur'),
+    onLabel: z.string().default('Activé'),
+    offLabel: z.string().default('Coupé'),
+    rollbackLabel: z.string().default('↺ Retour arrière'),
     /** Nom de l'interrupteur de fonctionnalité. */
     flag: z.string(),
     steps: z

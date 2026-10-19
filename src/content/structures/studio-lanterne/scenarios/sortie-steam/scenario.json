@@ -1,0 +1,49 @@
+{
+  "id": "sortie-steam",
+  "order": 2,
+  "kind": "Sortie et lancement",
+  "title": "Sortir le jeu sur Steam, et tenir le soir du lancement",
+  "summary": "Ce soir à 19 h, « Brume » sort sur Steam. Page de la boutique, traductions, revue de Valve, sauvegardes, accessibilité, plantages imprévus et premiers avis : suivez la version finale du jeu jusqu'à ses premiers joueurs.",
+  "workItem": {
+    "label": "Brume 1.0, ici",
+    "title": "Mettre « Brume » en vente sur Steam le jeudi 13 avril 2028 à 19 h : une version finale vérifiée, une page prête, et une équipe capable de réagir si quelque chose casse le soir même.",
+    "project": "brume"
+  },
+  "intro": "Nous sommes le jeudi 13 avril 2028, dix-sept mois après la vertical slice. Ce soir à 19 h, « Brume » sort sur Steam. L'équipe se souvient du lancement de « Petits Cailloux », en 2023 : un bug de sauvegarde corrigé en catastrophe pendant la nuit. Cette fois, tout a été préparé des semaines à l'avance. Reste à tenir la soirée.",
+  "finale": {
+    "lead": "Une sortie ne se joue pas le soir même : la page de la boutique, les traductions, la revue de Valve, les sauvegardes et l'accessibilité étaient prêtes des semaines avant. Le soir du lancement, l'imprévu est arrivé quand même, et l'équipe l'a corrigé en deux heures, sans nuit blanche. Maintenant commence la vie du jeu : écouter les joueurs, corriger, enrichir.",
+    "outcomesTitle": "Le premier jour de Brume",
+    "outcomes": [
+      {
+        "label": "Des listes de souhaits aux ventes",
+        "before": "118 400 souhaits",
+        "after": "31 500 ventes en 24 h"
+      },
+      { "label": "Taux de plantage", "before": "3,1 % (19 h 40)", "after": "0,2 % (1.0.1)" },
+      { "label": "Avis des joueurs", "before": "aucun", "after": "92 % positifs (1 260 avis)" },
+      { "label": "Note de la presse", "before": "sous embargo", "after": "84/100 (46 tests)" },
+      {
+        "label": "Le soir de la sortie",
+        "before": "Petits Cailloux : nuit blanche",
+        "after": "Brume : astreinte finie à 23 h"
+      }
+    ]
+  },
+  "bystanders": [
+    {
+      "role": "level-design",
+      "screenFrom": "vertical-slice",
+      "note": "Antoine prépare déjà le niveau bonus de la **mise à jour gratuite 1.1**, prévue en mai. Ce soir, il est à la war room avec les autres ; le niveau de Kerlaz, sur son écran, est celui que les joueurs découvrent en ce moment."
+    },
+    {
+      "role": "environment-art",
+      "screenFrom": "vertical-slice",
+      "note": "Bastien retravaille les décors pour le **mode photo** de la mise à jour 1.1 : des joueurs le demandaient déjà pendant la démo de février."
+    },
+    {
+      "role": "animation",
+      "screenFrom": "vertical-slice",
+      "note": "Aminata anime de nouvelles expressions de Maëlle pour le mode photo de la 1.1. Le soir de la sortie, elle regarde les premiers joueurs en direct sur les plateformes vidéo, pour voir comment ils réagissent aux animations."
+    }
+  ]
+}

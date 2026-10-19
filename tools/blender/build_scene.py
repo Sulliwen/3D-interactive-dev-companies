@@ -734,15 +734,26 @@ def misc_furniture():
 # ---------------------------------------------------------------------------
 
 LIBRARY = {}
+# Le modèle « office_notepads » présente dix blocs côte à côte : un seul par bureau.
+NOTEPAD = {"office_notepads_a4_stack"}
 
 
-def load_model(asset_id, decimate=None):
-    """Importe un modèle glTF une fois (collection cachée « bibliotheque »)."""
+def load_model(asset_id, decimate=None, keep=None):
+    """Importe un modèle glTF une fois (collection cachée « bibliotheque »). `keep` : ne garder
+    que ces morceaux du modèle (un lot d'objets présentés côte à côte, par exemple)."""
     if asset_id in LIBRARY:
         return LIBRARY[asset_id]
+    # La bibliothèque est cachée après le premier import : la rendre visible le temps de
+    # fusionner les morceaux, sinon seul le premier est gardé (feuilles des plantes…).
+    if "bibliotheque" in COLLECTIONS:
+        coll("bibliotheque").hide_viewport = False
     before = set(bpy.data.objects)
     bpy.ops.import_scene.gltf(filepath=str(SRC / "models" / asset_id / f"{asset_id}.gltf"))
     meshes = [o for o in set(bpy.data.objects) - before if o.type == "MESH"]
+    if keep:
+        for o in [o for o in meshes if o.name not in keep]:
+            meshes.remove(o)
+            bpy.data.objects.remove(o)
     for o in set(bpy.data.objects) - before:
         for c in o.users_collection:
             c.objects.unlink(o)
@@ -771,8 +782,8 @@ def load_model(asset_id, decimate=None):
     return ob
 
 
-def place(asset_id, name, location, rot_z=0.0, height=None, collection="decor", decimate=None):
-    lib = load_model(asset_id, decimate)
+def place(asset_id, name, location, rot_z=0.0, height=None, collection="decor", decimate=None, keep=None):
+    lib = load_model(asset_id, decimate, keep)
     ob = bpy.data.objects.new(name, lib.data)  # maillage partagé (instance)
     ob.location = Vector(location)
     ob.rotation_euler = (0, 0, rot_z)
@@ -801,7 +812,7 @@ def assets():
             ob = place("potted_plant_04", f"desk_plant_{i}", B(x, top, z) + off, rot_z=i, height=0.22, decimate=0.5)
             ob["no_bake"] = True
         if i % 2 == 1:
-            place("office_notepads", f"notepads_{i}", B(x, top, z) + Matrix.Rotation(rot, 4, "Z") @ Vector((0.45, 0.1, 0)), rot_z=rot + 0.3)
+            place("office_notepads", f"notepads_{i}", B(x, top, z) + Matrix.Rotation(rot, 4, "Z") @ Vector((0.45, 0.1, 0)), rot_z=rot + 0.3, keep=NOTEPAD)
     t = boxes("cafe_low_table")[0]["position"]
     place("coffee_table_round_01", "cafe_low_table", B(t[0], 0, t[2]))
     place("modern_arm_chair_01", "cafe_armchair_0", B(t[0] - 1.25, 0, t[2] - 0.3), rot_z=-math.pi / 2 + 0.4)

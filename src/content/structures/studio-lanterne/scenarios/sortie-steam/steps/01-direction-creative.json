@@ -1,0 +1,136 @@
+{
+  "role": "direction-creative",
+  "order": 9,
+  "featureStep": "Ce qui part dans le correctif, ce qui attend",
+  "tagline": "Le soir de la sortie, tout le monde veut tout corriger tout de suite. Mon travail : trier. Ce qui empêche de jouer part ce soir ; le reste attend des données, ou n'arrivera jamais.",
+  "missions": [
+    "Trier la liste des derniers problèmes avec Jeanne, Yasmine et Sarah : ce soir, la semaine prochaine, en mai, jamais.",
+    "Protéger la version du soir : n'y faire entrer que des [[correctif|correctifs]] sûrs, testés, qui ne cassent rien d'autre.",
+    "Garder le cap des [[piliers-de-jeu|piliers]] même face aux demandes des joueurs : certaines bonnes idées n'ont pas leur place dans « Brume ».",
+    "Écrire chaque décision dans le [[game-design-document|carnet de jeu]], pour que toute l'équipe sache pourquoi."
+  ],
+  "takeaways": [
+    "Un **correctif du premier jour** n'est pas une mise à jour : on n'y met que ce qui empêche de jouer, ou ce qui se corrige sans aucun risque.",
+    "Changer un réglage dans la précipitation, c'est souvent créer le bug du lendemain. Le marais attend **48 heures de données** avant qu'on y touche.",
+    "Les [[piliers-de-jeu|piliers]] servent encore après la sortie : une flèche pour guider les joueurs perdus ne sera jamais ajoutée, parce que « la brume est vivante »."
+  ],
+  "receivesFrom": {
+    "roles": ["qa", "narrative-design"],
+    "text": "À 20 h, la liste de Yasmine : le plantage de 19 h 40 reproduit sur un PC de test, et la réplique allemande trop longue que Chloé a déjà raccourcie."
+  },
+  "handsOffTo": {
+    "roles": ["technical-art", "engine-tools"],
+    "text": "Un feu vert écrit à 20 h 30 : Théo corrige le plantage pour la version 1.0.1, Sarah la construira dès que Yasmine aura validé le correctif sur les 12 PC."
+  },
+  "screen": {
+    "component": "design-doc",
+    "toolName": "Carnet de jeu",
+    "props": {
+      "document": "Soir de la sortie · tri des problèmes",
+      "author": "Margaux Lefort",
+      "updated": "modifié le 13 avril 2028 à 20 h 30",
+      "outline": [
+        { "title": "Plan du lancement" },
+        { "title": "Soir de la sortie · tri", "active": true },
+        { "title": "Version 1.0.2" },
+        { "title": "Mise à jour 1.1 (mai)" },
+        { "title": "Idées refusées" }
+      ],
+      "lead": "Il est 20 h 30, « Brume » est en vente depuis une heure et demie. Ce tableau dit ce qui part dans le correctif de ce soir, ce qui attend, et ce qui ne sera jamais fait.",
+      "sections": [
+        {
+          "heading": "Les règles du tri, ce soir",
+          "bullets": [
+            "Dans la 1.0.1 : seulement ce qui empêche de jouer, ou ce qui se corrige sans risque.",
+            "Aucun réglage de jeu ne change avant 48 h de données (télémétrie de Karim).",
+            "Ce qui ne sert aucun pilier ne sera jamais fait, même si des joueurs le demandent.",
+            "Astreinte jusqu'à 23 h : ce qui n'est pas prêt à 22 h attend demain."
+          ]
+        }
+      ],
+      "tuning": {
+        "title": "Tri des derniers problèmes",
+        "source": "liste partagée avec Jeanne, Yasmine et Sarah",
+        "columns": ["Problème", "Quand", "Pourquoi"],
+        "rows": [
+          {
+            "param": "Plantage à la 1re lampe (anciennes cartes graphiques)",
+            "value": "1.0.1 · ce soir",
+            "note": "214 plantages en 40 min : Théo corrige, Yasmine teste"
+          },
+          {
+            "param": "Réplique allemande trop longue (chapitre 2)",
+            "value": "1.0.1 · ce soir",
+            "note": "correctif de Chloé déjà prêt, sans risque"
+          },
+          {
+            "param": "Brume trop rapide dans le marais",
+            "value": "1.0.2 · semaine pro.",
+            "note": "on attend les chiffres de Karim avant de toucher au réglage"
+          },
+          {
+            "param": "Mode photo",
+            "value": "1.1 · mai",
+            "note": "demandé depuis la démo de février (Bastien, Aminata)"
+          },
+          {
+            "param": "Deuxième voix de la brume",
+            "value": "1.1 · mai",
+            "note": "coupée en novembre 2026 pour tenir la vertical slice"
+          },
+          {
+            "param": "Flèche qui montre le chemin",
+            "value": "jamais",
+            "note": "« la brume est vivante » : on se perd, puis on écoute la cloche"
+          }
+        ]
+      },
+      "comments": [
+        {
+          "author": "Karim",
+          "text": "Je ralentis la brume du marais dans la 1.0.1 ? C'est une seule valeur à changer.",
+          "reply": {
+            "author": "Margaux",
+            "text": "Non : un réglage changé ce soir, c'est peut-être le bug de demain. Regarde d'abord les chiffres, on en reparle samedi."
+          },
+          "resolved": true
+        },
+        {
+          "author": "Sarah",
+          "text": "Je peux construire la 1.0.1 vers 21 h 30 si le correctif de Théo est validé.",
+          "reply": {
+            "author": "Margaux",
+            "text": "Go. Yasmine passe les 12 PC avant l'envoi sur Steam."
+          }
+        }
+      ],
+      "status": "Décisions partagées avec tout le studio · astreinte jusqu'à 23 h"
+    },
+    "annotations": [
+      {
+        "id": "regles",
+        "zone": "sections",
+        "title": "Des règles écrites avant l'urgence",
+        "text": "Le soir d'une sortie, la fatigue et l'excitation poussent à tout corriger d'un coup. Margaux pose des règles simples, que chacun peut appliquer seul : qu'est-ce qui empêche de jouer ? Qu'est-ce qui est sans risque ? Le reste attend."
+      },
+      {
+        "id": "tri",
+        "zone": "tuning",
+        "title": "Ce soir, la semaine prochaine, en mai, jamais",
+        "text": "Chaque problème reçoit une destination : le [[correctif]] de ce soir (1.0.1), la petite mise à jour de la semaine prochaine (1.0.2), la grosse mise à jour gratuite de mai (1.1), ou jamais. La décision et sa raison restent écrites."
+      },
+      {
+        "id": "patience",
+        "zone": "comments",
+        "title": "Ne pas régler à chaud",
+        "text": "Karim voudrait ralentir tout de suite la brume du marais. Margaux refuse : quelques avis ne suffisent pas, et changer un réglage sans mesurer, c'est risquer de casser autre chose. Il faut d'abord les chiffres de la [[telemetrie]]."
+      },
+      {
+        "id": "sommaire",
+        "zone": "outline",
+        "title": "Le carnet continue après la sortie",
+        "text": "Le [[game-design-document|carnet de jeu]] ne s'arrête pas à la version finale : il accueille maintenant le tri du soir, les prochaines versions et même les idées refusées, pour ne pas les redébattre tous les trois mois."
+      }
+    ]
+  }
+}

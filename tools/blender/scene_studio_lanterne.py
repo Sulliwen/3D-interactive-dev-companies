@@ -23,7 +23,7 @@ import bpy  # noqa: E402
 from mathutils import Matrix, Vector  # noqa: E402
 
 import build_scene as bs  # noqa: E402
-from build_scene import B, MATS, Builder, boxes, by_suffix, coll, flat, pbr, shash, task_chair  # noqa: E402
+from build_scene import B, MATS, Builder, boxes, by_suffix, coll, flat, pbr, place, shash, task_chair  # noqa: E402
 
 PLAN, H, HW, HD = bs.PLAN, bs.H, bs.HW, bs.HD
 BUILD, BLEND, ROOT = bs.BUILD, bs.BLEND, bs.ROOT
@@ -35,15 +35,6 @@ WARM = (1.0, 0.82, 0.62)
 
 def box(name):
     return boxes(name)[0]
-
-
-def place(asset_id, name, location, **kwargs):
-    """bs.place, la bibliothèque rendue sélectionnable le temps de l'import : sinon, à partir
-    du deuxième modèle importé, la fusion de ses morceaux échoue (collection cachée) et seul
-    le premier morceau est gardé (feuilles des plantes, corps de la caméra…)."""
-    if "bibliotheque" in bs.COLLECTIONS:
-        coll("bibliotheque").hide_viewport = False
-    return bs.place(asset_id, name, location, **kwargs)
 
 
 # ---------------------------------------------------------------------------
@@ -574,7 +565,7 @@ def plants():
             ob["no_bake"] = True
         if i % 2 == 1:
             # Le modèle regroupe plusieurs carnets (≈ 1,1 m) : réduit à une petite pile.
-            pad = place("office_notepads", f"notepads_{i}", B(x, top, z) + Matrix.Rotation(rot, 4, "Z") @ Vector((0.45, 0.1, 0)), rot_z=rot + 0.3)
+            pad = place("office_notepads", f"notepads_{i}", B(x, top, z) + Matrix.Rotation(rot, 4, "Z") @ Vector((0.45, 0.1, 0)), rot_z=rot + 0.3, keep=bs.NOTEPAD)
             pad.scale = (0.3, 0.3, 0.3)
 
 

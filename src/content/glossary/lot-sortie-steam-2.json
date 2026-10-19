@@ -1,0 +1,44 @@
+[
+  {
+    "id": "version-gold",
+    "term": "Version finale (« gold »)",
+    "definition": "La version du jeu qui sera vendue le jour de la sortie. Une fois validée, on n'y ajoute plus rien : seules des corrections passent ensuite, sous forme de mises à jour. Le nom vient de l'époque des disques : la version « gold » était celle envoyée à l'usine pour être pressée.",
+    "analogy": "Comme le bon à tirer d'un livre : une fois signé, l'imprimeur lance l'impression, et les corrections attendront la réédition."
+  },
+  {
+    "id": "steam-deck",
+    "term": "Steam Deck (« Vérifié »)",
+    "definition": "La console portable de Valve, qui fait tourner les jeux PC de Steam. Valve teste les jeux et leur attribue un badge : « Vérifié » (tout fonctionne à la manette, textes lisibles, bonne fluidité), « Jouable » (quelques réglages à faire) ou « Non pris en charge ». Le badge s'affiche sur la page du jeu.",
+    "analogy": "Comme un label « testé et approuvé » sur un appareil : on achète plus tranquillement."
+  },
+  {
+    "id": "revue-valve",
+    "term": "Revue de Valve",
+    "definition": "La vérification que Valve, propriétaire de Steam, fait avant la sortie d'un jeu : la page de la boutique (captures fidèles, langues, âge conseillé) et le jeu lui-même (il se lance, se quitte, tient ce que la page promet). Elle prend quelques jours ; en cas de refus, le studio corrige et soumet à nouveau. C'est bien plus léger que la certification exigée par les fabricants de consoles.",
+    "analogy": "Comme le contrôle technique avant de vendre une voiture d'occasion : rapide, mais pas de vente sans lui."
+  },
+  {
+    "id": "matrice-de-compatibilite",
+    "term": "Matrice de compatibilité",
+    "definition": "La liste des machines sur lesquelles on teste le jeu, choisies pour représenter le matériel des joueurs : cartes graphiques de plusieurs marques, processeurs anciens et récents, versions de Windows, portables, écrans inhabituels. Impossible de tout tester : on couvre les combinaisons les plus courantes et les plus risquées.",
+    "analogy": "Comme un tailleur qui essaie un modèle sur une dizaine de morphologies avant de le produire en série."
+  },
+  {
+    "id": "sauvegarde-cloud",
+    "term": "Sauvegarde dans le cloud",
+    "definition": "La copie de la partie envoyée sur les serveurs de la boutique (ici, le cloud de Steam), en plus du disque du joueur. Le joueur retrouve sa progression sur un autre PC ou sur sa console portable, et ne perd rien si son disque tombe en panne.",
+    "analogy": "Comme un carnet dont chaque page serait aussi photocopiée et rangée dans un coffre."
+  },
+  {
+    "id": "conflit-de-sauvegarde",
+    "term": "Conflit de sauvegarde",
+    "definition": "La situation où la sauvegarde du disque et celle du cloud ne racontent pas la même partie, par exemple après avoir joué hors connexion sur un autre appareil. Plutôt que de choisir au hasard et risquer d'effacer la bonne, le jeu montre les deux au joueur et le laisse décider.",
+    "analogy": "Comme deux versions d'un même document modifiées chacune de son côté : avant d'en jeter une, on regarde laquelle est la bonne."
+  },
+  {
+    "id": "sous-titres-des-sons",
+    "term": "Sous-titres des sons",
+    "definition": "Des descriptions écrites des sons importants pour jouer, affichées à l'écran : « [La cloche du phare, au loin] ». Contrairement aux sous-titres des dialogues, ils décrivent les bruits, la musique quand elle compte, et souvent leur direction. Ils rendent le jeu jouable pour les personnes sourdes ou malentendantes.",
+    "analogy": "Comme les mentions [rires] ou [porte qui claque] dans les sous-titres pour sourds et malentendants, à la télévision."
+  }
+]

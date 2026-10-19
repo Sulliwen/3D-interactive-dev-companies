@@ -41,6 +41,9 @@ export const analyticsDashboardPropsSchema = z.object({
   query: z.object({ title: z.string(), lines: z.array(z.string()), result: z.string() }),
   /** Projection « et si… ». */
   hypothesis: z.object({ title: z.string(), text: z.string(), value: z.string() }),
+  /** Barre d'état : fraîcheur des données, et ce qu'elles ne contiennent pas. */
+  freshness: z.string().default('Données mises à jour ce matin à 6 h 00'),
+  privacy: z.string().default('Données anonymisées · aucun nom de patient'),
 })
 
 export type AnalyticsDashboardProps = z.infer<typeof analyticsDashboardPropsSchema>

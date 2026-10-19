@@ -23,7 +23,7 @@ export const milestonePlanPropsSchema = z.object({
             z.object({
               day: z.string(),
               label: z.string(),
-              kind: z.enum(['freeze', 'playtest', 'recording', 'demo', 'other']),
+              kind: z.enum(['freeze', 'playtest', 'recording', 'demo', 'launch', 'press', 'other']),
             }),
           )
           .max(3),
@@ -63,6 +63,11 @@ export const milestonePlanPropsSchema = z.object({
     unit: z.string().default('jours'),
   }),
   status: z.string(),
+  /** Titres des panneaux et du décompte (défauts : jalon de la vertical slice). */
+  scopeTitle: z.string().default('Dans la vertical slice'),
+  cutsTitle: z.string().default('Coupé pour tenir la date'),
+  capacityTitle: z.string().default("Charge de l'équipe"),
+  scopeCount: z.string().default('livrables prêts'),
 })
 
 export type MilestonePlanProps = z.infer<typeof milestonePlanPropsSchema>

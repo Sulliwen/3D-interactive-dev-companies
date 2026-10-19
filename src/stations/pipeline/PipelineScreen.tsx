@@ -74,7 +74,8 @@ export function PipelineScreen({ toolName, props: rawProps }: ScreenComponentPro
             <Icon name="branch" size={13} /> {props.run.branch} · {props.run.commit}
           </span>
           <span>
-            Interrupteur {props.rollout.flag} : {flagOn ? 'activé' : 'coupé'}
+            {props.rollout.flagStatus} {props.rollout.flag} :{' '}
+            {(flagOn ? props.rollout.onLabel : props.rollout.offLabel).toLowerCase()}
           </span>
           <span className="pl__status-right">{props.run.target}</span>
         </>
@@ -141,14 +142,14 @@ export function PipelineScreen({ toolName, props: rawProps }: ScreenComponentPro
 
         <div className="pl__bottom">
           <Zone id="rollout" className="pl__card pl__rollout">
-            <p className="pl__card-title">Déploiement progressif</p>
+            <p className="pl__card-title">{props.rollout.title}</p>
             <div
               className="pl__bar"
               role="progressbar"
               aria-valuenow={percent}
               aria-valuemin={0}
               aria-valuemax={100}
-              aria-label="Part des patients qui ont la nouvelle version"
+              aria-label={props.rollout.audienceLabel}
             >
               <div className="pl__bar-fill" style={{ width: `${percent}%` }} />
               {props.rollout.steps.map((s) => (
@@ -156,7 +157,7 @@ export function PipelineScreen({ toolName, props: rawProps }: ScreenComponentPro
               ))}
             </div>
             <p className="pl__percent">
-              <strong>{percent} %</strong> des patients ont la fonctionnalité
+              <strong>{percent} %</strong> {props.rollout.audience}
             </p>
             <ul className="pl__steps">
               {props.rollout.steps.map((s, k) => (
@@ -176,7 +177,7 @@ export function PipelineScreen({ toolName, props: rawProps }: ScreenComponentPro
 
           <div className="pl__side">
             <Zone id="feature-flag" className="pl__card pl__flag">
-              <p className="pl__card-title">Interrupteur de fonctionnalité</p>
+              <p className="pl__card-title">{props.rollout.flagTitle}</p>
               <div className="pl__flag-row">
                 <code>{props.rollout.flag}</code>
                 <button
@@ -196,7 +197,7 @@ export function PipelineScreen({ toolName, props: rawProps }: ScreenComponentPro
                 >
                   <span />
                 </button>
-                <span>{flagOn ? 'Activé' : 'Coupé'}</span>
+                <span>{flagOn ? props.rollout.onLabel : props.rollout.offLabel}</span>
               </div>
               {rolledBack ? (
                 <p className="pl__rollback-msg" role="status">
@@ -217,7 +218,7 @@ export function PipelineScreen({ toolName, props: rawProps }: ScreenComponentPro
                       : undefined
                   }
                 >
-                  ↺ Retour arrière
+                  {props.rollout.rollbackLabel}
                 </button>
               )}
             </Zone>

@@ -16,11 +16,7 @@ export function ArtBoardScreen({ toolName, props: raw }: ScreenComponentProps) {
   }, [revealZone, zoneRevealed])
 
   return (
-    <AppWindow
-      toolName={toolName}
-      title={props.file}
-      titleRight={<span>Pinceau · Brume douce · 38 %</span>}
-    >
+    <AppWindow toolName={toolName} title={props.file} titleRight={<span>{props.brush}</span>}>
       <div className="ab__tools" aria-hidden="true">
         {[
           'M3 13l7-7 3 3-7 7H3z',
@@ -43,6 +39,7 @@ export function ArtBoardScreen({ toolName, props: raw }: ScreenComponentProps) {
             kind={props.canvas.kind}
             mood={props.canvas.mood}
             variant={props.canvas.variant}
+            logo={props.canvas.logo}
             width={560}
             height={300}
           />
@@ -50,7 +47,7 @@ export function ArtBoardScreen({ toolName, props: raw }: ScreenComponentProps) {
         </Zone>
 
         <Zone id="color-script" className="ab__script">
-          <p className="ab__heading">Script couleur du niveau</p>
+          <p className="ab__heading">{props.scriptTitle}</p>
           <ol className="ab__beats">
             {props.colorScript.map((b) => (
               <li key={b.label}>
@@ -67,16 +64,29 @@ export function ArtBoardScreen({ toolName, props: raw }: ScreenComponentProps) {
 
       <div className="ab__side">
         <Zone id="variants" className="ab__panel">
-          <p className="ab__heading">Pistes explorées</p>
+          <p className="ab__heading">{props.variantsTitle}</p>
           <ul className="ab__variants">
             {props.variants.map((v) => (
               <li key={v.label} className={v.chosen ? 'is-chosen' : ''}>
-                <Painting kind={v.kind} mood={v.mood} variant={v.variant} width={88} height={50} />
+                <span className="ab__thumb">
+                  <Painting
+                    kind={v.kind}
+                    mood={v.mood}
+                    variant={v.variant}
+                    logo={v.logo}
+                    {...thumbSize(v.format)}
+                  />
+                </span>
                 <span>
                   <b>
                     {v.label}
                     {v.chosen && <em> · retenue</em>}
                   </b>
+                  {v.format && (
+                    <i className="ab__format">
+                      {v.format.w} × {v.format.h} px
+                    </i>
+                  )}
                   {v.note}
                 </span>
               </li>
@@ -107,4 +117,11 @@ export function ArtBoardScreen({ toolName, props: raw }: ScreenComponentProps) {
       </div>
     </AppWindow>
   )
+}
+
+/** Miniature de 88 × 50 px, ou aux proportions du format imposé (dans la même case). */
+function thumbSize(format?: { w: number; h: number }): { width: number; height: number } {
+  if (!format) return { width: 88, height: 50 }
+  const scale = Math.min(88 / format.w, 50 / format.h)
+  return { width: Math.round(format.w * scale), height: Math.round(format.h * scale) }
 }

@@ -32,7 +32,7 @@ export function PlaytestLabScreen({ toolName, props: raw }: ScreenComponentProps
       title={props.study}
       titleRight={
         props.sessions.length > 1 && (
-          <span className="pl__tabs" role="group" aria-label="Session de playtest">
+          <span className="ptl__tabs" role="group" aria-label="Session de playtest">
             {props.sessions.map((s, i) => (
               <button
                 key={s.label}
@@ -56,24 +56,24 @@ export function PlaytestLabScreen({ toolName, props: raw }: ScreenComponentProps
         </>
       }
     >
-      <div className="pl">
-        <Zone id="heatmap" className="pl__panel pl__map">
-          <p className="pl__heading">Carte de chaleur · où les joueurs passent leur temps</p>
+      <div className="ptl">
+        <Zone id="heatmap" className="ptl__panel ptl__map">
+          <p className="ptl__heading">Carte de chaleur · où les joueurs passent leur temps</p>
           <LevelMap map={props.map} session={session} />
-          <p className="pl__legend">
+          <p className="ptl__legend">
             <span>
-              <i className="pl__swatch" /> temps passé
+              <i className="ptl__swatch" /> temps passé
             </span>
             {(['lost', 'death', 'stop'] as const).map((k) => (
               <span key={k}>
-                <b className={`pl__mk pl__mk--${k}`}>{MARKER[k].symbol}</b> {MARKER[k].label}
+                <b className={`ptl__mk ptl__mk--${k}`}>{MARKER[k].symbol}</b> {MARKER[k].label}
               </span>
             ))}
           </p>
         </Zone>
 
-        <div className="pl__right">
-          <Zone id="stats" className="pl__stats">
+        <div className="ptl__right">
+          <Zone id="stats" className="ptl__stats">
             {session.stats.map((s) => (
               <StatTile
                 key={s.label}
@@ -85,25 +85,25 @@ export function PlaytestLabScreen({ toolName, props: raw }: ScreenComponentProps
             ))}
           </Zone>
 
-          <Zone id="funnel" className="pl__panel pl__funnel">
-            <p className="pl__heading">Arrivés sans aide, étape par étape</p>
+          <Zone id="funnel" className="ptl__panel ptl__funnel">
+            <p className="ptl__heading">Arrivés sans aide, étape par étape</p>
             <Funnel funnel={session.funnel} />
           </Zone>
 
-          <Zone id="quotes" className="pl__panel pl__quotes">
-            <p className="pl__heading">Ce qu'ils disent</p>
+          <Zone id="quotes" className="ptl__panel ptl__quotes">
+            <p className="ptl__heading">Ce qu'ils disent</p>
             {props.quotes.map((q) => (
-              <p key={q.text} className="pl__quote">
+              <p key={q.text} className="ptl__quote">
                 « {q.text} » <span>{q.who}</span>
               </p>
             ))}
           </Zone>
 
-          <Zone id="fix" className="pl__panel pl__fix">
-            <p className="pl__heading">Correctif décidé · {props.fix.by}</p>
-            <p className="pl__fix-title">{props.fix.title}</p>
-            <p className="pl__fix-text">{props.fix.text}</p>
-            <p className="pl__measure">
+          <Zone id="fix" className="ptl__panel ptl__fix">
+            <p className="ptl__heading">Correctif décidé · {props.fix.by}</p>
+            <p className="ptl__fix-title">{props.fix.title}</p>
+            <p className="ptl__fix-text">{props.fix.text}</p>
+            <p className="ptl__measure">
               <span>{props.fix.measure.label}</span>
               <StatusBadge status="critical">{props.fix.measure.before}</StatusBadge>
               <span aria-hidden="true">→</span>
@@ -127,7 +127,7 @@ function LevelMap({
   const lost = session.markers.reduce((n, m) => n + (m.kind === 'lost' ? m.count : 0), 0)
   return (
     <svg
-      className="pl__svg"
+      className="ptl__svg"
       viewBox="0 0 100 62"
       role="img"
       aria-label={`Plan du niveau : ${map.places.map((p) => p.label).join(', ')}. ${lost} joueurs perdus.`}
@@ -144,7 +144,7 @@ function LevelMap({
       </defs>
       <rect width="100" height="62" fill="#141a26" />
       <rect width="100" height="62" fill="url(#pl-grid)" />
-      <polyline className="pl__path" points={path} />
+      <polyline className="ptl__path" points={path} />
       {session.heat.map((h, i) => (
         <circle
           key={i}
@@ -155,9 +155,9 @@ function LevelMap({
           opacity={0.25 + h.v * 0.75}
         />
       ))}
-      <circle className="pl__focus" cx={map.focus.at[0]} cy={map.focus.at[1]} r={map.focus.r} />
+      <circle className="ptl__focus" cx={map.focus.at[0]} cy={map.focus.at[1]} r={map.focus.r} />
       <text
-        className="pl__focus-label"
+        className="ptl__focus-label"
         x={map.focus.at[0] + map.focus.r * 0.6}
         y={map.focus.at[1] - map.focus.r - 1.2}
         textAnchor="end"
@@ -166,9 +166,9 @@ function LevelMap({
       </text>
       {map.places.map((p) => (
         <g key={p.label} transform={`translate(${p.at[0]} ${p.at[1]})`}>
-          <circle className="pl__place" r="1.1" />
+          <circle className="ptl__place" r="1.1" />
           <text
-            className="pl__place-label"
+            className="ptl__place-label"
             y="3.6"
             textAnchor={p.at[0] > 85 ? 'end' : p.at[0] < 12 ? 'start' : 'middle'}
           >
@@ -178,8 +178,8 @@ function LevelMap({
       ))}
       {session.markers.map((m, i) => (
         <g key={i} transform={`translate(${m.at[0]} ${m.at[1]})`}>
-          <circle className={`pl__marker pl__marker--${m.kind}`} r="2.1" />
-          <text className="pl__marker-text" y="0.9" textAnchor="middle">
+          <circle className={`ptl__marker ptl__marker--${m.kind}`} r="2.1" />
+          <text className="ptl__marker-text" y="0.9" textAnchor="middle">
             {m.count}
           </text>
         </g>
@@ -191,16 +191,16 @@ function LevelMap({
 function Funnel({ funnel }: { funnel: PlaytestLabProps['sessions'][number]['funnel'] }) {
   const max = Math.max(...funnel.map((f) => f.count), 1)
   return (
-    <ol className="pl__steps">
+    <ol className="ptl__steps">
       {funnel.map((f, i) => {
         const drop = i > 0 && f.count < funnel[i - 1]!.count
         return (
           <li key={f.label} className={drop ? 'is-drop' : ''}>
-            <span className="pl__step-label">{f.label}</span>
-            <span className="pl__bar">
+            <span className="ptl__step-label">{f.label}</span>
+            <span className="ptl__bar">
               <span style={{ width: `${(f.count / max) * 100}%` }} />
             </span>
-            <span className="pl__count">
+            <span className="ptl__count">
               {f.count}/{max}
             </span>
           </li>

@@ -7,7 +7,7 @@ import type { ScreenComponentProps } from '../types'
 import { analyticsDashboardPropsSchema } from './schema'
 import './analytics-dashboard.css'
 
-/** « Lumen Insights » : tableau de bord d'analyse (chiffres clés, tendance, répartition). */
+/** Tableau de bord d'analyse (chiffres clés, tendance, répartition), outil nommé par la fiche. */
 export function AnalyticsDashboardScreen({ toolName, props: raw }: ScreenComponentProps) {
   const props = useMemo(() => analyticsDashboardPropsSchema.parse(raw), [raw])
   const { live, revealZone, zoneRevealed } = useAnnotations()
@@ -32,8 +32,8 @@ export function AnalyticsDashboardScreen({ toolName, props: raw }: ScreenCompone
       titleRight={<span className="ad__period">{props.period}</span>}
       status={
         <>
-          <span>Données mises à jour ce matin à 6 h 00</span>
-          <span style={{ marginLeft: 'auto' }}>Données anonymisées · aucun nom de patient</span>
+          <span>{props.freshness}</span>
+          <span style={{ marginLeft: 'auto' }}>{props.privacy}</span>
         </>
       }
     >
